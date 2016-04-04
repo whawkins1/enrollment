@@ -1,0 +1,80 @@
+* {padding:0; margin:0}
+
+body {
+	background-color: #484848;	
+	position: relative;	
+}
+
+fieldset {
+	padding-top: 10px;
+   display: inline-block;
+	vertical-align: middle;	
+}
+
+form {
+	text-align: center;
+}
+
+p {
+   text-align: center;
+}
+
+h1 {
+	font-size: 120px;
+	color: #000000;
+	text-align: center;
+	font-family: "SIMPSON";
+	margin: 50px;
+}
+
+#submit {
+    display: block;
+	width: 90px;
+	height: 30px;
+	margin: 10px auto;
+	font-family: "ARIAL";
+	font-size: 1em;
+}
+
+.inputwrap input {
+	margin: 5px 14px;
+	display: inline-block;
+    width: 150px;
+    text-align: left;
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+    width: 100px;
+}
+
+#countryselect, #cityselect, #stateselect, #majorselect {
+  display: inline-block; 
+  height: 24px;
+    margin-top: 5px;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+#countryselect, #majorselect {
+  margin-left: 13px;
+  margin-right: 13px;
+  width: 155px;
+}
+
+#cityselect, #stateselect {
+  margin-left: 14px;
+  margin-right: 1px;
+  margin-top: 6px;
+  width: 155px;
+}
+
+#loading_state_image, #loading_city_image {
+  visibility: hidden;
+  margin-left: 5px;
+}
+
+#statelabel, #citylabel {
+  margin-left: 13px;
+}

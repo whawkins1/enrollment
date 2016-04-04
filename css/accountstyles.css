@@ -1,0 +1,430 @@
+* {padding:0; margin:0}
+
+
+
+body {
+  background-color: #9933ff;
+}
+
+.tabs li {
+  list-style: none;
+  display: inline;
+}
+
+.tabs a {
+   padding: 5px 10px;
+   display: inline-block;
+   background: #666;
+   color: #fff;
+   text-decoration: none;
+}
+
+.tabs a.active {
+   background: #000066;
+   color: #fff;
+}
+
+.tabsjump {
+    padding: 10px;
+    width: 100%;
+    height: 400px;
+    background-color: white;  
+}
+
+#nav ul {
+  margin-bottom: 10px;
+  padding: 0;
+  text-align: center;
+  background-color: #000000;
+}
+
+#nav  ul li{
+  display: inline;
+  list-style: none;
+}
+
+
+#nav li a:link, #nav li a:visited {
+  width: 120px;
+  padding: 4px;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: inline-block;
+  background-color: #000000;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#nav li a:hover, #nav li a:active {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+#tab-personal label {
+  float: left;
+  clear: both;
+  width: 110px;
+  padding-top: 6px;
+}
+
+#tab-personal input {
+  float: left;
+  padding-top: 3px;
+  margin-top: 6px;
+  width: 200px;
+}
+
+.contactinput  {
+  border: 0px solid;
+  padding: 2px;
+} 
+
+#editbutton {
+   font-size: 0.9em;
+   width: 12%;
+}
+
+#editbuttoncontainer {
+  text-align: center;
+  margin-top: 4px;  
+}
+
+legend {
+  font-weight: bold;
+  font-size: 110%;
+}
+
+#financialfieldSet {
+  width: 100%;
+  height: 90%;
+}
+
+#tablecourses {
+   border-collapse: collapse;
+   width: 100%;
+}
+
+
+#tablecourses th {
+  text-align: left;
+  font-size: 12px;
+  background-color: limegreen;
+  padding: 4px 30px 4px 8px;
+  border: 1px solid green;
+} 
+
+.tablesorter th.header {
+    background-image: url("../plugins/tablesorter/themes/blue/bg.gif");
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.tablesorter th.headerSortUp {
+    background-image: url("../plugins/tablesorter/themes/blue/asc.gif");
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.tablesorter th.headerSortDown {
+    background-image: url("../plugins/tablesorter/themes/blue/desc.gif");
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+th.checkbox, th.credits {
+  width: 6%;
+}
+
+th.code {
+ width: 6%;
+}
+
+th.time {
+   width: 10%;
+}
+
+th.location {
+    width: 15%;
+}
+
+th.name {
+   width: 22%;
+}
+
+th.department {
+   width: 15%;
+}
+
+th.professor {
+   width: 20%;
+}
+
+.filters {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 40px;
+}
+
+#filterlabel {
+  font-weight: bold;
+}
+
+#tablecourses td {
+   border: 1px solid #e3e3e3;
+   padding: 4px 8px;
+}
+
+#tablesummary th {
+    font-style: italic;
+    text-decoration: underline;
+    text-align: center;
+}
+
+table {
+  border-collapse: separate;
+    border-spacing: 0;
+}
+
+#tablesummary {
+    float: left;
+    margin-left: 4px;
+    margin-bottom: 82px;
+}
+
+#tablesummary th, td {
+   padding: 3px 10px;
+}
+
+#tablesummary td {
+  background-color: white;
+}
+
+.separatorlinetotal td {
+ border-top: 2px solid black;
+}
+
+#paymentscontainer  {
+   float: left; 
+   margin-left: 40px;
+}
+
+#paymentslabel {
+    float: left;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+table.thead, table.tbody {
+  display: block;
+}
+
+#tablepayments th {
+  text-align: left;  
+  width: 24%;
+  height: 30%;   
+  font-weight: bold;
+  background-color: limegreen;
+  border: 1px solid green;
+}
+
+#tablepayments {
+  border-spacing: 0;
+   border: 2px solid black;
+}
+
+#tablepayments  tbody tr td:nth-child(1){
+   text-align: left;
+}
+
+#tablepayments  tbody tr td:nth-child(2){
+   text-align: right;
+}
+
+#tablepayments  tbody tr td:nth-child(3){
+   text-align: right;
+}
+
+#tablepayments  tbody tr td:nth-child(4){
+   text-align: right;
+}
+
+#selecttype {
+  margin-bottom: 4px;
+  margin-top: 2px;  
+}
+
+#containertablepayments {
+   width:400px;
+   height: 245px;
+   margin-bottom: 6px;
+   overflow: auto;
+}
+
+#contactcontainer {
+  float: left;
+  width: 20%;
+  height: 100%;
+  margin-right: 60px;
+}
+
+#containerfinancial {
+  float: left;
+  width: 35%;
+}
+
+#contactfieldset {
+  height: 66%;
+}
+
+#makepaymentbuttoncontainer {
+   text-align: center;
+   margin-top: 4px;
+}
+
+#tablepayments  td {
+   font-family: sans-serif;
+   font-size: 0.7em;
+}
+
+.tabs li:last-child {
+   visibility: hidden;
+}
+
+#paymenttypecontainer {
+   margin-top: 10px;
+   height: 30%;
+   width: 100%;
+}
+
+#companycontainer {
+  height: 30%;
+  width: 100%;
+}
+
+.container {
+  padding: 8px;  
+  border: 1px solid black;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#steponecontainer {
+   height: 42%;
+  width: 68%;    
+}
+
+#steptwocontainer {
+  height: 50%;
+  width: 70%;
+}
+
+#stepthreecontainer {
+   height: 42%;
+   width: 60%;
+}
+
+.dropdown {
+  font-size: .6em;
+}
+
+.input {
+ font-size: 2em;
+}
+
+.heading {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 2.5em;
+}
+
+.paymentsteps {
+  float: left;
+  position: relative;
+  margin-left: 8px;
+  border: 1px solid black;
+  width: 32%;
+  height: 100%;
+}
+
+.hidden {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  height: 15%;
+}
+
+#creditvincontainer {
+ padding-top: 25px;
+ padding-left: 4px;
+ visibility: hidden;
+  
+}
+
+#onlineinputcontainer {
+ padding-top: 25px;
+ padding-left: 4px;
+ visibility: hidden;  
+}
+
+#makepaymentcontainer {
+  width: 100%;
+  height: 100%;  
+  padding-top: 25px;
+  padding-left: 4px;
+}
+
+.inputtext {
+   font-size: 0.7em;
+}
+
+#vincontainer {
+ margin-top: 8px;
+}
+
+#passcontainer {
+  margin-top: 8px;
+}
+
+#showpasswordcontainer {
+  margin-top: 8px;
+}
+
+#vin {
+  width: 12%;
+}
+
+#creditcard {
+  width: 49%;
+}
+
+#instructionscontainer {
+   width: 80%;
+   height: 5%;
+}
+
+#finishbutton {
+   width: 30%;
+   height: 40%;
+   font-size: 1.0em;
+}
+
+#finishbuttoncontainer {
+  text-align: center;    
+  width: 80%;
+  height: 45%;
+  margin-top: 15px;
+}
