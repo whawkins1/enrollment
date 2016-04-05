@@ -150,14 +150,14 @@ function submitInformation() {
                 var password = $('#password').val();
                 var confirm = $('#confirm').val();
                
-               if(password != confirm) {
+               if (password != confirm) {
                   setTextFieldRed('#password, #confirm');
                } else {
                  var passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-                 if(!(passwordRegEx.test(password))) {
+                 if (!(passwordRegEx.test(password))) {
                     alert("Password Error Must Include at least 8 Characters, One Uppercase, One Number");
                     noErrors = false;
-                 }
+                 } 
                }                   
                 
                if(noErrors) {
@@ -186,7 +186,7 @@ function submitInformation() {
                    console.log($('#email').val());
                    console.log(password);  */
                
-                   /* var promise = $.ajax({
+                   /* var ajaxCall = $.ajax({
                              type: 'POST',
                              url: "submitRegistration.php",
                              data: {firstName: firstName,
@@ -200,13 +200,13 @@ function submitInformation() {
                                     phoneMobile: phoneMobile,
                                     major: major,
                                     email: email,
-                                    password: password },
+                                    password: passwordHash },
                               dataType: 'text'      
                              });
-                    promise.done (function(data) {alert(data);});
+                    ajaxCall.done (function(data) {alert(data);});
                                                 //window.open("welcome.php" + "?email=" + $email);});
-                    promise.fail (function() { alert("Error Processing Registration"); });                      */
-               } // end no errors
+                    ajaxCall.fail (function() { alert("Error Processing Registration"); });                      */
+               } 
            } else {
                alert("Error Phone Home");
              htmlErrors += "<p>Empty Fields All With * Must Be completed</p>";

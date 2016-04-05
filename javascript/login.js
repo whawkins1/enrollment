@@ -27,6 +27,8 @@ $(function() {
 
       
   function submitForm() {
+      
+      
       var data = $('#login_form').serialize();
       
       var ajaxCall = $.ajax({

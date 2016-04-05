@@ -1,5 +1,5 @@
 <?php
-     require_once("config.php");
+     include("config.php");
      
         if (isset($_POST[('firstname')],
          $_POST[('lastName')],
@@ -17,18 +17,14 @@
          $hashOK = true;
          
          if (defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
-             //Hash Password
-             $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
-             //Prefix Information To Verify Later; $2a$ Blowfish Algorithm
-             $cost = 10;
-             $salt = sprintf("$2a$%02d$", $cost) . $salt;
-             $hash = crypt($password, $salt);
+             $options = array('cost' => 11);
+             var passwordHash = password_hash($_POST[('password')], PASSWORD_BCRYPT, $options);
          } else {
              alert("Blowfish not Defined");
              $hashOK = false;
          }
          
-         if ($performSubmit) {
+         if ($hashOK) {
              $firstName = $_POST[('firstName')];
              $lastName = $_POST[('lastName')];
              $country = $_POST[('country')];
@@ -56,23 +52,37 @@
                                         mobile_phone, 
                                         postal_code) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                                         
-                                         $statement = $conn->prepare($sql); 
-                                         $statement->bind_param('sssssssssssi', $firstName, 
-                                                                                   $lastName, 
-                                                                                   $email, 
-                                                                                   $hash, 
-                                                                                   $country, 
-                                                                                   $state, 
-                                                                                   $city, 
-                                                                                   $major, 
-                                                                                   $address, 
-                                                                                   $phoneHome, 
-                                                                                   $phoneMobile, 
-                                                                                   $postalCode);
-                                          if(!$statement->execute()) {
-                                             die('Error:('.$conn->errno .')'.$conn->error);
+                                         $stmt = mysqli_prepare($conn, $sql);
+                                         
+                                         if ($stmt === false) {
+                                            trigger_error("Statement Failed" . htmlspecialchars(mysqli_error($conn)), E_USER_ERROR);
+                                         }
+                                         
+                                         $bind = mysqli_stmt_bind_param($stmt, 'sssssssssssi', $firstName, 
+                                                                                                    $lastName, 
+                                                                                                    $email, 
+                                                                                                    $passwordHash, 
+                                                                                                    $country, 
+                                                                                                    $state, 
+                                                                                                    $city, 
+                                                                                                    $major, 
+                                                                                                    $address, 
+                                                                                                    $phoneHome, 
+                                                                                                    $phoneMobile, 
+                                                                                                    $postalCode);
+          
+                                          if ($bind === false) {
+                                              trigger_error("bind param failed!", E_USER_ERROR);
                                           }
-                                          $statement->close();
+                                          
+                                          $exec = mysqli_stmt_execute($stmt);
+                                          
+                                          if ($exec === false) {
+                                             trigger_error("Statement execute failed!" . htmlspecialchars(mysqli_stmt_error($stmt)), E_USER_ERROR);
+                                          }
+                                          
+                                          mysqli_stmt_close($stmt);
+                                          mysqli_close($conn);
              }
        }
 ?>
