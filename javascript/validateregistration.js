@@ -173,20 +173,20 @@ function submitInformation() {
                    var major = $('#majorselect :selected').text();
                    var email = $('#email').val();
                    
-                   /* console.log($('#firstname').val());
-                   console.log($('#lastname').val());
-                   console.log($('#countryselect :selected').text());
-                   console.log($('#stateselect :selected').text());
-                   console.log($('#cityselect :selected').text());
-                   console.log($('#address').val());
-                   console.log($('#postalcode').val());
-                   console.log($('#phonehome').val());
-                   console.log($('#phonemobile').val());
-                   console.log($('#majorselect :selected').text());
-                   console.log($('#email').val());
-                   console.log(password);  */
+                   console.log(firstName);
+                   console.log(lastName);
+                   console.log(country);
+                   console.log(state);
+                   console.log(city);
+                   console.log(address);
+                   console.log(postalCode);
+                   console.log(phoneHome);
+                   console.log(phoneMobile);
+                   console.log(major);
+                   console.log(email);
+                   console.log(password);  
                
-                   /* var ajaxCall = $.ajax({
+                    var ajaxCall = $.ajax({
                              type: 'POST',
                              url: "submitRegistration.php",
                              data: {firstName: firstName,
@@ -200,12 +200,11 @@ function submitInformation() {
                                     phoneMobile: phoneMobile,
                                     major: major,
                                     email: email,
-                                    password: passwordHash },
-                              dataType: 'text'      
+                                    password: password }
                              });
-                    ajaxCall.done (function(data) {alert(data);});
+                    ajaxCall.done (function(data) { alert("Register Complete "); });
                                                 //window.open("welcome.php" + "?email=" + $email);});
-                    ajaxCall.fail (function() { alert("Error Processing Registration"); });                      */
+                    ajaxCall.fail (function() { alert("Error Processing Registration"); });                      
                } 
            } else {
                alert("Error Phone Home");
@@ -222,8 +221,7 @@ function populateCountryDropDown() {
               cache: false
           });
           
-         ajaxCall.done (function(data) {
-                      
+         ajaxCall.done (function(data) {                      
                       $("#countryselect").html(data)  
                       $("#countryselect").prop("selectedIndex", -1);});
                       
