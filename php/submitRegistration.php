@@ -1,19 +1,19 @@
 <?php
      include("config.php");
      
-      if (isset($_POST['firstName']) &&
-          isset($_POST['lastName']) &&
-          isset($_POST['country']) &&
-          isset($_POST['state']) &&
-          isset($_POST['city']) &&
-          isset($_POST['address']) &&
-          isset($_POST['postalCode']) &&
-          isset($_POST['phoneHome']) &&     
-          isset($_POST['phoneMobile']) &&
-          isset($_POST['major']) &&
-          isset($_POST['email']) &&
-          isset($_POST['password'])) {   
-                        
+     $postNames = array('firstName', 'lastName', 'country', 'state', 
+                        'city', 'address', 'postalCode', 'phoneHome', 
+                        'phoneMobile', 'major', 'email', 'password');
+     $allPostSet = true;
+     
+     foreach ($postNames as $value) {
+         if (!isset($_POST[$value])) {
+             $allPostSet = false;
+             break;
+         }
+     }
+          
+     if ($allPostSet) { 
          $sql = "INSERT INTO users(user_first_name, 
                                        user_last_name, 
                                        user_email, 
