@@ -1,5 +1,5 @@
 
-$(function() {
+(function() {
   ('#login_form').validate({
       rules: {
           password: {
@@ -16,10 +16,31 @@ $(function() {
                    },
         username: {
                      required: "Please enter your username"
-                  },
+                  }
+      },
                   
-        submitHandler: function () {
-            var data = $('#login_form').serialize();
+        submitHandler: submitForm
+  });
+
+  $('#username').on('keyup', function() {
+      var empty = $(this).val().length === 0;
+     
+      if (empty) {
+          $(this).attr('placeholder', "Username");
+      }
+  });
+  
+  $('#password').on('keyup', function() {
+      var empty = $(this).val().length === 0;
+      
+      if (empty) {
+          $(this).attr('placeholder', "Username");
+      }
+  });  
+});
+
+function submitForm() {
+    var data = $('#login_form').serialize();
             console.log(data);
       
           var ajaxCall = $.ajax({
@@ -38,24 +59,5 @@ $(function() {
                 ('#password').val("");
                 ('#password').attr('placeholder', "Password");*/           
               }
-          });
-        }
-      }
-   )};
-
-  $('#username').on('keyup', function() {
-      var empty = $(this).val().length === 0;
-     
-      if (empty) {
-          $(this).attr('placeholder', "Username");
-      }
-  });
-  
-  $('#password').on('keyup', function() {
-      var empty = $(this).val().length === 0;
-      
-      if (empty) {
-          $(this)attr('placeholder', "Username");
-      }
-  });  
-});
+          });    
+}
