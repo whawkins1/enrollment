@@ -2,21 +2,13 @@
 (function() {
   ('#login_form').validate({
       rules: {
-          password: {
-                      required: true
-                    },
-          username: {
-                       required: true
-                    }
+          password: "required",
+          username: "required"
       },
       
       messages: {
-        password:  {
-                     required: "Please enter your password"
-                   },
-        username: {
-                     required: "Please enter your username"
-                  }
+        password:  "Please enter your password",
+        username:  "Please enter your username"
       },
                   
         submitHandler: submitForm
@@ -41,9 +33,9 @@
 
 function submitForm() {
     var data = $('#login_form').serialize();
-            console.log(data);
+            console.log("here");
       
-          var ajaxCall = $.ajax({
+         /* var ajaxCall = $.ajax({
                 type: 'POST',
                 url: "../php/login.php",
                 data: data
@@ -57,7 +49,7 @@ function submitForm() {
                 alert("Invalid Login, Please Try Again");
                 /*('#username').focus();
                 ('#password').val("");
-                ('#password').attr('placeholder', "Password");*/           
+                ('#password').attr('placeholder', "Password");           
               }
-          });    
+          });  */  
 }
