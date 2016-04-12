@@ -1,17 +1,41 @@
 
 (function() {
-  ('#login_form').validate({
-      rules: {
-          password: "required",
-          username: "required"
-      },
+  ('#login_button').on('click', function () {
+      var username = ('#username').val().trim();
+      var password = ('#password').val().trim();
       
-      messages: {
-        password:  "Please enter your password",
-        username:  "Please enter your username"
-      },
-                  
-        submitHandler: submitForm
+  if ( (username === "") && (password !== "")) {
+      alert("Username Field Required!");
+      ('#username').focus();
+  } else if ( (username !== "") && (password === "")) {
+      alert("Password Field Required!");
+      ('#password').focus();
+  } else {            
+         var ajaxCall = $.ajax({
+                type: 'POST',
+                url: "../php/login.php",
+                data: { 
+                        username : username,
+                        password : password
+                      },
+                dataType: 'text'
+          });
+      
+          ajaxCall.done (function(data) {
+              if (data === "valid") {
+                 alert("Valid Login");
+                 //window.open("account.php?username=" + username);
+              } else if (data === "invalid") {
+                alert("Invalid Login, Please Try Again");                
+              }
+          });   
+          
+          ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                alert("Error Logging in, Please Try Again!");
+          });
+          ('#login_form').[0].reset();
+          ('#username').focus();
+  }      
   });
 
   $('#username').on('keyup', function() {
@@ -32,24 +56,5 @@
 });
 
 function submitForm() {
-    var data = $('#login_form').serialize();
-            console.log("here");
-      
-         /* var ajaxCall = $.ajax({
-                type: 'POST',
-                url: "../php/login.php",
-                data: data
-          });
-      
-          ajaxCall.done (function(data) {
-              if (data === "valid") {
-                 alert("Valid Login");
-                 //window.open("account.php?username=" + ('#username').val().trim());
-              } else if (data === "invalid") {
-                alert("Invalid Login, Please Try Again");
-                /*('#username').focus();
-                ('#password').val("");
-                ('#password').attr('placeholder', "Password");           
-              }
-          });  */  
+    
 }
