@@ -1,15 +1,19 @@
 
-(function() {
-  ('#login_button').on('click', function () {
-      var username = ('#username').val().trim();
-      var password = ('#password').val().trim();
+$(function() {
+  $('#login_button').on('click', function () {
+      var username = $('#username').val().trim();
+      var password = $('#password').val().trim();
       
   if ( (username === "") && (password !== "")) {
       alert("Username Field Required!");
-      ('#username').focus();
+      $('#username').focus();
+      $('#password').val("");
   } else if ( (username !== "") && (password === "")) {
       alert("Password Field Required!");
-      ('#password').focus();
+      $('#password').focus();
+  } else if ( (username === "") && (password === "")) {
+      alert("Both Fields Required");
+      $('#username').focus();      
   } else {            
          var ajaxCall = $.ajax({
                 type: 'POST',
@@ -22,39 +26,34 @@
           });
       
           ajaxCall.done (function(data) {
+              console.log(data);
               if (data === "valid") {
                  alert("Valid Login");
                  //window.open("account.php?username=" + username);
+                 $('#login_form')[0].reset();
               } else if (data === "invalid") {
-                alert("Invalid Login, Please Try Again");                
-              }
+                alert("Invalid Login, Please Try Again");
+                $('#username').focus();                
+              } 
           });   
           
           ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
                 alert("Error Logging in, Please Try Again!");
-          });
-          ('#login_form').[0].reset();
-          ('#username').focus();
+                $('#password').val("");
+                $('#username').focus();      
+          });          
   }      
   });
-
-  $('#username').on('keyup', function() {
-      var empty = $(this).val().length === 0;
-     
-      if (empty) {
-          $(this).attr('placeholder', "Username");
-      }
-  });
   
-  $('#password').on('keyup', function() {
-      var empty = $(this).val().length === 0;
-      
-      if (empty) {
-          $(this).attr('placeholder', "Username");
-      }
-  });  
+  $('#username').on('keypress', function (e) { triggerEnter(e); });
+  $('#password').on('keypress', function (e) { triggerEnter(e); });
 });
 
-function submitForm() {
+function triggerEnter ( event ) {
+  var keyCode = event.which;
     
+  if (keyCode === 13) {
+       $('#login_button').trigger('click');
+       event.preventDefault();
+  }
 }
