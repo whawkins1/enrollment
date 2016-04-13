@@ -15,7 +15,7 @@ $(function() {
   } else if ( (username === "") && (password === "")) {
       alert("Both Fields Required");
       $('#username').focus();   
-  } else if (!(regexEmail.test(username)) {
+  } else if (!(regexEmail.test(username))) {
       alert("Invalid Username Format");
       $('#username').focus();
   } else {            
@@ -34,7 +34,7 @@ $(function() {
               if (data === "valid") {
                  alert("Valid Login");
                  //window.open("account.php?username=" + username);
-                 $('#login_form')[0].reset();
+                 $('#loginform')[0].reset();
               } else if (data === "invalid") {
                 alert("Invalid Login, Please Try Again");
                 $('#username').focus();                
@@ -49,8 +49,7 @@ $(function() {
   }      
   });
   
-  $('#username').on('keypress', function (e) { triggerEnter(e); });
-  $('#password').on('keypress', function (e) { triggerEnter(e); });
+  $('.input_text').on('keypress', function (e) { triggerEnter(e); });
 });
 
 function triggerEnter ( event ) {

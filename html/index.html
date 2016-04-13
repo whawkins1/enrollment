@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
    <title>Enrollment Center</title>   
@@ -7,14 +8,21 @@
 </head>
    <body>
 	<h1>Enrollment Center</h1>
-		<form id="login_form" method="POST">
+		<form id="loginform" method="POST">
 		 <fieldset>
-			<input type="text" id="username"  placeholder="Username" size="30" autofocus><br>
-    		<input type="password" id="password" placeholder="Password" size="30"><br>
-			  
-	        <input type="button" id="login_button" value="Login">
-			<input type="reset" name="Reset" value="Reset">
-			<input type="button" value="Register">
+            <div id="labelcontainer">
+                <label id="loginlabel" class="input_text">Login</label>
+            </div>            
+            <div id="inputcontainer">
+                <input type="text" id="username"  class="input_text" placeholder="Username" size="30" autofocus><br>
+                <input type="password" id="password" class="input_text" placeholder="Password" size="30"><br>			  
+            </div>
+            <div class="buttoncontainer">            
+                <input type="button" class="button" id="login_button" value="Login">
+            </div>
+            <div class="buttoncontainer">
+                <input type="button" class="button" id="register_button" value="Register">
+            </div>    
 		</fieldset>
 		</form>
         <script src="../plugins/jquery-1.12.0.js"></script>
