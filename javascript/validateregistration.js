@@ -134,7 +134,6 @@ function submitInformation() {
             }); // end check empty fields 
            
            if(noEmptyTextFields) {
-               
                var phoneHome = $.trim($('#phonehome').val());
                var phoneMobile = $.trim($('#phonemobile').text);
                

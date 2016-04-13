@@ -3,6 +3,7 @@ $(function() {
   $('#login_button').on('click', function () {
       var username = $('#username').val().trim();
       var password = $('#password').val().trim();
+      var regexEmail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
       
   if ( (username === "") && (password !== "")) {
       alert("Username Field Required!");
@@ -13,7 +14,10 @@ $(function() {
       $('#password').focus();
   } else if ( (username === "") && (password === "")) {
       alert("Both Fields Required");
-      $('#username').focus();      
+      $('#username').focus();   
+  } else if (!(regexEmail.test(username)) {
+      alert("Invalid Username Format");
+      $('#username').focus();
   } else {            
          var ajaxCall = $.ajax({
                 type: 'POST',
