@@ -8,8 +8,8 @@ fieldset {
 	height: 100%;
 	width: 100%;
     margin-top: 70px;
-	padding-top: 20px;
-    padding-bottom: 20px;
+	padding-top: 15px;
+    padding-bottom: 35px;
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -19,6 +19,7 @@ fieldset {
     width: 56%;
     height: 30%;
     font-size: 1.2em;
+    
 }
 
 #inputcontainer {
@@ -40,6 +41,15 @@ form {
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
+}
+
+#username, #password {
+   border: solid 1px;
+   padding-left: 2px;
+}
+
+#errorlogin {
+  color: red;
 }
 
 .button {
