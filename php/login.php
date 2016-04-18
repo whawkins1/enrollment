@@ -15,7 +15,6 @@ if( isset($_POST['username'], $_POST['password'])) {
                 $stmt->fetch();
                         
                 if (PASSWORD_VERIFY($password, $user_db_hash)) {
-                     $_SESSION['username'] = $username;
                      echo "valid";
                 } else {
                      echo "invalid";

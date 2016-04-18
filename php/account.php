@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
-<?php $username = $_GET['username']; ?>
+<?php
+    session_start(); 
+    $_SESSION['username'] = $_GET['username'];
+?>
 
 <html lang="en">
   <head>
@@ -10,7 +13,7 @@
   </head>
     <body>
       <div id="loggedincontainer">
-           <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $username ?></span></label>
+           <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $_SESSION['username'] ?></span></label>
       </div>
       
       <?php include("../php/navigation.php")?>;         
