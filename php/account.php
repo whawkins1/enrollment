@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 
-<?php 
-    $username = $_GET['username']; 
-?>
+<?php $username = $_GET['username']; ?>
 
-<html>
+<html lang="en">
   <head>
     <title>Enrollment Center</title>
     <link rel="stylesheet" href="../css/accountstyles.css"/>
@@ -15,13 +13,13 @@
            <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $username ?></span></label>
       </div>
       
-      <?php include("../php/navigation.php")?>;
-         
+      <?php include("../php/navigation.php")?>;         
         
       <ul class="tabs">
          <li><a href="#tab-personal">Personal</a></li>
          <li><a href="#tab-courses">Courses</a></li>
          <li><a href="#tab-grades">Grades</a></li>
+         <li><a href="#tab-financial">Financial</a></li>
          <li><a href="#tab-payment">Make Payment</a></li>
       </ul>
       
@@ -44,12 +42,85 @@
                     <button type="button" id="editbutton">Edit</button>
                 </div>
              </div>
-            
-             
-           <div id="containerfinancial">      
+      </div>
+      
+       <div id="tab-courses" class="tabsjump">
+              <label id="filterlabel" class="filters"> Filter By: </label> 
+              <div id="filterdepartment" class="filters">
+                        <select id="departmentfilter"> 
+                            <option>-- Select Department --</option>
+                            <option>Business</option>
+                            <option>Computer Science</option>
+                            <option>English</option>
+                            <option>Math</option>
+                        </select>                        
+              </div>
+                  
+                  <div id="filtercodes" class="filters">
+                        <select id="codefilter"> 
+                            <option>-- Select Code --</option>
+                            <option>ENG101</option>
+                            <option>MATH101</option>
+                        </select>
+                  </div>
+
+                 <div id="filterprofessor" class="filters">
+                        <select id="professorfilter"> 
+                            <option>-- Select Professor </option>
+                            <option>Bettis, Jerome</option>
+                            <option>Hawkins, Jenny</option>
+                            <option>Laporte, Leo</option>
+                            <option>Smith, Mike</option>
+                            <option>Zeise, Paul</option>
+                        </select>
+                  </div>
+                  
+                  <div id="filterlocation" class="filters">
+                        <select id="locationfilter"> 
+                            <option>-- Select Location --</option>
+                            <option>Colebank Hall</option>
+                            <option>Falcon Center</option>
+                            <option>Feaster Center</option>
+                            <option>Hardway Hall</option>
+                            <option>Technology Park</option>
+                        </select>                        
+                  </div>
+              
+              <table id="tablecourses" class="tablesorter">      
+              <thead>
+                    <tr id="headerRow">
+                         <th class="checkbox"><input type="checkbox" id="checkboxhead"/></th>
+                         <th class="code">Code</th>
+                         <th class="name">Name</th>
+                         <th class="department">Department</th>
+                         <th class="professor">Professor</th>
+                         <th class="time">Time</th>
+                         <th class="location">Location</th>
+                         <th class="credits">Credits</th>
+                    </tr>
+               </thead>     
+                 <tbody>
+                 </tbody>                  
+             </table>
+      </div>                
+      
+      <div id="tab-grades" class="tabsjump">
+      </div>          
+
+      <div id="tab-financial" class="tabsjump">
+          <div id="containerfinancial">      
              <fieldset id="financialfieldSet">
+               <label id="paymentslabel">History</label>
+
                <legend>Financial</legend>
             
+                <label for="selecttype" id="filterbylabel">Filter By:                    
+                       <select id="selecttype">
+                          <option>All</option>
+                          <option>Payment</option>
+                          <option>Charge</option>
+                       </select> 
+                       </label>
                <table id="tablesummary">
                  <thead>
                     <tr>
@@ -70,21 +141,9 @@
                         <td>0.00</td>
                     </tr>
                  </tbody>
-               </table>
-                  
-               <div id="paymentscontainer">
-                   <label id="paymentslabel">History</label>
-                    
-                    <label for="selecttype" id="filterbylabel">Filter By:                    
-                       <select id="selecttype">
-                          <option>All</option>
-                          <option>Payment</option>
-                          <option>Charge</option>
-                       </select> 
-                       </label>
-                   
-                   <div id="containertablepayments">
-                       <table id="tablepayments" class="tablesorter">
+             </table>
+             
+             <table id="tablepayments" class="tablesorter">
                          <thead>
                             <tr id="headerRow">
                                <th>Code</th>
@@ -169,77 +228,14 @@
                             </tr>
                          </tbody>
                        </table>
-                    </div>
-             </div>  
           </fieldset>
-          <div id="makepaymentbuttoncontainer">
+            <div id="makepaymentbuttoncontainer">
                     <button type="button" id="makepaymentbutton">Make Payment</button>
                 </div>
           </div>
-      </div>
-      
-       <div id="tab-courses" class="tabsjump">
-              <label id="filterlabel" class="filters"> Filter By: </label> 
-              <div id="filterdepartment" class="filters">
-                        <select id="departmentfilter"> 
-                            <option>-- Select Department --</option>
-                            <option>Business</option>
-                            <option>Computer Science</option>
-                            <option>English</option>
-                            <option>Math</option>
-                        </select>                        
-              </div>
-                  
-                  <div id="filtercodes" class="filters">
-                        <select id="codefilter"> 
-                            <option>-- Select Code --</option>
-                            <option>ENG101</option>
-                            <option>MATH101</option>
-                        </select>
-                  </div>
-
-                 <div id="filterprofessor" class="filters">
-                        <select id="professorfilter"> 
-                            <option>-- Select Professor </option>
-                            <option>Bettis, Jerome</option>
-                            <option>Hawkins, Jenny</option>
-                            <option>Laporte, Leo</option>
-                            <option>Smith, Mike</option>
-                            <option>Zeise, Paul</option>
-                        </select>
-                  </div>
-                  
-                  <div id="filterlocation" class="filters">
-                        <select id="locationfilter"> 
-                            <option>-- Select Location --</option>
-                            <option>Colebank Hall</option>
-                            <option>Falcon Center</option>
-                            <option>Feaster Center</option>
-                            <option>Hardway Hall</option>
-                            <option>Technology Park</option>
-                        </select>                        
-                  </div>
-              
-              <table id="tablecourses" class="tablesorter">      
-              <thead>
-                    <tr id="headerRow">
-                         <th class="checkbox"><input type="checkbox" id="checkboxhead"/></th>
-                         <th class="code">Code</th>
-                         <th class="name">Name</th>
-                         <th class="department">Department</th>
-                         <th class="professor">Professor</th>
-                         <th class="time">Time</th>
-                         <th class="location">Location</th>
-                         <th class="credits">Credits</th>
-                    </tr>
-               </thead>     
-                 <tbody>
-                 </tbody>                  
-             </table>
-      </div>                
-      
-      <div id="tab-grades" class="tabsjump">
-      </div>           
+          
+          </div>
+      </div>      
       
       <div id="tab-payment" class="tabsjump">
            <div class="paymentsteps">
