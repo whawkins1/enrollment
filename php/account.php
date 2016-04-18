@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php 
-   //$email = $_GET['email'];
+    $username = $_GET['username']; 
 ?>
 
 <html>
@@ -11,13 +11,18 @@
     <meta charset="UTF-8">
   </head>
     <body>
-      <?php include("../php/navigation.php"); ?>
+      <div id="loggedincontainer">
+           <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $username ?></span></label>
+      </div>
+      
+      <?php include("../php/navigation.php")?>;
+         
         
       <ul class="tabs">
          <li><a href="#tab-personal">Personal</a></li>
          <li><a href="#tab-courses">Courses</a></li>
          <li><a href="#tab-grades">Grades</a></li>
-         <li><a href="#tab-payment">Make Payment</a></li>4re55555555555
+         <li><a href="#tab-payment">Make Payment</a></li>
       </ul>
       
       <div id="tab-personal" class="tabsjump">

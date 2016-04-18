@@ -428,3 +428,17 @@ table.thead, table.tbody {
   height: 45%;
   margin-top: 15px;
 }
+
+#loggedincontainer {
+  height: 20%;
+  text-align: right;
+}
+
+#loggedinlabel {
+  padding-right: 8px;
+}
+
+#fontusername {
+  font-weight: bold;
+  font-style: italic;
+}

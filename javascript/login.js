@@ -3,6 +3,7 @@ $(function() {
   $('#login_button').on('click', function () {
       var username = $('#username').val().trim();
       var password = $('#password').val().trim();
+      
       var regexEmail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
       
       if ( (username === "") && (password !== "")) {
@@ -19,6 +20,7 @@ $(function() {
           $('#errorlogin').text("Invalid Username Format");
           $('#username').focus();
       } else {        
+             var redirectWindow =  window.open("http://localhost/php/account.php?username=" + username);
              $(this).val("");
              $(this).css({'background-image': 'url(../images/loader.gif)',
                        'background-repeat': 'no-repeat',
@@ -35,16 +37,13 @@ $(function() {
               });
           
               ajaxCall.done (function(data) {
-                  console.log(data);
                   if (data === "valid") {
-                     alert("Valid Login");
-                     //window.open("account.php?username=" + username);
-                     $('#loginform')[0].reset();
+                     redirectWindow.location;
                   } else if (data === "invalid") {
                     $('#errorlogin').text("Invalid Login, Please Try Again!");
                     $('#username').focus();                
-                  } 
-                  $(this).html("Login");
+                    $(this).html("Login");
+                  }                   
               });   
               
               ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {

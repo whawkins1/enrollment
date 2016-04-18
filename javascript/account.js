@@ -164,7 +164,6 @@ $(function() {
           $('.contactinput').prop('readonly', true);
           $(this).text("Edit");
         }
-    }      
     });    
 });
 
