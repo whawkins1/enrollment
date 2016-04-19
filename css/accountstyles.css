@@ -77,18 +77,21 @@ body {
 }
 
 .contactinput  {
-  border: 0px solid;
-  padding: 2px;
+  padding-left: 2px;
+  margin: 6px;
+  border: 1px solid black;
+  width: 60%;
 } 
 
 #editbutton {
    font-size: 0.9em;
-   width: 12%;
+   width: 18%;
 }
 
 #editbuttoncontainer {
+  width: 70%;
   text-align: center;
-  margin-top: 4px;  
+  margin-top: 6px;  
 }
 
 legend {
@@ -268,7 +271,7 @@ table.thead, table.tbody {
 
 #contactcontainer {
   float: left;
-  width: 20%;
+  width: 30%;
   height: 100%;
   margin-right: 60px;
 }
@@ -279,7 +282,7 @@ table.thead, table.tbody {
 }
 
 #contactfieldset {
-  height: 66%;
+  width: 70%;
 }
 
 #makepaymentbuttoncontainer {
@@ -441,4 +444,11 @@ table.thead, table.tbody {
 #fontusername {
   font-weight: bold;
   font-style: italic;
+}
+
+.contactlabel {
+  width: 40%;
+  margin-left: 6px;
+  text-align: right;
+  margin: 2px;
 }

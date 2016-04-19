@@ -23,8 +23,5 @@ if( isset($_POST['username'], $_POST['password'])) {
                echo $stmt->num_rows;
             }            
         }
-        $stmt->free_result();
-        $stmt->close();      
-        $conn->close();
       }
 ?>
