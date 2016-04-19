@@ -1,8 +1,39 @@
 <!DOCTYPE html>
 
 <?php
-    session_start(); 
-    $_SESSION['username'] = $_GET['username'];
+    include("config.php");
+         
+    
+    $username = $_GET['username'];
+    if ( isset($username) && $username != '') {
+      session_start();
+      $_SESSION['username'] = $username;
+      
+      $sql = "SELECT user_first_name, 
+                     user_last_name, 
+                     user_country, 
+                     user_state, 
+                     user_city, 
+                     user_major, 
+                     user_address, 
+                     user_home_phone, 
+                     user_mobile_phone, 
+                     user_postal_code, 
+                     user_balance
+              FROM   users
+              WHERE  user_email = ?";
+              
+       $stmt = $conn->prepare($sql);
+       $stmt->bind_param('s', $username);
+       
+       if ($stmt->execute()) {
+           $stmt->bind_result($firstName, $lastName, $country, $state, $city, $major, $address, $homePhone, $mobilePhone, $postalCode, $balance);
+           $stmt->fetch();
+           $stmt->free_result();
+           $stmt->close();
+           $conn->close();
+       }           
+    }
 ?>
 
 <html lang="en">
@@ -30,15 +61,15 @@
              <div id="contactcontainer">            
                 <fieldset id="contactfieldset">
                    <legend>Contact</legend>
-                    <label>First Name* :</label> <input type="text" id="firstname" class="contactinput" readonly >
-                    <label>Last Name* :</label>  <input type="text" id="lastname" class="contactinput" readonly>
-                    <label>Street Address* :</label>  <input type="text" id="streetaddress" class="contactinput" readonly>
-                    <label>City* :</label>  <input type="text" id="city" class="contactinput" readonly>
-                    <label>State* :</label>  <input type="text" id="state" class="contactinput" readonly>
-                    <label>Zip Code* :</label>  <input type="text" id="lastname" class="contactinput" readonly>
-                    <label>Phone* :</label>  <input type="text" id="lastname" class="contactinput" readonly>
-                    <label>Phone(mobile)* :</label>  <input type="text" id="lastname" class="contactinput" readonly>
-                    <label>Email* :</label>  <input type="text" id="lastname", class="contactinput" readonly>
+                    <label>First Name* :</label> <input type="text" id="firstname" class="contactinput" value="<?php echo $firstName?>" readonly >
+                    <label>Last Name* :</label>  <input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly>
+                    <label>Street Address* :</label>  <input type="text" id="streetaddress" class="contactinput" value="<?php echo $address?>" readonly>
+                    <label>City* :</label>  <input type="text" id="city" class="contactinput" value="<?php echo $city?>" readonly>
+                    <label>State* :</label>  <input type="text" id="state" class="contactinput" value="<?php echo $state?>" readonly>
+                    <label>Zip Code* :</label>  <input type="text" id="lastname" class="contactinput" value="<?php echo $postal_code?>" readonly>
+                    <label>Phone* :</label>  <input type="text" id="lastname" class="contactinput" value="<?php echo $homePhone?>" readonly>
+                    <label>Phone(mobile)* :</label>  <input type="text" id="lastname" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
+                    <label>Email* :</label>  <input type="text" id="lastname", class="contactinput" value="<?php echo $username?>"readonly>
                 </fieldset>
                 
                 <div id="editbuttoncontainer">
