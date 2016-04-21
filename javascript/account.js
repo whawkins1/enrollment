@@ -1,5 +1,15 @@
 
 $(function() {    
+    var firstNameChanged = false;
+    var lastNameChanged = false;
+    var addressChanged = false;
+    var cityChanged = false;
+    var stateChanged = false;
+    var zipchanged = false;
+    var homePhoneChanged = false;
+    var mobilePhoneChanged = false;
+    var emailChanged = false;
+    
     loadTableData();
     setDropDownFilterDepartment();
     setDropDownFilterCode();
@@ -164,13 +174,40 @@ $(function() {
           $('.contactinput').prop('readonly', true);
           $(this).text("Edit");
         }
-    });    
-});
-
-//Switch Password Visbility
+    });   
+    
+    //Switch Password Visbility
     $('#showpasscb').on('click', function () {
         $('#password').attr(type, $(this).prop('checked') ? 'text' : 'password');
     });
+    
+    $('.contactinput').on('keyup keydown keypress change blur', function () {
+       if ( $(this).val() !==  $.data(this, 'lastvalue') {
+          select( this.id ) {
+             case "firstname":
+                  firstNameChanged = true;
+                  break;
+             case "lastName":
+                  break;
+             case "streetaddress":
+                  break;
+             case "city":
+                  break;
+             case "state":
+                  break;
+             case "zipcode":
+                  break;
+             case "homephone":
+                  break;
+             case "mobilephone":
+                  break;
+             case "email":
+                  break;
+          }
+          $.data(this, "lastvalue", $(this).val());
+       }
+    });
+});
 
 function populateReviewForm () {
   //Set Date Box For Payment Review
