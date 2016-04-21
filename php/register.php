@@ -38,15 +38,15 @@
 					</div>
                     <div class="inputwrap">
 						<label>Postal Code*:</label>
-							 <input class="inputfieldnumbers" type="text" id="postalcode" name="postalcode" maxlength="5">
+							 <input type="text" id="postalcode" name="postalcode" maxlength="5">
 					</div>
 					<div class="inputwrap"> 				
 					<label>Phone Home*:</label>
-							 <input class="inputfieldnumbers" type="text" id="phonehome" name="home" maxlength="15">
+							 <input type="text" id="phonehome" name="home" maxlength="15">
 					</div>
 					<div class="inputwrap">
 						<label>Phone Mobile:</label>
-							 <input class="inputfieldnumbers" type="text" id="phonemobile" name="mobile" maxlength="15">
+							 <input type="text" id="phonemobile" name="mobile" maxlength="15">
 					</div>
                     <div id="major_drop_down" class="dropdown">
 						<label>Major*:</label>
@@ -68,7 +68,7 @@
 				<button type="button" id="submit">SUBMIT</button>
                 
                  <script src="../plugins/jquery-1.12.0.js"></script>
-                 <script src="https://raw.githubusercontent.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.js"></script>
+                 <script src="../plugins/jquery.maskedinput.js"></script>
                  <script src="../javascript/validateregistration.js"></script>
        </body>
 </html>

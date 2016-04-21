@@ -1,15 +1,5 @@
 
 $(function() {    
-    var firstNameChanged = false;
-    var lastNameChanged = false;
-    var addressChanged = false;
-    var cityChanged = false;
-    var stateChanged = false;
-    var zipchanged = false;
-    var homePhoneChanged = false;
-    var mobilePhoneChanged = false;
-    var emailChanged = false;
-    
     loadTableData();
     setDropDownFilterDepartment();
     setDropDownFilterCode();
@@ -21,6 +11,29 @@ $(function() {
     $('#tablepayments').tablesorter();
     $('#amount').autoNumeric('init');
     $('#vin').val("");
+    
+    $('.inputfieldnumbers').on('keydown', function(e) {
+       var arr = [8,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
+             
+             for (var i = 48; i <= 57; i++) {
+                    arr.push(i);
+             }
+             
+             if (!(e.ctrlKey && (e.which == 90 || e.which == 86 || e.which == 88))) {
+                 if ($.inArray(e.which, arr)  === -1) {
+                   e.preventDefault();
+                 }
+             }
+    });
+    
+    $('.inputfieldnumbers').on('keypress', function(e) {
+             var inputValue = this.val();
+             var regexpnumbers = /[^0-9]/g;
+             if (inputValue.match(regexpnumbers)) {
+                inputValue( inputValue.replace(regexpnumbers, '') );
+             }
+    });
+    
     
     $('#companydropdown').on('change', function() {
        var type = $('#selectpaymenttype').val();
@@ -60,15 +73,11 @@ $(function() {
     });
     
     $('#vin').on('keydown', function(e) {
-        //Check keycodes spacebar devare backspace and number range
-        
-        return (e.which === 37 || e.which === 39 || e.which === 8 || e.which === 46 || (e.which >= 48 && e.which <= 57)); 
+        return isValidKey(e); 
     });
     
     $('#creditcard').on('keydown', function(e) {
-        //Check keycodes spacebar devare backspace and number range
-        
-        return (e.which === 37 || e.which === 39 || e.which === 8 || e.which === 46 || (e.which >= 48 && e.which <= 57)); 
+         return isValidKey(e);
     });
     
     //Enter space After 4 digits
@@ -163,16 +172,23 @@ $(function() {
     
     });
     
+    $('.contactinput').focus( function () {
+        $(this).select(); 
+    });
+    
     // Set Edit Button
-    $('#editButton').on('click', function() {
+    $('#editbutton').on('click', function() {
         var text = $(this).text();
         if (text === "Edit") {
             $('.contactinput').prop('readonly', false);
+            $('.contactinput').css('pointer-events', 'auto');
+            $('#firstname').focus();
             $(this).text("Save");
         } else { // In Save Mode
-          //Validate and check info then write to server
-          $('.contactinput').prop('readonly', true);
-          $(this).text("Edit");
+        //Validate and check info then write to server
+            $('.contactinput').prop('readonly', true);
+            $('.contactinput').css('pointer-events', 'none');
+            $(this).text("Edit");
         }
     });   
     
@@ -181,33 +197,16 @@ $(function() {
         $('#password').attr(type, $(this).prop('checked') ? 'text' : 'password');
     });
     
-    $('.contactinput').on('keyup keydown keypress change blur', function () {
-       if ( $(this).val() !==  $.data(this, 'lastvalue') {
-          select( this.id ) {
-             case "firstname":
-                  firstNameChanged = true;
-                  break;
-             case "lastName":
-                  break;
-             case "streetaddress":
-                  break;
-             case "city":
-                  break;
-             case "state":
-                  break;
-             case "zipcode":
-                  break;
-             case "homephone":
-                  break;
-             case "mobilephone":
-                  break;
-             case "email":
-                  break;
-          }
-          $.data(this, "lastvalue", $(this).val());
-       }
-    });
+    $('#homephone').mask("999-999-9999");
+    $('#mobilephone').mask("999-999-9999");
 });
+
+function isValidKey ( event ) {
+    //Check keycodes spacebar devare backspace and number range
+   return (event.which === 37 || event.which === 39 || 
+           event.which === 8 || event.which === 46 || 
+          (event.which >= 48 && event.which <= 57));
+}
 
 function populateReviewForm () {
   //Set Date Box For Payment Review

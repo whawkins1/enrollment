@@ -15,44 +15,48 @@ $(function()  {
       }
     });    
 
-         $('.inputfieldnumbers').on('keydown', function(e) {
-             var arr = [8,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
+         $('#postalcode').on('keydown', function(e) {
+             //Allow Keyboard Shortcuts include cut paste
+             var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46,86,88];
              
              for (var i = 48; i <= 57; i++) {
                     arr.push(i);
              }
              
              if (!(e.ctrlKey && (e.which == 90 || e.which == 86 || e.which == 88))) {
-                 if (jQuery.inArray(e.which, arr)  === -1) {
+                 if ($.inArray(e.which, arr)  === -1) {
                    e.preventDefault();
                  }
              }
          });
                
-         $('.inputfieldnumbers').on('input', function() {
-             var regexpnumbers = /[^0-9]/g;
-             if ($(this).val().match(regexpnumbers)) {
-                $(this).val( $(this).val().replace(regexpnumbers, ''));
+         $('#postalcode').on('keypress', function() {
+             var inputValue = this.value;
+             if (inputValue.match(/[^0-9]/g)) {
+                inputValue( inputValue.replace(regexpnumbers, ''));
              }
          });             
          
          $('.inputfieldletters').on('keydown', function(e) {
-             var arr = [8,16,20,35,36,37,38,39,40,45,46];
+             //Allow Keyboard Shortcuts include cut paste
+             var arr = [8,9,16,20,35,36,37,38,39,40,45,46];
              
              for (var i = 65; i < 90; i++) {
                     arr.push(i);
              }
              
-             if (jQuery.inArray(e.which, arr)  === -1) {
-               e.preventDefault();
+             if (!(e.ctrlKey && (e.which == 90 || e.which == 86 || e.which == 88))) {
+                 if ($.inArray(e.which, arr)  === -1) {
+                   e.preventDefault();
+                 }
              }
          });
          
-         $('.inputfieldletters').on('input', function() {
-           var regexpletters = /[^a-zA-Z]/g;
+         $('.inputfieldletters').on('keypress', function() {
+           var inputValue = this.value;
            
-           if ($(this).val().match(regexpletters)) {
-              $(this).val( $(this).val().replace(regexpletters, ''));
+           if (inputValue.match(/[^a-zA-Z]/g)) {
+              inputValue( inputValue.replace(regexpletters, ''));
            }
          });
      
