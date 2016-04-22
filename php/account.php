@@ -64,13 +64,15 @@
       </ul>
       
       <div id="tab-personal" class="tabsjump">
-             <div id="contactcontainer">            
-             <form>
+             
+             <div id="contactcontainer">          
+                <div id="errorcontainer">ERROR: All Fields Must Be entered!</div>             
+             <form id="contactform">
                 <fieldset id="contactfieldset">
                    <legend>Contact</legend>
                     <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $firstName?>" readonly >
                     <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly >
-                    <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" class="contactinput" value="<?php echo $address?>" readonly>
+                    <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
                     <label class="contactlabel">Country* :</label><input type="text" id="country" class="contactinput" value="<?php echo $country?>" readonly>
                     <label class="contactlabel">City* :</label><input type="text" id="city" class="contactinput" value="<?php echo $city?>" readonly>
                     <label class="contactlabel">State* :</label><input type="text" id="state" class="contactinput" value="<?php echo $state?>" readonly>
@@ -80,6 +82,7 @@
                     <label class="contactlabel">Email* :</label><input type="text" id="email", class="contactinput" value="<?php echo $username?>"readonly>
                 </fieldset>
               </form>  
+                <div id="allfieldsrequirednotation">* required field</div>
                 
                 <div id="editbuttoncontainer">
                     <button type="button" id="editbutton">Edit</button>

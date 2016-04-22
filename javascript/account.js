@@ -12,8 +12,8 @@ $(function() {
     $('#amount').autoNumeric('init');
     $('#vin').val("");
     
-    $('.inputfieldnumbers').on('keydown', function(e) {
-       var arr = [8,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
+    $('#zipcode, #streetaddress').on('keydown', function(e) {
+       var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
              
              for (var i = 48; i <= 57; i++) {
                     arr.push(i);
@@ -26,14 +26,38 @@ $(function() {
              }
     });
     
-    $('.inputfieldnumbers').on('keypress', function(e) {
-             var inputValue = this.val();
+    $('#zipcode, #streetaddress').on('keypress', function() {
+             var inputValue = $(this).val();
              var regexpnumbers = /[^0-9]/g;
              if (inputValue.match(regexpnumbers)) {
                 inputValue( inputValue.replace(regexpnumbers, '') );
              }
     });
     
+    $('.contactinput').on('keydown', function(e) {
+             //Allow Keyboard Shortcuts include cut paste
+             var arr = [8,9,16,20,35,36,37,38,39,40,45,46];
+             
+             for (var i = 65; i < 90; i++) {
+                    arr.push(i);
+             }
+             
+             if (!(e.ctrlKey && (e.which == 90 || e.which == 86 || e.which == 88))) {
+                 if ($.inArray(e.which, arr)  === -1) {
+                   e.preventDefault();
+                 }
+             }
+         });
+    
+    $('.contactinput').on('keypress', function() {
+         $('.inputfieldletters').on('keypress', function() {
+           var inputValue = $(this).val;
+           
+               if (inputValue.match(/[^a-zA-Z]/g)) {
+                  inputValue( inputValue.replace(regexpletters, ''));
+               }
+         });         
+    });
     
     $('#companydropdown').on('change', function() {
        var type = $('#selectpaymenttype').val();
@@ -172,25 +196,57 @@ $(function() {
     
     });
     
-    $('.contactinput').focus( function () {
-        $(this).select(); 
-    });
-    
     // Set Edit Button
     $('#editbutton').on('click', function() {
         var text = $(this).text();
         if (text === "Edit") {
             $('.contactinput').prop('readonly', false);
             $('.contactinput').css('pointer-events', 'auto');
+            $('#streetaddress').css('pointer-events', 'auto');
+            $('#streetaddress').prop('readonly', false);
+            $('#zipcode').css('pointer-events', 'auto');
+            $('#zipcode').prop('readonly', false);
             $('#firstname').focus();
             $(this).text("Save");
-        } else { // In Save Mode
-        //Validate and check info then write to server
-            $('.contactinput').prop('readonly', true);
-            $('.contactinput').css('pointer-events', 'none');
-            $(this).text("Edit");
+        } else if (text === "Save"){ // In Save Mode
+            var setEditMode = true;
+            $('#contactfieldset > input').each ( function () {
+                var enteredValue = $.trim($(this).val());
+                if ( enteredValue === "" ) {
+                   setTextFieldRed($(this));
+                   setEditMode = false;
+                } else {
+                   var $email =  $('#email');
+                   var regexEmail =  /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                   var input = $.trim($email.val());
+                
+                    if (regexEmail.test(input)) {
+                        //Check Duplicate Email
+                        /*if ( ) { // OK Email
+                              
+                        } else {
+                           setTextField($email);
+                        }*/
+                    } else {
+                       setTextFieldRed($email);
+                    }                        
+                }
+            });
+            if ( setEditMode ) {            
+                $('.contactinput').prop('readonly', true);
+                $('.contactinput').css('pointer-events', 'none');
+                $('#streetaddress').prop('readonly', true);
+                $('#streetaddress').css('pointer-events', 'none');
+                $('#zipcode').prop('readonly', true);
+                $('#zipcode').css('pointer-events', 'none');
+                $(this).text("Edit");
+            }
         }
     });   
+    
+    $('#savebutton').on('click', function () {
+        
+    });
     
     //Switch Password Visbility
     $('#showpasscb').on('click', function () {
@@ -200,6 +256,13 @@ $(function() {
     $('#homephone').mask("999-999-9999");
     $('#mobilephone').mask("999-999-9999");
 });
+
+function setTextFieldRed(textField) {
+    textField.css({
+                    "border": "1px solid red",
+                   "background": "#FFCECE"
+                  });
+}
 
 function isValidKey ( event ) {
     //Check keycodes spacebar devare backspace and number range
