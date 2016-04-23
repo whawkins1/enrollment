@@ -27,7 +27,7 @@
                                        user_mobile_phone, 
                                        user_postal_code) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                                         
-                                         $stmt = $conn->prepare($sql); 
+                                       if ($stmt = $conn->prepare($sql)) { 
                                          $stmt->bind_param('sssssssssssi', $conn->real_escape_string($_POST['firstName']), 
                                                                            $conn->real_escape_string($_POST['lastName']), 
                                                                            $conn->real_escape_string($_POST['email']), 
@@ -43,8 +43,7 @@
                                           if(!$stmt->execute()) {
                                              trigger_error("Error Executing Insert: ", E_USER_ERROR);
                                           }
+                                       }                                          
                                           
-                                          $statement->close();
-                                          $conn->close();
     }
 ?>

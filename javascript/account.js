@@ -222,11 +222,23 @@ $(function() {
                 
                     if (regexEmail.test(input)) {
                         //Check Duplicate Email
-                        /*if ( ) { // OK Email
+                        
+                        var ajaxCall = $.ajax({
+                        
+                        });
+                        
+                        ajaxCall.done( function(data) {
+                            if ( data === "email not in use" ) { // OK Email
                               
-                        } else {
-                           setTextField($email);
-                        }*/
+                            } else if ( data === "email in use" ) {
+                              setTextField($email);
+                            }
+                        });
+                        
+                        ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                        });
+                        
+                        
                     } else {
                        setTextFieldRed($email);
                     }                        
