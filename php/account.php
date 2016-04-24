@@ -74,8 +74,8 @@
                     <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly >
                     <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
                     <label class="contactlabel">Country* :</label><input type="text" id="country" class="contactinput" value="<?php echo $country?>" readonly>
-                    <label class="contactlabel">City* :</label><input type="text" id="city" class="contactinput" value="<?php echo $city?>" readonly>
                     <label class="contactlabel">State* :</label><input type="text" id="state" class="contactinput" value="<?php echo $state?>" readonly>
+                    <label class="contactlabel">City* :</label><input type="text" id="city" class="contactinput" value="<?php echo $city?>" readonly>
                     <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode?>" readonly>
                     <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone?>" readonly>
                     <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>

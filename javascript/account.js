@@ -215,33 +215,79 @@ $(function() {
                 if ( enteredValue === "" ) {
                    setTextFieldRed($(this));
                    setEditMode = false;
-                } else {
+                } 
+                
+                if ( setEditMode ) { // All Fields complete                
                    var $email =  $('#email');
                    var regexEmail =  /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                    var input = $.trim($email.val());
                 
                     if (regexEmail.test(input)) {
-                        //Check Duplicate Email
-                        
                         var ajaxCall = $.ajax({
-                        
+                               type: 'POST',
+                               url: "../php/checkDuplicateUser.php",
+                               data: {
+                                        email : input
+                                     },
+                               dataType: 'text'
                         });
                         
                         ajaxCall.done( function(data) {
-                            if ( data === "email not in use" ) { // OK Email
+                            if ( data === "email not in use" ) { 
+                              ajaxCall = $.ajax({
+                                  type: 'POST',
+                                  url: "../php/updateAccount.php",
+                                  data: {
+                                            firstName: $('#firstname').val(),
+                                            lastName: $('#lastname').val(),
+                                            address: $('#address').val(),
+                                            country: $('#country').val(),
+                                            state: $('#state').val(),
+                                            city: $('#city').val(),
+                                            zip: $('#zip').val(),
+                                            homePhone: $('#homephone').val(),
+                                            mobilePhone: $('#mobilephone').val(),
+                                            email: $('#email').val()
+                                        }                                    
+                                  }, 
+                                  dataType: 'text'
+                              });
                               
+                              ajaxCall.done( function(data) {
+                                  if ( data === "success" ) {
+                                      $('#errorcontainer').html("SUCCESS: completed update of account!");
+                                  } else if ( data === "error" ) {
+                                      $('#errorcontainer').html("ERROR: failed to update account!");
+                                      setEditMode = false;
+                                  }
+                              });
+                              
+                              ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                                  $('#errorcontainer').html("SERVER ERROR: failed to update account!");
+                                  $('#editbutton').focus();
+                                  setEditMode = false;                                  
+                              });
                             } else if ( data === "email in use" ) {
-                              setTextField($email);
+                                  $('#errorcontainer').html("ERROR: email already in use");
+                                  setTextField($email);
+                                  $email.focus();  
+                                  setEditMode = false;                                               
                             }
                         });
                         
                         ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
-                        });
-                        
-                        
+                            $('#errorcontainer').html("ERROR: check for duplicate email failed?");
+                            $('#editbutton').focus();
+                            setEditMode = false;
+                        });                       
                     } else {
+                       $('#errorcontainer').html("ERROR: invalid email format!");
                        setTextFieldRed($email);
+                       setEditMode = false;
                     }                        
+                } else {
+                    $('#errorcontainer').html("ERROR: All Fields Must Be entered!");
+                    setEditMode = false;
                 }
             });
             if ( setEditMode ) {            
@@ -254,11 +300,7 @@ $(function() {
                 $(this).text("Edit");
             }
         }
-    });   
-    
-    $('#savebutton').on('click', function () {
-        
-    });
+    });      
     
     //Switch Password Visbility
     $('#showpasscb').on('click', function () {
@@ -271,7 +313,7 @@ $(function() {
 
 function setTextFieldRed(textField) {
     textField.css({
-                    "border": "1px solid red",
+                   "border": "1px solid red",
                    "background": "#FFCECE"
                   });
 }
