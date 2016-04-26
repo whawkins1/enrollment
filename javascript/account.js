@@ -1,5 +1,6 @@
 
 $(function() {    
+    var originalEmail = $('email').val();
     loadTableData();
     setDropDownFilterDepartment();
     setDropDownFilterCode();
@@ -216,6 +217,7 @@ $(function() {
                    setTextFieldRed($(this));
                    setEditMode = false;
                 } 
+            });
                 
                 if ( setEditMode ) { // All Fields complete                
                    var $email =  $('#email');
@@ -223,63 +225,37 @@ $(function() {
                    var input = $.trim($email.val());
                 
                     if (regexEmail.test(input)) {
-                        var ajaxCall = $.ajax({
-                               type: 'POST',
-                               url: "../php/checkDuplicateUser.php",
-                               data: {
-                                        email : input
-                                     },
-                               dataType: 'text'
-                        });
-                        
-                        ajaxCall.done( function(data) {
-                            if ( data === "email not in use" ) { 
-                              ajaxCall = $.ajax({
-                                  type: 'POST',
-                                  url: "../php/updateAccount.php",
-                                  data: {
-                                            firstName: $('#firstname').val(),
-                                            lastName: $('#lastname').val(),
-                                            address: $('#address').val(),
-                                            country: $('#country').val(),
-                                            state: $('#state').val(),
-                                            city: $('#city').val(),
-                                            zip: $('#zip').val(),
-                                            homePhone: $('#homephone').val(),
-                                            mobilePhone: $('#mobilephone').val(),
-                                            email: $('#email').val()
-                                        }                                    
-                                  }, 
-                                  dataType: 'text'
-                              });
-                              
-                              ajaxCall.done( function(data) {
-                                  if ( data === "success" ) {
-                                      $('#errorcontainer').html("SUCCESS: completed update of account!");
-                                  } else if ( data === "error" ) {
-                                      $('#errorcontainer').html("ERROR: failed to update account!");
-                                      setEditMode = false;
-                                  }
-                              });
-                              
-                              ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
-                                  $('#errorcontainer').html("SERVER ERROR: failed to update account!");
-                                  $('#editbutton').focus();
-                                  setEditMode = false;                                  
-                              });
-                            } else if ( data === "email in use" ) {
-                                  $('#errorcontainer').html("ERROR: email already in use");
-                                  setTextField($email);
-                                  $email.focus();  
-                                  setEditMode = false;                                               
-                            }
-                        });
-                        
-                        ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
-                            $('#errorcontainer').html("ERROR: check for duplicate email failed?");
-                            $('#editbutton').focus();
-                            setEditMode = false;
-                        });                       
+                        if ( input !== originalEmail ) {
+                            var ajaxCall = $.ajax({
+                                   type: 'GET',
+                                   url: "../php/checkDuplicateUser.php",
+                                   data: {
+                                            email : input
+                                         },
+                                   dataType: 'text'
+                            });
+                            
+                            ajaxCall.done( function(data) {
+                                if ( data === "email not in use" ) { 
+                                   addUpdates();
+                                } else if ( data === "email in use" ) {
+                                      $('#errorcontainer').html("ERROR: email already in use");
+                                      setTextFieldRed($email);
+                                      $email.focus();  
+                                      setEditMode = false; 
+                                }  ( data === "error" ) {
+                                    $('#errorcontainer').html("ERROR: Email Check could not be completed!");
+                                }
+                            });
+                            
+                            ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                                $('#errorcontainer').html("ERROR: check for duplicate email failed?");
+                                $('#editbutton').focus();
+                                setEditMode = false;
+                            });
+                        } else {
+                           addUpdates();
+                        }                            
                     } else {
                        $('#errorcontainer').html("ERROR: invalid email format!");
                        setTextFieldRed($email);
@@ -289,8 +265,8 @@ $(function() {
                     $('#errorcontainer').html("ERROR: All Fields Must Be entered!");
                     setEditMode = false;
                 }
-            });
-            if ( setEditMode ) {            
+
+           if ( setEditMode ) {            
                 $('.contactinput').prop('readonly', true);
                 $('.contactinput').css('pointer-events', 'none');
                 $('#streetaddress').prop('readonly', true);
@@ -310,6 +286,43 @@ $(function() {
     $('#homephone').mask("999-999-9999");
     $('#mobilephone').mask("999-999-9999");
 });
+
+
+function addUpdates() { 
+          ajaxCall = $.ajax({
+              type: 'POST',
+              url: "../php/updateAccount.php",
+              data: {
+                        firstName: $('#firstname').val(),
+                        lastName: $('#lastname').val(),
+                        address: $('#address').val(),
+                        country: $('#country').val(),
+                        state: $('#state').val(),
+                        city: $('#city').val(),
+                        zip: $('#zip').val(),
+                        homePhone: $('#homephone').val(),
+                        mobilePhone: $('#mobilephone').val(),
+                        email: $('#email').val()
+                   }, 
+              dataType: 'text'
+          })
+          
+          ajaxCall.done( function(data) {
+              if ( data === "success" ) {
+                  $('#errorcontainer').html("SUCCESS: completed update of account!");
+                  originalEmail = $('email').val();
+              } else if ( data === "error" ) {
+                  $('#errorcontainer').html("ERROR: failed to update account!");
+                  setEditMode = false;
+              }
+          });
+          
+          ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+              $('#errorcontainer').html("SERVER ERROR: failed to update account!");
+              $('#editbutton').focus();
+              setEditMode = false;                                  
+          });
+}
 
 function setTextFieldRed(textField) {
     textField.css({

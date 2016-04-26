@@ -66,7 +66,7 @@
       <div id="tab-personal" class="tabsjump">
              
              <div id="contactcontainer">          
-                <div id="errorcontainer">ERROR: All Fields Must Be entered!</div>             
+                <div id="errorcontainer"></div>             
              <form id="contactform">
                 <fieldset id="contactfieldset">
                    <legend>Contact</legend>

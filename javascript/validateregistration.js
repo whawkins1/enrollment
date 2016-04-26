@@ -229,8 +229,6 @@ function populateCountryDropDown() {
                       $("#countryselect").prop("selectedIndex", -1);});
                       
          ajaxCall.fail (function() { alert("Error Loading Countries");});       
-         
-         
 }  
 
 function populateMajorDropDown() {
