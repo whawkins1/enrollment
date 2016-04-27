@@ -79,6 +79,7 @@
                     <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode?>" readonly>
                     <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone?>" readonly>
                     <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
+                    <label class="contactlabel">Major* : </label><input type="text" id="major" class="contactinput" value="<?php echo $major?>" readonly>
                     <label class="contactlabel">Email* :</label><input type="text" id="email", class="contactinput" value="<?php echo $username?>"readonly>
                 </fieldset>
               </form>  

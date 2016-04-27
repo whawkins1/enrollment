@@ -236,14 +236,15 @@ $(function() {
                             });
                             
                             ajaxCall.done( function(data) {
-                                if ( data === "email not in use" ) { 
+                                var response = $.trim(data);
+                                if ( response === "email not in use" ) { 
                                    addUpdates();
-                                } else if ( data === "email in use" ) {
+                                } else if ( response === "email in use" ) {
                                       $('#errorcontainer').html("ERROR: email already in use");
                                       setTextFieldRed($email);
                                       $email.focus();  
                                       setEditMode = false; 
-                                }  ( data === "error" ) {
+                                } else if ( response === "error" ) {
                                     $('#errorcontainer').html("ERROR: Email Check could not be completed!");
                                 }
                             });
@@ -295,19 +296,21 @@ function addUpdates() {
               data: {
                         firstName: $('#firstname').val(),
                         lastName: $('#lastname').val(),
-                        address: $('#address').val(),
+                        address: $('#streetaddress').val(),
                         country: $('#country').val(),
                         state: $('#state').val(),
                         city: $('#city').val(),
-                        zip: $('#zip').val(),
+                        postalCode: $('#zipcode').val(),
                         homePhone: $('#homephone').val(),
                         mobilePhone: $('#mobilephone').val(),
+                        major: $('#major').val(),
                         email: $('#email').val()
                    }, 
               dataType: 'text'
           })
           
           ajaxCall.done( function(data) {
+              console.log(data);
               if ( data === "success" ) {
                   $('#errorcontainer').html("SUCCESS: completed update of account!");
                   originalEmail = $('email').val();
