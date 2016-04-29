@@ -63,15 +63,15 @@
          <li><a href="#tab-payment">Make Payment</a></li>
       </ul>
       
-      <div id="tab-personal" class="tabsjump">
-             
-             <div id="contactcontainer">          
-                <div id="errorcontainer"></div>             
-             <form id="contactform">
+      <div id="tab-personal" class="tabsjump">             
+             <div id="contactcontainer" >          
+                             
+             <form id="contactform" >
                 <fieldset id="contactfieldset">
                    <legend>Contact</legend>
-                    <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $firstName?>" readonly >
-                    <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly >
+                    <div id="errorcontainer" class="error"></div>
+                    <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $firstName?>" readonly>
+                    <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly>
                     <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
                     <label class="contactlabel">Country* :</label><input type="text" id="country" class="contactinput" value="<?php echo $country?>" readonly>
                     <label class="contactlabel">State* :</label><input type="text" id="state" class="contactinput" value="<?php echo $state?>" readonly>
@@ -81,14 +81,31 @@
                     <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
                     <label class="contactlabel">Major* : </label><input type="text" id="major" class="contactinput" value="<?php echo $major?>" readonly>
                     <label class="contactlabel">Email* :</label><input type="text" id="email", class="contactinput" value="<?php echo $username?>"readonly>
+                    
+                    <div id="editbuttoncontainer">
+                        <button type="button" id="editbutton">Edit</button>
+                    </div>
                 </fieldset>
-              </form>  
-                <div id="allfieldsrequirednotation">* required field</div>
-                
-                <div id="editbuttoncontainer">
-                    <button type="button" id="editbutton">Edit</button>
-                </div>
-             </div>
+              </form>                       
+             </div>                
+             
+             <div id="passwordcontainer">             
+                <form id="passwordform">
+                     <fieldset id="passwordfieldset">
+                        <legend>Change Password</legend>
+                           <div id="passwordmessage" class="error"></div> 
+                           <label class="contactlabel">Old* :</label><input type="password" id="oldpassword" class="contactinput" disabled>
+                           <label class="contactlabel">New* :</label><input type="password" id="newpassword" class="contactinput" disabled>
+                           <label class="contactlabel">Confirm* :</label><input type="password" id="confirmpassword" class="contactinput" disabled>
+                           
+                           <div id="passwordbuttoncontainer">
+                                <button type="button" id="changepasswordbutton">Change Password</button>
+                           </div>
+                     </fieldset>
+                </form>
+                <div id="allfieldsrequirednotation">* indicates required field</div>                    
+           </div>
+             
       </div>
       
        <div id="tab-courses" class="tabsjump">
@@ -379,7 +396,7 @@
              </div>
         </div>
         
-        <div id="reviewpaymentcontainer">
+        <!--<div id="reviewpaymentcontainer">
              <div class="paymentcontainers">
                 <label id="datelabel"></label>
              </div>
@@ -403,6 +420,7 @@
                  <input type="button" id="submitbutton">
              </div>
          </div>
+         -->
       </div>
      
       <script src="../plugins/jquery-1.12.0.js"></script>

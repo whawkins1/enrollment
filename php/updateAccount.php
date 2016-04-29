@@ -5,6 +5,7 @@
                       'city', 'address', 'postalCode', 'homePhone', 
                       'mobilePhone', 'major', 'email', 'originalEmail');
      $allPostSet = true;
+     $checkVariables = "";
      
      foreach ($postNames as $value) {
          if (!isset($_POST[$value])) {
@@ -14,20 +15,22 @@
      }
      
      if ($allPostSet) {
-        $sql = "UPDATE users SET user_first_name = ? 
-                              user_last_name = ?, 
-                              user_email = ?, 
-                              user_country = ?, 
-                              user_state = ?, 
-                              user_city = ?, 
-                              user_major = ?, 
-                              user_address = ?, 
-                              user_home_phone = ?, 
-                              user_mobile_phone = ?, 
-                              user_postal_code WHERE originalEmail = ?;
+        $sql = "UPDATE users SET user_first_name = ?, 
+                                      user_last_name = ?, 
+                                      user_email = ?, 
+                                      user_country = ?, 
+                                      user_state = ?, 
+                                      user_city = ?, 
+                                      user_major = ?, 
+                                      user_address = ?, 
+                                      user_home_phone = ?, 
+                                      user_mobile_phone = ?, 
+                                      user_postal_code = ?
+                                      WHERE user_email = ?";
                                        
                  if ( $stmt = $conn->prepare($sql) ) {
-                     $stmt->bind_param('ssssssssssi', $conn->real_escape_string($_POST['firstName']), 
+                     // Bounces Back Warning  Strict Standards Variables Pass By Reference
+                     $stmt->bind_param('ssssssssssis', $conn->real_escape_string($_POST['firstName']), 
                                                       $conn->real_escape_string($_POST['lastName']), 
                                                       $conn->real_escape_string($_POST['email']), 
                                                       $conn->real_escape_string($_POST['country']), 
@@ -35,11 +38,12 @@
                                                       $conn->real_escape_string($_POST['city']), 
                                                       $conn->real_escape_string($_POST['major']), 
                                                       $conn->real_escape_string($_POST['address']), 
-                                                      $conn->real_escape_string($_POST['phoneHome']), 
-                                                      $conn->real_escape_string($_POST['phoneMobile']), 
-                                                      intval($conn->real_escape_string($_POST['postalCode'])));
+                                                      $conn->real_escape_string($_POST['homePhone']), 
+                                                      $conn->real_escape_string($_POST['mobilePhone']), 
+                                                      intval($conn->real_escape_string($_POST['postalCode'])),
+                                                      $conn->real_escape_string($_POST['originalEmail']));
                                   if( !$stmt->execute() ) {
-                                     trigger_error("Error Executing Insert: ", E_USER_ERROR);
+                                     trigger_error("Error Executing Update: ", E_USER_ERROR);
                                      echo "error 1";
                                   } else {
                                     echo "success";

@@ -1,4 +1,5 @@
 <?php
+   session_start();
    include("config.php");
    $email = $_POST['email'];
    $pass = $_POST['pass'];

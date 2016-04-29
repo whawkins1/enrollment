@@ -1,6 +1,7 @@
+var originalEmail;
 
 $(function() {    
-    var originalEmail = $('email').val();
+    originalEmail = $('#email').val();
     loadTableData();
     setDropDownFilterDepartment();
     setDropDownFilterCode();
@@ -13,7 +14,7 @@ $(function() {
     $('#amount').autoNumeric('init');
     $('#vin').val("");
     
-    $('#zipcode, #streetaddress').on('keydown', function(e) {
+    $('#zipcode').on('keydown', function(e) {
        var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
              
              for (var i = 48; i <= 57; i++) {
@@ -27,7 +28,7 @@ $(function() {
              }
     });
     
-    $('#zipcode, #streetaddress').on('keypress', function() {
+    $('#zipcode').on('keypress', function() {
              var inputValue = $(this).val();
              var regexpnumbers = /[^0-9]/g;
              if (inputValue.match(regexpnumbers)) {
@@ -284,6 +285,64 @@ $(function() {
         $('#password').attr(type, $(this).prop('checked') ? 'text' : 'password');
     });
     
+    //enable change password fields and change text button
+    $('#changepasswordbutton').on('click', function() {
+        var text = $(this).text();
+        var $oldPassField = $('#oldpassword');
+        var $newPassField = $('#newpassword');
+        var $confirmPassField = $('#confirmpassword');
+        var $passwordMessage = $('#passwordMessage');
+        
+        if (text === "Change Password") {
+           $oldPassField.prop('disabled', false);
+           $oldPassField.css('pointer-events', 'auto');
+           $oldPassField.focus();
+           $newPassField.prop('disabled', false);
+           $newPassField.css('pointer-events', 'auto');
+           $confirmPassField.prop('disabled', false);
+           $confirmPassField.css('pointer-events', 'auto');
+           $(this).text("Submit Change");
+        } else if (text === "Submit Change") {
+            var oldPassInput = $oldPassField.val();
+           var newPassInput = $newPassField.val();
+           var confirmPassInput = $confirmPassField.val();
+           
+           if ( oldPassInput === "" || newPassInput === "" || confirmPassInput === "" ) {
+             $passwordMessage.text("ERROR: All Fields Must Be Entered!");
+           } else if ( newPassInput !== confirmPassInput ) {
+             $passwordMessage.text("ERROR: New and Confirm Passwords Must Match!");
+           } else {
+               // Check Password Exists
+               ajaxCall = $.ajax({
+                  type: 'GET',
+                  url: "../php/login.php",
+                  data: {
+                          username : $('#email').val(),
+                          password : oldPassInput
+                        },
+                  dataType: 'text'                        
+               })
+               
+               ajaxCall.done( function(data) {
+                  if ( data === "valid" ) {
+                      //Change Password
+                      
+                      
+                     $passwordMessage.text("SUCCESS: Password Changed!");
+                  } else if ( data === "invalid" ) {
+                      $passwordMessage.text("ERROR: Old Password Incorrect!");
+                      $oldPassField.focus();
+                  }
+               });
+               
+               ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                      $passwordMessage.html("SERVER ERROR: failed to update account!");
+                      $(this).focus();
+               });
+           }
+        }
+    });
+    
     $('#homephone').mask("999-999-9999");
     $('#mobilephone').mask("999-999-9999");
 });
@@ -304,13 +363,13 @@ function addUpdates() {
                         homePhone: $('#homephone').val(),
                         mobilePhone: $('#mobilephone').val(),
                         major: $('#major').val(),
-                        email: $('#email').val()
+                        email: $('#email').val(),
+                        originalEmail: originalEmail
                    }, 
               dataType: 'text'
           })
           
           ajaxCall.done( function(data) {
-              console.log(data);
               if ( data === "success" ) {
                   $('#errorcontainer').html("SUCCESS: completed update of account!");
                   originalEmail = $('email').val();

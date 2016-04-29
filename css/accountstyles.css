@@ -21,13 +21,12 @@ body {
 
 .tabs a.active {
    background: #000066;
-   color: #fff;
 }
 
 .tabsjump {
     padding: 10px;
     width: 100%;
-    height: 500px;
+    height: 540px;
     background-color: white;  
 }
 
@@ -78,7 +77,7 @@ body {
 
 .contactinput  {
   padding-left: 2px;
-  margin: 6px;
+  margin: 9px;
   border: 1px solid black;
   width: 60%;
   pointer-events: none;
@@ -103,14 +102,13 @@ body {
 #editbutton {
    font-size: 0.9em;
    width: 18%;
+   margin-top: 8px;
 }
 
 #editbuttoncontainer {
-  width: 70%;
-  height: 50%;
-  margin-left: 40px;
+  width: 100%;
+  height: 6%;
   text-align: center;
-  margin-top: 8px;
 }
 
 legend {
@@ -289,8 +287,9 @@ table.thead, table.tbody {
 }
 
 #contactcontainer {
+  display: inline-block;
   width: 25%;
-  height: 85%;
+  height: 100%;
 }
 
 #containerfinancial {
@@ -299,8 +298,9 @@ table.thead, table.tbody {
 }
 
 #contactfieldset {
-  width: 70%;
-  padding: 8px;
+  width: 80%;
+  height: 88%;
+  padding: 10px;
 }
 
 #makepaymentbuttoncontainer {
@@ -471,23 +471,63 @@ table.thead, table.tbody {
   margin: 2px;
 }
 
-#errorcontainer {
-  width: 70%;
-  height: 5%;
-  margin-left: 40px;
+.error {
   color: red;
-  font-size: 1.3em;
-  margin-top: 8px;
+  font-size: 1.2em;
+}
+
+#errorcontainer {
+   width: 100%;
+   height: 5%;
+   text-align: center;
+   margin-bottom: 4px;
+}
+
+#passwordmessage {
+   width: 100%;
+   height: 14%;
+  text-align: center;
+  margin-top: 4px;
 }
 
 #contactform {
-  margin-top: 6px;
   margin-left: 40px;
   width: 100%;
+  height: 100%;
+  padding: 10px;
 }
 
 #allfieldsrequirednotation {
-  width: 82%;
+  width: 100%;
+  margin-top: -28px;
   font-size: 0.9em;
   text-align: right;
+}
+
+#passwordform {
+   height: 100%;
+   width: 100%;
+   margin-left: 30px;
+}
+
+#passwordfieldset {
+    height: 38%;
+    width: 100%;
+}
+
+#passwordcontainer {
+   display: inline-block;
+   height: 100%;
+   width: 21%;
+}
+
+#changepasswordbutton {
+   font-size: 0.9em;
+   margin-top: 8px;
+}
+
+#passwordbuttoncontainer {
+   height: 100%;
+   width: 100%;
+   text-align: center;
 }
