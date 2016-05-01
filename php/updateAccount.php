@@ -42,14 +42,14 @@
                                                       $conn->real_escape_string($_POST['mobilePhone']), 
                                                       intval($conn->real_escape_string($_POST['postalCode'])),
                                                       $conn->real_escape_string($_POST['originalEmail']));
-                                  if( !$stmt->execute() ) {
-                                     trigger_error("Error Executing Update: ", E_USER_ERROR);
-                                     echo "error 1";
+                                  if($stmt->execute() ) {
+                                      echo "success";                                     
                                   } else {
-                                    echo "success";
+                                    trigger_error("Error Executing Update: ", E_USER_ERROR);
+                                     echo "ERROR: failed to properly execute statement!";
                                   }
                  } else {
-                    echo "error 2";
+                    echo "ERROR: invalid sql format!";
                  }                     
      } else {
         echo "error all variables must be set!";

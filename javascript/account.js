@@ -313,11 +313,12 @@ $(function() {
              $passwordMessage.text("ERROR: New and Confirm Passwords Must Match!");
            } else {
                // Check Password Exists
+               var email = $('#email').val();
                ajaxCall = $.ajax({
                   type: 'GET',
                   url: "../php/login.php",
                   data: {
-                          username : $('#email').val(),
+                          username : email,
                           password : oldPassInput
                         },
                   dataType: 'text'                        
@@ -326,6 +327,21 @@ $(function() {
                ajaxCall.done( function(data) {
                   if ( data === "valid" ) {
                       //Change Password
+                      var ajaxCall = $.ajax({
+                                              type: 'POST',
+                                              url: "../php/changePassword.php",
+                                              data: {
+                                                       email : email,
+                                                       password : newPassInput
+                                                    },
+                                               dataType: 'text'
+                                           )}
+                      ajaxCall.done( function (data) {
+                      });
+                      
+                      ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                      });
+                      
                       
                       
                      $passwordMessage.text("SUCCESS: Password Changed!");

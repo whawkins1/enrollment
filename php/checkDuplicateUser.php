@@ -15,9 +15,9 @@
                $stmt->fetch();
                
                if ($stmt->num_rows === 1) {
-                   echo "email in use".PHP_EOL;
+                   echo "email in use";
                } else {
-                   echo "email not in use".PHP_EOL;
+                   echo "email not in use";
                }           
             }   
        } else {
