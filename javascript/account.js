@@ -337,14 +337,20 @@ $(function() {
                                                dataType: 'text'
                                            )}
                       ajaxCall.done( function (data) {
+                          if (data.startsWith("ERROR")) {
+                             $oldPassField.focus();
+                          } else if (data.startsWith("SUCCESS")) {
+                             $oldPassField.val("");
+                             $newPassField.val("");
+                             $confirmPassField.val("");                             
+                          }
+                          $passwordMessage.text(data);
                       });
                       
                       ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
-                      });
-                      
-                      
-                      
-                     $passwordMessage.text("SUCCESS: Password Changed!");
+                            $oldPassField.focus();
+                            $passwordMessage.text(data);
+                      });                      
                   } else if ( data === "invalid" ) {
                       $passwordMessage.text("ERROR: Old Password Incorrect!");
                       $oldPassField.focus();
@@ -357,8 +363,7 @@ $(function() {
                });
            }
         }
-    });
-    
+    });    
     $('#homephone').mask("999-999-9999");
     $('#mobilephone').mask("999-999-9999");
 });
