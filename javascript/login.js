@@ -20,7 +20,6 @@ $(function() {
           $('#errorlogin').text("Invalid Username Format");
           $('#username').focus();
       } else {        
-             var redirectWindow =  window.open("http://localhost/php/account.php?username=" + username);
              $(this).val("");
              $(this).css({'background-image': 'url(../images/loader.gif)',
                        'background-repeat': 'no-repeat',
@@ -38,7 +37,7 @@ $(function() {
           
               ajaxCall.done (function(data) {
                   if (data === "valid") {
-                     redirectWindow.location;
+                     window.open("http://localhost/php/account.php?username=" + username, "_self", "", true);
                   } else if (data === "invalid") {
                     $('#errorlogin').text("Invalid Login, Please Try Again!");
                     $('#username').focus();                

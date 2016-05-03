@@ -171,3 +171,14 @@ CREATE TABLE IF NOT EXISTS states (
   KEY country_id (country_id)
 ) ENGINE=InnoDB;
 
+-- -----------------------------------------------------
+-- Table user_logs
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS user_logs (
+  log_email VARCHAR(40) NOT NULL,
+  log_action VARCHAR(40) NOT NULL,
+  log_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+  PRIMARY KEY (log_email),
+   FOREIGN KEY (log_email) REFERENCES users(user_email)
+) ENGINE=InnoDB;
+
