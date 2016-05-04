@@ -73,13 +73,60 @@
                     <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $firstName?>" readonly>
                     <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly>
                     <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
-             <!--Change to dropdowns -->       <label class="contactlabel">Country* :</label><input type="text" id="country" class="contactinput" value="<?php echo $country?>" readonly>
-                    <label class="contactlabel">State* :</label><input type="text" id="state" class="contactinput" value="<?php echo $state?>" readonly>
-                    <label class="contactlabel">City* :</label><input type="text" id="city" class="contactinput" value="<?php echo $city?>" readonly>
+                     <label class="contactlabel">Country* :</label> <select id="countrydropdown">
+                        <?php
+                        $result = mysqli_query($conn, "SELECT * FROM countries");
+                          if($result) {                              
+                              while ($row=mysqli_fetch_assoc($result))   { 
+                                    echo "<option value=\"$row['country_id'];?>" <?php if ($row['country_name'] == $country) { echo ' selected="selected"';}?> > <?php echo $row['country_name'];?></option>
+                                    <?php
+                              }
+                          } 
+                        ?>
+                     </select>
+                    <!-- 
+                     <label class="contactlabel">State* :</label> <select id="statedropdown" disabled>
+                     <select id="statedropdown" disabled>
+                        <?php 
+                          /*$result = mysqli_query($conn, "SELECT * FROM states");
+                          if($result) {
+                              while ($row=mysqli_fetch_assoc($result))   { ?>
+                                    <option value="<?php echo $row['state_id'];?>" <?php if ($row['state_name'] == $state) { echo ' selected="selected"';?>><?php echo $row['state_name'];?></option>
+                                    <?php
+                              }
+                          } */
+                          ?>
+                     </select>
+                    
+                    <label class="contactlabel">City* :</label>   
+                    <select id="cityropdown" disabled>
+                        <?php 
+                          /* $result = mysqli_query($conn, "SELECT * FROM cities");
+                          if($result) {
+                              while ($row=mysqli_fetch_assoc($result))   { ?>
+                                    <option value="<?php echo $row['state_id'];?>" <?php if ($row['city_name'] == $city) { echo ' selected="selected"';?>><?php echo $row['city_name'];?></option>
+                                    <?php
+                              }
+                          } */
+                          ?>
+                     </select> -->
+                    
                     <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode?>" readonly>
                     <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone?>" readonly>
                     <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
-        <!--Change to dropdowns -->         <label class="contactlabel">Major* : </label><input type="text" id="major" class="contactinput" value="<?php echo $major?>" readonly>
+                    <!-- <label class="contactlabel">Major* : </label>  
+                    <select id="cityropdown" disabled>
+                        <?php 
+                        /*   $result = mysqli_query($conn, "SELECT DISTINCT user_major FROM users");
+                          if($result) {
+                              while ($row=mysqli_fetch_assoc($result))   { ?>
+                                    <option value="<?php echo $row['user_major'];?>" <?php if ($row['user_major'] == $major) { echo ' selected="selected"';?>><?php echo $row['user_major'];?></option>
+                                    <?php
+                              }
+                          } */
+                          ?>
+                    </select> -->
+                     
                     <label class="contactlabel">Email* :</label><input type="text" id="email", class="contactinput" value="<?php echo $username?>"readonly>
                     
                     <div id="editbuttoncontainer">
