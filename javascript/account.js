@@ -2,6 +2,8 @@ var originalEmail;
 
 $(function() {    
     originalEmail = $('#email').val();
+    populateCountryDropDown();
+    populateMajorDropDown();
     loadTableData();
     setDropDownFilterDepartment();
     setDropDownFilterCode();
@@ -831,3 +833,34 @@ function getCurrentBalance() {
                                           alert("Error Getting User Balance");
                           });
 }
+
+function populateCountryDropDown() {
+       var ajaxCall = $.ajax({
+              type: 'GET',
+              url: "/php/getCountries.php",
+              datatype: 'html',
+              cache: false
+          });
+          
+         ajaxCall.done (function(data) {                      
+                      $("#countryselect").html(data)  
+                      
+         ajaxCall.fail (function() { alert("Error Loading Countries");});       
+}  
+
+function populateMajorDropDown() {
+    var ajaxCall = $.ajax({
+                    type: 'GET',
+                    url: "/php/getMajors.php",
+                    datatype: 'html'
+                });
+                
+    ajaxCall.done (function(data) {
+                      $("#majorselect").html(data);
+                  });
+    
+    ajaxCall.fail (function() { 
+                      alert("Error Loading Majors");
+                  });  
+}
+

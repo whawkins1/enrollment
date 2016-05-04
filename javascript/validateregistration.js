@@ -225,10 +225,13 @@ function populateCountryDropDown() {
           });
           
          ajaxCall.done (function(data) {                      
-                      $("#countryselect").html(data)  
-                      $("#countryselect").prop("selectedIndex", -1);});
+                          $("#countryselect").html(data)  
+                          $("#countryselect").prop("selectedIndex", -1);
+                      });
                       
-         ajaxCall.fail (function() { alert("Error Loading Countries");});       
+         ajaxCall.fail (function() {
+                           alert("Error Loading Countries");
+                       });       
 }  
 
 function populateMajorDropDown() {
@@ -241,9 +244,12 @@ function populateMajorDropDown() {
                 
     ajaxCall.done (function(data) {
                       $("#majorselect").html(data)
-                      $("#majorselect").prop("selectedIndex", -1); });
+                      $("#majorselect").prop("selectedIndex", -1); 
+                  });
     
-    ajaxCall.fail (function() { alert("Error Loading Majors");});  
+    ajaxCall.fail (function() {  
+                     alert("Error Loading Majors");
+                  });  
 }
 
 function setTextFieldRed(textField, errorMessage) {

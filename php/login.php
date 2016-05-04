@@ -20,7 +20,7 @@ if( isset($_POST['username'], $_POST['password'])) {
                      echo "invalid";
                 }
             } else {
-               echo $stmt->num_rows;
+               echo "invalid";
             }            
         }
       }

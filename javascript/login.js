@@ -36,8 +36,9 @@ $(function() {
               });
           
               ajaxCall.done (function(data) {
+                  console.log(data);
                   if (data === "valid") {
-                     window.open("http://localhost/php/account.php?username=" + username, "_self", "", true);
+                     window.open("http://localhost/php/account.php?username=" + username, "_self");
                   } else if (data === "invalid") {
                     $('#errorlogin').text("Invalid Login, Please Try Again!");
                     $('#username').focus();                
