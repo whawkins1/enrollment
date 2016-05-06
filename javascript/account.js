@@ -1,6 +1,10 @@
 var originalEmail;
 
 $(function() {    
+    //Remove all options to avoid caching previous results
+    $(window).unload( function () {
+      $('select option').remove();
+    });
     originalEmail = $('#email').val();
     loadTableData();
     setDropDownFilterDepartment();

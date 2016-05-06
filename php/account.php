@@ -78,8 +78,11 @@
                         <?php
                         $sql = "SELECT * FROM countries";
                         $result =  $conn->query($sql);
+                        
                               while ($row = $result->fetch_assoc()) { 
-                                    echo '<option value="'.$row["country_id"].'">'.$row["country_name"].'</option>';
+                                    $selected = ($country == $row["country_name"]) ? ' selected' : "";
+                                    
+                                     echo '<option value="'.$row["country_id"].'"'. $selected . ">" . $row["country_name"].'</option>';
                               }
                         ?>
                      </select>
