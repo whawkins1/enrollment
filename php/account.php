@@ -38,6 +38,7 @@
                               $postalCode, 
                               $balance);
            $stmt->fetch();
+           $stmt->close();
        }           
     }
 ?>
@@ -75,13 +76,14 @@
                     <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
                      <label class="contactlabel">Country* :</label> <select id="countrydropdown">
                         <?php
-                        $result = mysqli_query($conn, "SELECT * FROM countries");
-                          if($result) {                              
-                              while ($row=mysqli_fetch_assoc($result))   { 
-                                    echo "<option value=\"$row['country_id'];?>" <?php if ($row['country_name'] == $country) { echo ' selected="selected"';}?> > <?php echo $row['country_name'];?></option>
-                                    <?php
+                        $sql = "SELECT * FROM countries";
+                        $result =  $conn->query($sql);
+                        
+                              while ($row = $result->fetch_assoc()) { 
+                                    $selected = ($country == $row["country_name"]) ? ' selected' : "";
+                                    
+                                     echo '<option value="'.$row["country_id"].'"'. $selected . ">" . $row["country_name"].'</option>';
                               }
-                          } 
                         ?>
                      </select>
                     <!-- 
