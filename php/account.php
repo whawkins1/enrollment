@@ -76,58 +76,73 @@
                     <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
                      <label class="contactlabel">Country* :</label> <select id="countrydropdown">
                         <?php
-                        $sql = "SELECT * FROM countries";
-                        $result =  $conn->query($sql);
-                        
-                              while ($row = $result->fetch_assoc()) { 
-                                    $selected = ($country == $row["country_name"]) ? ' selected' : "";
-                                    
-                                     echo '<option value="'.$row["country_id"].'"'. $selected . ">" . $row["country_name"].'</option>';
-                              }
+                            $result =  $conn->query("SELECT * FROM countries");
+                               if ($result) {
+                                  while ($row = $result->fetch_assoc()) { 
+                                        $selected = ($country == $row["country_name"]) ? " selected" : "";
+                                        echo "<option value=", $row["country_id"], $selected,  ">", $row["country_name"], "</option>";
+                                  }
+                               }
                         ?>
                      </select>
-                    <!-- 
-                     <label class="contactlabel">State* :</label> <select id="statedropdown" disabled>
-                     <select id="statedropdown" disabled>
+                    
+                     <label class="contactlabel">State* :</label> <select id="statedropdown">
                         <?php 
-                          /*$result = mysqli_query($conn, "SELECT * FROM states");
-                          if($result) {
-                              while ($row=mysqli_fetch_assoc($result))   { ?>
-                                    <option value="<?php echo $row['state_id'];?>" <?php if ($row['state_name'] == $state) { echo ' selected="selected"';?>><?php echo $row['state_name'];?></option>
-                                    <?php
+                          $stmt = $conn->prepare("SELECT country_id FROM countries WHERE country_name = ?");
+                          $stmt->bind_param('s', $country);
+                          
+                          if ($stmt->execute()) {
+                             $stmt->bind_result($countryID);
+                             $stmt->fetch();
+                          }
+                          $stmt->close();
+                        
+                          $stmt = $conn->prepare("SELECT state_id, state_name FROM states WHERE country_id = ?");
+                          $stmt->bind_param('i', $countryID);
+                          
+                          if($stmt->execute()) {
+                              $stmt->bind_result($stateID, $stateName);
+
+                              while ($stmt->fetch())   { 
+                                    $selected = ($state == $stateName) ? " selected" : "";
+                                    echo "<option value=", $stateID,  $selected,  ">",  $stateName,  "</option>";
                               }
-                          } */
+                          } 
+                          $stmt->close(); 
                           ?>
                      </select>
                     
-                    <label class="contactlabel">City* :</label>   
-                    <select id="cityropdown" disabled>
+                     <label class="contactlabel">City* :</label> <select id="cityropdown">
                         <?php 
-                          /* $result = mysqli_query($conn, "SELECT * FROM cities");
-                          if($result) {
-                              while ($row=mysqli_fetch_assoc($result))   { ?>
-                                    <option value="<?php echo $row['state_id'];?>" <?php if ($row['city_name'] == $city) { echo ' selected="selected"';?>><?php echo $row['city_name'];?></option>
-                                    <?php
-                              }
-                          } */
+                            $stmt = $conn->prepare("SELECT city_name, city_id FROM cities WHERE state_id = ?");
+                            $stmt->bind_param('i', $stateID);
+                            
+                            if ($stmt->execute()) {
+                               $stmt->bind_result($cityName, $cityID);
+                               
+                               while ($stmt->fetch()) {
+                                  $selected = ($city == $cityName) ? " selected" : "";
+                                  echo "<option value=", $cityID . $selected . ">" . $stateID . "</option>";
+                               }
+                            }
+                            $stmt->close();
                           ?>
-                     </select> -->
+                     </select>
                     
                     <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode?>" readonly>
                     <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone?>" readonly>
                     <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
-                    <!-- <label class="contactlabel">Major* : </label>  
-                    <select id="cityropdown" disabled>
+                    <label class="contactlabel">Major* : </label> <select id="majordropdown">
                         <?php 
-                        /*   $result = mysqli_query($conn, "SELECT DISTINCT user_major FROM users");
+                          $result = $conn->query("SELECT DISTINCT user_major FROM users");
                           if($result) {
-                              while ($row=mysqli_fetch_assoc($result))   { ?>
-                                    <option value="<?php echo $row['user_major'];?>" <?php if ($row['user_major'] == $major) { echo ' selected="selected"';?>><?php echo $row['user_major'];?></option>
-                                    <?php
+                              while ($row = $result->fetch_assoc())   { 
+                                    $selected = ($major == $user_major) ? " selected" : "";
+                                    echo "<option value=", $row["user_major"], $selected, ">", $row["user_major"], "</option>";
                               }
-                          } */
+                          } 
                           ?>
-                    </select> -->
+                    </select> 
                      
                     <label class="contactlabel">Email* :</label><input type="text" id="email", class="contactinput" value="<?php echo $username?>"readonly>
                     
