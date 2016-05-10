@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.30, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.10, for Win64 (x86_64)
 --
 -- Host: localhost    Database: enrollment
 -- ------------------------------------------------------
--- Server version	5.6.30-log
+-- Server version	5.7.10-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -412,6 +412,31 @@ INSERT INTO `states` VALUES (0,0,'none'),(241,2,'Balkh'),(242,2,'Herat'),(243,2,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user_logs`
+--
+
+DROP TABLE IF EXISTS `user_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_logs` (
+  `log_email` varchar(40) NOT NULL,
+  `log_action` varchar(40) NOT NULL,
+  `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_email`),
+  CONSTRAINT `user_logs_ibfk_1` FOREIGN KEY (`log_email`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_logs`
+--
+
+LOCK TABLES `user_logs` WRITE;
+/*!40000 ALTER TABLE `user_logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_logs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -463,4 +488,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-02 16:50:01
+-- Dump completed on 2016-05-09 22:59:49
