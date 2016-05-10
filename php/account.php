@@ -74,7 +74,7 @@
                     <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $firstName?>" readonly>
                     <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly>
                     <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
-                     <label class="contactlabel">Country* :</label> <select id="countrydropdown">
+                     <label class="contactlabel">Country* :</label> <select id="countrydropdown" class="contactinput">
                         <?php
                             $result =  $conn->query("SELECT * FROM countries");
                                if ($result) {
@@ -86,7 +86,7 @@
                         ?>
                      </select>
                     
-                     <label class="contactlabel">State* :</label> <select id="statedropdown">
+                     <label class="contactlabel">State* :</label> <select id="statedropdown" class="contactinput">
                         <?php 
                           $stmt = $conn->prepare("SELECT country_id FROM countries WHERE country_name = ?");
                           $stmt->bind_param('s', $country);
@@ -112,7 +112,7 @@
                           ?>
                      </select>
                     
-                     <label class="contactlabel">City* :</label> <select id="cityropdown">
+                     <label class="contactlabel">City* :</label> <select id="cityropdown" class="contactinput">
                         <?php 
                             $stmt = $conn->prepare("SELECT city_name, city_id FROM cities WHERE state_id = ?");
                             $stmt->bind_param('i', $stateID);
@@ -132,7 +132,7 @@
                     <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode?>" readonly>
                     <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone?>" readonly>
                     <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
-                    <label class="contactlabel">Major* : </label> <select id="majordropdown">
+                    <label class="contactlabel">Major* : </label> <select id="majordropdown" class="contactinput">
                         <?php 
                           $result = $conn->query("SELECT DISTINCT user_major FROM users");
                           if($result) {
