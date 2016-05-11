@@ -368,6 +368,45 @@ $(function() {
            }
         }
     });    
+    
+    //Populate State Dropdown Based on Country
+    $('#countrydropdown').change(function() {		
+         var ajaxCall = $.ajax({
+                  type: 'POST',
+                  url: "/php/findState.php",
+                  datatype: 'html',
+                  data: { country_id : ($('#countrydropdown option:selected').val()) }
+              }) // end ajax
+            ajaxCall.done (function(data) { 
+                            $("#stateselect").html(data);
+                            $("#stateselect").prop("selectedIndex", -1);
+                            $('#cityselect').html("<option></option>");})                  
+           ajaxCall.fail (function() { alert("Error Loading States");})         
+    }); 
+    
+    //Populate City Dropdown Based on State
+    $('#statedropdown').change(function() {	
+          $selected = $('#statedropdown :selected').text();
+          if (!($selected === "none" || $selected === "error")) {
+               var ajaxCall = $.ajax({
+                  type: 'POST',
+                  url: "findCity.php",
+                  datatype: 'html',
+                  data: { 
+                          state_id : ($('#statedropdown option:selected').val()) 
+                        }
+              }); 
+              
+              ajaxCall.done (function(data) {
+                  $('#cityselect').html(data);
+              });
+              
+              ajaxCall.fail (function() { 
+                               alert("Error Loading States");
+                            });
+           }
+	}); 
+    
     $('#homephone').mask("999-999-9999");
     $('#mobilephone').mask("999-999-9999");
 });

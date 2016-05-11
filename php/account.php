@@ -112,7 +112,7 @@
                           ?>
                      </select>
                     
-                     <label class="contactlabel">City* :</label> <select id="cityropdown" class="contactinput">
+                     <label class="contactlabel">City* :</label> <select id="citydropdown" class="contactinput">
                         <?php 
                             $stmt = $conn->prepare("SELECT city_name, city_id FROM cities WHERE state_id = ?");
                             $stmt->bind_param('i', $stateID);
