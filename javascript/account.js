@@ -216,6 +216,8 @@ $(function() {
             $(this).text("Save");
         } else if (text === "Save"){ // In Save Mode
             var setEditMode = true;
+            
+            //Check Empty input fields
             $('#contactfieldset > input').each ( function () {
                 var enteredValue = $.trim($(this).val());
                 if ( enteredValue === "" ) {
@@ -223,6 +225,16 @@ $(function() {
                    setEditMode = false;
                 } 
             });
+            
+            //Check Empty Dropdowns
+            if ($('#statedropdown option:selected').val() === "") {
+                 console.log("here");
+                 setTextFieldRed('#statedropdown');
+            }
+
+            if (('#citydropdown option:selected').length === 0) {
+                 setTextFieldRed('#citydropdown');
+            }             
                 
                 if ( setEditMode ) { // All Fields complete                
                    var $email =  $('#email');
@@ -333,7 +345,7 @@ $(function() {
                       //Change Password
                       var ajaxCall = $.ajax({
                                               type: 'POST',
-                                              url: "../php/changePassword.php",
+                                              url: "changePassword.php",
                                               data: {
                                                        email : email,
                                                        password : newPassInput
@@ -372,16 +384,23 @@ $(function() {
     //Populate State Dropdown Based on Country
     $('#countrydropdown').change(function() {		
          var ajaxCall = $.ajax({
-                  type: 'POST',
-                  url: "/php/findState.php",
-                  datatype: 'html',
-                  data: { country_id : ($('#countrydropdown option:selected').val()) }
-              }) // end ajax
-            ajaxCall.done (function(data) { 
-                            $("#stateselect").html(data);
-                            $("#stateselect").prop("selectedIndex", -1);
-                            $('#cityselect').html("<option></option>");})                  
-           ajaxCall.fail (function() { alert("Error Loading States");})         
+                          type: 'POST',
+                          url: "findState.php",
+                          datatype: 'html',
+                          data: { 
+                                   country_id : ($('#countrydropdown option:selected').val())
+                                }
+                        }); 
+            
+          ajaxCall.done (function(data) { 
+                                $("#statedropdown").html(data);
+                                $("#statedropdown").prop("selectedIndex", -1);
+                                $('#citydropdown').html("<option></option>");
+                         });                  
+           
+           ajaxCall.fail (function(jqHXR, textStatus, errorThrown) { 
+                             alert("Error Loading States");
+                         });         
     }); 
     
     //Populate City Dropdown Based on State
@@ -398,10 +417,11 @@ $(function() {
               }); 
               
               ajaxCall.done (function(data) {
-                  $('#cityselect').html(data);
+                  $('#citydropdown').html(data);
+                  $('#citydropdown').prop('selectedIndex', -1);
               });
               
-              ajaxCall.fail (function() { 
+              ajaxCall.fail (function(jqHXR, textStatus, errorThrown) { 
                                alert("Error Loading States");
                             });
            }
