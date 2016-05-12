@@ -531,3 +531,8 @@ table.thead, table.tbody {
    width: 100%;
    text-align: center;
 }
+
+.highlightred {
+    border: 1px solid red;
+    background: #FFCECE;
+}

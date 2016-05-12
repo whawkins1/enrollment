@@ -227,9 +227,9 @@ $(function() {
             });
             
             //Check Empty Dropdowns
-            if ($('#statedropdown option:selected').val() === "") {
-                 console.log("here");
-                 setTextFieldRed('#statedropdown');
+            if ($('#statedropdown :selected').text() === "") {
+                 console.log($('#statedropdown :selected').val());
+                 $('#statedropdown').addClass('highlightred');
             }
 
             if (('#citydropdown option:selected').length === 0) {
