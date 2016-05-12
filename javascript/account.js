@@ -1,3 +1,13 @@
+var originalFirstName;
+var originalLastName;
+var originalStreetAddress;
+var originalCountry;
+var originalState;
+var originalCity;
+var originalZip;
+var originalHomePhone;
+var originalMobilePhone;
+var originalMajor;
 var originalEmail;
 
 $(function() {    
@@ -5,6 +15,7 @@ $(function() {
     $(window).unload( function () {
       $('select option').remove();
     });
+    
     originalEmail = $('#email').val();
     loadTableData();
     setDropDownFilterDepartment();
@@ -214,6 +225,7 @@ $(function() {
             $('#zipcode').prop('readonly', false);
             $('#firstname').focus();
             $(this).text("Save");
+            $('#resetdefaultbutton').show();
         } else if (text === "Save"){ // In Save Mode
             var setEditMode = true;
             
@@ -221,22 +233,22 @@ $(function() {
             $('#contactfieldset > input').each ( function () {
                 var enteredValue = $.trim($(this).val());
                 if ( enteredValue === "" ) {
-                   setTextFieldRed($(this));
+                   $(this).addClass('highlightred');
                    setEditMode = false;
                 } 
             });
             
             //Check Empty Dropdowns
+            
             if ($('#statedropdown :selected').text() === "") {
-                 console.log($('#statedropdown :selected').val());
                  $('#statedropdown').addClass('highlightred');
             }
-
-            if (('#citydropdown option:selected').length === 0) {
-                 setTextFieldRed('#citydropdown');
+            
+            if ($('#citydropdown :selected').text() === "") {
+                 $('#citydropdown').addClass('highlightred');
             }             
                 
-                if ( setEditMode ) { // All Fields complete                
+                if ( setEditMode ) { // All Fields complete    
                    var $email =  $('#email');
                    var regexEmail =  /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                    var input = $.trim($email.val());
@@ -258,7 +270,7 @@ $(function() {
                                    addUpdates();
                                 } else if ( response === "email in use" ) {
                                       $('#errorcontainer').html("ERROR: email already in use");
-                                      setTextFieldRed($email);
+                                      $email.addClass('highlightred');
                                       $email.focus();  
                                       setEditMode = false; 
                                 } else if ( response === "error" ) {
@@ -276,12 +288,12 @@ $(function() {
                         }                            
                     } else {
                        $('#errorcontainer').html("ERROR: invalid email format!");
-                       setTextFieldRed($email);
+                       $email.addClass('highlightred');
                        setEditMode = false;
                     }                        
-                } else {
+                }  else {
                     $('#errorcontainer').html("ERROR: All Fields Must Be entered!");
-                    setEditMode = false;
+                    setEditMode = false; 
                 }
 
            if ( setEditMode ) {            
@@ -292,9 +304,13 @@ $(function() {
                 $('#zipcode').prop('readonly', true);
                 $('#zipcode').css('pointer-events', 'none');
                 $(this).text("Edit");
-            }
+            } 
         }
     });      
+    
+    $('#resetdefaultbutton').on('click', function() {
+        $(this).hide();        
+    });
     
     //Switch Password Visbility
     $('#showpasscb').on('click', function () {
@@ -468,13 +484,6 @@ function addUpdates() {
               $('#editbutton').focus();
               setEditMode = false;                                  
           });
-}
-
-function setTextFieldRed(textField) {
-    textField.css({
-                   "border": "1px solid red",
-                   "background": "#FFCECE"
-                  });
 }
 
 function isValidKey ( event ) {

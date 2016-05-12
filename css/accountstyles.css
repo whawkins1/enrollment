@@ -536,3 +536,7 @@ table.thead, table.tbody {
     border: 1px solid red;
     background: #FFCECE;
 }
+
+#resetdefaultbutton {
+  display: none;  
+}

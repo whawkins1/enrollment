@@ -122,7 +122,7 @@
                                
                                while ($stmt->fetch()) {
                                   $selected = ($city == $cityName) ? " selected" : "";
-                                  echo "<option value=", $cityID . $selected . ">" . $stateID . "</option>";
+                                  echo "<option value=", $cityID . $selected . ">" . $cityName . "</option>";
                                }
                             }
                             $stmt->close();
@@ -148,6 +148,7 @@
                     
                     <div id="editbuttoncontainer">
                         <button type="button" id="editbutton">Edit</button>
+                        <button type="button" id="resetdefaultbutton">Reset Default</button>
                     </div>
                 </fieldset>
               </form>                       
