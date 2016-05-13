@@ -11,12 +11,34 @@ var originalMajor;
 var originalEmail;
 
 $(function() {    
-    //Remove all options to avoid caching previous results
+    //Remove all Data Fields to avoid caching previous results
     $(window).unload( function () {
-      $('select option').remove();
+      $('#firstname').val("");
+      $('#lastname').val("");
+      $('#streetaddress').val("");
+      $('#countrydropdown option').remove();
+      $('#statedropdown option').remove();
+      $('#citydropdown option').remove();
+      $('#majordropdown option').remove();
+      $('#zipcode').val(""):
+      $('#homephone').val("");
+      $('#mobilephone').val("");
+      $('#email').val("");      
     });
     
+    //Hold original Values to Reset Defaults
+    originalFirstName = $('#firstName').val();
+    originalLastName = $('#lastName').val();
+    originalStreetAddress = $('#streetaddress').val("");
+    originalCountry = $('#countrydropdown').text();
+    originalState = $('#statedropdown').text();
+    originalCity = $('#citydropdown').text();
+    originalZip = $('#zipcode').val();
+    originalHomePhone = $('#homephone').val();
+    originalMobilePhone = $('#mobilephone').val();
+    originalMajor = $('majordropdown').text();
     originalEmail = $('#email').val();
+    
     loadTableData();
     setDropDownFilterDepartment();
     setDropDownFilterCode();
@@ -309,7 +331,44 @@ $(function() {
     });      
     
     $('#resetdefaultbutton').on('click', function() {
-        $(this).hide();        
+         $('#firstName').val(originalFirstName);
+         $('#lastName').val(originalLastName);
+         $('#streetaddress').val(originalStreetAddress);
+         
+         $('#countrydropdown option').filter(function() {
+             return ($(this).text === originalCountry);
+         )}.prop('selected', true);
+         
+         $('#statedropdown option').filter(function() {
+              return ($(this).text === originalState);
+         )}.prop('selected', true);
+         
+         $('#citydropdown').filter(function() {
+              return ($(this).text === originalCity);
+         )}.prop('selected', true);
+         
+         $('#zipcode').val(originalZip);
+         $('#homephone').val(originalHomePhone);
+         $('#mobilephone').val(originalMobilePhone);
+         
+         $('majordropdown').filter(function() {
+              return ($(this).text === originalMajor);
+         )}.prop('selected', true);
+         $('#email').val(originalEmail);
+         $('#resetdefaultbutton').prop("disabled", true);
+    });
+    
+    //Enable Reset Button on Key Input
+    $('#contactfieldset input').on('keyup', function() {
+                
+    });
+    
+    //Enable Reset Button on Dropdown change
+    $('select').on('change', function() {
+        var selectedText = $(this).find('option:selected').text();
+        if (selectedText !== "") {
+           $('#resetdefaultbutton').prop("disabled", true);
+        }
     });
     
     //Switch Password Visbility
@@ -473,6 +532,9 @@ function addUpdates() {
               if ( data === "success" ) {
                   $('#errorcontainer').html("SUCCESS: completed update of account!");
                   originalEmail = $('email').val();
+                  var $resetButton = $('#resetdefaultbutton');
+                  $resetButton.prop('disabled', true);
+                  $resetButton.hide();
               } else if ( data === "error" ) {
                   $('#errorcontainer').html("ERROR: failed to update account!");
                   setEditMode = false;
