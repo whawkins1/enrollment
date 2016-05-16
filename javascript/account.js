@@ -20,16 +20,16 @@ $(function() {
       $('#statedropdown option').remove();
       $('#citydropdown option').remove();
       $('#majordropdown option').remove();
-      $('#zipcode').val(""):
+      $('#zipcode').val("");
       $('#homephone').val("");
       $('#mobilephone').val("");
       $('#email').val("");      
     });
     
     //Hold original Values to Reset Defaults
-    originalFirstName = $('#firstName').val();
-    originalLastName = $('#lastName').val();
-    originalStreetAddress = $('#streetaddress').val("");
+    originalFirstName = $('#firstname').val();
+    originalLastName = $('#lastname').val();
+    originalStreetAddress = $('#streetaddress').val();
     originalCountry = $('#countrydropdown').text();
     originalState = $('#statedropdown').text();
     originalCity = $('#citydropdown').text();
@@ -331,21 +331,21 @@ $(function() {
     });      
     
     $('#resetdefaultbutton').on('click', function() {
-         $('#firstName').val(originalFirstName);
-         $('#lastName').val(originalLastName);
+         $('#firstname').val(originalFirstName);
+         $('#lastname').val(originalLastName);
          $('#streetaddress').val(originalStreetAddress);
          
          $('#countrydropdown option').filter(function() {
              return ($(this).text === originalCountry);
-         )}.prop('selected', true);
+         }).prop('selected', true);
          
          $('#statedropdown option').filter(function() {
               return ($(this).text === originalState);
-         )}.prop('selected', true);
+         }).prop('selected', true);
          
          $('#citydropdown').filter(function() {
               return ($(this).text === originalCity);
-         )}.prop('selected', true);
+         }).prop('selected', true);
          
          $('#zipcode').val(originalZip);
          $('#homephone').val(originalHomePhone);
@@ -353,22 +353,24 @@ $(function() {
          
          $('majordropdown').filter(function() {
               return ($(this).text === originalMajor);
-         )}.prop('selected', true);
+         }).prop('selected', true);
+         
          $('#email').val(originalEmail);
-         $('#resetdefaultbutton').prop("disabled", true);
+         $('#resetdefaultbutton').prop('disabled', true);
     });
     
     //Enable Reset Button on Key Input
     $('#contactfieldset input').on('keyup', function() {
-                
+          if ( $('#resetdefaultbutton').prop('disabled') ) {
+             $('#resetdefaultbutton').prop('disabled', false);
+          }              
     });
     
-    //Enable Reset Button on Dropdown change
-    $('select').on('change', function() {
-        var selectedText = $(this).find('option:selected').text();
-        if (selectedText !== "") {
-           $('#resetdefaultbutton').prop("disabled", true);
-        }
+    //Enable Reset Button on Dropdown Selection
+    $('#contactfieldset select').on('change', function () {
+       if ( $('#resetdefaultbutton').prop('disabled') ) {
+          $('#resetdefaultbutton').prop('disabled', false);
+       }
     });
     
     //Switch Password Visbility
@@ -515,13 +517,13 @@ function addUpdates() {
                         firstName: $('#firstname').val(),
                         lastName: $('#lastname').val(),
                         address: $('#streetaddress').val(),
-                        country: $('#country').val(),
-                        state: $('#state').val(),
-                        city: $('#city').val(),
+                        country: $('#countrydropdown option:selected').text(),
+                        state: $('#statedropdown option:selected').text(),
+                        city: $('#citydropdown option:selected').text(),
                         postalCode: $('#zipcode').val(),
                         homePhone: $('#homephone').val(),
                         mobilePhone: $('#mobilephone').val(),
-                        major: $('#major').val(),
+                        major: $('#majordropdown option:selected').text(),
                         email: $('#email').val(),
                         originalEmail: originalEmail
                    }, 
@@ -529,13 +531,14 @@ function addUpdates() {
           })
           
           ajaxCall.done( function(data) {
-              if ( data === "success" ) {
+              var response = $.trim(data);
+              if ( response === "success" ) {
                   $('#errorcontainer').html("SUCCESS: completed update of account!");
                   originalEmail = $('email').val();
                   var $resetButton = $('#resetdefaultbutton');
                   $resetButton.prop('disabled', true);
                   $resetButton.hide();
-              } else if ( data === "error" ) {
+              } else if ( response === "error" ) {
                   $('#errorcontainer').html("ERROR: failed to update account!");
                   setEditMode = false;
               }

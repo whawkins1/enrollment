@@ -9,6 +9,7 @@
      
      foreach ($postNames as $value) {
          if (!isset($_POST[$value])) {
+             $checkVariables = $value;
              $allPostSet = false;
              break;
          }
@@ -29,19 +30,18 @@
                                       WHERE user_email = ?";
                                        
                  if ( $stmt = $conn->prepare($sql) ) {
-                     // Bounces Back Warning  Strict Standards Variables Pass By Reference
-                     $stmt->bind_param('ssssssssssis', $conn->real_escape_string($_POST['firstName']), 
-                                                      $conn->real_escape_string($_POST['lastName']), 
-                                                      $conn->real_escape_string($_POST['email']), 
-                                                      $conn->real_escape_string($_POST['country']), 
-                                                      $conn->real_escape_string($_POST['state']), 
-                                                      $conn->real_escape_string($_POST['city']), 
-                                                      $conn->real_escape_string($_POST['major']), 
-                                                      $conn->real_escape_string($_POST['address']), 
-                                                      $conn->real_escape_string($_POST['homePhone']), 
-                                                      $conn->real_escape_string($_POST['mobilePhone']), 
-                                                      intval($conn->real_escape_string($_POST['postalCode'])),
-                                                      $conn->real_escape_string($_POST['originalEmail']));
+                     $stmt->bind_param('ssssssssssis', $_POST['firstName'], 
+                                                      $_POST['lastName'], 
+                                                      $_POST['email'], 
+                                                      $_POST['country'], 
+                                                      $_POST['state'], 
+                                                      $_POST['city'], 
+                                                      $_POST['major'], 
+                                                      $_POST['address'], 
+                                                      $_POST['homePhone'], 
+                                                      $_POST['mobilePhone'], 
+                                                      $_POST['postalCode'],
+                                                      $_POST['originalEmail']);
                                   if($stmt->execute() ) {
                                       echo "success";                                     
                                   } else {
@@ -54,5 +54,4 @@
      } else {
         echo "error all variables must be set!";
      }
-?>
-     
+?>  
