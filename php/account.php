@@ -216,24 +216,42 @@
                   </div>
               
               <table id="tablecourses" class="tablesorter">      
-              <thead>
-                    <tr id="headerRow">
-                         <th class="checkbox"><input type="checkbox" id="checkboxhead"/></th>
-                         <th class="code">Code</th>
-                         <th class="name">Name</th>
-                         <th class="department">Department</th>
-                         <th class="professor">Professor</th>
-                         <th class="time">Time</th>
-                         <th class="location">Location</th>
-                         <th class="credits">Credits</th>
-                    </tr>
-               </thead>     
+                  <thead>
+                        <tr id="headerRow">
+                             <th class="checkbox"><input type="checkbox" id="checkboxhead"/></th>
+                             <th class="code">Code</th>
+                             <th class="name">Name</th>
+                             <th class="department">Department</th>
+                             <th class="professor">Professor</th>
+                             <th class="time">Time</th>
+                             <th class="location">Location</th>
+                             <th class="credits">Credits</th>
+                        </tr>
+                   </thead>     
                  <tbody>
                  </tbody>                  
              </table>
       </div>                
       
       <div id="tab-grades" class="tabsjump">
+          <label>GPA</label>
+          <label>Semester</label> 
+          <label id="semestergpa"></label> 
+          <label>Overall</label> 
+          <label id="overallgpa"></label>
+          <select id="semesteryeardropdown"></select>
+          <table id="tablegrades" class="tablesorter">
+              <thead>
+                    <tr id="headerRow">
+                         <th class="code">Code</th>
+                         <th class="name">Name</th>
+                         <th class="grade">Grade</th>
+                         <th class="credits">Credits</th>
+                    </tr>
+              </thead>
+            <tbody>
+            </tbody>
+         </table>
       </div>          
 
       <div id="tab-financial" class="tabsjump">
