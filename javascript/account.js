@@ -434,15 +434,19 @@ $(function() {
                              $oldPassField.focus();
                           } else if (data.startsWith("SUCCESS")) {
                              $oldPassField.val("");
+                             $oldPassfield.prop('disabled', true);
                              $newPassField.val("");
-                             $confirmPassField.val("");                             
+                             $newPassField.prop('disabled', true);
+                             $confirmPassField.val("");
+                             $confirmPassfield.prop('disabled', true);
+                             $(this).text("Change Password");                             
                           }
                           $passwordMessage.text(data);
                       });
                       
                       ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
                             $oldPassField.focus();
-                            $passwordMessage.text(data);
+                            $passwordMessage.text("SERVER ERROR: Problem Processing Request");
                       });                      
                   } else if ( data === "invalid" ) {
                       $passwordMessage.text("ERROR: Old Password Incorrect!");
