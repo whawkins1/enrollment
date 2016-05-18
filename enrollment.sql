@@ -457,6 +457,7 @@ CREATE TABLE `users` (
   `user_mobile_phone` varchar(15) DEFAULT NULL,
   `user_postal_code` int(5) NOT NULL,
   `user_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `user_year_started` int(4) NOT NULL,
   PRIMARY KEY (`user_email`),
   KEY `country` (`user_country`),
   KEY `state` (`user_state`),
@@ -475,7 +476,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('Pompeani','Bob','bpomp@yahoo.com','$2y$11$USg6gVx5rmywRyhLnanE8..5xnpSixkRG/oh6uyZVjm152xHGBYvG','Iraq','Karbala','Karbala','Math','123 slow lane','895-757-4463','142-342-4242',97978,0.00),('Jaso','John','jjaso@gmail.com','$2y$11$k/a6HG/fgEdJwD.uBEgwVeHO2/xCKtI9MCB9Yyqdx2Laxn7gWXRMO','Djibouti','Djibouti','Djibouti','Business','123 wow lane','645-347-5867','978-456-7357',56858,0.00),('Stevens','John','jsvens@gmail.com','$2y$11$zZDavUx4BTeWQwZXnGYMZeZftZIxgsw0H9OddKxlaquIdS2gL9zNe','Kiribati','South Tarawa','Bikenibeu','English','Maltese Street','896-478-4678','234-124-1242',66767,0.00),('Michael','Jordan','mjordan@gmail.com','$2y$11$tj3GWi.vC4hNSJPplRMl4uZuXGq1b2K1lWpttX.jp7cArWf0PNDsi','Mexico','Durango','Durango','English','4545 First Lane','456-435-6457','657-567-5675',45345,0.00),('Jordy','Mercer','up@yahoo.com','$2y$11$P8viKyPH.8i09gvF.VlWE.D52169TXk//pinUePNA.gIkJG5zfbO6','Croatia','Osijek-Baranja','Osijek','Business','123 fast lane','222-224-5533','585-858-6585',45678,0.00);
+INSERT INTO `users` VALUES ('Pompeani','Bob','bpomp@yahoo.com','$2y$11$USg6gVx5rmywRyhLnanE8..5xnpSixkRG/oh6uyZVjm152xHGBYvG','Iraq','Karbala','Karbala','Math','123 slow lane','895-757-4463','142-342-4242',97978,0.00,0),('Jaso','John','jjaso@gmail.com','$2y$11$k/a6HG/fgEdJwD.uBEgwVeHO2/xCKtI9MCB9Yyqdx2Laxn7gWXRMO','Djibouti','Djibouti','Djibouti','Business','123 wow lane','645-347-5867','978-456-7357',56858,0.00,0),('Stevens','John','jsvens@gmail.com','$2y$11$zZDavUx4BTeWQwZXnGYMZeZftZIxgsw0H9OddKxlaquIdS2gL9zNe','Kiribati','South Tarawa','Bikenibeu','English','Maltese Street','896-478-4678','234-124-1242',66767,0.00,0),('Michael','Jordan','mjordan@gmail.com','$2y$11$tj3GWi.vC4hNSJPplRMl4uZuXGq1b2K1lWpttX.jp7cArWf0PNDsi','Mexico','Durango','Durango','English','4545 First Lane','456-435-6457','657-567-5675',45345,0.00,0),('Jordy','Mercer','up@yahoo.com','$2y$11$P8viKyPH.8i09gvF.VlWE.D52169TXk//pinUePNA.gIkJG5zfbO6','Croatia','Osijek-Baranja','Osijek','Business','123 fast lane','222-224-5533','585-858-6585',45678,0.00,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -488,4 +489,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-10 22:58:08
+-- Dump completed on 2016-05-17 23:00:39
