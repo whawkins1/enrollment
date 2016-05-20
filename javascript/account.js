@@ -408,7 +408,7 @@ $(function() {
                // Check Password Exists
                var email = $('#email').val();
                ajaxCall = $.ajax({
-                  type: 'GET',
+                  type: 'POST',
                   url: "../php/login.php",
                   data: {
                           username : email,
@@ -418,11 +418,12 @@ $(function() {
                })
                
                ajaxCall.done( function(data) {
+                   console.log(data);
                   if ( data === "valid" ) {
                       //Change Password
                       var ajaxCall = $.ajax({
                                               type: 'POST',
-                                              url: "changePassword.php",
+                                              url: "../php/changePassword.php",
                                               data: {
                                                        email : email,
                                                        password : newPassInput
@@ -430,15 +431,16 @@ $(function() {
                                                dataType: 'text'
                                            });
                       ajaxCall.done( function (data) {
+                          console.log(data);
                           if (data.startsWith("ERROR")) {
                              $oldPassField.focus();
                           } else if (data.startsWith("SUCCESS")) {
                              $oldPassField.val("");
-                             $oldPassfield.prop('disabled', true);
+                             $oldPassField.prop('disabled', true);
                              $newPassField.val("");
                              $newPassField.prop('disabled', true);
                              $confirmPassField.val("");
-                             $confirmPassfield.prop('disabled', true);
+                             $confirmPassField.prop('disabled', true);
                              $(this).text("Change Password");                             
                           }
                           $passwordMessage.text(data);

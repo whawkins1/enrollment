@@ -159,9 +159,9 @@
                      <fieldset id="passwordfieldset">
                         <legend>Change Password</legend>
                            <div id="passwordmessage" class="error"></div> 
-                           <label class="contactlabel">Old* :</label><input type="password" id="oldpassword" class="contactinput" disabled>
-                           <label class="contactlabel">New* :</label><input type="password" id="newpassword" class="contactinput" disabled>
-                           <label class="contactlabel">Confirm* :</label><input type="password" id="confirmpassword" class="contactinput" disabled>
+                           <label class="contactlabel">Old* :</label><input type="password" id="oldpassword"  disabled>
+                           <label class="contactlabel">New* :</label><input type="password" id="newpassword"  disabled>
+                           <label class="contactlabel">Confirm* :</label><input type="password" id="confirmpassword" disabled>
                            
                            <div id="passwordbuttoncontainer">
                                 <button type="button" id="changepasswordbutton">Change Password</button>

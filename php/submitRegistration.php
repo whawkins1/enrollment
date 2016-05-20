@@ -28,18 +28,18 @@
                                        user_postal_code) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                                         
                                        if ($stmt = $conn->prepare($sql)) { 
-                                         $stmt->bind_param('sssssssssssi', $conn->real_escape_string($_POST['firstName']), 
-                                                                           $conn->real_escape_string($_POST['lastName']), 
-                                                                           $conn->real_escape_string($_POST['email']), 
-                                                                           $conn->real_escape_string($_POST['country']), 
+                                         $stmt->bind_param('sssssssssssi', $_POST['firstName'], 
+                                                                           $_POST['lastName'], 
+                                                                           $_POST['email'], 
+                                                                           $_POST['country'], 
                                                                            password_hash($_POST['password'], PASSWORD_BCRYPT, array('cost' => 11)), 
-                                                                           $conn->real_escape_string($_POST['state']), 
-                                                                           $conn->real_escape_string($_POST['city']), 
-                                                                           $conn->real_escape_string($_POST['major']), 
-                                                                           $conn->real_escape_string($_POST['address']), 
-                                                                           $conn->real_escape_string($_POST['phoneHome']), 
-                                                                           $conn->real_escape_string($_POST['phoneMobile']), 
-                                                                           intval($conn->real_escape_string($_POST['postalCode'])));
+                                                                           $_POST['state'], 
+                                                                           $_POST['city'], 
+                                                                           $_POST['major'], 
+                                                                           $_POST['address'], 
+                                                                           $_POST['phoneHome'], 
+                                                                           $_POST['phoneMobile'], 
+                                                                           $_POST['postalCode']);
                                           if(!$stmt->execute()) {
                                              trigger_error("Error Executing Insert: ", E_USER_ERROR);
                                           }
