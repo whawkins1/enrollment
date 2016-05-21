@@ -2,7 +2,7 @@
 -- Table users
 -- -----------------------------------------------------  
   CREATE TABLE IF NOT EXISTS users (
-  email VARCHAR(50) NOT NULL,
+  user_email VARCHAR(30) NOT NULL,
   user_first_name VARCHAR(30) NOT NULL,
   user_last_name VARCHAR(30) NOT NULL,
   user_password VARCHAR(187) NOT NULL,
@@ -16,15 +16,85 @@
   user_postal_code INT(5) NOT NULL,
   user_balance DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   user_year_started INT(4) NOT NULL
-  PRIMARY KEY (email),
-  FOREIGN KEY(country)
+  PRIMARY KEY (user_email),
+  FOREIGN KEY(user_country)
      REFERENCES countries(country_name),
-  FOREIGN KEY(state)
+  FOREIGN KEY(user_state)
      REFERENCES states(state_name),
-  FOREIGN KEY(city)
+  FOREIGN KEY(user_city)
      REFERENCES cities(city_name),    
-  FOREIGN KEY(major)
-     REFERENCES majors(major)
+  FOREIGN KEY(user_major)
+     REFERENCES majors(user_major)
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table enrolled_2010
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS enrolled_2010 (
+  user_email_2010 VARCHAR(30) NOT NULL,
+  PRIMARY KEY(user_email_2010),
+  FOREIGN KEY(user_email_2010) 
+      REFERENCES users(user_email)
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table enrolled_2011
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS enrolled_2011 (
+  user_email_2011 VARCHAR(30),
+  PRIMARY KEY (user_email_2011),
+  FOREIGN KEY(user_email_2011)
+      REFERENCES users(user_email)
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table enrolled_2012
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS enrolled_2012 (
+  user_email_2012 VARCHAR(30),
+  PRIMARY KEY (user_email_2012),
+  FOREIGN KEY(user_email_2012)
+      REFERENCES users(user_email)
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table enrolled_2013
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS enrolled_2013 (
+  user_email_2013 VARCHAR(30),
+  PRIMARY KEY (user_email_2013),
+  FOREIGN KEY(user_email_2013)
+      REFERENCES users(user_email)
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table enrolled_2014
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS enrolled_2014 (
+  user_email_2014 VARCHAR(30),
+  PRIMARY KEY (user_email_2014),
+  FOREIGN KEY(user_email_2014)
+      REFERENCES users(user_email)
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table enrolled_2015
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS enrolled_2015 (
+  user_email_2015 VARCHAR(30),
+  PRIMARY KEY (user_email_2015),
+  FOREIGN KEY(user_email_2015)
+      REFERENCES users(user_email)
+) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table enrolled_2016
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS enrolled_2016 (
+  user_email_2016 VARCHAR(30),
+  PRIMARY KEY (user_email_2016),
+  FOREIGN KEY(user_email_2016)
+      REFERENCES users(user_email)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------

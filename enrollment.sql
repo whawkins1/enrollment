@@ -245,6 +245,167 @@ INSERT INTO `departments` VALUES ('Business'),('Computer Science'),('English'),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `enrolled_2010`
+--
+
+DROP TABLE IF EXISTS `enrolled_2010`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enrolled_2010` (
+  `user_email_2010` varchar(30) NOT NULL,
+  PRIMARY KEY (`user_email_2010`),
+  CONSTRAINT `enrolled_2010_ibfk_1` FOREIGN KEY (`user_email_2010`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enrolled_2010`
+--
+
+LOCK TABLES `enrolled_2010` WRITE;
+/*!40000 ALTER TABLE `enrolled_2010` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enrolled_2010` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enrolled_2011`
+--
+
+DROP TABLE IF EXISTS `enrolled_2011`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enrolled_2011` (
+  `user_email_2011` varchar(30) NOT NULL,
+  PRIMARY KEY (`user_email_2011`),
+  CONSTRAINT `enrolled_2011_ibfk_1` FOREIGN KEY (`user_email_2011`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enrolled_2011`
+--
+
+LOCK TABLES `enrolled_2011` WRITE;
+/*!40000 ALTER TABLE `enrolled_2011` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enrolled_2011` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enrolled_2012`
+--
+
+DROP TABLE IF EXISTS `enrolled_2012`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enrolled_2012` (
+  `user_email_2012` varchar(30) NOT NULL,
+  PRIMARY KEY (`user_email_2012`),
+  CONSTRAINT `enrolled_2012_ibfk_1` FOREIGN KEY (`user_email_2012`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enrolled_2012`
+--
+
+LOCK TABLES `enrolled_2012` WRITE;
+/*!40000 ALTER TABLE `enrolled_2012` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enrolled_2012` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enrolled_2013`
+--
+
+DROP TABLE IF EXISTS `enrolled_2013`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enrolled_2013` (
+  `user_email_2013` varchar(30) NOT NULL,
+  PRIMARY KEY (`user_email_2013`),
+  CONSTRAINT `enrolled_2013_ibfk_1` FOREIGN KEY (`user_email_2013`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enrolled_2013`
+--
+
+LOCK TABLES `enrolled_2013` WRITE;
+/*!40000 ALTER TABLE `enrolled_2013` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enrolled_2013` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enrolled_2014`
+--
+
+DROP TABLE IF EXISTS `enrolled_2014`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enrolled_2014` (
+  `user_email_2014` varchar(30) NOT NULL,
+  PRIMARY KEY (`user_email_2014`),
+  CONSTRAINT `enrolled_2014_ibfk_1` FOREIGN KEY (`user_email_2014`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enrolled_2014`
+--
+
+LOCK TABLES `enrolled_2014` WRITE;
+/*!40000 ALTER TABLE `enrolled_2014` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enrolled_2014` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enrolled_2015`
+--
+
+DROP TABLE IF EXISTS `enrolled_2015`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enrolled_2015` (
+  `user_email_2015` varchar(30) NOT NULL,
+  PRIMARY KEY (`user_email_2015`),
+  CONSTRAINT `enrolled_2015_ibfk_1` FOREIGN KEY (`user_email_2015`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enrolled_2015`
+--
+
+LOCK TABLES `enrolled_2015` WRITE;
+/*!40000 ALTER TABLE `enrolled_2015` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enrolled_2015` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enrolled_2016`
+--
+
+DROP TABLE IF EXISTS `enrolled_2016`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `enrolled_2016` (
+  `user_email_2016` varchar(30) NOT NULL,
+  PRIMARY KEY (`user_email_2016`),
+  CONSTRAINT `enrolled_2016_ibfk_1` FOREIGN KEY (`user_email_2016`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enrolled_2016`
+--
+
+LOCK TABLES `enrolled_2016` WRITE;
+/*!40000 ALTER TABLE `enrolled_2016` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enrolled_2016` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `locations`
 --
 
@@ -489,4 +650,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-17 23:00:39
+-- Dump completed on 2016-05-21 17:12:55
