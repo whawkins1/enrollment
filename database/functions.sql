@@ -1,12 +1,14 @@
-CREATE FUNCTION getYearsAttended (VARCHAR(30) email)
+DELIMITER //
+
+CREATE FUNCTION getYearsAttended (email VARCHAR(30))
 RETURNS VARCHAR(100)
-DETERMINISTIC
+
 BEGIN
       DECLARE years_concat VARCHAR(100) DEFAULT ""; 
       
-      if (SELECT EXISTS(SELECT 1 FROM enrolled_2010 WHERE email_enrolled = email LIMIT 1)) {
-          SET years_concat = SELECT CONCAT_WS(',', '2010', years_concat);
-      }
+      IF (SELECT EXISTS(SELECT 1 FROM enrolled_2010 WHERE user_email_2010 = email LIMIT 1)) THEN
+           SET years_concat = SELECT CONCAT_WS(',', '2010', years_concat);
+      END IF;
       
       if (SELECT EXISTS(SELECT 1 FROM enrolled_2011 WHERE email_enrolled = email LIMIT 1)) {
           SET years_concat = SELECT CONCAT_WS(',', '2011', years_concat);
@@ -33,4 +35,6 @@ BEGIN
       }      
       
       RETURN years_concat;
-END
+END; //
+
+DELIMITER ;
