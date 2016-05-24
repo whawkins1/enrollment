@@ -418,7 +418,6 @@ $(function() {
                })
                
                ajaxCall.done( function(data) {
-                   console.log(data);
                   if ( data === "valid" ) {
                       //Change Password
                       var ajaxCall = $.ajax({
