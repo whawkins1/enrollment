@@ -32,10 +32,13 @@
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS enrolled_2010 (
   user_email_2010 VARCHAR(30) NOT NULL,
-  user_grade_2010 CHAR(1) NOT NULL DEFAULT "-"
-  PRIMARY KEY(user_email_2010),
+  user_grade_2010 CHAR(1) NOT NULL DEFAULT "-",
+  user_course_code VARCHAR(10) NOT NULL
+  PRIMARY KEY(user_email_2010, user_course_code),
   FOREIGN KEY(user_email_2010) 
-      REFERENCES users(user_email)
+      REFERENCES users(user_email),
+  FOREIGN KEY(user_course_code)
+      REFERENCES courses(code)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -46,7 +49,9 @@ CREATE TABLE IF NOT EXISTS enrolled_2011 (
   user_grade_2011 CHAR(1) NOT NULL DEFAULT "-"
   PRIMARY KEY (user_email_2011),
   FOREIGN KEY(user_email_2011)
-      REFERENCES users(user_email)
+      REFERENCES users(user_email),
+  FOREIGN KEY(user_course_code)
+      REFERENCES courses(code)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -57,7 +62,9 @@ CREATE TABLE IF NOT EXISTS enrolled_2012 (
   user_grade_2012 CHAR(1) NOT NULL DEFAULT "-"
   PRIMARY KEY (user_email_2012),
   FOREIGN KEY(user_email_2012)
-      REFERENCES users(user_email)
+      REFERENCES users(user_email),
+  FOREIGN KEY(user_course_code)
+      REFERENCES courses(code)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -68,7 +75,9 @@ CREATE TABLE IF NOT EXISTS enrolled_2013 (
   user_grade_2013 CHAR(1) NOT NULL DEFAULT "-"
   PRIMARY KEY (user_email_2013),
   FOREIGN KEY(user_email_2013)
-      REFERENCES users(user_email)
+      REFERENCES users(user_email),
+  FOREIGN KEY(user_course_code)
+      REFERENCES courses(code)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -79,7 +88,9 @@ CREATE TABLE IF NOT EXISTS enrolled_2014 (
   user_grade_2014 CHAR(1) NOT NULL DEFAULT "-"
   PRIMARY KEY (user_email_2014),
   FOREIGN KEY(user_email_2014)
-      REFERENCES users(user_email)
+      REFERENCES users(user_email),
+  FOREIGN KEY(user_course_code)
+      REFERENCES courses(code)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -90,7 +101,9 @@ CREATE TABLE IF NOT EXISTS enrolled_2015 (
   user_grade_2015 CHAR(1) NOT NULL DEFAULT "-"
   PRIMARY KEY (user_email_2015),
   FOREIGN KEY(user_email_2015)
-      REFERENCES users(user_email)
+      REFERENCES users(user_email),
+  FOREIGN KEY(user_course_code)
+      REFERENCES courses(code)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -101,7 +114,9 @@ CREATE TABLE IF NOT EXISTS enrolled_2016 (
   user_grade_2016 CHAR(1) NOT NULL DEFAULT "-"
   PRIMARY KEY (user_email_2016),
   FOREIGN KEY(user_email_2016)
-      REFERENCES users(user_email)
+      REFERENCES users(user_email),
+  FOREIGN KEY(user_course_code)
+      REFERENCES courses(code)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------

@@ -37,4 +37,9 @@ BEGIN
       RETURN years_concat;
 END; //
 
-DELIMITER ;
+CREATE FUNCTION getUserSemesterGPA2010(email VARCHAR(30))
+RETURNS DECIMAL(10, 2)
+
+BEGIN
+
+END; //

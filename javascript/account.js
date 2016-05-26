@@ -50,7 +50,7 @@ $(function() {
     $('#tablepayments').tablesorter();
     $('#amount').autoNumeric('init');
     $('#vin').val("");
-    
+    6
     $('#zipcode').on('keydown', function(e) {
        var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
              
