@@ -40,7 +40,7 @@ END; //
 
 DROP FUNCTION IF EXISTS getUserSemesterGPA;//
 
-CREATE FUNCTION getUserSemesterGPA(email VARCHAR(30), semester CHAR(6), year INT(4))
+CREATE FUNCTION getUserSemesterGPA(email VARCHAR(30), semester CHAR(6), year CHAR(4))
 RETURNS DECIMAL(10, 2)
 
 BEGIN
@@ -50,9 +50,26 @@ BEGIN
     DECLARE gradeD CHAR(1) DEFAULT 'D';
     DECLARE gradeF CHAR(1) DEFAULT 'F';
     DECLARE gpa DECIMAL(10, 2) DEFAULT 0.00; 
-    DECLARE concatYear CHAR(13) DEFAULT CONCAT('enrolled_', CAST(year AS CHAR));
+    
+    DECLARE concatYear CHAR(13) DEFAULT CONCAT('enrolled_', year);
+    DECLARE concatEmail CHAR(14) DEFAULT CONCAT('user_email_', year);
+    DECLARE concatGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
+        
+    DECLARE cur1 CURSOR FOR SELECT concatGrade FROM concatYear WHERE concatEmail = email;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    OPEN cur1;
+    
+    read_loop: LOOP
+       FETCH cur1 INTO grade;
+    IF done THEN
+        LEAVE read_loop;
+    END IF;
+    -- ADD GRADES HERE IN IF STATEMENT
+    
+    END LOOP;
     
     IF semester = 'fall' THEN
+    
        
     ELSEIF semester = 'spring' THEN
     
