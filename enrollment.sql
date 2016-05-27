@@ -255,8 +255,11 @@ CREATE TABLE `enrolled_2010` (
   `user_email_2010` varchar(30) NOT NULL,
   `user_grade_2010` char(1) NOT NULL DEFAULT '-',
   `user_semester_2016` char(6) NOT NULL,
-  PRIMARY KEY (`user_email_2010`),
-  CONSTRAINT `enrolled_2010_ibfk_1` FOREIGN KEY (`user_email_2010`) REFERENCES `users` (`user_email`)
+  `user_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_email_2010`,`user_course_code`),
+  KEY `user_course_code` (`user_course_code`),
+  CONSTRAINT `enrolled_2010_ibfk_1` FOREIGN KEY (`user_email_2010`) REFERENCES `users` (`user_email`),
+  CONSTRAINT `enrolled_2010_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -280,8 +283,11 @@ CREATE TABLE `enrolled_2011` (
   `user_email_2011` varchar(30) NOT NULL,
   `user_grade_2011` char(1) NOT NULL DEFAULT '-',
   `user_semester_2011` char(6) NOT NULL,
-  PRIMARY KEY (`user_email_2011`),
-  CONSTRAINT `enrolled_2011_ibfk_1` FOREIGN KEY (`user_email_2011`) REFERENCES `users` (`user_email`)
+  `user_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_email_2011`,`user_course_code`),
+  KEY `user_course_code` (`user_course_code`),
+  CONSTRAINT `enrolled_2011_ibfk_1` FOREIGN KEY (`user_email_2011`) REFERENCES `users` (`user_email`),
+  CONSTRAINT `enrolled_2011_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -305,8 +311,11 @@ CREATE TABLE `enrolled_2012` (
   `user_email_2012` varchar(30) NOT NULL,
   `user_grade_2012` char(1) NOT NULL DEFAULT '-',
   `user_semester_2012` char(6) NOT NULL,
-  PRIMARY KEY (`user_email_2012`),
-  CONSTRAINT `enrolled_2012_ibfk_1` FOREIGN KEY (`user_email_2012`) REFERENCES `users` (`user_email`)
+  `user_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_email_2012`,`user_course_code`),
+  KEY `user_course_code` (`user_course_code`),
+  CONSTRAINT `enrolled_2012_ibfk_1` FOREIGN KEY (`user_email_2012`) REFERENCES `users` (`user_email`),
+  CONSTRAINT `enrolled_2012_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -330,8 +339,11 @@ CREATE TABLE `enrolled_2013` (
   `user_email_2013` varchar(30) NOT NULL,
   `user_grade_2013` char(1) NOT NULL DEFAULT '-',
   `user_semester_2013` char(6) NOT NULL,
-  PRIMARY KEY (`user_email_2013`),
-  CONSTRAINT `enrolled_2013_ibfk_1` FOREIGN KEY (`user_email_2013`) REFERENCES `users` (`user_email`)
+  `user_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_email_2013`,`user_course_code`),
+  KEY `user_course_code` (`user_course_code`),
+  CONSTRAINT `enrolled_2013_ibfk_1` FOREIGN KEY (`user_email_2013`) REFERENCES `users` (`user_email`),
+  CONSTRAINT `enrolled_2013_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -355,8 +367,11 @@ CREATE TABLE `enrolled_2014` (
   `user_email_2014` varchar(30) NOT NULL,
   `user_grade_2014` char(1) NOT NULL DEFAULT '-',
   `user_semester_2014` char(6) NOT NULL,
-  PRIMARY KEY (`user_email_2014`),
-  CONSTRAINT `enrolled_2014_ibfk_1` FOREIGN KEY (`user_email_2014`) REFERENCES `users` (`user_email`)
+  `user_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_email_2014`,`user_course_code`),
+  KEY `user_course_code` (`user_course_code`),
+  CONSTRAINT `enrolled_2014_ibfk_1` FOREIGN KEY (`user_email_2014`) REFERENCES `users` (`user_email`),
+  CONSTRAINT `enrolled_2014_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -380,8 +395,11 @@ CREATE TABLE `enrolled_2015` (
   `user_email_2015` varchar(30) NOT NULL,
   `user_grade_2015` char(1) NOT NULL DEFAULT '-',
   `user_semester_2015` char(6) NOT NULL,
-  PRIMARY KEY (`user_email_2015`),
-  CONSTRAINT `enrolled_2015_ibfk_1` FOREIGN KEY (`user_email_2015`) REFERENCES `users` (`user_email`)
+  `user_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_email_2015`,`user_course_code`),
+  KEY `user_course_code` (`user_course_code`),
+  CONSTRAINT `enrolled_2015_ibfk_1` FOREIGN KEY (`user_email_2015`) REFERENCES `users` (`user_email`),
+  CONSTRAINT `enrolled_2015_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -405,8 +423,11 @@ CREATE TABLE `enrolled_2016` (
   `user_email_2016` varchar(30) NOT NULL,
   `user_grade_2016` char(1) NOT NULL DEFAULT '-',
   `user_semester_2016` char(6) NOT NULL,
-  PRIMARY KEY (`user_email_2016`),
-  CONSTRAINT `enrolled_2016_ibfk_1` FOREIGN KEY (`user_email_2016`) REFERENCES `users` (`user_email`)
+  `user_course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_email_2016`,`user_course_code`),
+  KEY `user_course_code` (`user_course_code`),
+  CONSTRAINT `enrolled_2016_ibfk_1` FOREIGN KEY (`user_email_2016`) REFERENCES `users` (`user_email`),
+  CONSTRAINT `enrolled_2016_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -664,4 +685,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-26 15:57:35
+-- Dump completed on 2016-05-27 15:27:04

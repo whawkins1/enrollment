@@ -44,37 +44,72 @@ CREATE FUNCTION getUserSemesterGPA(email VARCHAR(30), semester CHAR(6), year CHA
 RETURNS DECIMAL(10, 2)
 
 BEGIN
-    DECLARE gradeA CHAR(1) DEFAULT 'A';
-    DECLARE gradeB CHAR(1) DEFAULT 'B';
-    DECLARE gradeC CHAR(1) DEFAULT 'C';
-    DECLARE gradeD CHAR(1) DEFAULT 'D';
-    DECLARE gradeF CHAR(1) DEFAULT 'F';
-    DECLARE gpa DECIMAL(10, 2) DEFAULT 0.00; 
+    DECLARE gradeTotal INT(2) DEFAULT 0;
+    DECLARE creditHours INT(2) DEFAULT 0;
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE points INT(2) DEFAULT 0;       
+       
+    IF year = '2010' THEN
+       DECLARE cur CURSOR FOR SELECT enrolled_2010.user_grade_2010, SUM(courses.credits) FROM enrolled_2010 
+                               INNER JOIN courses
+                               ON courses.code = enrolled_2010.user_course_code
+                               WHERE enrolled_2010.user_email = email AND enrolled_2010.user_semester_2010 = semester;
+    ELSEIF year = '2011' THEN
+       DECLARE cur CURSOR FOR SELECT enrolled_2011.user_grade_2011, SUM(courses.credits) FROM enrolled_2011 
+                               INNER JOIN courses
+                               ON courses.code = enrolled_2011.user_course_code
+                               WHERE enrolled_2011.user_email = email AND enrolled_2011.user_semester_2011 = semester;
+    ELSEIF year = '2012' THEN
+       DECLARE cur CURSOR FOR SELECT enrolled_2012.user_grade_2012, SUM(courses.credits) FROM enrolled_2012 
+                               INNER JOIN courses
+                               ON courses.code = enrolled_2012.user_course_code
+                               WHERE enrolled_2012.user_email = email AND enrolled_2012.user_semester_2010 = semester;
+    ELSEIF year = '2012' THEN
+        DECLARE cur CURSOR FOR SELECT enrolled_2012.user_grade_2012, SUM(courses.credits) FROM enrolled_2012 
+                               INNER JOIN courses
+                               ON courses.code = enrolled_2012.user_course_code
+                               WHERE enrolled_2012.user_email = email AND enrolled_2012.user_semester_2012 = semester;
+    ELSEIF year = '2014' THEN
+        DECLARE cur CURSOR FOR SELECT enrolled_2014.user_grade_2014, SUM(courses.credits) FROM enrolled_2014 
+                               INNER JOIN courses
+                               ON courses.code = enrolled_2014.user_course_code
+                               WHERE enrolled_2014.user_email = email AND enrolled_2014.user_semester_2014 = semester;
+    ELSEIF year = '2015' THEN
+        DECLARE cur CURSOR FOR SELECT enrolled_2015.user_grade_2015, SUM(courses.credits) FROM enrolled_2015 
+                               INNER JOIN courses
+                               ON courses.code = enrolled_2015.user_course_code
+                               WHERE enrolled_2015.user_email = email AND enrolled_2015.user_semester_2015 = semester;
+    ELSEIF year = '2016' THEN
+         DECLARE cur CURSOR FOR SELECT enrolled_2016.user_grade_2016, SUM(courses.credits) FROM enrolled_2016 
+                               INNER JOIN courses
+                               ON courses.code = enrolled_2016.user_course_code
+                               WHERE enrolled_2016.user_email = email AND enrolled_2016.user_semester_2016 = semester;
+    END IF;
     
-    DECLARE concatYear CHAR(13) DEFAULT CONCAT('enrolled_', year);
-    DECLARE concatEmail CHAR(14) DEFAULT CONCAT('user_email_', year);
-    DECLARE concatGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
-        
-    DECLARE cur1 CURSOR FOR SELECT concatGrade FROM concatYear WHERE concatEmail = email;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-    OPEN cur1;
+    OPEN cur;
     
     read_loop: LOOP
-       FETCH cur1 INTO grade;
+       FETCH cur INTO grade, creditHours;
     IF done THEN
         LEAVE read_loop;
     END IF;
-    -- ADD GRADES HERE IN IF STATEMENT
-    
+       IF grade == 'A' THEN
+          SET points = 4;
+       ELSEIF grade == 'B' THEN
+          SET points = 3;
+       ELSEIF grade == 'C' THEN
+          SET points = 2
+       ELSEIF grade == 'D' THEN
+          SET points = 1;
+       ELSEIF grade == 'F' THEN
+          SET points = 0;
+       END IF;
+      
+      SET gradeTotal = gradeTotal + points;
     END LOOP;
+    CLOSE cur;
     
-    IF semester = 'fall' THEN
-    
-       
-    ELSEIF semester = 'spring' THEN
-    
-    ELSEIF semenster = 'summer' THEN
-    
-    END IF;
-    
+    -- Return GPA Rounded 2 Decimal Places
+    RETURN ROUND((gradeTotal/creditHours), 2);
 END; //
