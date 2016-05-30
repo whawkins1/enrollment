@@ -8,31 +8,31 @@ BEGIN
       DECLARE years_concat VARCHAR(100) DEFAULT ""; 
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2010 WHERE user_email_2010 = email LIMIT 1) THEN
-           SET years_concat = CONCAT_WS(' ', '2010', years_concat);
+           SET years_concat = CONCAT_WS(',', '2010', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2011 WHERE email_enrolled = email LIMIT 1) THEN 
-          SET years_concat = CONCAT_WS(' ', '2011', years_concat);
+          SET years_concat = CONCAT_WS(',', '2011', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2012 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(' ', '2012', years_concat);
+          SET years_concat = CONCAT_WS(',', '2012', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2013 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(' ', '2013', years_concat);
+          SET years_concat = CONCAT_WS(',', '2013', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2014 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(' ', '2014', years_concat);
+          SET years_concat = CONCAT_WS(',', '2014', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2015 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(' ', '2015', years_concat);
+          SET years_concat = CONCAT_WS(',', '2015', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2016 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(' ', '2016', years_concat);
+          SET years_concat = CONCAT_WS(',', '2016', years_concat);
       END IF;
       
       RETURN years_concat;
@@ -90,10 +90,11 @@ BEGIN
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN cur;
     
-    read_loop: LOOP
+    perform_totaling:
+    LOOP
        FETCH cur INTO grade, credits;
     IF done THEN
-        LEAVE read_loop;
+        LEAVE perform_totaling;
     END IF;
        IF grade == 'A' THEN
           SET points = 4;
@@ -115,28 +116,36 @@ END; //
 
 DROP FUNCTION IF EXISTS getTotalGPA;//
 
-CREATE FUNCTON getTotalGPA(email VARCHAR(30), spaceSeparatedYears VARCHAR(100))
+CREATE FUNCTON getTotalGPA(email VARCHAR(30), stringYears VARCHAR(100))
 RETURNS DECIMAL(10, 2)
    
 BEGIN
   DECLARE strLen    INT DEFAULT 0;
   DECLARE SubStrLen INT DEFAULT 0;
+  DECLARE year CHAR(4) DEFAULT "    ";
 
-  IF spaceSeparatedYears IS NULL THEN
-    SET spaceSeparatedYears = '';
+  IF stringYears IS NULL THEN
+    SET stringYears = '';
   END IF;
 
-do_this:
+perform_totaling:
   LOOP
-    SET strLen = CHAR_LENGTH(spaceSeparatedYears);
+    SET strLen = CHAR_LENGTH(stringYears);
+    SET year = SUBSTRING_INDEX(stringYears, ',', 1);
 
-    UPDATE TestTable SET status = 'C' WHERE Id = SUBSTRING_INDEX(spaceSeparatedYears, ' ', 1);
+    --SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(stringYears, ',', 1)) + 2;
+    SET stringYears = MID(stringYears, 6, strLen);
 
-    SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(spaceSeparatedYears, ',', 1)) + 2;
-    SET spaceseparatedYears = MID(spaceSeparatedYears, SubStrLen, strLen);
-
-    IF spaceSeparatedYears = '' THEN
-      LEAVE do_this;
+    IF stringYears = '' THEN
+      LEAVE perform_totaling;
+    ELSEIF year = '2010' THEN
+       IF SELECT EXISTS(SELECT 1 FROM enrolled_2010 WHERE enrolled_2010.user_email_2010 = email 
+                                                    AND enrolled_2010.user_semester_2010  = 'fall'LIMIT 1) THEN
+                 getSemesterGPA(email, fall, year);
+                 -- SELECT GRADTOTAL AND CREDIT HOURS
+       END IF;
+    
+    
     END IF;
   END LOOP do_this;
 
