@@ -115,36 +115,29 @@ END; //
 
 DROP FUNCTION IF EXISTS getTotalGPA;//
 
-CREATE FUNCTON getTotalGPA(email VARCHAR(30), spaceseparatedYears VARCHAR(100))
+CREATE FUNCTON getTotalGPA(email VARCHAR(30), spaceSeparatedYears VARCHAR(100))
 RETURNS DECIMAL(10, 2)
-   DELIMITER $$
-
-CREATE PROCEDURE procedure1(IN strIDs VARCHAR(255))
+   
 BEGIN
   DECLARE strLen    INT DEFAULT 0;
   DECLARE SubStrLen INT DEFAULT 0;
 
-  IF strIDs IS NULL THEN
-    SET strIDs = '';
+  IF spaceSeparatedYears IS NULL THEN
+    SET spaceSeparatedYears = '';
   END IF;
 
 do_this:
   LOOP
-    SET strLen = CHAR_LENGTH(strIDs);
+    SET strLen = CHAR_LENGTH(spaceSeparatedYears);
 
-    UPDATE TestTable SET status = 'C' WHERE Id = SUBSTRING_INDEX(strIDs, ',', 1);
+    UPDATE TestTable SET status = 'C' WHERE Id = SUBSTRING_INDEX(spaceSeparatedYears, ' ', 1);
 
-    SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(strIDs, ',', 1)) + 2;
-    SET strIDs = MID(strIDs, SubStrLen, strLen);
+    SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(spaceSeparatedYears, ',', 1)) + 2;
+    SET spaceseparatedYears = MID(spaceSeparatedYears, SubStrLen, strLen);
 
-    IF strIDs = '' THEN
+    IF spaceSeparatedYears = '' THEN
       LEAVE do_this;
     END IF;
   END LOOP do_this;
-
-END
-$$
-
-BEGIN
 
 END;//
