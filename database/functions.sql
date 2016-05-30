@@ -8,31 +8,31 @@ BEGIN
       DECLARE years_concat VARCHAR(100) DEFAULT ""; 
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2010 WHERE user_email_2010 = email LIMIT 1) THEN
-           SET years_concat = CONCAT_WS(',', '2010', years_concat);
+           SET years_concat = CONCAT_WS(' ', '2010', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2011 WHERE email_enrolled = email LIMIT 1) THEN 
-          SET years_concat = CONCAT_WS(',', '2011', years_concat);
+          SET years_concat = CONCAT_WS(' ', '2011', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2012 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(',', '2012', years_concat);
+          SET years_concat = CONCAT_WS(' ', '2012', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2013 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(',', '2013', years_concat);
+          SET years_concat = CONCAT_WS(' ', '2013', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2014 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(',', '2014', years_concat);
+          SET years_concat = CONCAT_WS(' ', '2014', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2015 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(',', '2015', years_concat);
+          SET years_concat = CONCAT_WS(' ', '2015', years_concat);
       END IF;
       
       IF SELECT EXISTS(SELECT 1 FROM enrolled_2016 WHERE email_enrolled = email LIMIT 1) THEN
-          SET years_concat = CONCAT_WS(',', '2016', years_concat);
+          SET years_concat = CONCAT_WS(' ', '2016', years_concat);
       END IF;
       
       RETURN years_concat;
@@ -40,8 +40,9 @@ END; //
 
 DROP FUNCTION IF EXISTS getUserSemesterGPA;//
 
-CREATE FUNCTION getUserSemesterGPA(email VARCHAR(30), semester CHAR(6), year CHAR(4))
-RETURNS DECIMAL(10, 2)
+CREATE FUNCTION getUserSemesterGPA(IN email VARCHAR(30), 
+                                   IN semester CHAR(6), 
+                                   IN year CHAR(4))
 
 BEGIN
     DECLARE gradeTotal INT(2) DEFAULT 0;
@@ -90,7 +91,7 @@ BEGIN
     OPEN cur;
     
     read_loop: LOOP
-       FETCH cur INTO grade, creditHours;
+       FETCH cur INTO grade, credits;
     IF done THEN
         LEAVE read_loop;
     END IF;
@@ -108,8 +109,42 @@ BEGIN
       
       SET gradeTotal = gradeTotal + points;
     END LOOP;
+    SET creditHours = credits;
     CLOSE cur;
-    
-    -- Return GPA Rounded 2 Decimal Places
-    RETURN ROUND((gradeTotal/creditHours), 2);
 END; //
+
+DROP FUNCTION IF EXISTS getTotalGPA;//
+
+CREATE FUNCTON getTotalGPA(email VARCHAR(30), spaceseparatedYears VARCHAR(100))
+RETURNS DECIMAL(10, 2)
+   DELIMITER $$
+
+CREATE PROCEDURE procedure1(IN strIDs VARCHAR(255))
+BEGIN
+  DECLARE strLen    INT DEFAULT 0;
+  DECLARE SubStrLen INT DEFAULT 0;
+
+  IF strIDs IS NULL THEN
+    SET strIDs = '';
+  END IF;
+
+do_this:
+  LOOP
+    SET strLen = CHAR_LENGTH(strIDs);
+
+    UPDATE TestTable SET status = 'C' WHERE Id = SUBSTRING_INDEX(strIDs, ',', 1);
+
+    SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(strIDs, ',', 1)) + 2;
+    SET strIDs = MID(strIDs, SubStrLen, strLen);
+
+    IF strIDs = '' THEN
+      LEAVE do_this;
+    END IF;
+  END LOOP do_this;
+
+END
+$$
+
+BEGIN
+
+END;//
