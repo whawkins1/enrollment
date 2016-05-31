@@ -38,11 +38,13 @@ BEGIN
       RETURN years_concat;
 END; //
 
-DROP FUNCTION IF EXISTS getUserSemesterGPA;//
+DROP PROCEDURE IF EXISTS getUserSemesterGPA;//
 
-CREATE FUNCTION getUserSemesterGPA(IN email VARCHAR(30), 
+CREATE PROCEDURE getUserSemesterGPA(IN email VARCHAR(30), 
                                    IN semester CHAR(6), 
-                                   IN year CHAR(4))
+                                   IN year CHAR(4),
+                                   INOUT gradeTotal INT(3),
+                                   INOUT creditHours INT(3)
 
 BEGIN
     DECLARE gradeTotal INT(2) DEFAULT 0;
@@ -93,9 +95,10 @@ BEGIN
     perform_totaling:
     LOOP
        FETCH cur INTO grade, credits;
-    IF done THEN
-        LEAVE perform_totaling;
-    END IF;
+       IF done THEN
+            LEAVE perform_totaling;
+       END IF;
+        
        IF grade == 'A' THEN
           SET points = 4;
        ELSEIF grade == 'B' THEN
@@ -120,9 +123,12 @@ CREATE FUNCTON getTotalGPA(email VARCHAR(30), stringYears VARCHAR(100))
 RETURNS DECIMAL(10, 2)
    
 BEGIN
-  DECLARE strLen    INT DEFAULT 0;
-  DECLARE SubStrLen INT DEFAULT 0;
-  DECLARE year CHAR(4) DEFAULT "    ";
+  DECLARE stringLength  INT DEFAULT 0;
+  --DECLARE subStringLength INT DEFAULT 0;
+  DECLARE year CHAR(4);
+  DECLARE semester VARCHAR(6);
+  DECLARE gradeTotal INT(3) DEFAULT 0;
+  DECLARE creditHours INT(3) DEFAULT 0;  
 
   IF stringYears IS NULL THEN
     SET stringYears = '';
@@ -130,23 +136,119 @@ BEGIN
 
 perform_totaling:
   LOOP
-    SET strLen = CHAR_LENGTH(stringYears);
+    SET stringLength = CHAR_LENGTH(stringYears);
     SET year = SUBSTRING_INDEX(stringYears, ',', 1);
 
     --SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(stringYears, ',', 1)) + 2;
-    SET stringYears = MID(stringYears, 6, strLen);
+    SET stringYears = MID(stringYears, 6, stringLength);
 
     IF stringYears = '' THEN
       LEAVE perform_totaling;
     ELSEIF year = '2010' THEN
-       IF SELECT EXISTS(SELECT 1 FROM enrolled_2010 WHERE enrolled_2010.user_email_2010 = email 
-                                                    AND enrolled_2010.user_semester_2010  = 'fall'LIMIT 1) THEN
-                 getSemesterGPA(email, fall, year);
-                 -- SELECT GRADTOTAL AND CREDIT HOURS
-       END IF;
-    
-    
+       IF SELECT EXISTS(SELECT 1 FROM enrolled_2010 
+                                 WHERE enrolled_2010.user_email_2010 = email 
+                                 AND enrolled_2010.user_semester_2010  = 'fall' LIMIT 1) THEN
+           SET semester = 'fall';                                 
+       ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2010 
+                                 WHERE enrolled_2010.user_email_2010 = email 
+                                 AND enrolled_2010.user_semester_2010  = 'spring' LIMIT 1) THEN
+           SET semester = 'spring';                                 
+       ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2010 
+                                 WHERE enrolled_2010.user_email_2010 = email 
+                                 AND enrolled_2010.user_semester_2010  = 'summer' LIMIT 1) THEN
+           SET semester = 'summer';                                 
+       END IF;   
+    ELSEIF year = '2011' THEN
+           IF SELECT EXISTS(SELECT 1 FROM enrolled_2011
+                                     WHERE enrolled_2011.user_email_2011 = email 
+                                     AND enrolled_2011.user_semester_2011 = 'fall' LIMIT 1) THEN
+               SET semester = 'fall';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2011
+                                     WHERE enrolled_2011.user_email_2011 = email 
+                                     AND enrolled_2011.user_semester_2011  = 'spring' LIMIT 1) THEN
+               SET semester = 'spring';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2011
+                                     WHERE enrolled_2011.user_email_2011 = email 
+                                     AND enrolled_2011.user_semester_2011 = 'summer' LIMIT 1) THEN
+               SET semester = 'summer';                                 
+           END IF;  
+       ELSEIF year = '2012' THEN
+           IF SELECT EXISTS(SELECT 1 FROM enrolled_2012
+                                     WHERE enrolled_2012.user_email_2012 = email 
+                                     AND enrolled_2011.user_semester_2012 = 'fall' LIMIT 1) THEN
+               SET semester = 'fall';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2012
+                                     WHERE enrolled_2012.user_email_2012 = email 
+                                     AND enrolled_2012.user_semester_2012 = 'spring' LIMIT 1) THEN
+               SET semester = 'spring';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2012
+                                     WHERE enrolled_2012.user_email_2012 = email 
+                                     AND enrolled_2012.user_semester_2012 = 'summer' LIMIT 1) THEN
+               SET semester = 'summer';                                 
+           END IF;     
+       ELSEIF year = '2013' THEN
+           IF SELECT EXISTS(SELECT 1 FROM enrolled_2013
+                                     WHERE enrolled_2013.user_email_2013 = email 
+                                     AND enrolled_2013.user_semester_2013  = 'fall' LIMIT 1) THEN
+               SET semester = 'fall';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2013
+                                     WHERE enrolled_2013.user_email_2013 = email 
+                                     AND enrolled_2013.user_semester_2013  = 'spring' LIMIT 1) THEN
+               SET semester = 'spring';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2013
+                                     WHERE enrolled_2013.user_email_2013 = email 
+                                     AND enrolled_2013.user_semester_2013 = 'summer' LIMIT 1) THEN
+               SET semester = 'summer';                                 
+           END IF;
+      ELSEIF year = '2014' THEN
+           IF SELECT EXISTS(SELECT 1 FROM enrolled_2014
+                                     WHERE enrolled_2014.user_email_2014 = email 
+                                     AND enrolled_2014.user_semester_2014  = 'fall' LIMIT 1) THEN
+               SET semester = 'fall';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2014
+                                     WHERE enrolled_2014.user_email_2014 = email 
+                                     AND enrolled_2014.user_semester_2014  = 'spring' LIMIT 1) THEN
+               SET semester = 'spring';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2014
+                                     WHERE enrolled_2014.user_email_2014 = email 
+                                     AND enrolled_2014.user_semester_2014 = 'summer' LIMIT 1) THEN
+               SET semester = 'summer';                                 
+           END IF;
+     ELSEIF year = '2015' THEN
+           IF SELECT EXISTS(SELECT 1 FROM enrolled_2015
+                                     WHERE enrolled_2015.user_email_2015 = email 
+                                     AND enrolled_2015.user_semester_2015  = 'fall' LIMIT 1) THEN
+               SET semester = 'fall';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2015
+                                     WHERE enrolled_2015.user_email_2015 = email 
+                                     AND enrolled_2015.user_semester_2015  = 'spring' LIMIT 1) THEN
+               SET semester = 'spring';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2015
+                                     WHERE enrolled_2015.user_email_2015 = email 
+                                     AND enrolled_2015.user_semester_2015 = 'summer' LIMIT 1) THEN
+               SET semester = 'summer';                                 
+           END IF;
+     ELSEIF year = '2016' THEN
+           IF SELECT EXISTS(SELECT 1 FROM enrolled_2016
+                                     WHERE enrolled_2016.user_email_2016 = email 
+                                     AND enrolled_2016.user_semester_2016  = 'fall' LIMIT 1) THEN
+               SET semester = 'fall';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2016
+                                     WHERE enrolled_2016.user_email_2016 = email 
+                                     AND enrolled_2016.user_semester_2016  = 'spring' LIMIT 1) THEN
+               SET semester = 'spring';                                 
+           ELSEIF SELECT EXISTS(SELECT 1 FROM enrolled_2016
+                                     WHERE enrolled_2016.user_email_2016 = email 
+                                     AND enrolled_2016.user_semester_2016 = 'summer' LIMIT 1) THEN
+               SET semester = 'summer';                                 
+           END IF;
     END IF;
-  END LOOP do_this;
+    CALL getSemesterGPA(email, semester, year, @gradeTotal, @creditHours);
+  END LOOP perform_totaling;
+  
+  SELECT @gradeTotal INTO gradeTotal;
+  SELECT @creditHourse INTO creditHours;
+  
+  RETURN (gradeTotal/creditHours);
 
 END;//
