@@ -1,95 +1,123 @@
-DELIMITER //
+DELIMITER $$
 
-DROP FUNCTION IF EXISTS getYearsAttended;//
+DROP FUNCTION IF EXISTS getYearsAttended$$
 CREATE FUNCTION getYearsAttended (email VARCHAR(30))
 RETURNS VARCHAR(100)
 
 BEGIN
       DECLARE years_concat VARCHAR(100) DEFAULT ""; 
       
-      IF SELECT EXISTS(SELECT 1 FROM enrolled_2010 WHERE user_email_2010 = email LIMIT 1) THEN
+      IF EXISTS(SELECT 1 FROM enrolled_2010 WHERE user_email_2010 = email LIMIT 1) THEN
            SET years_concat = CONCAT_WS(',', '2010', years_concat);
       END IF;
       
-      IF SELECT EXISTS(SELECT 1 FROM enrolled_2011 WHERE email_enrolled = email LIMIT 1) THEN 
+      IF EXISTS(SELECT 1 FROM enrolled_2011 WHERE user_email_2011 = email LIMIT 1) THEN 
           SET years_concat = CONCAT_WS(',', '2011', years_concat);
       END IF;
       
-      IF SELECT EXISTS(SELECT 1 FROM enrolled_2012 WHERE email_enrolled = email LIMIT 1) THEN
+      IF EXISTS(SELECT 1 FROM enrolled_2012 WHERE user_email_2012 = email LIMIT 1) THEN
           SET years_concat = CONCAT_WS(',', '2012', years_concat);
       END IF;
       
-      IF SELECT EXISTS(SELECT 1 FROM enrolled_2013 WHERE email_enrolled = email LIMIT 1) THEN
+      IF EXISTS(SELECT 1 FROM enrolled_2013 WHERE user_email_2013 = email LIMIT 1) THEN
           SET years_concat = CONCAT_WS(',', '2013', years_concat);
       END IF;
       
-      IF SELECT EXISTS(SELECT 1 FROM enrolled_2014 WHERE email_enrolled = email LIMIT 1) THEN
+      IF EXISTS(SELECT 1 FROM enrolled_2014 WHERE user_email_2014 = email LIMIT 1) THEN
           SET years_concat = CONCAT_WS(',', '2014', years_concat);
       END IF;
       
-      IF SELECT EXISTS(SELECT 1 FROM enrolled_2015 WHERE email_enrolled = email LIMIT 1) THEN
+      IF EXISTS(SELECT 1 FROM enrolled_2015 WHERE user_email_2015 = email LIMIT 1) THEN
           SET years_concat = CONCAT_WS(',', '2015', years_concat);
       END IF;
       
-      IF SELECT EXISTS(SELECT 1 FROM enrolled_2016 WHERE email_enrolled = email LIMIT 1) THEN
+      IF EXISTS(SELECT 1 FROM enrolled_2016 WHERE user_email_2016 = email LIMIT 1) THEN
           SET years_concat = CONCAT_WS(',', '2016', years_concat);
       END IF;
       
       RETURN years_concat;
-END; //
+END
 
-DROP PROCEDURE IF EXISTS getUserSemesterGPA;//
+DELIMITER $$
+DROP PROCEDURE IF EXISTS getUserSemesterGPA$$
 
 CREATE PROCEDURE getUserSemesterGPA(IN email VARCHAR(30), 
-                                   IN semester CHAR(6), 
-                                   IN year CHAR(4),
-                                   INOUT gradeTotal INT(3),
-                                   INOUT creditHours INT(3)
+                                    IN semester CHAR(6), 
+                                    IN year CHAR(4),
+                                    INOUT gradeTotal INT(3),
+                                    INOUT creditHours INT(3))
 
 BEGIN
-    DECLARE gradeTotal INT(2) DEFAULT 0;
-    DECLARE creditHours INT(2) DEFAULT 0;
     DECLARE done INT DEFAULT FALSE;
-    DECLARE points INT(2) DEFAULT 0;       
-       
-    IF year = '2010' THEN
-       DECLARE cur CURSOR FOR SELECT enrolled_2010.user_grade_2010, SUM(courses.credits) FROM enrolled_2010 
-                               INNER JOIN courses
-                               ON courses.code = enrolled_2010.user_course_code
-                               WHERE enrolled_2010.user_email = email AND enrolled_2010.user_semester_2010 = semester;
+    DECLARE points INT(2) DEFAULT 0;
+    DECLARE tempGradeTotal, tempCreditHourse INT(3) DEFAULT 0;
+    /*DECLARE curGradesCredits2010 CURSOR FOR SELECT enrolled_2010.user_grade_2010, SUM(courses.credits) FROM enrolled_2010 
+                                        INNER JOIN courses
+                                        ON courses.code = enrolled_2010.user_course_code
+                                        WHERE enrolled_2010.user_email = email AND enrolled_2010.user_semester_2010 = semester;
+
+    DECLARE curGradesCredits2011 CURSOR FOR SELECT enrolled_2011.user_grade_2011, SUM(courses.credits) FROM enrolled_2011 
+                                            INNER JOIN courses
+                                            ON courses.code = enrolled_2011.user_course_code
+                                            WHERE enrolled_2011.user_email = email AND enrolled_2011.user_semester_2011 = semester;
+   
+    DECLARE curGradesCredits2012 CURSOR FOR SELECT enrolled_2012.user_grade_2012, SUM(courses.credits) FROM enrolled_2012 
+                                            INNER JOIN courses
+                                            ON courses.code = enrolled_2012.user_course_code
+                                            WHERE enrolled_2012.user_email = email AND enrolled_2012.user_semester_2010 = semester;
+                                            
+    DECLARE curGradesCredits2013 CURSOR FOR SELECT enrolled_2013.user_grade_2013, SUM(courses.credits) FROM enrolled_2013 
+                                            INNER JOIN courses
+                                            ON courses.code = enrolled_2013.user_course_code
+                                            WHERE enrolled_2013.user_email = email AND enrolled_2013.user_semester_2013 = semester;         
+        
+    DECLARE curGradesCredits2014 CURSOR FOR SELECT enrolled_2014.user_grade_2014, SUM(courses.credits) FROM enrolled_2014 
+                                            INNER JOIN courses
+                                            ON courses.code = enrolled_2014.user_course_code
+                                            WHERE enrolled_2014.user_email = email AND enrolled_2014.user_semester_2014 = semester;    
+   
+    DECLARE curGradesCredits2015 CURSOR FOR SELECT enrolled_2015.user_grade_2015, SUM(courses.credits) FROM enrolled_2015 
+                                            INNER JOIN courses
+                                            ON courses.code = enrolled_2015.user_course_code
+                                            WHERE enrolled_2015.user_email = email AND enrolled_2015.user_semester_2015 = semester;
+                               
+    DECLARE curGradesCredits2016 CURSOR FOR SELECT enrolled_2016.user_grade_2016, SUM(courses.credits) FROM enrolled_2016 
+                                            INNER JOIN courses
+                                            ON courses.code = enrolled_2016.user_course_code
+                                            WHERE enrolled_2016.user_email = email AND enrolled_2016.user_semester_2016 = semester; */                           
+   
+   IF year = '2010' THEN
+                         SELECT SUM(courses.credits), 
+                                   SUM(CASE enrolled_2010.user_grade_2010
+                                        WHEN 'A' THEN 4
+                                        WHEN 'B' THEN 3
+                                        WHEN 'C' THEN 2
+                                        WHEN 'D' THEN 1
+                                        WHEN 'F' THEN 0
+                                   END)                                         
+                          INTO tempCreditHours, tempGradeTotal 
+                          FROM enrolled_2010 
+                          INNER JOIN courses
+                          ON courses.code = enrolled_2010.user_course_code
+                          WHERE enrolled_2010.user_email = email AND enrolled_2010.user_semester_2010 = semester;    
     ELSEIF year = '2011' THEN
-       DECLARE cur CURSOR FOR SELECT enrolled_2011.user_grade_2011, SUM(courses.credits) FROM enrolled_2011 
-                               INNER JOIN courses
-                               ON courses.code = enrolled_2011.user_course_code
-                               WHERE enrolled_2011.user_email = email AND enrolled_2011.user_semester_2011 = semester;
+       
     ELSEIF year = '2012' THEN
-       DECLARE cur CURSOR FOR SELECT enrolled_2012.user_grade_2012, SUM(courses.credits) FROM enrolled_2012 
-                               INNER JOIN courses
-                               ON courses.code = enrolled_2012.user_course_code
-                               WHERE enrolled_2012.user_email = email AND enrolled_2012.user_semester_2010 = semester;
-    ELSEIF year = '2012' THEN
-        DECLARE cur CURSOR FOR SELECT enrolled_2012.user_grade_2012, SUM(courses.credits) FROM enrolled_2012 
-                               INNER JOIN courses
-                               ON courses.code = enrolled_2012.user_course_code
-                               WHERE enrolled_2012.user_email = email AND enrolled_2012.user_semester_2012 = semester;
+       
+    ELSEIF year = '2013' THEN
+        
     ELSEIF year = '2014' THEN
-        DECLARE cur CURSOR FOR SELECT enrolled_2014.user_grade_2014, SUM(courses.credits) FROM enrolled_2014 
-                               INNER JOIN courses
-                               ON courses.code = enrolled_2014.user_course_code
-                               WHERE enrolled_2014.user_email = email AND enrolled_2014.user_semester_2014 = semester;
+        
     ELSEIF year = '2015' THEN
-        DECLARE cur CURSOR FOR SELECT enrolled_2015.user_grade_2015, SUM(courses.credits) FROM enrolled_2015 
-                               INNER JOIN courses
-                               ON courses.code = enrolled_2015.user_course_code
-                               WHERE enrolled_2015.user_email = email AND enrolled_2015.user_semester_2015 = semester;
+        
     ELSEIF year = '2016' THEN
-         DECLARE cur CURSOR FOR SELECT enrolled_2016.user_grade_2016, SUM(courses.credits) FROM enrolled_2016 
-                               INNER JOIN courses
-                               ON courses.code = enrolled_2016.user_course_code
-                               WHERE enrolled_2016.user_email = email AND enrolled_2016.user_semester_2016 = semester;
+         
     END IF;
     
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    SET gradeTotal = gradeTotal + tempGradeTotal;
+    SET creditHours = creditHours + tempCreditHoursCredits;
+    
+    /*DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN cur;
     
     perform_totaling:
@@ -109,15 +137,13 @@ BEGIN
           SET points = 1;
        ELSEIF grade == 'F' THEN
           SET points = 0;
-       END IF;
-      
-      SET gradeTotal = gradeTotal + points;
+       END IF; 
     END LOOP;
-    SET creditHours = credits;
-    CLOSE cur;
-END; //
+    CLOSE cur; */
+END$$
 
-DROP FUNCTION IF EXISTS getTotalGPA;//
+
+DROP FUNCTION IF EXISTS getTotalGPA$$
 
 CREATE FUNCTON getTotalGPA(email VARCHAR(30), stringYears VARCHAR(100))
 RETURNS DECIMAL(10, 2)
@@ -127,8 +153,6 @@ BEGIN
   --DECLARE subStringLength INT DEFAULT 0;
   DECLARE year CHAR(4);
   DECLARE semester VARCHAR(6);
-  DECLARE gradeTotal INT(3) DEFAULT 0;
-  DECLARE creditHours INT(3) DEFAULT 0;  
 
   IF stringYears IS NULL THEN
     SET stringYears = '';
@@ -246,9 +270,6 @@ perform_totaling:
     CALL getSemesterGPA(email, semester, year, @gradeTotal, @creditHours);
   END LOOP perform_totaling;
   
-  SELECT @gradeTotal INTO gradeTotal;
-  SELECT @creditHourse INTO creditHours;
-  
-  RETURN (gradeTotal/creditHours);
+  RETURN (@gradeTotal/@creditHours);
 
-END;//
+END$$
