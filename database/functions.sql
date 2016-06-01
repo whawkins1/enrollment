@@ -51,6 +51,10 @@ BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE points INT(2) DEFAULT 0;
     DECLARE tempGradeTotal, tempCreditHourse INT(3) DEFAULT 0;
+    DECLARE enrolledTable CHAR(13) DEFAULT ('enrolled_', year);
+    DECLARE userGrade CHAR(15) DEFAULT ('user_grade_', year);
+    DECLARE userSemester CHAR(18) DEFAULT ('user_semester_', year);
+    
     /*DECLARE curGradesCredits2010 CURSOR FOR SELECT enrolled_2010.user_grade_2010, SUM(courses.credits) FROM enrolled_2010 
                                         INNER JOIN courses
                                         ON courses.code = enrolled_2010.user_course_code
@@ -86,23 +90,53 @@ BEGIN
                                             ON courses.code = enrolled_2016.user_course_code
                                             WHERE enrolled_2016.user_email = email AND enrolled_2016.user_semester_2016 = semester; */                           
    
-   IF year = '2010' THEN
-                         SELECT SUM(courses.credits), 
-                                   SUM(CASE enrolled_2010.user_grade_2010
-                                        WHEN 'A' THEN 4
-                                        WHEN 'B' THEN 3
-                                        WHEN 'C' THEN 2
-                                        WHEN 'D' THEN 1
-                                        WHEN 'F' THEN 0
-                                   END)                                         
+   SELECT SUM(courses.credits), 
+                                   SUM(CASE userGrade
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
                           INTO tempCreditHours, tempGradeTotal 
-                          FROM enrolled_2010 
+                          FROM enrolledTable 
                           INNER JOIN courses
-                          ON courses.code = enrolled_2010.user_course_code
-                          WHERE enrolled_2010.user_email = email AND enrolled_2010.user_semester_2010 = semester;    
-    ELSEIF year = '2011' THEN
+                          ON courses.code = user_course_code
+                          WHERE userEmail = email AND userSemester = semester;
+                          
+    SET gradeTotal = gradeTotal + tempGradeTotal;
+    SET creditHours = creditHours + tempCreditHoursCredits;
        
-    ELSEIF year = '2012' THEN
+   /*IF year = '2010' THEN
+                             
+    ELSEIF year = '2011' THEN                      
+                         SELECT SUM(courses.credits), 
+                                   SUM(CASE enrolled_2011.user_grade_2011
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
+                          INTO tempCreditHours, tempGradeTotal 
+                          FROM enrolled_2011
+                          INNER JOIN courses
+                          ON courses.code = enrolled_2011.user_course_code
+                          WHERE enrolled_2011.user_email_2011 = email AND enrolled_2011.user_semester_2011 = semester;       
+    ELSEIF year = '2012' THEN                      
+                         SELECT SUM(courses.credits), 
+                                   SUM(CASE enrolled_2012.user_grade_2012
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
+                          INTO tempCreditHours, tempGradeTotal 
+                          FROM enrolled_2012 
+                          INNER JOIN courses
+                          ON courses.code = enrolled_2012.user_course_code
+                          WHERE enrolled_2010.user_email_ = email AND enrolled_2010.user_semester_2010 = semester;
        
     ELSEIF year = '2013' THEN
         
@@ -114,10 +148,8 @@ BEGIN
          
     END IF;
     
-    SET gradeTotal = gradeTotal + tempGradeTotal;
-    SET creditHours = creditHours + tempCreditHoursCredits;
     
-    /*DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN cur;
     
     perform_totaling:
