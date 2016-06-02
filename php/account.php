@@ -234,12 +234,28 @@
       </div>                
       
       <div id="tab-grades" class="tabsjump">
-          <label>GPA</label>
+          <label>Year"</label>          
+          <select id="yeardropdown">
+               <option value='2016'>2016</option>
+               <option value='2015'>2015</option>
+               <option value='2014'>2014</option>
+               <option value='2013'>2013</option>
+               <option value='2012'>2012</option>
+               <option value='2011'>2011</option>
+               <option value='2010'>2010</option>
+          </select>
+          <label>Semester:</label>
+          <select id="semesterdropdown">
+               <option value='fall'>Fall</option>
+               <option value='spring'>Spring</option>
+               <option value='summer'>Summer</option>
+          </select>
+          <label>GPA:</label>
           <label>Semester</label> 
           <label id="semestergpa"></label> 
           <label>Overall</label> 
           <label id="overallgpa"></label>
-          <select id="semesteryeardropdown"></select>
+          
           <table id="tablegrades" class="tablesorter">
               <thead>
                     <tr id="headerRow">
