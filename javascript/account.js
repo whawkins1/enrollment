@@ -519,6 +519,17 @@ $(function() {
     $('#semesterdropdown').on('change', function() {
        var yearSelected = $('#yeardropdown').val();
        var semesterSelected = $(this).val
+       
+       switch (yearSelected) {
+          case 2010:
+             
+          case 2011:
+          case 2012:
+          case 2013:
+          case 2014:
+          case 2015:
+          case 2016:
+       }
     });
     
     $('#yeardropdown option:first').prop('selected', true);
@@ -527,6 +538,7 @@ $(function() {
     var currentMonth = currentDate.getMonth() + 1;
     var semester = "";
     
+    //Set Default Semester Based On Month
     if (currentMonth >= 9 && currentMonth <= 12) {
         semester = 'summer';
     } else if (currentMonth >=1 && currentMonth <=5) {
@@ -540,10 +552,26 @@ $(function() {
     $('#mobilephone').mask("999-999-9999");
 });
 
+function populateGradeTable(year, semester) {
+   $.ajax({
+           type: 'GET',
+           url:
+           data: {
+                    year: year,
+                    semester: semester
+                 },
+           dataType: 'text'
+     })
+     .done( function(data) {
+     })
+     .fail(function jqHXR, textStatus, errorThrown) {
+     });         
+}
+
 function addUpdates() { 
           ajaxCall = $.ajax({
               type: 'POST',
-              url: "../php/updateAccount.php",
+              url: "updateAccount.php",
               data: {
                         firstName: $('#firstname').val(),
                         lastName: $('#lastname').val(),
