@@ -509,15 +509,59 @@ $(function() {
            }
 	}); 
     
+    $('#yeardropdown').on('change', function() {
+         var yearSelected = $(this).val();
+         var semesterSelected = $('#semesterdropdown :selected').val();
+         
+         
+    });
+    
+    $('#semesterdropdown').on('change', function() {
+       var yearSelected = $('#yeardropdown').val();
+       var semesterSelected = $(this).val       
+       
+    });
+    
+    $('#yeardropdown option:first').prop('selected', true);
+    
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth() + 1;
+    var semester = "";
+    
+    //Set Default Semester Based On Month
+    if (currentMonth >= 9 && currentMonth <= 12) {
+        semester = 'summer';
+    } else if (currentMonth >=1 && currentMonth <=5) {
+        semester = 'fall';
+    } else if (currentMonth >=6 && currentMonth <=8) {
+        semester = 'spring';
+    }
+    $('#semesterdropdown').val(semester);
+    
     $('#homephone').mask("999-999-9999");
     $('#mobilephone').mask("999-999-9999");
 });
 
+function populateGradeTable(year, semester) {
+   $.ajax({
+           type: 'GET',
+           url:
+           data: {
+                    year: year,
+                    semester: semester
+                 },
+           dataType: 'text'
+     })
+     .done( function(data) {
+     })
+     .fail(function jqHXR, textStatus, errorThrown) {
+     });         
+}
 
 function addUpdates() { 
           ajaxCall = $.ajax({
               type: 'POST',
-              url: "../php/updateAccount.php",
+              url: "updateAccount.php",
               data: {
                         firstName: $('#firstname').val(),
                         lastName: $('#lastname').val(),

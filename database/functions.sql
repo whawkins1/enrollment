@@ -38,15 +38,8 @@ BEGIN
       RETURN years_concat;
 END
 
-DELIMITER $$
-DROP PROCEDURE IF EXISTS getUserSemesterGPA$$
 
-CREATE PROCEDURE getUserSemesterGPA(IN email VARCHAR(30), 
-                                    IN semester CHAR(6), 
-                                    IN year CHAR(4),
-                                    INOUT gradeTotal INT(3),
-                                    INOUT creditHours INT(3))
-
+<<<<<<< HEAD
 BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE points INT(2) DEFAULT 0;
@@ -55,6 +48,8 @@ BEGIN
     DECLARE userGrade CHAR(15) DEFAULT ('user_grade_', year);
     DECLARE userSemester CHAR(18) DEFAULT ('user_semester_', year);
     
+=======
+>>>>>>> cda9f5b6a5042de758da3504fe0f1dd159b62750
     /*DECLARE curGradesCredits2010 CURSOR FOR SELECT enrolled_2010.user_grade_2010, SUM(courses.credits) FROM enrolled_2010 
                                         INNER JOIN courses
                                         ON courses.code = enrolled_2010.user_course_code
@@ -89,6 +84,7 @@ BEGIN
                                             INNER JOIN courses
                                             ON courses.code = enrolled_2016.user_course_code
                                             WHERE enrolled_2016.user_email = email AND enrolled_2016.user_semester_2016 = semester; */                           
+<<<<<<< HEAD
    
    SELECT SUM(courses.credits), 
                                    SUM(CASE userGrade
@@ -137,17 +133,49 @@ BEGIN
                           INNER JOIN courses
                           ON courses.code = enrolled_2012.user_course_code
                           WHERE enrolled_2010.user_email_ = email AND enrolled_2010.user_semester_2010 = semester;
-       
-    ELSEIF year = '2013' THEN
-        
-    ELSEIF year = '2014' THEN
-        
-    ELSEIF year = '2015' THEN
-        
-    ELSEIF year = '2016' THEN
-         
-    END IF;
+=======
     
+    DELIMITER $$
+       DROP PROCEDURE IF EXISTS getUserSemesterGPA$$
+
+       CREATE PROCEDURE getUserSemesterGPA(IN email VARCHAR(30), 
+                                           IN semester CHAR(6), 
+                                           IN year CHAR(4),
+                                           INOUT gradeTotal INT(3),
+                                           INOUT creditHours INT(3))
+
+    BEGIN
+        DECLARE done INT DEFAULT FALSE;
+        DECLARE tempGradeTotal, tempCreditHours INT(3) DEFAULT 0;                    
+        DECLARE enrolledTable CHAR(13) DEFAULT CONCAT("enrolled_", year);
+        DECLARE enrolledGrade CHAR(15) DEFAULT CONCAT("user_grade_", year);
+        DECLARE enrolledSemester CHAR(16) DEFAULT ("user_semester_", year);        
+        DECLARE enrolledEmail CHAR(14) DEFAULT ("user_email_", year);
+>>>>>>> cda9f5b6a5042de758da3504fe0f1dd159b62750
+       
+       IF year = '2010' THEN
+                             SELECT SUM(courses.credits), 
+                                       SUM(CASE enrolledGrade
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                            WHEN '-' THEN 0
+                                       END)                                         
+                              INTO tempCreditHours, tempGradeTotal 
+                              FROM enrolledTable
+                              INNER JOIN courses
+                              ON courses.code = user_course_code
+                              WHERE enrolledEmail = email AND enrolledSemester = semester;    
+       END IF;
+    
+<<<<<<< HEAD
+=======
+    SET gradeTotal = gradeTotal + tempGradeTotal;
+    SET creditHours = creditHours + tempCreditHoursCredits;
+    END$$
+>>>>>>> cda9f5b6a5042de758da3504fe0f1dd159b62750
     
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN cur;
@@ -172,19 +200,25 @@ BEGIN
        END IF; 
     END LOOP;
     CLOSE cur; */
-END$$
 
 
+-- DECLARE subStringLength INT DEFAULT 0;
+-- SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(stringYears, ',', 1)) + 2;    
+
+DELIMITER $$
 DROP FUNCTION IF EXISTS getTotalGPA$$
 
-CREATE FUNCTON getTotalGPA(email VARCHAR(30), stringYears VARCHAR(100))
+CREATE FUNCTION getTotalGPA(email VARCHAR(30), stringYears VARCHAR(100))
 RETURNS DECIMAL(10, 2)
    
 BEGIN
-  DECLARE stringLength  INT DEFAULT 0;
-  --DECLARE subStringLength INT DEFAULT 0;
+  DECLARE stringLength INT DEFAULT 0;
   DECLARE year CHAR(4);
   DECLARE semester VARCHAR(6);
+  DECLARE enrolledTable CHAR(13) DEFAULT CONCAT("enrolled_", year);
+  DECLARE enrolledGrade CHAR(15) DEFAULT CONCAT("user_grade_", year);
+  DECLARE enrolledSemester CHAR(16) DEFAULT ("user_semester_", year);        
+  DECLARE enrolledEmail CHAR(14) DEFAULT ("user_email_", year);
 
   IF stringYears IS NULL THEN
     SET stringYears = '';
@@ -194,13 +228,37 @@ perform_totaling:
   LOOP
     SET stringLength = CHAR_LENGTH(stringYears);
     SET year = SUBSTRING_INDEX(stringYears, ',', 1);
-
-    --SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(stringYears, ',', 1)) + 2;
     SET stringYears = MID(stringYears, 6, stringLength);
 
     IF stringYears = '' THEN
       LEAVE perform_totaling;
-    ELSEIF year = '2010' THEN
+    ELSE 
+         CASE
+             WHEN EXISTS(SELECT 1 FROM enrolledTable 
+                             WHERE enrolledEmail = email 
+                             AND enrolledSemester = 'fall' LIMIT 1) THEN 
+             SET semester = 'fall';
+         END CASE;    
+         CASE 
+             WHEN EXISTS(SELECT 1 FROM enrolledTable 
+                                 WHERE enrolledEmail = email 
+                                 AND enrolledSemester  = 'spring' LIMIT 1) THEN
+             SET semester = 'spring';         
+         END CASE;   
+         CASE
+             WHEN EXISTS(SELECT 1 FROM enrolledTable 
+                                 WHERE enrolledEmail = email 
+                                 AND enrolledSemester  = 'summer' LIMIT 1) THEN
+             SET semester = 'spring';    
+         END CASE;   
+      CALL getSemesterGPA(email, semester, year, @gradeTotal, @creditHours);
+    END IF;
+   END LOOP perform_totaling;
+ 
+   RETURN (@gradeTotal/@creditHours);
+  END$$
+  
+    /*ELSEIF year = '2010' THEN
        IF SELECT EXISTS(SELECT 1 FROM enrolled_2010 
                                  WHERE enrolled_2010.user_email_2010 = email 
                                  AND enrolled_2010.user_semester_2010  = 'fall' LIMIT 1) THEN
@@ -299,9 +357,5 @@ perform_totaling:
                SET semester = 'summer';                                 
            END IF;
     END IF;
-    CALL getSemesterGPA(email, semester, year, @gradeTotal, @creditHours);
-  END LOOP perform_totaling;
-  
-  RETURN (@gradeTotal/@creditHours);
-
-END$$
+    */
+    
