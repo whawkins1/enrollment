@@ -545,17 +545,48 @@ $(function() {
 function populateGradeTable(year, semester) {
    $.ajax({
            type: 'GET',
-           url:
+           url: "getGradesYearSemester.php";
            data: {
                     year: year,
                     semester: semester
                  },
-           dataType: 'text'
+           dataType: 'html'
      })
      .done( function(data) {
+         ('#tablegrades tbody').remove();
+         ('#tablegrades' tbody).append(data);
      })
      .fail(function jqHXR, textStatus, errorThrown) {
+         alert("Error Retrieving Grades for " + semester + " " + year);
      });         
+}
+
+function setSemesterGPA(year, semester) {
+    $.ajax({
+              type: 'GET',
+              url:
+              data: {
+                        year: year,
+                        semester: semester
+                    },
+              dataType: 'text'
+    })
+    .done(function(data) {
+    })
+    .fail(function jqHXR, textStatus, errorThrown) {
+    });
+}
+
+function setCumulativeGPA() {
+    $.ajax({
+              type: 'GET',
+              url:              
+              dataType: 'text'
+    })
+    .done(function(data) {
+    })
+    .fail(function jqHXR, textStatus, errorThrown) {
+    });
 }
 
 function addUpdates() { 
