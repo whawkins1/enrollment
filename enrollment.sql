@@ -254,7 +254,7 @@ DROP TABLE IF EXISTS `enrolled_2010`;
 CREATE TABLE `enrolled_2010` (
   `user_email_2010` varchar(30) NOT NULL,
   `user_grade_2010` char(1) NOT NULL DEFAULT '-',
-  `user_semester_2016` char(6) NOT NULL,
+  `user_semester_2010` varchar(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
   PRIMARY KEY (`user_email_2010`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
@@ -685,4 +685,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-27 16:14:37
+-- Dump completed on 2016-06-06 16:25:49

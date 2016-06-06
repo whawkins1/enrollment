@@ -40,14 +40,40 @@ END
 
 
 <<<<<<< HEAD
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS getSemesterGPA$$
+CREATE PROCEDURE getSemesterGPA(IN email VARCHAR(30), 
+                                IN semester VARCHAR(6), 
+                                IN year INT(4), 
+                                INOUT gradeTotal INT(3), 
+                                INOUT creditHours INT(3))
+
 BEGIN
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE points INT(2) DEFAULT 0;
-    DECLARE tempGradeTotal, tempCreditHourse INT(3) DEFAULT 0;
+    DECLARE tempGradeTotal INT(3) DEFAULT 0;
+    DECLARE tempCreditHours INT(3) DEFAULT 0;
     DECLARE enrolledTable CHAR(13) DEFAULT ('enrolled_', year);
     DECLARE userGrade CHAR(15) DEFAULT ('user_grade_', year);
     DECLARE userSemester CHAR(18) DEFAULT ('user_semester_', year);
-    
+   
+    SELECT SUM(courses.credits), 
+                                   SUM(CASE userGrade
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
+                          INTO tempCreditHours, tempGradeTotal 
+                          FROM enrolledTable 
+                          INNER JOIN courses
+                          ON courses.code = user_course_code
+                          WHERE userEmail = email AND userSemester = semester;
+                          
+    SET gradeTotal = gradeTotal + tempGradeTotal;
+    SET creditHours = creditHours + tempCreditHoursCredits;
+END$$
+   
 =======
 >>>>>>> cda9f5b6a5042de758da3504fe0f1dd159b62750
     /*DECLARE curGradesCredits2010 CURSOR FOR SELECT enrolled_2010.user_grade_2010, SUM(courses.credits) FROM enrolled_2010 
@@ -86,22 +112,7 @@ BEGIN
                                             WHERE enrolled_2016.user_email = email AND enrolled_2016.user_semester_2016 = semester; */                           
 <<<<<<< HEAD
    
-   SELECT SUM(courses.credits), 
-                                   SUM(CASE userGrade
-                                            WHEN 'A' THEN 4
-                                            WHEN 'B' THEN 3
-                                            WHEN 'C' THEN 2
-                                            WHEN 'D' THEN 1
-                                            WHEN 'F' THEN 0
-                                       END)                                         
-                          INTO tempCreditHours, tempGradeTotal 
-                          FROM enrolledTable 
-                          INNER JOIN courses
-                          ON courses.code = user_course_code
-                          WHERE userEmail = email AND userSemester = semester;
-                          
-    SET gradeTotal = gradeTotal + tempGradeTotal;
-    SET creditHours = creditHours + tempCreditHoursCredits;
+   
        
    /*IF year = '2010' THEN
                              
@@ -219,6 +230,8 @@ BEGIN
   DECLARE enrolledGrade CHAR(15) DEFAULT CONCAT("user_grade_", year);
   DECLARE enrolledSemester CHAR(16) DEFAULT ("user_semester_", year);        
   DECLARE enrolledEmail CHAR(14) DEFAULT ("user_email_", year);
+  DECLARE gradeTotal INT(3) DEFAULT 0;
+  DECLARE creditHours INT(3) DEFAULT 0;
 
   IF stringYears IS NULL THEN
     SET stringYears = '';
@@ -251,11 +264,11 @@ perform_totaling:
                                  AND enrolledSemester  = 'summer' LIMIT 1) THEN
              SET semester = 'spring';    
          END CASE;   
-      CALL getSemesterGPA(email, semester, year, @gradeTotal, @creditHours);
+      CALL getSemesterGPA(email, semester, year, gradeTotal, creditHours);
     END IF;
    END LOOP perform_totaling;
  
-   RETURN (@gradeTotal/@creditHours);
+   RETURN (gradeTotal/creditHours);
   END$$
   
     /*ELSEIF year = '2010' THEN
