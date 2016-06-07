@@ -3,13 +3,14 @@
 <?php
     include("config.php");
 
+     $cumulativeGPA = 0;
      $email = $_GET['email'];
      $year = $_GET['year'];
      $semester = $_GET['semester'];
         
-     if (    (isset($year) && $year != "") 
-          && ( isset($semester) && $semester != "")
-          && ( isset($email) && $email !="") ) {
+     if ( (isset($year) && $year != "") &&
+          ( isset($semester) && $semester != "") &&
+          ( isset($email) && $email !="") ) {
         session_start();
         $callYearsAttended = $conn->prepare("CALL getYearsAttended(?)");
         $callYearsAttended->bind_param('s', $_GET['email']);
@@ -24,4 +25,5 @@
         $result = call->fetch();
         $cumulativeGPA = $result[//column name not sure        
      }         
+     return $cumulativeGPA;     
 ?>

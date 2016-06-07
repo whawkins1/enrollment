@@ -252,9 +252,9 @@
           </select>
           <label>GPA:</label>
           <label>Semester</label> 
-          <label id="semestergpa"></label> 
-          <label>Overall</label> 
-          <label id="overallgpa"></label>
+          <label id="semestergpalabel"></label> 
+          <label>Cumulative</label> 
+          <label id="cumulativegpalabel"></label>
           
           <table id="tablegrades" class="tablesorter">
               <thead>

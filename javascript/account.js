@@ -564,7 +564,7 @@ function populateGradeTable(year, semester) {
 function setSemesterGPA(year, semester) {
     $.ajax({
               type: 'GET',
-              url:
+              url: "getSemesterGPA.php";
               data: {
                         year: year,
                         semester: semester
@@ -572,20 +572,24 @@ function setSemesterGPA(year, semester) {
               dataType: 'text'
     })
     .done(function(data) {
+        $('#semestergpalabel').text(data);
     })
     .fail(function jqHXR, textStatus, errorThrown) {
+        $('#semestergpalabel').text("error");
     });
 }
 
 function setCumulativeGPA() {
     $.ajax({
               type: 'GET',
-              url:              
+              url: "getCumulativeGPA.php";             
               dataType: 'text'
     })
     .done(function(data) {
+        $('#cumulativegpalabel').text(data);
     })
     .fail(function jqHXR, textStatus, errorThrown) {
+        $('#cumulativegpalabel').text("Error");
     });
 }
 
