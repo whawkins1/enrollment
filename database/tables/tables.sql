@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS enrolled_2010 (
   user_grade_2010 CHAR(1) NOT NULL DEFAULT "-",
   user_course_code VARCHAR(10) NOT NULL,
   user_semester_2010 CHAR(6) NOT NULL  
-  PRIMARY KEY(user_email_2010, user_course_code),
+  PRIMARY KEY(user_email_2010, user_course_code, user_semester_2010),
   FOREIGN KEY(user_email_2010) 
       REFERENCES users(user_email),
   FOREIGN KEY(user_course_code)
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS enrolled_2011 (
   user_grade_2011 CHAR(1) DEFAULT "-",
   user_course_code VARCHAR(10) NOT NULL,
   user_semester_2011 CHAR(6) NOT NULL
-  PRIMARY KEY (user_email_2011),
+  PRIMARY KEY (user_email_2011, user_course_code, user_semester_2011),
   FOREIGN KEY(user_email_2011)
       REFERENCES users(user_email),
   FOREIGN KEY(user_course_code)
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS enrolled_2012 (
   user_grade_2012 CHAR(1) NOT NULL,
   user_semester_2012 CHAR(6) NOT NULL,
   user_coure_code VARCHAR(10) NOT NULL  
-  PRIMARY KEY (user_email_2012),
+  PRIMARY KEY (user_email_2012, user_course_code, user_semester_2012),
   FOREIGN KEY(user_email_2012)
       REFERENCES users(user_email),
   FOREIGN KEY(user_course_code)
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS enrolled_2013 (
   user_grade_2013 CHAR(1) NOT NULL,
   user_semester_2013 CHAR(6) NOT NULL,
   user_course_code VARCHAR(10) NOT NULL
-  PRIMARY KEY (user_email_2013),
+  PRIMARY KEY (user_email_2013, user_course_code, user_semester_2013),
   FOREIGN KEY(user_email_2013)
       REFERENCES users(user_email),
   FOREIGN KEY(user_course_code)
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS enrolled_2014 (
   user_grade_2014 CHAR(1) NOT NULL,
   user_semester_2014 CHAR(6) NOT NULL,
   user_course_code VARCHAR(10) NOT NULL
-  PRIMARY KEY (user_email_2014),
+  PRIMARY KEY (user_email_2014, user_course_code, user_semester_2014),
   FOREIGN KEY(user_email_2014)
       REFERENCES users(user_email),
   FOREIGN KEY(user_course_code)
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS enrolled_2015 (
   user_grade_2015 CHAR(1) NOT NULL,
   user_semester_2015 CHAR(6) NOT NULL,
   user_course_code VARCHAR(10) NOT NULL
-  PRIMARY KEY (user_email_2015),
+  PRIMARY KEY (user_email_2015, user_course_code, user_semester_2015),
   FOREIGN KEY(user_email_2015)
       REFERENCES users(user_email),
   FOREIGN KEY(user_course_code)
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS enrolled_2016 (
   user_grade_2016 CHAR(1) NOT NULL,
   user_semester_2016 CHAR(6) NOT NULL,
   user_course_code VARCHAR(10) NOT NULL
-  PRIMARY KEY (user_email_2016),
+  PRIMARY KEY (user_email_2016, user_course_code, user_semester_2016),
   FOREIGN KEY(user_email_2016)
       REFERENCES users(user_email),
   FOREIGN KEY(user_course_code)

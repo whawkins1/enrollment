@@ -24,7 +24,92 @@ INSERT INTO users
      user_address, user_home_phone, user_mobile_phone,
      user_postal_code)
 VALUES
-    ("johnboy@gmai.com", "john", "Boy", "f34f3f3f43f", "United States",
+    ("johnboy@gmail.com", "john", "Boy", "f34f3f3f43f", "United States",
       "New York", "New York", "Business", "123 Avenue",
       "3045862949", "3993939396", 34585
     );
+    
+ -- -----------------------------------------------------
+-- Insert users
+-- ------------------------------------------------------
+INSERT INTO enrolled_2010
+    (user_email_2010, user_grade_2010, user_semester_2010, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
+    
+ -- -----------------------------------------------------
+-- Insert users
+-- ------------------------------------------------------
+INSERT INTO enrolled_2011
+    (user_email_2011, user_grade_2011, user_semester_2011, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
+    
+ -- -----------------------------------------------------
+-- Insert users
+-- ------------------------------------------------------
+INSERT INTO enrolled_2012
+    (user_email_2012, user_grade_2012, user_semester_2012, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
+    
+ -- -----------------------------------------------------
+-- Insert users
+-- ------------------------------------------------------
+INSERT INTO enrolled_2013
+    (user_email_2013, user_grade_2013, user_semester_2013, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
+    
+ -- -----------------------------------------------------
+-- Insert users
+-- ------------------------------------------------------
+INSERT INTO enrolled_2014
+    (user_email_2014, user_grade_2014, user_semester_2014, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
+    
+ -- -----------------------------------------------------
+-- Insert users
+-- ------------------------------------------------------
+INSERT INTO enrolled_2015
+    (user_email_2015, user_grade_2015, user_semester_2015, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
+    
+ -- -----------------------------------------------------
+-- Insert users
+-- ------------------------------------------------------
+INSERT INTO enrolled_2016
+    (user_email_2016, user_grade_2016, user_semester_2016, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
+    
