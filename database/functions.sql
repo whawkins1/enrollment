@@ -34,6 +34,8 @@ BEGIN
       IF EXISTS(SELECT 1 FROM enrolled_2016 WHERE user_email_2016 = email LIMIT 1) THEN
           SET years_concat = CONCAT_WS(',', '2016', years_concat);
       END IF;
+         
+      SET years_concat = TRIM(TRAILING ',' FROM years_concat);
       
       RETURN years_concat;
 END
@@ -52,9 +54,9 @@ CREATE PROCEDURE getSemesterGPA(IN email VARCHAR(30),
 BEGIN
     DECLARE tempGradeTotal INT(3) DEFAULT 0;
     DECLARE tempCreditHours INT(3) DEFAULT 0;
-    DECLARE enrolledTable CHAR(13) DEFAULT ('enrolled_', year);
-    DECLARE userGrade CHAR(15) DEFAULT ('user_grade_', year);
-    DECLARE userSemester CHAR(18) DEFAULT ('user_semester_', year);
+    DECLARE enrolledTable CHAR(13) DEFAULT CONCAT('enrolled_', year);
+    DECLARE userGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
+    DECLARE userSemester CHAR(18) DEFAULT CONCAT('user_semester_', year);
    
     SELECT SUM(courses.credits), 
                                    SUM(CASE userGrade

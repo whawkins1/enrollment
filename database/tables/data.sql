@@ -29,8 +29,8 @@ VALUES
       "3045862949", "3993939396", 34585
     );
     
- -- -----------------------------------------------------
--- Insert users
+-- -----------------------------------------------------
+-- Insert enrolled_2010
 -- ------------------------------------------------------
 INSERT INTO enrolled_2010
     (user_email_2010, user_grade_2010, user_semester_2010, user_course_code)
@@ -41,8 +41,8 @@ VALUES
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
     
- -- -----------------------------------------------------
--- Insert users
+-- -----------------------------------------------------
+-- Insert enrolled_2011
 -- ------------------------------------------------------
 INSERT INTO enrolled_2011
     (user_email_2011, user_grade_2011, user_semester_2011, user_course_code)
@@ -53,8 +53,8 @@ VALUES
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
     
- -- -----------------------------------------------------
--- Insert users
+-- -----------------------------------------------------
+-- Insert enrolled_2012
 -- ------------------------------------------------------
 INSERT INTO enrolled_2012
     (user_email_2012, user_grade_2012, user_semester_2012, user_course_code)
@@ -65,8 +65,8 @@ VALUES
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
     
- -- -----------------------------------------------------
--- Insert users
+-- -----------------------------------------------------
+-- Insert enrolled_2013
 -- ------------------------------------------------------
 INSERT INTO enrolled_2013
     (user_email_2013, user_grade_2013, user_semester_2013, user_course_code)
@@ -77,8 +77,8 @@ VALUES
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
     
- -- -----------------------------------------------------
--- Insert users
+-- -----------------------------------------------------
+-- Insert enrolled_2014
 -- ------------------------------------------------------
 INSERT INTO enrolled_2014
     (user_email_2014, user_grade_2014, user_semester_2014, user_course_code)
@@ -89,8 +89,8 @@ VALUES
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
     
- -- -----------------------------------------------------
--- Insert users
+-- -----------------------------------------------------
+-- Insert enrolled_2015
 -- ------------------------------------------------------
 INSERT INTO enrolled_2015
     (user_email_2015, user_grade_2015, user_semester_2015, user_course_code)
@@ -101,8 +101,8 @@ VALUES
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
     
- -- -----------------------------------------------------
--- Insert users
+-- -----------------------------------------------------
+-- Insert enrolled_2016
 -- ------------------------------------------------------
 INSERT INTO enrolled_2016
     (user_email_2016, user_grade_2016, user_semester_2016, user_course_code)
