@@ -40,9 +40,6 @@ BEGIN
       RETURN years_concat;
 END
 
-
-<<<<<<< HEAD
-
 DELIMITER $$
 DROP PROCEDURE IF EXISTS getSemesterGPA$$
 CREATE PROCEDURE getSemesterGPA(IN email VARCHAR(30), 
@@ -52,32 +49,40 @@ CREATE PROCEDURE getSemesterGPA(IN email VARCHAR(30),
                                 INOUT creditHours INT(3))
 
 BEGIN
-    DECLARE tempGradeTotal INT(3) DEFAULT 0;
-    DECLARE tempCreditHours INT(3) DEFAULT 0;
-    DECLARE enrolledTable CHAR(13) DEFAULT CONCAT('enrolled_', year);
-    DECLARE userGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
-    DECLARE userSemester CHAR(18) DEFAULT CONCAT('user_semester_', year);
-   
-    SELECT SUM(courses.credits), 
-                                   SUM(CASE userGrade
+    SET @tempGradeTotal = 0;
+    SET @tempCreditHours = 0;
+    SET @enrolledTable = CONCAT('enrolled_', year);
+    SET @userGrade = CONCAT('user_grade_', year);
+    SET @userSemester = CONCAT('user_semester_', year);
+    SET @userEmail = CONCAT('user_email_', year);
+    SET @email = email;
+    SET @semester = semester;
+    
+    
+    SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
+                                   SUM(CASE ",@userGrade,"
                                             WHEN 'A' THEN 4
                                             WHEN 'B' THEN 3
                                             WHEN 'C' THEN 2
                                             WHEN 'D' THEN 1
                                             WHEN 'F' THEN 0
                                        END)                                         
-                          INTO tempCreditHours, tempGradeTotal 
-                          FROM enrolledTable 
+                          INTO @tempCreditHours, @tempGradeTotal 
+                          FROM ", @enrolledTable, " 
                           INNER JOIN courses
                           ON courses.code = user_course_code
-                          WHERE userEmail = email AND userSemester = semester;
+                          WHERE ", @userEmail, " = '",@email,"' AND ",@userSemester," = '",@semester, "'");
+    
+    PREPARE stmt FROM @sqlText;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;    
                           
-    SET gradeTotal = gradeTotal + tempGradeTotal;
-    SET creditHours = creditHours + tempCreditHoursCredits;
+    SET gradeTotal = gradeTotal + @tempGradeTotal;
+    SET creditHours = creditHours + @tempCreditHours;
 END$$
+delimiter ;
    
-=======
->>>>>>> cda9f5b6a5042de758da3504fe0f1dd159b62750
+
     /*DECLARE curGradesCredits2010 CURSOR FOR SELECT enrolled_2010.user_grade_2010, SUM(courses.credits) FROM enrolled_2010 
                                         INNER JOIN courses
                                         ON courses.code = enrolled_2010.user_course_code
