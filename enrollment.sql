@@ -256,7 +256,7 @@ CREATE TABLE `enrolled_2010` (
   `user_grade_2010` char(1) NOT NULL DEFAULT '-',
   `user_semester_2010` varchar(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`user_email_2010`,`user_course_code`),
+  PRIMARY KEY (`user_email_2010`,`user_semester_2010`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
   CONSTRAINT `enrolled_2010_ibfk_1` FOREIGN KEY (`user_email_2010`) REFERENCES `users` (`user_email`),
   CONSTRAINT `enrolled_2010_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
@@ -269,6 +269,7 @@ CREATE TABLE `enrolled_2010` (
 
 LOCK TABLES `enrolled_2010` WRITE;
 /*!40000 ALTER TABLE `enrolled_2010` DISABLE KEYS */;
+INSERT INTO `enrolled_2010` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2010` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +285,7 @@ CREATE TABLE `enrolled_2011` (
   `user_grade_2011` char(1) NOT NULL DEFAULT '-',
   `user_semester_2011` char(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`user_email_2011`,`user_course_code`),
+  PRIMARY KEY (`user_email_2011`,`user_semester_2011`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
   CONSTRAINT `enrolled_2011_ibfk_1` FOREIGN KEY (`user_email_2011`) REFERENCES `users` (`user_email`),
   CONSTRAINT `enrolled_2011_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
@@ -297,6 +298,7 @@ CREATE TABLE `enrolled_2011` (
 
 LOCK TABLES `enrolled_2011` WRITE;
 /*!40000 ALTER TABLE `enrolled_2011` DISABLE KEYS */;
+INSERT INTO `enrolled_2011` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2011` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +314,7 @@ CREATE TABLE `enrolled_2012` (
   `user_grade_2012` char(1) NOT NULL DEFAULT '-',
   `user_semester_2012` char(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`user_email_2012`,`user_course_code`),
+  PRIMARY KEY (`user_email_2012`,`user_semester_2012`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
   CONSTRAINT `enrolled_2012_ibfk_1` FOREIGN KEY (`user_email_2012`) REFERENCES `users` (`user_email`),
   CONSTRAINT `enrolled_2012_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
@@ -325,6 +327,7 @@ CREATE TABLE `enrolled_2012` (
 
 LOCK TABLES `enrolled_2012` WRITE;
 /*!40000 ALTER TABLE `enrolled_2012` DISABLE KEYS */;
+INSERT INTO `enrolled_2012` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2012` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,7 +343,7 @@ CREATE TABLE `enrolled_2013` (
   `user_grade_2013` char(1) NOT NULL DEFAULT '-',
   `user_semester_2013` char(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`user_email_2013`,`user_course_code`),
+  PRIMARY KEY (`user_email_2013`,`user_semester_2013`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
   CONSTRAINT `enrolled_2013_ibfk_1` FOREIGN KEY (`user_email_2013`) REFERENCES `users` (`user_email`),
   CONSTRAINT `enrolled_2013_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
@@ -353,6 +356,7 @@ CREATE TABLE `enrolled_2013` (
 
 LOCK TABLES `enrolled_2013` WRITE;
 /*!40000 ALTER TABLE `enrolled_2013` DISABLE KEYS */;
+INSERT INTO `enrolled_2013` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2013` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,7 +372,7 @@ CREATE TABLE `enrolled_2014` (
   `user_grade_2014` char(1) NOT NULL DEFAULT '-',
   `user_semester_2014` char(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`user_email_2014`,`user_course_code`),
+  PRIMARY KEY (`user_email_2014`,`user_semester_2014`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
   CONSTRAINT `enrolled_2014_ibfk_1` FOREIGN KEY (`user_email_2014`) REFERENCES `users` (`user_email`),
   CONSTRAINT `enrolled_2014_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
@@ -381,6 +385,7 @@ CREATE TABLE `enrolled_2014` (
 
 LOCK TABLES `enrolled_2014` WRITE;
 /*!40000 ALTER TABLE `enrolled_2014` DISABLE KEYS */;
+INSERT INTO `enrolled_2014` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2014` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,7 +401,7 @@ CREATE TABLE `enrolled_2015` (
   `user_grade_2015` char(1) NOT NULL DEFAULT '-',
   `user_semester_2015` char(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`user_email_2015`,`user_course_code`),
+  PRIMARY KEY (`user_email_2015`,`user_semester_2015`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
   CONSTRAINT `enrolled_2015_ibfk_1` FOREIGN KEY (`user_email_2015`) REFERENCES `users` (`user_email`),
   CONSTRAINT `enrolled_2015_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
@@ -409,6 +414,7 @@ CREATE TABLE `enrolled_2015` (
 
 LOCK TABLES `enrolled_2015` WRITE;
 /*!40000 ALTER TABLE `enrolled_2015` DISABLE KEYS */;
+INSERT INTO `enrolled_2015` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2015` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,7 +430,7 @@ CREATE TABLE `enrolled_2016` (
   `user_grade_2016` char(1) NOT NULL DEFAULT '-',
   `user_semester_2016` char(6) NOT NULL,
   `user_course_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`user_email_2016`,`user_course_code`),
+  PRIMARY KEY (`user_email_2016`,`user_semester_2016`,`user_course_code`),
   KEY `user_course_code` (`user_course_code`),
   CONSTRAINT `enrolled_2016_ibfk_1` FOREIGN KEY (`user_email_2016`) REFERENCES `users` (`user_email`),
   CONSTRAINT `enrolled_2016_ibfk_2` FOREIGN KEY (`user_course_code`) REFERENCES `courses` (`code`)
@@ -437,6 +443,7 @@ CREATE TABLE `enrolled_2016` (
 
 LOCK TABLES `enrolled_2016` WRITE;
 /*!40000 ALTER TABLE `enrolled_2016` DISABLE KEYS */;
+INSERT INTO `enrolled_2016` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2016` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -685,4 +692,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-06 16:25:49
+-- Dump completed on 2016-06-11 17:00:43
