@@ -38,7 +38,7 @@ BEGIN
       SET years_concat = TRIM(TRAILING ',' FROM years_concat);
       
       RETURN years_concat;
-END
+END $$
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS getSemesterGPA$$
@@ -49,36 +49,33 @@ CREATE PROCEDURE getSemesterGPA(IN email VARCHAR(30),
                                 INOUT creditHours INT(3))
 
 BEGIN
+    DECLARE enrolledTable CHAR(13) DEFAULT CONCAT('enrolled_', year);
+    DECLARE userGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
+    DECLARE userSemester CHAR(18) DEFAULT CONCAT('user_semester_', year);
+    DECLARE userEmail CHAR(15) DEFAULT CONCAT('user_email_', year);
     SET @tempGradeTotal = 0;
-    SET @tempCreditHours = 0;
-    SET @enrolledTable = CONCAT('enrolled_', year);
-    SET @userGrade = CONCAT('user_grade_', year);
-    SET @userSemester = CONCAT('user_semester_', year);
-    SET @userEmail = CONCAT('user_email_', year);
-    SET @email = email;
-    SET @semester = semester;
-    
+    SET @tempCreditHour = 0;
     
     SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
-                                   SUM(CASE ",@userGrade,"
+                                   SUM(CASE ",userGrade,"
                                             WHEN 'A' THEN 4
                                             WHEN 'B' THEN 3
                                             WHEN 'C' THEN 2
                                             WHEN 'D' THEN 1
                                             WHEN 'F' THEN 0
                                        END)                                         
-                          INTO @tempCreditHours, @tempGradeTotal 
-                          FROM ", @enrolledTable, " 
+                          INTO @tempCreditHour, @tempGradeTotal 
+                          FROM ", enrolledTable, " 
                           INNER JOIN courses
                           ON courses.code = user_course_code
-                          WHERE ", @userEmail, " = '",@email,"' AND ",@userSemester," = '",@semester, "'");
+                          WHERE ", userEmail, " = '",email,"' AND ",userSemester," = '",semester, "'");
     
     PREPARE stmt FROM @sqlText;
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;    
                           
     SET gradeTotal = gradeTotal + @tempGradeTotal;
-    SET creditHours = creditHours + @tempCreditHours;
+    SET creditHours = creditHours + @tempCreditHour;
 END$$
 delimiter ;
    
