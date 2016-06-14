@@ -3,6 +3,7 @@ DELIMITER $$
 DROP FUNCTION IF EXISTS getYearsAttended$$
 CREATE FUNCTION getYearsAttended (email VARCHAR(30))
 RETURNS VARCHAR(100)
+DETERMINISTIC
 
 BEGIN
       DECLARE years_concat VARCHAR(100) DEFAULT ""; 
@@ -40,12 +41,13 @@ BEGIN
       RETURN years_concat;
 END $$
 
-DELIMITER $$
-DROP FUNCTION IF EXISTS getSemesterGPA$$
-CREATE FUNCTION getSemesterGPA(IN email VARCHAR(30), 
-                               IN semester VARCHAR(6), 
-                               IN year INT(4))
-RETURNS DECIMAL(10, 2)
+
+DROP PROCEDURE IF EXISTS getSemesterGPA$$
+CREATE PROCEDURE getSemesterGPA(IN email VARCHAR(30),
+                                IN semester VARCHAR(6), 
+                                IN year INT(4),
+                                OUT semesterGPA DECIMAL(10, 2))
+DETERMINISTIC
 
 BEGIN
     DECLARE enrolledTable CHAR(13) DEFAULT CONCAT('enrolled_', year);
@@ -72,19 +74,20 @@ BEGIN
     PREPARE stmt FROM @sqlText;
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;    
-                          
-    RETURN (@gradeTotal / @creditHours)
+    
+    SELECT (@gradeTotal * @creditHours / @creditHours) INTO semesterGPA;
  END$$
-delimiter ;    
+
 
 -- DECLARE subStringLength INT DEFAULT 0;
 -- SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(stringYears, ',', 1)) + 2;    
 
 DELIMITER $$
-DROP FUNCTION IF EXISTS getTotalGPA$$
+DROP PROCEDURE IF EXISTS getCumulativeGPA$$
 
-CREATE FUNCTION getTotalGPA(email VARCHAR(30), stringYears VARCHAR(100))
-RETURNS DECIMAL(10, 2)
+CREATE PROCEDURE getCumulativeGPA(IN email VARCHAR(30),
+                             OUT cumulativeGPA DECIMAL(10, 2))
+DETERMINISTIC
    
 BEGIN
   DECLARE stringLength INT DEFAULT 0;
@@ -95,26 +98,48 @@ BEGIN
   DECLARE enrolledEmail CHAR(15) DEFAULT ("user_email_", year);
   DECLARE gradeTotal INT(3) DEFAULT 0;
   DECLARE creditHours INT(3) DEFAULT 0;
-
-  IF stringYears IS NULL THEN
-    SET stringYears = '';
+  DECLARE yearsAttended VARCHAR(100) DEFAULT getYearsAttended(email);
+  SET @tempGradeTotal = 0;
+  SET @tempCreditHours = 0;
+  
+  IF yearsAttended IS NULL THEN
+    SET yearsAttended = '';
   END IF;
 
 perform_totaling:
   LOOP
-    SET stringLength = CHAR_LENGTH(stringYears);
-    SET year = SUBSTRING_INDEX(stringYears, ',', 1);
-    SET stringYears = MID(stringYears, 6, stringLength);
+        SET stringLength = CHAR_LENGTH(yearsAttended);
+        SET year = SUBSTRING_INDEX(yearsAttended, ',', 1);
+        SET yearsAttended = MID(yearsAttended, 6, stringLength);
 
-    IF stringYears = '' THEN
-      LEAVE perform_totaling;
-    ELSE 
-        
-      CALL getSemesterGPA(email, semester, year, gradeTotal, creditHours);
-    END IF;
+        IF yearsAttended = '' THEN
+          LEAVE perform_totaling;
+        ELSE 
+           SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
+                                   SUM(CASE ",enrolledGrade,"
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
+                          INTO @tempCreditHours, @tempGradeTotal 
+                          FROM ", enrolledTable, " 
+                          INNER JOIN courses
+                          ON courses.code = user_course_code
+                          WHERE ", enrolledEmail, " = '",email,"'");
+    
+            PREPARE stmt FROM @sqlText;
+            EXECUTE stmt;
+            DEALLOCATE PREPARE stmt;
+          
+          SET gradeTotal = (gradeTotal + @tempGradeTotal);
+          SET creditHours = (creditHours + @tempCreditHours);
+        END IF;
    END LOOP perform_totaling;
  
-   RETURN (gradeTotal/creditHours);
+   SELECT ((gradeTotal * creditHours) / creditHours) INTO cumulativeGPA;
   END$$
+  DELIMITER ;
   
         
