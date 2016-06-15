@@ -1,5 +1,3 @@
-DELIMITER $$
-
 DROP FUNCTION IF EXISTS getYearsAttended$$
 CREATE FUNCTION getYearsAttended (email VARCHAR(30))
 RETURNS VARCHAR(100)
@@ -41,7 +39,6 @@ BEGIN
       RETURN years_concat;
 END $$
 
-
 DROP PROCEDURE IF EXISTS getSemesterGPA$$
 CREATE PROCEDURE getSemesterGPA(IN email VARCHAR(30),
                                 IN semester VARCHAR(6), 
@@ -82,20 +79,17 @@ BEGIN
 -- DECLARE subStringLength INT DEFAULT 0;
 -- SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(stringYears, ',', 1)) + 2;    
 
-DELIMITER $$
 DROP PROCEDURE IF EXISTS getCumulativeGPA$$
-
 CREATE PROCEDURE getCumulativeGPA(IN email VARCHAR(30),
-                             OUT cumulativeGPA DECIMAL(10, 2))
+                                  OUT cumulativeGPA DECIMAL(10, 2))
 DETERMINISTIC
    
 BEGIN
   DECLARE stringLength INT DEFAULT 0;
   DECLARE year CHAR(4);
-  DECLARE enrolledTable CHAR(13) DEFAULT CONCAT("enrolled_", year);
-  DECLARE enrolledGrade CHAR(15) DEFAULT CONCAT("user_grade_", year);
-  DECLARE enrolledSemester CHAR(18) DEFAULT ("user_semester_", year);        
-  DECLARE enrolledEmail CHAR(15) DEFAULT ("user_email_", year);
+  DECLARE enrolledTable CHAR(13);
+  DECLARE enrolledGrade CHAR(15);
+  DECLARE enrolledEmail CHAR(15);
   DECLARE gradeTotal INT(3) DEFAULT 0;
   DECLARE creditHours INT(3) DEFAULT 0;
   DECLARE yearsAttended VARCHAR(100) DEFAULT getYearsAttended(email);
@@ -110,6 +104,9 @@ perform_totaling:
   LOOP
         SET stringLength = CHAR_LENGTH(yearsAttended);
         SET year = SUBSTRING_INDEX(yearsAttended, ',', 1);
+        SET enrolledTable = CONCAT("enrolled_", year);
+        SET enrolledGrade = CONCAT("user_grade_", year);
+        SET enrolledEmail = CONCAT("user_email_", year);
         SET yearsAttended = MID(yearsAttended, 6, stringLength);
 
         IF yearsAttended = '' THEN
@@ -139,7 +136,4 @@ perform_totaling:
    END LOOP perform_totaling;
  
    SELECT ((gradeTotal * creditHours) / creditHours) INTO cumulativeGPA;
-  END$$
-  DELIMITER ;
-  
-        
+  END$$  
