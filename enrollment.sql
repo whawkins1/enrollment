@@ -682,6 +682,311 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES ('Pompeani','Bob','bpomp@yahoo.com','$2y$11$USg6gVx5rmywRyhLnanE8..5xnpSixkRG/oh6uyZVjm152xHGBYvG','Iraq','Karbala','Karbala','Math','123 slow lane','895-757-4463','142-342-4242',97978,0.00,0),('Jaso','John','jjaso@gmail.com','$2y$11$k/a6HG/fgEdJwD.uBEgwVeHO2/xCKtI9MCB9Yyqdx2Laxn7gWXRMO','Djibouti','Djibouti','Djibouti','Business','123 wow lane','645-347-5867','978-456-7357',56858,0.00,0),('Stevens','John','jsvens@gmail.com','$2y$11$zZDavUx4BTeWQwZXnGYMZeZftZIxgsw0H9OddKxlaquIdS2gL9zNe','Kiribati','South Tarawa','Bikenibeu','English','Maltese Street','896-478-4678','234-124-1242',66767,0.00,0),('Michael','Jordan','mjordan@gmail.com','$2y$11$tj3GWi.vC4hNSJPplRMl4uZuXGq1b2K1lWpttX.jp7cArWf0PNDsi','Mexico','Durango','Durango','English','4545 First Lane','456-435-6457','657-567-5675',45345,0.00,0),('Jordy','Mercer','up@yahoo.com','$2y$11$P8viKyPH.8i09gvF.VlWE.D52169TXk//pinUePNA.gIkJG5zfbO6','Croatia','Osijek-Baranja','Osijek','Business','123 fast lane','222-224-5533','585-858-6585',45678,0.00,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'enrollment'
+--
+/*!50003 DROP FUNCTION IF EXISTS `getTotalGPA` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getTotalGPA`(email VARCHAR(30), stringYears VARCHAR(100)) RETURNS decimal(10,2)
+BEGIN
+  DECLARE stringLength INT DEFAULT 0;
+  DECLARE year CHAR(4);
+  DECLARE semester VARCHAR(6);
+  DECLARE enrolledTable CHAR(13) DEFAULT CONCAT("enrolled_", year);
+  DECLARE enrolledGrade CHAR(15) DEFAULT CONCAT("user_grade_", year);
+  DECLARE enrolledSemester CHAR(16) DEFAULT ("user_semester_", year);        
+  DECLARE enrolledEmail CHAR(14) DEFAULT ("user_email_", year);
+  DECLARE gradeTotal INT(3) DEFAULT 0;
+  DECLARE creditHours INT(3) DEFAULT 0;
+
+  IF stringYears IS NULL THEN
+    SET stringYears = '';
+  END IF;
+
+perform_totaling:
+  LOOP
+    SET stringLength = CHAR_LENGTH(stringYears);
+    SET year = SUBSTRING_INDEX(stringYears, ',', 1);
+    SET stringYears = MID(stringYears, 6, stringLength);
+
+    IF stringYears = '' THEN
+      LEAVE perform_totaling;
+    ELSE 
+         CASE
+             WHEN EXISTS(SELECT 1 FROM enrolledTable 
+                             WHERE enrolledEmail = email 
+                             AND enrolledSemester = 'fall' LIMIT 1) THEN 
+             SET semester = 'fall';
+         END CASE;    
+         CASE 
+             WHEN EXISTS(SELECT 1 FROM enrolledTable 
+                                 WHERE enrolledEmail = email 
+                                 AND enrolledSemester  = 'spring' LIMIT 1) THEN
+             SET semester = 'spring';         
+         END CASE;   
+         CASE
+             WHEN EXISTS(SELECT 1 FROM enrolledTable 
+                                 WHERE enrolledEmail = email 
+                                 AND enrolledSemester  = 'summer' LIMIT 1) THEN
+             SET semester = 'spring';    
+         END CASE;   
+      CALL getSemesterGPA(email, semester, year, gradeTotal, creditHours);
+    END IF;
+   END LOOP perform_totaling;
+ 
+   RETURN (gradeTotal/creditHours);
+  END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `getYearsAttended` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getYearsAttended`(email VARCHAR(30)) RETURNS varchar(100) CHARSET utf8
+    DETERMINISTIC
+BEGIN
+      DECLARE years_concat VARCHAR(100) DEFAULT ""; 
+      
+      IF EXISTS(SELECT 1 FROM enrolled_2010 WHERE user_email_2010 = email LIMIT 1) THEN
+           SET years_concat = CONCAT_WS(',', '2010', years_concat);
+      END IF;
+      
+      IF EXISTS(SELECT 1 FROM enrolled_2011 WHERE user_email_2011 = email LIMIT 1) THEN 
+          SET years_concat = CONCAT_WS(',', '2011', years_concat);
+      END IF;
+      
+      IF EXISTS(SELECT 1 FROM enrolled_2012 WHERE user_email_2012 = email LIMIT 1) THEN
+          SET years_concat = CONCAT_WS(',', '2012', years_concat);
+      END IF;
+      
+      IF EXISTS(SELECT 1 FROM enrolled_2013 WHERE user_email_2013 = email LIMIT 1) THEN
+          SET years_concat = CONCAT_WS(',', '2013', years_concat);
+      END IF;
+      
+      IF EXISTS(SELECT 1 FROM enrolled_2014 WHERE user_email_2014 = email LIMIT 1) THEN
+          SET years_concat = CONCAT_WS(',', '2014', years_concat);
+      END IF;
+      
+      IF EXISTS(SELECT 1 FROM enrolled_2015 WHERE user_email_2015 = email LIMIT 1) THEN
+          SET years_concat = CONCAT_WS(',', '2015', years_concat);
+      END IF;
+      
+      IF EXISTS(SELECT 1 FROM enrolled_2016 WHERE user_email_2016 = email LIMIT 1) THEN
+          SET years_concat = CONCAT_WS(',', '2016', years_concat);
+      END IF;
+         
+      SET years_concat = TRIM(TRAILING ',' FROM years_concat);
+      
+      RETURN years_concat;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getCumulativeGPA` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCumulativeGPA`(IN email VARCHAR(30),
+                                  OUT cumulativeGPA DECIMAL(10, 2))
+    DETERMINISTIC
+BEGIN
+  DECLARE stringLength INT DEFAULT 0;
+  DECLARE year CHAR(4);
+  DECLARE enrolledTable CHAR(13);
+  DECLARE enrolledGrade CHAR(15);
+  DECLARE enrolledEmail CHAR(15);
+  DECLARE gradeTotal INT(3) DEFAULT 0;
+  DECLARE creditHours INT(3) DEFAULT 0;
+  DECLARE yearsAttended VARCHAR(100) DEFAULT getYearsAttended(email);
+  SET @tempGradeTotal = 0;
+  SET @tempCreditHours = 0;
+  
+  IF yearsAttended != "" THEN      
+    perform_totaling:
+      LOOP
+            SET stringLength = CHAR_LENGTH(yearsAttended);
+            SET year = SUBSTRING_INDEX(yearsAttended, ',', 1);
+            SET enrolledTable = CONCAT("enrolled_", year);
+            SET enrolledGrade = CONCAT("user_grade_", year);
+            SET enrolledEmail = CONCAT("user_email_", year);
+            SET yearsAttended = MID(yearsAttended, 6, stringLength);
+            
+            SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
+                                       SUM(CASE ",enrolledGrade,"
+                                                WHEN 'A' THEN 4
+                                                WHEN 'B' THEN 3
+                                                WHEN 'C' THEN 2
+                                                WHEN 'D' THEN 1
+                                                WHEN 'F' THEN 0
+                                           END)                                         
+                              INTO @tempCreditHours, @tempGradeTotal 
+                              FROM ", enrolledTable, " 
+                              INNER JOIN courses
+                              ON courses.code = user_course_code
+                              WHERE ", enrolledEmail, " = '",email,"'");
+        
+                PREPARE stmt FROM @sqlText;
+                EXECUTE stmt;
+                DEALLOCATE PREPARE stmt;
+              
+              SET gradeTotal = (gradeTotal + (@tempGradeTotal * @tempCreditHours));
+              SET creditHours = (creditHours + @tempCreditHours);
+            
+            IF yearsAttended = '' THEN
+              LEAVE perform_totaling;
+            END IF;
+       END LOOP perform_totaling;
+     SELECT (gradeTotal / creditHours) INTO cumulativeGPA;
+   END IF;
+  END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getSemesterGPA` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getSemesterGPA`(IN email VARCHAR(30),
+                               IN semester VARCHAR(6), 
+                               IN year INT(4),
+                               OUT semesterGPA DECIMAL(10, 2))
+    DETERMINISTIC
+BEGIN
+    DECLARE enrolledTable CHAR(13) DEFAULT CONCAT('enrolled_', year);
+    DECLARE userGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
+    DECLARE userSemester CHAR(18) DEFAULT CONCAT('user_semester_', year);
+    DECLARE userEmail CHAR(15) DEFAULT CONCAT('user_email_', year);
+    SET @gradeTotal = 0;
+    SET @creditHours = 0;
+    
+    SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
+                                   SUM(CASE ",userGrade,"
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
+                          INTO @creditHours, @gradeTotal 
+                          FROM ", enrolledTable, " 
+                          INNER JOIN courses
+                          ON courses.code = user_course_code
+                          WHERE ", userEmail, " = '",email,"' AND ",userSemester," = '",semester, "'");
+    
+    PREPARE stmt FROM @sqlText;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;    
+    
+    SELECT (@gradeTotal * @creditHours / @creditHours) INTO semesterGPA;
+ END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getTotalGPA` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTotalGPA`(IN email VARCHAR(30),
+                             OUT cumulativeGPA DECIMAL(10, 2))
+    DETERMINISTIC
+BEGIN
+  DECLARE stringLength INT DEFAULT 0;
+  DECLARE year CHAR(4);
+  DECLARE enrolledTable CHAR(13) DEFAULT CONCAT("enrolled_", year);
+  DECLARE enrolledGrade CHAR(15) DEFAULT CONCAT("user_grade_", year);
+  DECLARE enrolledSemester CHAR(18) DEFAULT ("user_semester_", year);        
+  DECLARE enrolledEmail CHAR(15) DEFAULT ("user_email_", year);
+  DECLARE gradeTotal INT(3) DEFAULT 0;
+  DECLARE creditHours INT(3) DEFAULT 0;
+  DECLARE yearsAttended VARCHAR(100) DEFAULT getYearsAttended(email);
+  SET @tempGradeTotal = 0;
+  SET @tempCreditHours = 0;
+  
+  IF yearsAttended IS NULL THEN
+    SET yearsAttended = '';
+  END IF;
+
+perform_totaling:
+  LOOP
+        SET stringLength = CHAR_LENGTH(yearsAttended);
+        SET year = SUBSTRING_INDEX(yearsAttended, ',', 1);
+        SET yearsAttended = MID(yearsAttended, 6, stringLength);
+
+        IF yearsAttended = '' THEN
+          LEAVE perform_totaling;
+        ELSE 
+           SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
+                                   SUM(CASE ",userGrade,"
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
+                          INTO @tempCreditHours, @tempGradeTotal 
+                          FROM ", enrolledTable, " 
+                          INNER JOIN courses
+                          ON courses.code = user_course_code
+                          WHERE ", userEmail, " = '",email,"'");
+    
+            PREPARE stmt FROM @sqlText;
+            EXECUTE stmt;
+            DEALLOCATE PREPARE stmt;
+          
+          SET gradeTotal = (gradeTotal + @tempGradeTotal);
+          SET creditHours = (creditHours + @tempCreditHours);
+        END IF;
+   END LOOP perform_totaling;
+ 
+   SELECT ((gradeTotal * creditHours) / creditHours) INTO cumulativeGPA;
+  END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -692,4 +997,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-14 16:46:02
+-- Dump completed on 2016-06-15 17:57:33

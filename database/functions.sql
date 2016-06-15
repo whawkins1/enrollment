@@ -75,10 +75,7 @@ BEGIN
     SELECT (@gradeTotal * @creditHours / @creditHours) INTO semesterGPA;
  END$$
 
-
--- DECLARE subStringLength INT DEFAULT 0;
--- SET SubStrLen = CHAR_LENGTH(SUBSTRING_INDEX(stringYears, ',', 1)) + 2;    
-
+DELIMITER $$
 DROP PROCEDURE IF EXISTS getCumulativeGPA$$
 CREATE PROCEDURE getCumulativeGPA(IN email VARCHAR(30),
                                   OUT cumulativeGPA DECIMAL(10, 2))
@@ -96,44 +93,42 @@ BEGIN
   SET @tempGradeTotal = 0;
   SET @tempCreditHours = 0;
   
-  IF yearsAttended IS NULL THEN
-    SET yearsAttended = '';
-  END IF;
-
-perform_totaling:
-  LOOP
-        SET stringLength = CHAR_LENGTH(yearsAttended);
-        SET year = SUBSTRING_INDEX(yearsAttended, ',', 1);
-        SET enrolledTable = CONCAT("enrolled_", year);
-        SET enrolledGrade = CONCAT("user_grade_", year);
-        SET enrolledEmail = CONCAT("user_email_", year);
-        SET yearsAttended = MID(yearsAttended, 6, stringLength);
-
-        IF yearsAttended = '' THEN
-          LEAVE perform_totaling;
-        ELSE 
-           SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
-                                   SUM(CASE ",enrolledGrade,"
-                                            WHEN 'A' THEN 4
-                                            WHEN 'B' THEN 3
-                                            WHEN 'C' THEN 2
-                                            WHEN 'D' THEN 1
-                                            WHEN 'F' THEN 0
-                                       END)                                         
-                          INTO @tempCreditHours, @tempGradeTotal 
-                          FROM ", enrolledTable, " 
-                          INNER JOIN courses
-                          ON courses.code = user_course_code
-                          WHERE ", enrolledEmail, " = '",email,"'");
-    
-            PREPARE stmt FROM @sqlText;
-            EXECUTE stmt;
-            DEALLOCATE PREPARE stmt;
-          
-          SET gradeTotal = (gradeTotal + @tempGradeTotal);
-          SET creditHours = (creditHours + @tempCreditHours);
-        END IF;
-   END LOOP perform_totaling;
- 
-   SELECT ((gradeTotal * creditHours) / creditHours) INTO cumulativeGPA;
+  IF yearsAttended != "" THEN      
+    perform_totaling:
+      LOOP
+            SET stringLength = CHAR_LENGTH(yearsAttended);
+            SET year = SUBSTRING_INDEX(yearsAttended, ',', 1);
+            SET enrolledTable = CONCAT("enrolled_", year);
+            SET enrolledGrade = CONCAT("user_grade_", year);
+            SET enrolledEmail = CONCAT("user_email_", year);
+            SET yearsAttended = MID(yearsAttended, 6, stringLength);
+            
+            SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
+                                       SUM(CASE ",enrolledGrade,"
+                                                WHEN 'A' THEN 4
+                                                WHEN 'B' THEN 3
+                                                WHEN 'C' THEN 2
+                                                WHEN 'D' THEN 1
+                                                WHEN 'F' THEN 0
+                                           END)                                         
+                              INTO @tempCreditHours, @tempGradeTotal 
+                              FROM ", enrolledTable, " 
+                              INNER JOIN courses
+                              ON courses.code = user_course_code
+                              WHERE ", enrolledEmail, " = '",email,"'");
+        
+                PREPARE stmt FROM @sqlText;
+                EXECUTE stmt;
+                DEALLOCATE PREPARE stmt;
+              
+              SET gradeTotal = (gradeTotal + (@tempGradeTotal * @tempCreditHours));
+              SET creditHours = (creditHours + @tempCreditHours);
+            
+            IF yearsAttended = '' THEN
+              LEAVE perform_totaling;
+            END IF;
+       END LOOP perform_totaling;
+     SELECT (gradeTotal / creditHours) INTO cumulativeGPA;
+   END IF;
   END$$  
+  DELIMITER ;
