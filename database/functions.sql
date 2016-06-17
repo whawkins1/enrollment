@@ -70,11 +70,12 @@ BEGIN
                           WHERE ", userEmail, " = ? AND ",userSemester," = ?");
     
     PREPARE stmt FROM @sqlText;
-    EXECUTE stmt;
+    EXECUTE stmt
     USING @email, @semester;
     DEALLOCATE PREPARE stmt;    
     SET semesterGPA = @gpa;
  END$$
+ 
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS getCumulativeGPA$$
@@ -121,7 +122,7 @@ BEGIN
                               WHERE ", enrolledEmail, " = ?");
         
                 PREPARE stmt FROM @sqlText;
-                EXECUTE stmt;
+                EXECUTE stmt
                 USING @email;
                 DEALLOCATE PREPARE stmt;
               
@@ -135,4 +136,3 @@ BEGIN
      SELECT (gradeTotal / creditHours) INTO cumulativeGPA;
    END IF;
   END$$  
-  DELIMITER ;

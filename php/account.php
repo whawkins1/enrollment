@@ -234,15 +234,26 @@
       </div>                
       
       <div id="tab-grades" class="tabsjump">
-          <label>Year"</label>          
+          <label>Year</label>      
+          <?php
+               $sql = "SELECT getYearsAttended(?)";           
+               $stmt = $conn->prepare($sql);
+               $stmt->bind_param('s', $username);
+               if($stmt->execute()) {
+                  $stmt->bind_result($years_attended_commas);
+                  $stmt->fetch();
+                  $stmt->close();
+               }
+               $years_attended_arr = explode(",", $years_attended_commas);
+          ?>          
           <select id="yeardropdown">
-               <option value='2016'>2016</option>
-               <option value='2015'>2015</option>
-               <option value='2014'>2014</option>
-               <option value='2013'>2013</option>
-               <option value='2012'>2012</option>
-               <option value='2011'>2011</option>
-               <option value='2010'>2010</option>
+               <option selected="selected">Choose one</option>
+               <?php
+                    foreach($years_attended_arr AS $year) { ?>
+                    <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
+               <?php
+                    }
+               ?>
           </select>
           <label>Semester:</label>
           <select id="semesterdropdown">
@@ -251,6 +262,17 @@
                <option value='summer'>Summer</option>
           </select>
           <label>GPA:</label>
+          <?php 
+              //Move To Separate PHP for ajax call
+              $sql = "SELECT getSemesterGPA(?, ?, ?)";           
+               $stmt = $conn->prepare($sql);
+               $stmt->bind_param('s', $username);
+               if($stmt->execute()) {
+                  $stmt->bind_result($years_attended_commas);
+                  $stmt->fetch();
+                  $stmt->close();
+               }
+          ?>
           <label>Semester</label> 
           <label id="semestergpalabel"></label> 
           <label>Cumulative</label> 
