@@ -824,10 +824,12 @@ BEGIN
   DECLARE gradeTotal INT(3) DEFAULT 0;
   DECLARE creditHours INT(3) DEFAULT 0;
   DECLARE yearsAttended VARCHAR(100) DEFAULT getYearsAttended(email);
-  SET @tempGradeTotal = 0;
-  SET @tempCreditHours = 0;
   
   IF yearsAttended != "" THEN      
+    SET @tempGradeTotal = 0;
+    SET @tempCreditHours = 0;
+    SET @email = email;
+    
     perform_totaling:
       LOOP
             SET stringLength = CHAR_LENGTH(yearsAttended);
@@ -849,10 +851,11 @@ BEGIN
                               FROM ", enrolledTable, " 
                               INNER JOIN courses
                               ON courses.code = user_course_code
-                              WHERE ", enrolledEmail, " = '",email,"'");
+                              WHERE ", enrolledEmail, " = ?");
         
                 PREPARE stmt FROM @sqlText;
-                EXECUTE stmt;
+                EXECUTE stmt
+                USING @email;
                 DEALLOCATE PREPARE stmt;
               
               SET gradeTotal = (gradeTotal + (@tempGradeTotal * @tempCreditHours));
@@ -881,37 +884,38 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getSemesterGPA`(IN email VARCHAR(30),
-                               IN semester VARCHAR(6), 
-                               IN year INT(4),
-                               OUT semesterGPA DECIMAL(10, 2))
+                                IN semester VARCHAR(6), 
+                                IN year INT(4),
+                                OUT semesterGPA DECIMAL(10, 2))
     DETERMINISTIC
 BEGIN
     DECLARE enrolledTable CHAR(13) DEFAULT CONCAT('enrolled_', year);
     DECLARE userGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
     DECLARE userSemester CHAR(18) DEFAULT CONCAT('user_semester_', year);
     DECLARE userEmail CHAR(15) DEFAULT CONCAT('user_email_', year);
-    SET @gradeTotal = 0;
-    SET @creditHours = 0;
+    SET @gpa = 0.00;
+    SET @email = email;
+    SET @semester = semester;
     
-    SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
-                                   SUM(CASE ",userGrade,"
-                                            WHEN 'A' THEN 4
-                                            WHEN 'B' THEN 3
-                                            WHEN 'C' THEN 2
-                                            WHEN 'D' THEN 1
-                                            WHEN 'F' THEN 0
-                                       END)                                         
-                          INTO @creditHours, @gradeTotal 
+    SET @sqlText = CONCAT("SELECT SUM(courses.credits) * (CASE ",userGrade,"
+                                                            WHEN 'A' THEN 4
+                                                            WHEN 'B' THEN 3
+                                                            WHEN 'C' THEN 2
+                                                            WHEN 'D' THEN 1
+                                                            WHEN 'F' THEN 0
+                                                          END)  
+                                                       /  SUM(courses.credits)     
+                          INTO @gpa 
                           FROM ", enrolledTable, " 
                           INNER JOIN courses
                           ON courses.code = user_course_code
-                          WHERE ", userEmail, " = '",email,"' AND ",userSemester," = '",semester, "'");
+                          WHERE ", userEmail, " = ? AND ",userSemester," = ?");
     
     PREPARE stmt FROM @sqlText;
-    EXECUTE stmt;
+    EXECUTE stmt
+    USING @email, @semester;
     DEALLOCATE PREPARE stmt;    
-    
-    SELECT (@gradeTotal * @creditHours / @creditHours) INTO semesterGPA;
+    SET semesterGPA = @gpa;
  END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -997,4 +1001,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-15 17:57:33
+-- Dump completed on 2016-06-18 14:42:15
