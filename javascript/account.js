@@ -560,43 +560,7 @@ $(function() {
      .fail(function jqHXR, textStatus, errorThrown) {
          alert("Error Retrieving Grades for " + semester + " " + year);
      });         
-} 
-
-function setSemesterGPA(email, year, semester) {
-    $.ajax({
-              type: 'GET',
-              url: "getSemesterGPA.php";
-              data: {
-                        email: email,
-                        year: year,
-                        semester: semester
-                    },
-              dataType: 'text'
-    })
-    .done(function(data) {
-        $('#semestergpalabel').text(data);
-    })
-    .fail(function jqHXR, textStatus, errorThrown) {
-        $('#semestergpalabel').text("error");
-    });
-}
-
-function setCumulativeGPA() {
-    $.ajax({
-              type: 'GET',
-              url: "getCumulativeGPA.php";
-              date: {
-                       email: email
-                    }                  
-              dataType: 'text'
-    })
-    .done(function(data) {
-        $('#cumulativegpalabel').text(data);
-    })
-    .fail(function jqHXR, textStatus, errorThrown) {
-        $('#cumulativegpalabel').text("Error");
-    });
-}*/
+}*/ 
 
 function addUpdates() { 
           ajaxCall = $.ajax({

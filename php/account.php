@@ -245,11 +245,17 @@
                   $stmt->close();
                }
                $years_attended_arr = explode(",", $years_attended_commas);
+               $most_recent_year_enrolled = max($years_attended_arr);
           ?>          
           <select id="yeardropdown">
                <option selected="selected">Choose one</option>
                <?php
-                    foreach($years_attended_arr AS $year) { ?>
+                    foreach($years_attended_arr AS $year) { 
+                        if ($year = $most_recent_year_enrolled) { ?>
+                            <option value = "<?php echo $year; ?>" selected><?php echo $year; ?></option>
+                        <?php
+                        }
+                        ?>
                     <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
                <?php
                     }
@@ -257,13 +263,53 @@
           </select>
           <label>Semester:</label>
           <select id="semesterdropdown">
-               <option value='fall'>Fall</option>
-               <option value='spring'>Spring</option>
-               <option value='summer'>Summer</option>
+               <?php $fall_start_date = (new DateTime("09-01"))->format("m-d");
+                     $fall_end_date = (new DateTime("01-01"))->format("m-d");
+                     $today = (new DateTime())->format("m-d");
+               
+               if ($fall_start_date < $today && $fall_end_date > $today) { ?>
+                    <option value='Fall' selected>Fall</option>   
+               <?php
+               }       
+               else 
+               { ?>
+                  <option value='Fall'>Fall</option>
+               <?php
+               }
+               ?>
+               
+               <?php $spring_start_date = (new DateTime("09-01"))->format("m-d");
+                     $spring_end_date = (new DateTime("01-01"))->format("m-d");
+                     $today = (new DateTime())->format("m-d");
+               
+               if ($spring_start_date < $today && $spring_end_date > $today) { ?>
+                    <option value='Spring' selected>Spring</option>   
+               <?php
+               }       
+               else 
+               { ?>
+                  <option value='Spring'>Spring</option>
+               <?php
+               }
+               ?>
+               
+               <?php  $summer_start_date = (new DateTime("09-01"))->format("m-d");
+                      $summer_end_date = (new DateTime("01-01"))->format("m-d");
+                      $today = (new DateTime())->format("m-d");
+               
+               if ($summer_start_date < $today && $summer_end_date > $today) { ?>
+                    <option value='Summer' selected>Summer</option>   
+               <?php
+               }       
+               else 
+               { ?>
+                  <option value='Summer'>Summer</option>
+               <?php
+               }
+               ?>
           </select>
           <label>GPA:</label>
           <?php 
-              //Move To Separate PHP for ajax call
               $sql = "SELECT getSemesterGPA(?, ?, ?)";           
                $stmt = $conn->prepare($sql);
                $stmt->bind_param('s', $username);
