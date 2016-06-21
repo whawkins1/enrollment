@@ -562,6 +562,25 @@ $(function() {
      });         
 }*/ 
 
+function populateGradeTable(email, year, semester) {
+   $.ajax({
+           type: 'GET',
+           url: "getSemesterGPA.php";
+           data: {  
+                    email: email,
+                    year: year,
+                    semester: semester
+                 },
+           dataType: 'html'
+     })
+     .done( function(data) {
+         ('#tablegrades tbody').remove();
+         ('#tablegrades' tbody).append(data);
+     })
+     .fail(function jqHXR, textStatus, errorThrown) {
+         alert("Error Retrieving Grades for " + semester + " " + year);
+     });     
+
 function addUpdates() { 
           ajaxCall = $.ajax({
               type: 'POST',

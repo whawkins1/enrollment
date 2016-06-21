@@ -267,49 +267,29 @@
                      $fall_end_date = (new DateTime("01-01"))->format("m-d");
                      $today = (new DateTime())->format("m-d");
                
-               if ($fall_start_date < $today && $fall_end_date > $today) { ?>
-                    <option value='Fall' selected>Fall</option>   
-               <?php
-               }       
-               else 
-               { ?>
-                  <option value='Fall'>Fall</option>
-               <?php
-               }
+               $selected_fall = ($fall_start_date < $today && $fall_end_date > $today) 
                ?>
-               
+                    <option value='Fall' <?php if($selected_fall){ echo "Selected"; }?>>Fall</option>   
+                              
                <?php $spring_start_date = (new DateTime("09-01"))->format("m-d");
                      $spring_end_date = (new DateTime("01-01"))->format("m-d");
                      $today = (new DateTime())->format("m-d");
                
-               if ($spring_start_date < $today && $spring_end_date > $today) { ?>
-                    <option value='Spring' selected>Spring</option>   
-               <?php
-               }       
-               else 
-               { ?>
-                  <option value='Spring'>Spring</option>
-               <?php
-               }
+               $selected_spring = ($spring_start_date < $today && $spring_end_date > $today); 
                ?>
-               
+                    <option value='Spring' <?php if($selected_spring) {echo "Selected";}?>>Spring</option>   
+                              
                <?php  $summer_start_date = (new DateTime("09-01"))->format("m-d");
                       $summer_end_date = (new DateTime("01-01"))->format("m-d");
                       $today = (new DateTime())->format("m-d");
                
-               if ($summer_start_date < $today && $summer_end_date > $today) { ?>
-                    <option value='Summer' selected>Summer</option>   
-               <?php
-               }       
-               else 
-               { ?>
-                  <option value='Summer'>Summer</option>
-               <?php
-               }
+               $selected_summer = ($summer_start_date < $today && $summer_end_date > $today) 
                ?>
-          </select>
+                    <option value='Summer' <?php if($selected_summer){ echo "Selected"; }?>>Summer</option>   
+           </select>
           <label>GPA:</label>
           <?php 
+              
               $sql = "SELECT getSemesterGPA(?, ?, ?)";           
                $stmt = $conn->prepare($sql);
                $stmt->bind_param('s', $username);
