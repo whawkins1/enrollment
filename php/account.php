@@ -261,15 +261,15 @@
                     }
                ?>
           </select>
-          <label>Semester:</label>
           <select id="semesterdropdown">
-               <?php $fall_start_date = (new DateTime("09-01"))->format("m-d");
+               <?php $semester = "";
+                     $fall_start_date = (new DateTime("09-01"))->format("m-d");
                      $fall_end_date = (new DateTime("01-01"))->format("m-d");
                      $today = (new DateTime())->format("m-d");
                
                $selected_fall = ($fall_start_date < $today && $fall_end_date > $today) 
                ?>
-                    <option value='Fall' <?php if($selected_fall){ echo "Selected"; }?>>Fall</option>   
+                    <option value='Fall' <?php if($selected_fall){ echo "Selected"; $semester = "Fall"; }?>>Fall</option>   
                               
                <?php $spring_start_date = (new DateTime("09-01"))->format("m-d");
                      $spring_end_date = (new DateTime("01-01"))->format("m-d");
@@ -277,7 +277,7 @@
                
                $selected_spring = ($spring_start_date < $today && $spring_end_date > $today); 
                ?>
-                    <option value='Spring' <?php if($selected_spring) {echo "Selected";}?>>Spring</option>   
+                    <option value='Spring' <?php if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>   
                               
                <?php  $summer_start_date = (new DateTime("09-01"))->format("m-d");
                       $summer_end_date = (new DateTime("01-01"))->format("m-d");
@@ -285,25 +285,37 @@
                
                $selected_summer = ($summer_start_date < $today && $summer_end_date > $today) 
                ?>
-                    <option value='Summer' <?php if($selected_summer){ echo "Selected"; }?>>Summer</option>   
+                    <option value='Summer' <?php if($selected_summer){ echo "Selected"; $semester = "Summer";}?>>Summer</option>   
            </select>
-          <label>GPA:</label>
-          <?php 
-              
-              $sql = "SELECT getSemesterGPA(?, ?, ?)";           
-               $stmt = $conn->prepare($sql);
-               $stmt->bind_param('s', $username);
-               if($stmt->execute()) {
-                  $stmt->bind_result($years_attended_commas);
-                  $stmt->fetch();
-                  $stmt->close();
-               }
+           <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
+           <?php 
+            $gpa = "ERROR";
+            $sql = "CALL getSemesterGPA(?, ?, ?, @semesterGPA)";
+            $stmt = $conn->prepare($sql);         
+            $stmt->bind_param('ssi', $username, $most_recent_year_enrolled, $semester);
+            if($stmt->execute()) {
+                $stmt->close();
+                $sql = "SELECT @semesterGPA";
+                $gpa = $conn->query($sql);
+            }       
           ?>
-          <label>Semester</label> 
-          <label id="semestergpalabel"></label> 
+          <label>GPA:</label>
+          <label>Semester:</label>
+          <label id="semestergpalabel" value = <?php echo $gpa; ?>><?php echo $gpa?></label> 
+          <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
+          <?php
+             $cumulative_gpa = "ERROR";
+             $sql = "CALL getCumulativeGPA(?, @cumulativeGPA)";
+             $stmt = $conn->prepare($sql);
+             $stmt->bind_param('s', $username);
+             if ($stmt->execute() {
+                $stmt->close();
+                $sql = "SELECT @cumulativeGPA";
+                $gpa - $conn->query($sql);
+             }
+          ?>
           <label>Cumulative</label> 
-          <label id="cumulativegpalabel"></label>
-          
+          <label id="cumulativegpalabel" value = <?php echo $gpa?>><?php echo $gpa?></label>
           <table id="tablegrades" class="tablesorter">
               <thead>
                     <tr id="headerRow">
