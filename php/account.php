@@ -237,21 +237,23 @@
           <label>Year</label>      
           <?php
                $sql = "SELECT getYearsAttended(?)";           
-               $stmt = $conn->prepare($sql);
-               $stmt->bind_param('s', $username);
-               if($stmt->execute()) {
-                  $stmt->bind_result($years_attended_commas);
-                  $stmt->fetch();
-                  $stmt->close();
+               if ($stmt = $conn->prepare($sql)) {
+                   $stmt->bind_param('s', $username);
+                   if($stmt->execute()) {
+                      $stmt->bind_result($years_attended_commas);
+                      $stmt->fetch();
+                      $stmt->close();
+                   }
+                   $years_attended_arr = explode(",", $years_attended_commas);
+                   $most_recent_year_enrolled = max($years_attended_arr);
                }
-               $years_attended_arr = explode(",", $years_attended_commas);
-               $most_recent_year_enrolled = max($years_attended_arr);
           ?>          
           <select id="yeardropdown">
                <option selected="selected">Choose one</option>
                <?php
                     foreach($years_attended_arr AS $year) { 
-                        if ($year = $most_recent_year_enrolled) { ?>
+                        if ($year = $most_recent_year_enrolled) { 
+               ?>
                             <option value = "<?php echo $year; ?>" selected><?php echo $year; ?></option>
                         <?php
                         }
@@ -264,23 +266,23 @@
           <select id="semesterdropdown">
                <?php $semester = "";
                      $fall_start_date = (new DateTime("09-01"))->format("m-d");
-                     $fall_end_date = (new DateTime("01-01"))->format("m-d");
+                     $fall_end_date = (new DateTime("01-14"))->format("m-d");
                      $today = (new DateTime())->format("m-d");
                
                $selected_fall = ($fall_start_date < $today && $fall_end_date > $today) 
                ?>
                     <option value='Fall' <?php if($selected_fall){ echo "Selected"; $semester = "Fall"; }?>>Fall</option>   
                               
-               <?php $spring_start_date = (new DateTime("09-01"))->format("m-d");
-                     $spring_end_date = (new DateTime("01-01"))->format("m-d");
+               <?php $spring_start_date = (new DateTime("01-15"))->format("m-d");
+                     $spring_end_date = (new DateTime("05-15"))->format("m-d");
                      $today = (new DateTime())->format("m-d");
                
                $selected_spring = ($spring_start_date < $today && $spring_end_date > $today); 
                ?>
                     <option value='Spring' <?php if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>   
                               
-               <?php  $summer_start_date = (new DateTime("09-01"))->format("m-d");
-                      $summer_end_date = (new DateTime("01-01"))->format("m-d");
+               <?php  $summer_start_date = (new DateTime("05-16"))->format("m-d");
+                      $summer_end_date = (new DateTime("08-30"))->format("m-d");
                       $today = (new DateTime())->format("m-d");
                
                $selected_summer = ($summer_start_date < $today && $summer_end_date > $today) 
@@ -291,13 +293,14 @@
            <?php 
             $gpa = "ERROR";
             $sql = "CALL getSemesterGPA(?, ?, ?, @semesterGPA)";
-            $stmt = $conn->prepare($sql);         
-            $stmt->bind_param('ssi', $username, $most_recent_year_enrolled, $semester);
-            if($stmt->execute()) {
-                $stmt->close();
-                $sql = "SELECT @semesterGPA";
-                $gpa = $conn->query($sql);
-            }       
+            if($stmt = $conn->prepare($sql))      
+                $stmt->bind_param('ssi', $username, $most_recent_year_enrolled, $semester);
+                if($stmt->execute()) {
+                    $stmt->close();
+                    $sql = "SELECT @semesterGPA";
+                    $gpa = $conn->query($sql);
+                }       
+             }
           ?>
           <label>GPA:</label>
           <label>Semester:</label>
@@ -306,16 +309,18 @@
           <?php
              $cumulative_gpa = "ERROR";
              $sql = "CALL getCumulativeGPA(?, @cumulativeGPA)";
-             $stmt = $conn->prepare($sql);
-             $stmt->bind_param('s', $username);
-             if ($stmt->execute() {
-                $stmt->close();
-                $sql = "SELECT @cumulativeGPA";
-                $gpa - $conn->query($sql);
+             if($stmt = $conn->prepare($sql)) {
+               $stmt->bind_param('s', $username);
+                 if ($stmt->execute() {
+                    $stmt->close();
+                    $sql = "SELECT @cumulativeGPA";
+                    $gpa - $conn->query($sql);
+                 }
              }
           ?>
           <label>Cumulative</label> 
           <label id="cumulativegpalabel" value = <?php echo $gpa?>><?php echo $gpa?></label>
+          
           <table id="tablegrades" class="tablesorter">
               <thead>
                     <tr id="headerRow">
@@ -326,6 +331,24 @@
                     </tr>
               </thead>
             <tbody>
+          <?php $sql = "SELECT enrolled_grades_", $most_recent_year_enrolled, " FROM enrolled_", $most_recent_year_enrolled, " WHERE enrolled_semester = ?";
+            if ( $stmt = $conn->prepare($sql)) {
+                $stmt->bind_param('s', $semester);
+                
+                if ($stmt->execute()) {
+                   $result = $stmt->get_result();
+                   $enrolled_grade_str = "enrolled_grades_", $year;
+                   while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     echo "<tr>";
+                         echo "<td>", $row['code'], "</td>";
+                         echo "<td>", $row['name'], "</td>";
+                         echo "<td>", $row['credits'], "</td>";
+                         echo "<td>", $row[enrolled_grade_str], "</td>";
+                     echo "</tr>";
+                   }                   
+                }
+            }   
+          ?>          
             </tbody>
          </table>
       </div>          
