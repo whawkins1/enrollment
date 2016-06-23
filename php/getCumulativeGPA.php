@@ -8,12 +8,12 @@
      $year = $_GET['year'];
      $semester = $_GET['semester'];
         
-     if ( (isset($year) && $year != "") &&
-          ( isset($semester) && $semester != "") &&
-          ( isset($email) && $email !="") ) {
+     if ( (isset($year) && (!empty($year)) &&
+          ( isset($semester) && (!empty($semester)) &&
+          ( isset($email) && (!empty$email)) ) {
         session_start();
         $callYearsAttended = $conn->prepare("CALL getYearsAttended(?)");
-        $callYearsAttended->bind_param('s', $_GET['email']);
+        $callYearsAttended->bind_param('s', $email);
         $callYearsAttended->execute();      
         $result = $callYearsAttended->fetch();
         $yearsAttended = $result[//column name not sure

@@ -542,7 +542,8 @@ $(function() {
     $('#mobilephone').mask("999-999-9999");
 });
 
-/*function populateGradeTable(email, year, semester) {
+function populateGradeTable(email, year, semester) {
+    //Instead of passing parameters just get from dropdown
    $.ajax({
            type: 'GET',
            url: "getGradesYearSemester.php";
@@ -560,7 +561,43 @@ $(function() {
      .fail(function jqHXR, textStatus, errorThrown) {
          alert("Error Retrieving Grades for " + semester + " " + year);
      });         
-}*/ 
+}
+
+function getSemesterGPA() {
+    $.ajax({
+           type: 'GET',
+           url: "getSemesterGPA.php";
+           data: {  
+                    email: email,
+                    year: year,
+                    semester: semester
+                 },
+           dataType: 'html'
+     })
+     .done( function(data) {
+         
+     })
+     .fail(function jqHXR, textStatus, errorThrown) {
+
+     });
+}
+
+function getCumulativeGPA() {
+    $.ajax({
+           type: 'GET',
+           url: "getCumulativeGPA.php";
+           data: {  
+                    email: email,
+                 },
+           dataType: 'html'
+     })
+     .done( function(data) {
+         
+     })
+     .fail(function jqHXR, textStatus, errorThrown) {
+         
+     });    
+}
 
 function addUpdates() { 
           ajaxCall = $.ajax({

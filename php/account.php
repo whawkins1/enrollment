@@ -331,24 +331,26 @@
                     </tr>
               </thead>
             <tbody>
-          <?php $sql = "SELECT enrolled_grades_", $most_recent_year_enrolled, " FROM enrolled_", $most_recent_year_enrolled, " WHERE enrolled_semester = ?";
-            if ( $stmt = $conn->prepare($sql)) {
-                $stmt->bind_param('s', $semester);
-                
-                if ($stmt->execute()) {
-                   $result = $stmt->get_result();
-                   $enrolled_grade_str = "enrolled_grades_", $year;
-                   while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                     echo "<tr>";
-                         echo "<td>", $row['code'], "</td>";
-                         echo "<td>", $row['name'], "</td>";
-                         echo "<td>", $row['credits'], "</td>";
-                         echo "<td>", $row[enrolled_grade_str], "</td>";
-                     echo "</tr>";
-                   }                   
-                }
-            }   
-          ?>          
+              <?php $sql = "SELECT enrolled_grades_", $most_recent_year_enrolled, 
+                           " FROM enrolled_", $most_recent_year_enrolled,
+                           " WHERE enrolled_semester = ? AND user_email = ?";
+                if ( $stmt = $conn->prepare($sql)) {
+                    $stmt->bind_param('ss', $semester, $username);
+                    
+                    if ($stmt->execute()) {
+                       $result = $stmt->get_result();
+                       $enrolled_grade_str = "enrolled_grades_", $year;
+                       while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                         echo "<tr>";
+                             echo "<td>", $row['code'], "</td>";
+                             echo "<td>", $row['name'], "</td>";
+                             echo "<td>", $row['credits'], "</td>";
+                             echo "<td>", $row[enrolled_grade_str], "</td>";
+                         echo "</tr>";
+                       }                   
+                    }
+                }   
+              ?>          
             </tbody>
          </table>
       </div>          

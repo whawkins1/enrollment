@@ -3,15 +3,20 @@
 <?php
    include("config.php");
    
+   $email = $_GET['email'];
    $year = $_GET['year'];
    $semester = $_GET['semester'];
    
-   if( (isset($year) && $year != '') && (isset($semester) && $semester != '') ) {
+   if( (isset($email) && (!empty($year))
+       && (isset($year) && (!empty($year))) 
+       && (isset($semester) && (!empty($semester))) {
      session_start();     
      
-            $sql = "SELECT enrolled_grades_", $year, " FROM enrolled_", $year, " WHERE enrolled_semester = ?";
+            $sql = "SELECT enrolled_grades_", $year, 
+                   " FROM enrolled_", $year, 
+                   " WHERE enrolled_semester = ? AND user_email = ?";
             if ( $stmt = $conn->prepare($sql)) {
-                $stmt->bind_param('s', $_GET['semester']);
+                $stmt->bind_param('s', $semester, $user_email);
                 
                 if ($stmt->execute()) {
                    $result = $stmt->get_result();
