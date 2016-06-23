@@ -4,7 +4,7 @@
     include("config.php");
     
     $username = $_GET['username'];
-    if ( isset($username) && $username != '' ) {
+    if ( isset($username) && (!empty($username))) {
       session_start();
       $_SESSION['username'] = $username;
       
@@ -256,7 +256,7 @@
                ?>
                             <option value = "<?php echo $year; ?>" selected><?php echo $year; ?></option>
                         <?php
-                        }
+                        } else {
                         ?>
                     <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
                <?php
@@ -299,6 +299,7 @@
                     $stmt->close();
                     $sql = "SELECT @semesterGPA";
                     $gpa = $conn->query($sql);
+                    $stmt->close();
                 }       
              }
           ?>
@@ -311,10 +312,11 @@
              $sql = "CALL getCumulativeGPA(?, @cumulativeGPA)";
              if($stmt = $conn->prepare($sql)) {
                $stmt->bind_param('s', $username);
-                 if ($stmt->execute() {
+                 if ($stmt->execute()) {
                     $stmt->close();
                     $sql = "SELECT @cumulativeGPA";
                     $gpa - $conn->query($sql);
+                    $stmt->close();
                  }
              }
           ?>
@@ -331,15 +333,13 @@
                     </tr>
               </thead>
             <tbody>
-              <?php $sql = "SELECT enrolled_grades_", $most_recent_year_enrolled, 
-                           " FROM enrolled_", $most_recent_year_enrolled,
-                           " WHERE enrolled_semester = ? AND user_email = ?";
+              <?php $sql = "SELECT enrolled_grades_" . $most_recent_year_enrolled . " FROM enrolled_" . $most_recent_year_enrolled . " WHERE enrolled_semester = ? AND user_email = ?";
                 if ( $stmt = $conn->prepare($sql)) {
                     $stmt->bind_param('ss', $semester, $username);
                     
                     if ($stmt->execute()) {
                        $result = $stmt->get_result();
-                       $enrolled_grade_str = "enrolled_grades_", $year;
+                       $enrolled_grade_str = "enrolled_grades_" . $year;
                        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                          echo "<tr>";
                              echo "<td>", $row['code'], "</td>";
@@ -347,7 +347,8 @@
                              echo "<td>", $row['credits'], "</td>";
                              echo "<td>", $row[enrolled_grade_str], "</td>";
                          echo "</tr>";
-                       }                   
+                       }           
+                       $stmt->close();                       
                     }
                 }   
               ?>          
