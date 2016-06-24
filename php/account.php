@@ -264,30 +264,30 @@
                ?>
           </select>
           <select id="semesterdropdown">
-               <?php $semester = "";
+               <?php /* $semester = "";
                      $fall_start_date = (new DateTime("09-01"))->format("m-d");
                      $fall_end_date = (new DateTime("01-14"))->format("m-d");
                      $today = (new DateTime())->format("m-d");
                
-               $selected_fall = ($fall_start_date < $today && $fall_end_date > $today) 
+               $selected_fall = ($fall_start_date < $today && $fall_end_date > $today) */
                ?>
-                    <option value='Fall' <?php if($selected_fall){ echo "Selected"; $semester = "Fall"; }?>>Fall</option>   
+                    <!--<option value='Fall' <?php //if($selected_fall){ echo "Selected"; $semester = "Fall"; }?>>Fall</option> 
                               
-               <?php $spring_start_date = (new DateTime("01-15"))->format("m-d");
+               <?php /*$spring_start_date = (new DateTime("01-15"))->format("m-d");
                      $spring_end_date = (new DateTime("05-15"))->format("m-d");
                      $today = (new DateTime())->format("m-d");
                
-               $selected_spring = ($spring_start_date < $today && $spring_end_date > $today); 
+               $selected_spring = ($spring_start_date < $today && $spring_end_date > $today); */
                ?>
-                    <option value='Spring' <?php if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>   
+                    <option value='Spring' <?php //if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>   
                               
-               <?php  $summer_start_date = (new DateTime("05-16"))->format("m-d");
+               <?php /*$summer_start_date = (new DateTime("05-16"))->format("m-d");
                       $summer_end_date = (new DateTime("08-30"))->format("m-d");
                       $today = (new DateTime())->format("m-d");
                
-               $selected_summer = ($summer_start_date < $today && $summer_end_date > $today) 
+               $selected_summer = ($summer_start_date < $today && $summer_end_date > $today)*/ 
                ?>
-                    <option value='Summer' <?php if($selected_summer){ echo "Selected"; $semester = "Summer";}?>>Summer</option>   
+                    <option value='Summer' <?php //if($selected_summer){ echo "Selected"; $semester = "Summer";}?>>Summer</option> --> 
            </select>
            <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
            <?php 

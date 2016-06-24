@@ -486,7 +486,7 @@ $(function() {
     }); 
     
     //Populate City Dropdown Based on State
-    $('#statedropdown').change(function() {	
+    $('#statedropdown').on('change',function() {	
           $selected = $('#statedropdown :selected').text();
           if (!($selected === "none" || $selected === "error")) {
                var ajaxCall = $.ajax({
@@ -518,8 +518,7 @@ $(function() {
     
     $('#semesterdropdown').on('change', function() {
        var yearSelected = $('#yeardropdown').val();
-       var semesterSelected = $(this).val       
-       
+       var semesterSelected = $(this).val();          
     });
     
     $('#yeardropdown option:first').prop('selected', true);
@@ -540,23 +539,35 @@ $(function() {
     
     $('#homephone').mask("999-999-9999");
     $('#mobilephone').mask("999-999-9999");
+    
+    $('#semesterdropdown').on('change', function() {
+        populateGradeTable();
+        getSemesterGPA();
+        getCumulaitveGPA();
+    });
+    
+    $('#yeardropdown').on('change', function() {
+        populateGradeTable();
+        getSemesterGPA();
+        getCumulaitveGPA();
+    });
 });
 
-function populateGradeTable(email, year, semester) {
+function populateGradeTable() {
     //Instead of passing parameters just get from dropdown
    $.ajax({
            type: 'GET',
            url: "getGradesYearSemester.php";
            data: {  
-                    email: email,
-                    year: year,
-                    semester: semester
+                    email: originalEmail,
+                    year: $('#yeardropdown option:selected').text(),
+                    semester: $('#semesterdropdown option:selected').text()
                  },
            dataType: 'html'
      })
      .done( function(data) {
-         ('#tablegrades tbody').remove();
-         ('#tablegrades' tbody).append(data);
+         $('#tablegrades tbody').remove();
+         $('#tablegrades' tbody).append(data);
      })
      .fail(function jqHXR, textStatus, errorThrown) {
          alert("Error Retrieving Grades for " + semester + " " + year);
@@ -568,17 +579,17 @@ function getSemesterGPA() {
            type: 'GET',
            url: "getSemesterGPA.php";
            data: {  
-                    email: email,
-                    year: year,
-                    semester: semester
+                    email: originalEmail,
+                    year: $('#yeardropdown option:selected').text(),
+                    semester: $('#semesterdropdown option:selected').text()
                  },
            dataType: 'html'
      })
      .done( function(data) {
-         
+         $('#semestergpalabel').text(data);
      })
      .fail(function jqHXR, textStatus, errorThrown) {
-
+         $('#semestergpalabel').text("ERR");
      });
 }
 
@@ -587,15 +598,15 @@ function getCumulativeGPA() {
            type: 'GET',
            url: "getCumulativeGPA.php";
            data: {  
-                    email: email,
+                    email: originalEmail
                  },
            dataType: 'html'
      })
      .done( function(data) {
-         
+         $('#cumulativegpalabel').text(data);         
      })
      .fail(function jqHXR, textStatus, errorThrown) {
-         
+         $('#cumulativegpalabel').text("ERR");
      });    
 }
 
