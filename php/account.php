@@ -249,16 +249,18 @@
                }
           ?>          
           <select id="yeardropdown">
-               <option selected="selected">Choose one</option>
                <?php
                     foreach($years_attended_arr AS $year) { 
-                        if ($year = $most_recent_year_enrolled) { 
+                        if ($year == $most_recent_year_enrolled) { 
                ?>
-                            <option value = "<?php echo $year; ?>" selected><?php echo $year; ?></option>
+                          <option value = "<?php echo $year; ?>" selected><?php echo $year; ?></option>
+                       <?php
+                         } else {
+                       ?>                    
+                           <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
                         <?php
-                        } else {
-                        ?>
-                    <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
+                         }
+                       ?>                          
                <?php
                     }
                ?>
@@ -279,7 +281,7 @@
                
                $selected_spring = ($spring_start_date < $today && $spring_end_date > $today); */
                ?>
-                    <option value='Spring' <?php //if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>   
+                    <!--<option value='Spring' <?php //if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>   
                               
                <?php /*$summer_start_date = (new DateTime("05-16"))->format("m-d");
                       $summer_end_date = (new DateTime("08-30"))->format("m-d");
@@ -287,18 +289,17 @@
                
                $selected_summer = ($summer_start_date < $today && $summer_end_date > $today)*/ 
                ?>
-                    <option value='Summer' <?php //if($selected_summer){ echo "Selected"; $semester = "Summer";}?>>Summer</option> --> 
+                    <!--<option value='Summer' <?php //if($selected_summer){ echo "Selected"; $semester = "Summer";}?>>Summer</option> --> 
            </select>
            <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
            <?php 
             $gpa = "ERROR";
-            $sql = "CALL getSemesterGPA(?, ?, ?, @semesterGPA)";
-            if($stmt = $conn->prepare($sql))      
-                $stmt->bind_param('ssi', $username, $most_recent_year_enrolled, $semester);
+            if($stmt = $conn->prepare("CALL getSemesterGPA(?, ?, ?, @semesterGPA)")) {      
+                $stmt->bind_param('ssi', $username, $semester, $most_recent_year_enrolled);
                 if($stmt->execute()) {
-                    $stmt->close();
-                    $sql = "SELECT @semesterGPA";
-                    $gpa = $conn->query($sql);
+                    $select = $conn->query("SELECT @semesterGPA");
+                    $result = $select->fetch_assoc();
+                    $gpa = $result['@semesterGPA'];
                     $stmt->close();
                 }       
              }

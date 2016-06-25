@@ -50,7 +50,7 @@ $(function() {
     $('#tablepayments').tablesorter();
     $('#amount').autoNumeric('init');
     $('#vin').val("");
-    6
+    
     $('#zipcode').on('keydown', function(e) {
        var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
              
@@ -557,7 +557,7 @@ function populateGradeTable() {
     //Instead of passing parameters just get from dropdown
    $.ajax({
            type: 'GET',
-           url: "getGradesYearSemester.php";
+           url: "getGradesYearSemester.php",
            data: {  
                     email: originalEmail,
                     year: $('#yeardropdown option:selected').text(),
@@ -565,11 +565,11 @@ function populateGradeTable() {
                  },
            dataType: 'html'
      })
-     .done( function(data) {
+     .done(function(data) {
          $('#tablegrades tbody').remove();
-         $('#tablegrades' tbody).append(data);
+         $('#tablegrades tbody').append(data);
      })
-     .fail(function jqHXR, textStatus, errorThrown) {
+     .fail(function (jqHXR, textStatus, errorThrown) {
          alert("Error Retrieving Grades for " + semester + " " + year);
      });         
 }
@@ -577,7 +577,7 @@ function populateGradeTable() {
 function getSemesterGPA() {
     $.ajax({
            type: 'GET',
-           url: "getSemesterGPA.php";
+           url: "getSemesterGPA.php",
            data: {  
                     email: originalEmail,
                     year: $('#yeardropdown option:selected').text(),
@@ -588,7 +588,7 @@ function getSemesterGPA() {
      .done( function(data) {
          $('#semestergpalabel').text(data);
      })
-     .fail(function jqHXR, textStatus, errorThrown) {
+     .fail(function (jqHXR, textStatus, errorThrown) {
          $('#semestergpalabel').text("ERR");
      });
 }
@@ -596,7 +596,7 @@ function getSemesterGPA() {
 function getCumulativeGPA() {
     $.ajax({
            type: 'GET',
-           url: "getCumulativeGPA.php";
+           url: "getCumulativeGPA.php",
            data: {  
                     email: originalEmail
                  },
@@ -605,7 +605,7 @@ function getCumulativeGPA() {
      .done( function(data) {
          $('#cumulativegpalabel').text(data);         
      })
-     .fail(function jqHXR, textStatus, errorThrown) {
+     .fail(function (jqHXR, textStatus, errorThrown) {
          $('#cumulativegpalabel').text("ERR");
      });    
 }
