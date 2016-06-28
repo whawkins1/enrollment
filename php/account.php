@@ -259,27 +259,46 @@
           </select>
           <label id="semesterlabel">Semester</label>
           <select id="semesterdropdown">
-               <?php  $semester = Fall; 
-                      $curent_year = date("Y");
-                      $today = (new DateTime());   
+               <?php  
+                      function convertDateToTimestamp($date) {
+                         $date_zone = new DateTime($date, new DateTimeZone("America/New_York"));
+                         return $date_zone->getTimestamp();
+                      }
+                      $semester = ""; 
+                      $current_year = date("Y");
                       
-                      $fall_start_date = (new DateTime($current_year . "-09-01"));
-                      $fall_end_date = (new DateTime($current_year . "-01-14"));                 
-                      $selected_fall = ($fall_start_date <= $today && $fall_end_date >= $today);
+                      $today_timestamp = convertDateToTimestamp(null);
+                      
+                      $fall_start_date_year_prepended = $current_year . "-09-01";                          
+                      $fall_start_timestamp = convertDateToTimestamp($fall_start_date_year_prepended);
+                      
+                      $fall_end_date_year_prepended = ($current_year + 1) . "-01-14";
+                      $fall_end_timestamp = convertDateToTimestamp($fall_end_date_year_prepended);      
+                      
+                      $selected_fall = ( ($fall_start_timestamp <= $today_timestamp) && ($fall_end_timestamp >= $today_timestamp));
                ?>
                     <option value='Fall' <?php if($selected_fall){ echo "Selected"; $semester = "Fall"; }?>>Fall</option> 
                               
-               <?php $spring_start_date = (new DateTime($current_year . "-01-15"));
-                     $spring_end_date = (new DateTime($current_year . "-05-15"));
-                     $selected_spring = ($spring_start_date <= $today && $spring_end_date >= $today); 
+               <?php 
+                     $spring_start_date_year_prepended = $current_year . "-01-15";
+                     $sprin_start_timestamp = convertDateToTimestamp($spring_start_date_year_prepended);
+                     
+                     $spring_end_date_year_prepended = $current_year . "-05-15";
+                     $spring_end_timestamp = convertDateToTimestamp($spring_end_date_year_prepended);
+                     
+                     $selected_spring = ( ($spring_start_timestamp <= $today_timestamp) && ($spring_end_timestamp >= $today_timestamp)); 
                ?>
-                    <option value='Spring' <?php if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>   
+                    <option value='Spring' <?php if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>  
                               
-               <?php $summer_start_date = (new DateTime($current_year . "05-16"));
-                     $summer_end_date = (new DateTime($current_year . "08-30"));
-                    $selected_summer = ($summer_start_date < $today && $summer_end_date > $today) 
+               <?php 
+                     $summer_start_date_year_prepended = $current_year . "-06-01"; 
+                     $summer_start_timestamp = convertDateToTimestamp($summer_start_date_year_prepended);
+                     
+                     $summer_end_date_year_prepended = $current_year . "-08-30";
+                     $summer_end_timestamp = convertDateToTimestamp($summer_end_date_year_prepended);
+                     $selected_summer = ( ($summer_start_timestamp <= $today_timestamp) && ($summer_end_timestamp >= $today_timestamp)); 
                ?>
-                    <option value='Summer' <?php if($selected_summer){ echo "Selected"; $semester = "Summer";}?>>Summer</option> 
+                    <option value='Summer' <?php $selected_summer === true ? selected="selected" : ""; $semester = "Summer";}?>>Summer</option> 
            </select>
            <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
            <?php 
