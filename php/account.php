@@ -261,7 +261,8 @@
           <select id="semesterdropdown">
                <?php  
                       function convertDateToTimestamp($date) {
-                         $date_zone = new DateTime($date, new DateTimeZone("America/New_York"));
+                         $date_zone = new DateTime($date, new DateTimeZone("UTC"));
+                         $date_zone->setTimeZone(new DateTimeZone("America/New_York"));
                          return $date_zone->getTimestamp();
                       }
                       $semester = ""; 
@@ -281,7 +282,7 @@
                               
                <?php 
                      $spring_start_date_year_prepended = $current_year . "-01-15";
-                     $sprin_start_timestamp = convertDateToTimestamp($spring_start_date_year_prepended);
+                     $spring_start_timestamp = convertDateToTimestamp($spring_start_date_year_prepended);
                      
                      $spring_end_date_year_prepended = $current_year . "-05-15";
                      $spring_end_timestamp = convertDateToTimestamp($spring_end_date_year_prepended);
@@ -296,9 +297,13 @@
                      
                      $summer_end_date_year_prepended = $current_year . "-08-30";
                      $summer_end_timestamp = convertDateToTimestamp($summer_end_date_year_prepended);
-                     $selected_summer = ( ($summer_start_timestamp <= $today_timestamp) && ($summer_end_timestamp >= $today_timestamp)); 
+                     $selected_summer = ( ($summer_start_timestamp <= $today_timestamp) && ($summer_end_timestamp >= $today_timestamp)) ? " selected" : ""; 
+                                  //echo "<option value=", $cityID . $selected . ">" . $cityName . "</option>";
+                     echo "<option value='Summer' selected='selected'>Summer</option>"; 
+                     if (!empty($selected_summer)) { $semester = "Summer"; }
                ?>
-                    <option value='Summer' <?php $selected_summer === true ? selected="selected" : ""; $semester = "Summer";}?>>Summer</option> 
+                    
+                    
            </select>
            <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
            <?php 
@@ -315,7 +320,7 @@
           ?>
           <label>GPA:</label>
           <label>Semester:</label>
-          <label id="semestergpalabel" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
+          <label id="semestergpalabel" value = <?php echo $semester; ?>><?php echo $gpa;?></label> 
           <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
           <?php
              $cumulative_gpa = "ERROR";
