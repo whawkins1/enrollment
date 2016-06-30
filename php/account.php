@@ -122,7 +122,7 @@
                                
                                while ($stmt->fetch()) {
                                   $selected = ($city == $cityName) ? " selected" : "";
-                                  echo "<option value=", $cityID . $selected . ">" . $cityName . "</option>";
+                                  echo "<option value=", $cityID, $selected, ">", $cityName, "</option>";
                                }
                             }
                             $stmt->close();
@@ -276,9 +276,9 @@
                       $fall_end_date_year_prepended = ($current_year + 1) . "-01-14";
                       $fall_end_timestamp = convertDateToTimestamp($fall_end_date_year_prepended);      
                       
-                      $selected_fall = ( ($fall_start_timestamp <= $today_timestamp) && ($fall_end_timestamp >= $today_timestamp));
+                      $selected_fall = ( ($fall_start_timestamp <= $today_timestamp) && ($fall_end_timestamp >= $today_timestamp)) ? " selected" : "";
+                      echo "<option value='Fall' selected>Fall</option>";
                ?>
-                    <option value='Fall' <?php if($selected_fall){ echo "Selected"; $semester = "Fall"; }?>>Fall</option> 
                               
                <?php 
                      $spring_start_date_year_prepended = $current_year . "-01-15";
@@ -287,9 +287,9 @@
                      $spring_end_date_year_prepended = $current_year . "-05-15";
                      $spring_end_timestamp = convertDateToTimestamp($spring_end_date_year_prepended);
                      
-                     $selected_spring = ( ($spring_start_timestamp <= $today_timestamp) && ($spring_end_timestamp >= $today_timestamp)); 
+                     $selected_spring = ( ($spring_start_timestamp <= $today_timestamp) && ($spring_end_timestamp >= $today_timestamp)) ? " selected" : ""; 
+                     echo "<option value='Spring'>Spring</option>";
                ?>
-                    <option value='Spring' <?php if($selected_spring) { echo "Selected"; $semester = "Spring";}?>>Spring</option>  
                               
                <?php 
                      $summer_start_date_year_prepended = $current_year . "-06-01"; 
@@ -299,11 +299,9 @@
                      $summer_end_timestamp = convertDateToTimestamp($summer_end_date_year_prepended);
                      $selected_summer = ( ($summer_start_timestamp <= $today_timestamp) && ($summer_end_timestamp >= $today_timestamp)) ? " selected" : ""; 
                                   //echo "<option value=", $cityID . $selected . ">" . $cityName . "</option>";
-                     echo "<option value='Summer' selected='selected'>Summer</option>"; 
+                     echo "<option value='Summer'>Summer</option>"; 
                      if (!empty($selected_summer)) { $semester = "Summer"; }
-               ?>
-                    
-                    
+               ?>                    
            </select>
            <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
            <?php 
@@ -320,7 +318,7 @@
           ?>
           <label>GPA:</label>
           <label>Semester:</label>
-          <label id="semestergpalabel" value = <?php echo $semester; ?>><?php echo $gpa;?></label> 
+          <label id="semestergpalabel" value = <?php echo $selected_summer; ?>><?php echo $selected_summer;?></label> 
           <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
           <?php
              $cumulative_gpa = "ERROR";
@@ -348,7 +346,9 @@
                     </tr>
               </thead>
             <tbody>
-              <?php $sql = "SELECT enrolled_grades_" . $most_recent_year_enrolled . " FROM enrolled_" . $most_recent_year_enrolled . " WHERE enrolled_semester = ? AND user_email = ?";
+              <?php $sql = "SELECT enrolled_grades_" . $most_recent_year_enrolled . 
+                           " FROM enrolled_" . $most_recent_year_enrolled . 
+                           " WHERE enrolled_semester = ? AND user_email = ?";
                 if ( $stmt = $conn->prepare($sql)) {
                     $stmt->bind_param('ss', $semester, $username);
                     

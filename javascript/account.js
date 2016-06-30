@@ -561,7 +561,7 @@ function populateGradeTable() {
            data: {  
                     email: originalEmail,
                     year: $('#yeardropdown option:selected').text(),
-                    semester: $('#semesterdropdown option:selected').text()
+                    semester: $('#semesterdropdown option:selected').text() 
                  },
            dataType: 'html'
      })
