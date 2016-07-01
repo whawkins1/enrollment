@@ -137,14 +137,14 @@
                           $result = $conn->query("SELECT DISTINCT user_major FROM users");
                           if($result) {
                               while ($row = $result->fetch_assoc())   { 
-                                    $selected = ($major == $user_major) ? " selected" : "";
+                                    $selected = ($major == $row['user_major']) ? " selected" : "";
                                     echo "<option value=", $row["user_major"], $selected, ">", $row["user_major"], "</option>";
                               }
                           } 
                           ?>
                     </select> 
                      
-                    <label class="contactlabel">Email* :</label><input type="text" id="email", class="contactinput" value="<?php echo $username?>"readonly>
+                    <label class="contactlabel">Email* :</label><input type="text" id="email" class="contactinput" value="<?php echo $username?>" readonly>
                     
                     <div id="editbuttoncontainer">
                         <button type="button" id="editbutton">Edit</button>
@@ -189,9 +189,9 @@
                         <select id="codefilter"> 
                             <option>-- Select Code --</option>
                             <?php $result = $conn->query("SELECT DISTINCT code FROM courses;");
-                                 if($result) {
+                                  if($result) {
                                      while ($row = $result->fetch_assoc()) { ?>
-                                       <option value=<?php echo row['code']; ?>><?php echo row['code']; ?></option>
+                                       <option value=<?php echo $row['code']; ?>><?php echo $row['code']; ?></option>
                             <?php    } 
                                  } ?>
                         </select>
@@ -200,11 +200,12 @@
                  <div id="filterprofessor" class="filters">
                         <select id="professorfilter"> 
                             <option>-- Select Professor </option>
-                            <option>Bettis, Jerome</option>
-                            <option>Hawkins, Jenny</option>
-                            <option>Laporte, Leo</option>
-                            <option>Smith, Mike</option>
-                            <option>Zeise, Paul</option>
+                            <?php $result = $conn->query("SELECT DISTINCT concat(professor_last_name, ', ', professor_first_name AS professor FROM courses);");
+                                  if ($result) {
+                                      while($row = $result->fetch_assoc()) { ?>
+                                         <option value=<?php echo $row['professor'] ?>><?php echo $row['professor'] ?></option>
+                            <?php         }
+                                  }  ?>
                         </select>
                   </div>
                   
@@ -212,10 +213,10 @@
                         <select id="locationfilter"> 
                             <option>-- Select Location --</option>
                             <?php $result = $conn->query("SELECT DISTINCT location FROM courses;");
-                                 if ($result) {
-                                   while($row = $result->fetch_assoc()) { ?>
-                                     <option value=<?php echo $row['location'];?>><?php echo $row['location'];?></option>
-                             <?php } 
+                                  if ($result) {
+                                      while($row = $result->fetch_assoc()) { ?>
+                                        <option value=<?php echo $row['location'];?>><?php echo $row['location'];?></option>
+                             <?php    } 
                                   }  ?>                         
                         </select>                        
                   </div>
@@ -261,48 +262,48 @@
           <label id="semesterlabel">Semester</label>
           <select id="semesterdropdown">
                <?php  
-                      function convertDateToTimestamp($date) {
+                      function getTimeZoneObject($date) {
                          $date_zone = new DateTime($date, new DateTimeZone("UTC"));
                          $date_zone->setTimeZone(new DateTimeZone("America/New_York"));
-                         return $date_zone->getTimestamp();
+                         return $date_zone;
                       }
-                      $semester = ""; 
-                      $current_year = date("Y");
                       
-                      $today_timestamp = convertDateToTimestamp(null);
+                      $semester = ""; 
+                      $current_date = getTimeZoneObject(null);
+                      $current_year = $current_date->format("Y");
+                      
+                      $today_timestamp = $current_date->getTimeStamp();
                       
                       $fall_start_date_year_prepended = $current_year . "-09-01";                          
-                      $fall_start_timestamp = convertDateToTimestamp($fall_start_date_year_prepended);
+                      $fall_start_object = getTimeZoneObject($fall_start_date_year_prepended);
                       
                       $fall_end_date_year_prepended = ($current_year + 1) . "-01-14";
-                      $fall_end_timestamp = convertDateToTimestamp($fall_end_date_year_prepended);      
+                      $fall_end_object = getTimeZoneObject($fall_end_date_year_prepended);      
                       
-                      $selected_fall = ( ($fall_start_timestamp <= $today_timestamp) && ($fall_end_timestamp >= $today_timestamp)) ? " selected" : "";
+                      $selected_fall = ( ($fall_start_object->getTimeStamp <= $today_timestamp) && ($fall_end_object->getTimeStamp >= $today_timestamp)) ? " selected" : "";
                       echo "<option value='Fall' selected>Fall</option>";
-               ?>
+                      if (!empty($selected_fall)) { $semester = "Fall"; }
                               
-               <?php 
                      $spring_start_date_year_prepended = $current_year . "-01-15";
-                     $spring_start_timestamp = convertDateToTimestamp($spring_start_date_year_prepended);
+                     $spring_start_object = getTimeZoneObject($spring_start_date_year_prepended);
                      
                      $spring_end_date_year_prepended = $current_year . "-05-15";
-                     $spring_end_timestamp = convertDateToTimestamp($spring_end_date_year_prepended);
+                     $spring_end_object = getTimeZoneObject($spring_end_date_year_prepended);
                      
-                     $selected_spring = ( ($spring_start_timestamp <= $today_timestamp) && ($spring_end_timestamp >= $today_timestamp)) ? " selected" : ""; 
+                     $selected_spring = ( ($spring_start_object->getTimeStamp() <= $today_timestamp) && ($spring_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
                      echo "<option value='Spring'>Spring</option>";
-               ?>
-                              
-               <?php 
+                     if (!empty($selected_spring)) { $semester = "Spring"; }
+               
                      $summer_start_date_year_prepended = $current_year . "-06-01"; 
-                     $summer_start_timestamp = convertDateToTimestamp($summer_start_date_year_prepended);
+                     $summer_start_object = getTimeZoneObject($summer_start_date_year_prepended);
                      
                      $summer_end_date_year_prepended = $current_year . "-08-30";
-                     $summer_end_timestamp = convertDateToTimestamp($summer_end_date_year_prepended);
-                     $selected_summer = ( ($summer_start_timestamp <= $today_timestamp) && ($summer_end_timestamp >= $today_timestamp)) ? " selected" : ""; 
-                                  //echo "<option value=", $cityID . $selected . ">" . $cityName . "</option>";
+                     $summer_end_object = getTimeZoneObject($summer_end_date_year_prepended);
+                     
+                     $selected_summer = ( ($summer_start_object->getTimeStamp() <= $today_timestamp) && ($summer_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
                      echo "<option value='Summer'>Summer</option>"; 
-                     if (!empty($selected_summer)) { $semester = "Summer"; }
-               ?>                    
+                     if (!empty($selected_summer)) { $semester = "Summer"; } ?>
+               
            </select>
            <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
            <?php 
@@ -319,7 +320,7 @@
           ?>
           <label>GPA:</label>
           <label>Semester:</label>
-          <label id="semestergpalabel" value = <?php echo $selected_summer; ?>><?php echo $selected_summer;?></label> 
+          <label id="semestergpalabel" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
           <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
           <?php
              $cumulative_gpa = "ERROR";
@@ -347,9 +348,13 @@
                     </tr>
               </thead>
             <tbody>
-              <?php $sql = "SELECT enrolled_grades_" . $most_recent_year_enrolled . 
-                           " FROM enrolled_" . $most_recent_year_enrolled . 
-                           " WHERE enrolled_semester = ? AND user_email = ?";
+              <?php  $enrolled_grade_append_year =  "enrolled_grade_" . $most_recent_year_enrolled;
+                   $sql = "SELECT e." . $enrolled_grade_append_year . ", c.title, c.credits, c.code" .
+                           " FROM enrolled_" . $most_recent_year_enrolled . " AS e" 
+                           " INNER JOIN courses AS c ON c.code = e.user_course_code" . 
+                           " WHERE e.user_semester_" . $most_recent_year_enrolled . " = ? 
+                             AND e.user_email_".$most_recent_year_enrolled . " = ?"
+                             
                 if ( $stmt = $conn->prepare($sql)) {
                     $stmt->bind_param('ss', $semester, $username);
                     
@@ -361,7 +366,7 @@
                              echo "<td>", $row['code'], "</td>";
                              echo "<td>", $row['name'], "</td>";
                              echo "<td>", $row['credits'], "</td>";
-                             echo "<td>", $row[enrolled_grade_str], "</td>";
+                             echo "<td>", $row[enrolled_grade_append_year], "</td>";
                          echo "</tr>";
                        }           
                        $stmt->close();                       
