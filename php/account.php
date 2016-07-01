@@ -188,8 +188,12 @@
                   <div id="filtercodes" class="filters">
                         <select id="codefilter"> 
                             <option>-- Select Code --</option>
-                            <option>ENG101</option>
-                            <option>MATH101</option>
+                            <?php $result = $conn->query("SELECT DISTINCT code FROM courses;");
+                                 if($result) {
+                                     while ($row = $result->fetch_assoc()) { ?>
+                                       <option value=<?php echo row['code']; ?>><?php echo row['code']; ?></option>
+                            <?php    } 
+                                 } ?>
                         </select>
                   </div>
 
@@ -207,11 +211,12 @@
                   <div id="filterlocation" class="filters">
                         <select id="locationfilter"> 
                             <option>-- Select Location --</option>
-                            <option>Colebank Hall</option>
-                            <option>Falcon Center</option>
-                            <option>Feaster Center</option>
-                            <option>Hardway Hall</option>
-                            <option>Technology Park</option>
+                            <?php $result = $conn->query("SELECT DISTINCT location FROM courses;");
+                                 if ($result) {
+                                   while($row = $result->fetch_assoc()) { ?>
+                                     <option value=<?php echo $row['location'];?>><?php echo $row['location'];?></option>
+                             <?php } 
+                                  }  ?>                         
                         </select>                        
                   </div>
               
@@ -249,13 +254,9 @@
                }
           ?>          
           <select id="yeardropdown">
-               <?php
-                    foreach($years_attended_arr AS $year) { 
-               ?>     
+               <?php foreach($years_attended_arr AS $year) { ?>     
                            <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
-                   <?php    
-                   }
-                   ?>
+               <?php } ?>
           </select>
           <label id="semesterlabel">Semester</label>
           <select id="semesterdropdown">
