@@ -200,12 +200,13 @@
                  <div id="filterprofessor" class="filters">
                         <select id="professorfilter"> 
                             <option>-- Select Professor </option>
-                            <?php $result = $conn->query("SELECT DISTINCT concat(professor_last_name, ', ', professor_first_name AS professor FROM courses);");
-                                  if ($result) {
-                                      while($row = $result->fetch_assoc()) { ?>
+                            <?php $result = $conn->query("SELECT DISTINCT concat(professor_last_name, ', ', professor_first_name) AS professor FROM courses;");
+                                     if ($result) {
+                                        while($row = $result->fetch_assoc()) { ?>
                                          <option value=<?php echo $row['professor'] ?>><?php echo $row['professor'] ?></option>
-                            <?php         }
-                                  }  ?>
+                            <?php       }  
+                                     }
+                            ?>
                         </select>
                   </div>
                   
