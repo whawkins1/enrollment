@@ -281,7 +281,7 @@
                       $fall_end_date_year_prepended = ($current_year + 1) . "-01-14";
                       $fall_end_object = getTimeZoneObject($fall_end_date_year_prepended);      
                       
-                      $selected_fall = ( ($fall_start_object->getTimeStamp <= $today_timestamp) && ($fall_end_object->getTimeStamp >= $today_timestamp)) ? " selected" : "";
+                      $selected_fall = ( ($fall_start_object->getTimeStamp() <= $today_timestamp) && ($fall_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : "";
                       echo "<option value='Fall' selected>Fall</option>";
                       if (!empty($selected_fall)) { $semester = "Fall"; }
                               
@@ -321,6 +321,7 @@
           ?>
           <label>GPA:</label>
           <label>Semester:</label>
+          
           <label id="semestergpalabel" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
           <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
           <?php
@@ -343,31 +344,32 @@
               <thead>
                     <tr id="headerRow">
                          <th class="code">Code</th>
-                         <th class="name">Name</th>
+                         <th class="name">Title</th>
                          <th class="grade">Grade</th>
                          <th class="credits">Credits</th>
                     </tr>
               </thead>
             <tbody>
-              <?php  $enrolled_grade_append_year =  "enrolled_grade_" . $most_recent_year_enrolled;
+              <?php $most_recent_year_enrolled = 2010;  // Temporary
+                   $enrolled_grade_append_year =  "user_grade_" . $most_recent_year_enrolled;
                    $sql = "SELECT e." . $enrolled_grade_append_year . ", c.title, c.credits, c.code" .
-                           " FROM enrolled_" . $most_recent_year_enrolled . " AS e" 
-                           " INNER JOIN courses AS c ON c.code = e.user_course_code" . 
+                           " FROM enrolled_" . $most_recent_year_enrolled . " AS e 
+                             INNER JOIN courses AS c ON c.code = e.user_course_code" . 
                            " WHERE e.user_semester_" . $most_recent_year_enrolled . " = ? 
-                             AND e.user_email_".$most_recent_year_enrolled . " = ?"
+                             AND e.user_email_".$most_recent_year_enrolled . " = ?";
                              
                 if ( $stmt = $conn->prepare($sql)) {
+                    $semester = "Fall";  //Temporary
                     $stmt->bind_param('ss', $semester, $username);
                     
                     if ($stmt->execute()) {
-                       $result = $stmt->get_result();
-                       $enrolled_grade_str = "enrolled_grades_" . $year;
-                       while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                       $stmt->bind_result($grade, $title, $credits, $code);
+                       while ($stmt->fetch()) {
                          echo "<tr>";
-                             echo "<td>", $row['code'], "</td>";
-                             echo "<td>", $row['name'], "</td>";
-                             echo "<td>", $row['credits'], "</td>";
-                             echo "<td>", $row[enrolled_grade_append_year], "</td>";
+                             echo "<td>", $code, "</td>";
+                             echo "<td>", $title, "</td>";
+                             echo "<td>", $grade, "</td>";
+                             echo "<td>", $credits, "</td>";
                          echo "</tr>";
                        }           
                        $stmt->close();                       
