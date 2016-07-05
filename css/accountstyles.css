@@ -121,13 +121,13 @@ legend {
   height: 100%;
 }
 
-#tablecourses {
+.tablesorter {
    border-collapse: collapse;
    width: 100%;
 }
 
 
-#tablecourses th {
+.tablesorter thead tr th {
   text-align: left;
   font-size: 12px;
   background-color: limegreen;
@@ -539,4 +539,40 @@ table.thead, table.tbody {
 
 #resetdefaultbutton {
   display: none;
+}
+
+#labelyear {
+    float: left;
+}
+
+#yeardropdown {
+    float: left;
+}
+
+#semesterlabel {
+    float: left;
+}
+
+#semesterdropdown {
+    float: left;
+}
+
+#labelgpatitle {
+    float: right;
+}
+
+#labelgpasemestertitle {
+    float: right;
+}
+
+#labelgpasemester {
+    float: right;
+}
+
+#labelcumulativetitle {
+    float: right;
+}
+
+#labelcumulativegpa {
+    float: right;
 }

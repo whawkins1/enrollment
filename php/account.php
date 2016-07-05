@@ -241,7 +241,7 @@
       </div>                
       
       <div id="tab-grades" class="tabsjump">
-          <label>Year</label>      
+          <label id="labelyear">Year</label>      
           <?php
                $sql = "SELECT getYearsAttended(?)";           
                if ($stmt = $conn->prepare($sql)) {
@@ -319,10 +319,10 @@
                 }       
              }
           ?>
-          <label>GPA:</label>
-          <label>Semester:</label>
+          <label id="labelgpatitle">GPA:</label>
+          <label id="labelgpasemestertitle">Semester:</label>
           
-          <label id="semestergpalabel" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
+          <label id="labelgpasemester" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
           <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
           <?php
              $cumulative_gpa = "ERROR";
@@ -337,8 +337,8 @@
                  }
              }
           ?>
-          <label>Cumulative</label> 
-          <label id="cumulativegpalabel" value = <?php echo $cumulative_gpa; ?>><?php echo $cumulative_gpa;?></label>
+          <label id="labelcumulativetitle">Cumulative:</label> 
+          <label id="labelcumulativegpa" value = <?php echo $cumulative_gpa; ?>><?php echo $cumulative_gpa;?></label>
             
           <table id="tablegrades" class="tablesorter">
               <thead>
