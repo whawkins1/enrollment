@@ -10,7 +10,11 @@ var originalMobilePhone;
 var originalMajor;
 var originalEmail;
 
-$(function() {    
+$(function() { 
+    $('#tablegrades tr:odd').css('background-color', '#D3D3D3');
+            $('#tablegrades').tablesorter({
+                headers: { 0: { sorter: false} } 
+            });   
     //Remove all Data Fields to avoid caching previous results
     $(window).unload( function () {
       $('#firstname').val("");

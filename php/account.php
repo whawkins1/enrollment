@@ -241,110 +241,114 @@
       </div>                
       
       <div id="tab-grades" class="tabsjump">
-          <label id="labelyear">Year</label>      
-          <?php
-               $sql = "SELECT getYearsAttended(?)";           
-               if ($stmt = $conn->prepare($sql)) {
-                   $stmt->bind_param('s', $username);
-                   if($stmt->execute()) {
-                      $stmt->bind_result($years_attended_commas);
-                      $stmt->fetch();
-                      $stmt->close();
+         <div id="selectiongpacontainer">
+              <label id="labelyear">Year:</label>      
+              <?php
+                   $sql = "SELECT getYearsAttended(?)";           
+                   if ($stmt = $conn->prepare($sql)) {
+                       $stmt->bind_param('s', $username);
+                       if($stmt->execute()) {
+                          $stmt->bind_result($years_attended_commas);
+                          $stmt->fetch();
+                          $stmt->close();
+                       }
+                       $years_attended_arr = explode(",", $years_attended_commas);
+                       $most_recent_year_enrolled = max($years_attended_arr);
                    }
-                   $years_attended_arr = explode(",", $years_attended_commas);
-                   $most_recent_year_enrolled = max($years_attended_arr);
-               }
-          ?>          
-          <select id="yeardropdown">
-               <?php foreach($years_attended_arr AS $year) { ?>     
-                           <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
-               <?php } ?>
-          </select>
-          <label id="semesterlabel">Semester</label>
-          <select id="semesterdropdown">
-               <?php  
-                      function getTimeZoneObject($date) {
-                         $date_zone = new DateTime($date, new DateTimeZone("UTC"));
-                         $date_zone->setTimeZone(new DateTimeZone("America/New_York"));
-                         return $date_zone;
-                      }
-                      
-                      $semester = ""; 
-                      $current_date = getTimeZoneObject(null);
-                      $current_year = $current_date->format("Y");
-                      
-                      $today_timestamp = $current_date->getTimeStamp();
-                      
-                      $fall_start_date_year_prepended = $current_year . "-09-01";                          
-                      $fall_start_object = getTimeZoneObject($fall_start_date_year_prepended);
-                      
-                      $fall_end_date_year_prepended = ($current_year + 1) . "-01-14";
-                      $fall_end_object = getTimeZoneObject($fall_end_date_year_prepended);      
-                      
-                      $selected_fall = ( ($fall_start_object->getTimeStamp() <= $today_timestamp) && ($fall_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : "";
-                      echo "<option value='Fall' selected>Fall</option>";
-                      if (!empty($selected_fall)) { $semester = "Fall"; }
-                              
-                     $spring_start_date_year_prepended = $current_year . "-01-15";
-                     $spring_start_object = getTimeZoneObject($spring_start_date_year_prepended);
-                     
-                     $spring_end_date_year_prepended = $current_year . "-05-15";
-                     $spring_end_object = getTimeZoneObject($spring_end_date_year_prepended);
-                     
-                     $selected_spring = ( ($spring_start_object->getTimeStamp() <= $today_timestamp) && ($spring_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
-                     echo "<option value='Spring'>Spring</option>";
-                     if (!empty($selected_spring)) { $semester = "Spring"; }
-               
-                     $summer_start_date_year_prepended = $current_year . "-06-01"; 
-                     $summer_start_object = getTimeZoneObject($summer_start_date_year_prepended);
-                     
-                     $summer_end_date_year_prepended = $current_year . "-08-30";
-                     $summer_end_object = getTimeZoneObject($summer_end_date_year_prepended);
-                     
-                     $selected_summer = ( ($summer_start_object->getTimeStamp() <= $today_timestamp) && ($summer_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
-                     echo "<option value='Summer'>Summer</option>"; 
-                     if (!empty($selected_summer)) { $semester = "Summer"; } ?>
-               
-           </select>
-           <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
-           <?php 
-            $gpa = "ERROR";
-            if($stmt = $conn->prepare("CALL getSemesterGPA(?, ?, ?, @semesterGPA)")) {      
-                $stmt->bind_param('ssi', $username, $semester, $most_recent_year_enrolled);
-                if($stmt->execute()) {
-                    $select = $conn->query("SELECT @semesterGPA");
-                    $result = $select->fetch_assoc();
-                    $gpa = $result['@semesterGPA'];
-                    $stmt->close();
-                }       
-             }
-          ?>
-          <label id="labelgpatitle">GPA:</label>
-          <label id="labelgpasemestertitle">Semester:</label>
-          
-          <label id="labelgpasemester" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
-          <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
-          <?php
-             $cumulative_gpa = "ERROR";
-             $sql = "CALL getCumulativeGPA(?, @cumulativeGPA)";
-             if($stmt = $conn->prepare($sql)) {
-               $stmt->bind_param('s', $username);
-                 if ($stmt->execute()) {
-                    $select = $conn->query("SELECT @cumulativeGPA");
-                    $result = $select->fetch_assoc();
-                    $cumulative_gpa = $result['@cumulativeGPA'];                    
-                    $stmt->close();
+              ?>          
+              <select id="yeardropdown">
+                   <?php foreach($years_attended_arr AS $year) { ?>     
+                               <option value = "<?php echo $year; ?>"><?php echo $year; ?></option>
+                   <?php } ?>
+              </select>
+              <label id="semesterlabel">Semester:</label>
+              <select id="semesterdropdown">
+                   <?php  
+                          function getTimeZoneObject($date) {
+                             $date_zone = new DateTime($date, new DateTimeZone("UTC"));
+                             $date_zone->setTimeZone(new DateTimeZone("America/New_York"));
+                             return $date_zone;
+                          }
+                          
+                          $semester = ""; 
+                          $current_date = getTimeZoneObject(null);
+                          $current_year = $current_date->format("Y");
+                          
+                          $today_timestamp = $current_date->getTimeStamp();
+                          
+                          $fall_start_date_year_prepended = $current_year . "-09-01";                          
+                          $fall_start_object = getTimeZoneObject($fall_start_date_year_prepended);
+                          
+                          $fall_end_date_year_prepended = ($current_year + 1) . "-01-14";
+                          $fall_end_object = getTimeZoneObject($fall_end_date_year_prepended);      
+                          
+                          $selected_fall = ( ($fall_start_object->getTimeStamp() <= $today_timestamp) && ($fall_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : "";
+                          echo "<option value='Fall' selected>Fall</option>";
+                          if (!empty($selected_fall)) { $semester = "Fall"; }
+                                  
+                         $spring_start_date_year_prepended = $current_year . "-01-15";
+                         $spring_start_object = getTimeZoneObject($spring_start_date_year_prepended);
+                         
+                         $spring_end_date_year_prepended = $current_year . "-05-15";
+                         $spring_end_object = getTimeZoneObject($spring_end_date_year_prepended);
+                         
+                         $selected_spring = ( ($spring_start_object->getTimeStamp() <= $today_timestamp) && ($spring_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
+                         echo "<option value='Spring'>Spring</option>";
+                         if (!empty($selected_spring)) { $semester = "Spring"; }
+                   
+                         $summer_start_date_year_prepended = $current_year . "-06-01"; 
+                         $summer_start_object = getTimeZoneObject($summer_start_date_year_prepended);
+                         
+                         $summer_end_date_year_prepended = $current_year . "-08-30";
+                         $summer_end_object = getTimeZoneObject($summer_end_date_year_prepended);
+                         
+                         $selected_summer = ( ($summer_start_object->getTimeStamp() <= $today_timestamp) && ($summer_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
+                         echo "<option value='Summer'>Summer</option>"; 
+                         if (!empty($selected_summer)) { $semester = "Summer"; } ?>
+                   
+               </select>
+               <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
+               <?php 
+                $gpa = "ERROR";
+                if($stmt = $conn->prepare("CALL getSemesterGPA(?, ?, ?, @semesterGPA)")) {      
+                    $stmt->bind_param('ssi', $username, $semester, $most_recent_year_enrolled);
+                    if($stmt->execute()) {
+                        $select = $conn->query("SELECT @semesterGPA");
+                        $result = $select->fetch_assoc();
+                        $gpa = $result['@semesterGPA'];
+                        $stmt->close();
+                    }       
                  }
-             }
-          ?>
-          <label id="labelcumulativetitle">Cumulative:</label> 
-          <label id="labelcumulativegpa" value = <?php echo $cumulative_gpa; ?>><?php echo $cumulative_gpa;?></label>
-            
+              ?>
+              <div id="gpacontainer">
+                  <label id="labelgpatitle">GPA:</label>
+                  <label id="labelgpasemestertitle">Semester:</label>
+                  
+                  <label id="labelgpasemester" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
+                  <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
+                  <?php
+                     $cumulative_gpa = "ERROR";
+                     $sql = "CALL getCumulativeGPA(?, @cumulativeGPA)";
+                     if($stmt = $conn->prepare($sql)) {
+                       $stmt->bind_param('s', $username);
+                         if ($stmt->execute()) {
+                            $select = $conn->query("SELECT @cumulativeGPA");
+                            $result = $select->fetch_assoc();
+                            $cumulative_gpa = $result['@cumulativeGPA'];                    
+                            $stmt->close();
+                         }
+                     }
+                  ?>
+                  <label id="labelcumulativetitle">Cumulative:</label> 
+                  <label id="labelcumulativegpa" value = <?php echo $cumulative_gpa; ?>><?php echo $cumulative_gpa;?></label>
+              </div>    
+         </div>   
+         <div id="tablegradescontainer">
           <table id="tablegrades" class="tablesorter">
               <thead>
                     <tr id="headerRow">
                          <th class="code">Code</th>
-                         <th class="name">Title</th>
+                         <th class="title">Title</th>
                          <th class="grade">Grade</th>
                          <th class="credits">Credits</th>
                     </tr>
@@ -378,6 +382,11 @@
               ?>          
             </tbody>
          </table>
+         </div>
+         <div id="totalcreditscontainer">
+             <label id="labeltotalcreditstitle">Total Credits:</label>
+             <label id="labeltotalcredits">10</label>
+         </div>
       </div>          
 
       <div id="tab-financial" class="tabsjump">
@@ -393,7 +402,7 @@
                           <option>Payment</option>
                           <option>Charge</option>
                        </select> 
-                       </label>
+               </label>
                <table id="tablesummary">
                  <thead>
                     <tr>

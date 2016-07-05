@@ -24,9 +24,9 @@ body {
 }
 
 .tabsjump {
-    padding: 10px;
     width: 100%;
     height: 540px;
+    padding-top: 6px;
     background-color: white;  
 }
 
@@ -123,9 +123,9 @@ legend {
 
 .tablesorter {
    border-collapse: collapse;
+   margin-left: 6px;
    width: 100%;
 }
-
 
 .tablesorter thead tr th {
   text-align: left;
@@ -186,12 +186,13 @@ th.professor {
 
 .filters {
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   margin-right: 40px;
 }
 
 #filterlabel {
   font-weight: bold;
+  margin-left: 8px;
 }
 
 #tablecourses td {
@@ -542,37 +543,72 @@ table.thead, table.tbody {
 }
 
 #labelyear {
-    float: left;
+    margin-right: 10px;
 }
 
 #yeardropdown {
-    float: left;
+    margin-right: 12px;
 }
 
 #semesterlabel {
-    float: left;
+    margin-right: 8px;
 }
 
-#semesterdropdown {
-    float: left;
-}
 
 #labelgpatitle {
-    float: right;
+ font-weight: bold;
+ margin-right: 8px; 
 }
 
 #labelgpasemestertitle {
-    float: right;
+    margin-right: 4px;   
 }
 
 #labelgpasemester {
-    float: right;
+   margin-right: 12px;
 }
 
 #labelcumulativetitle {
-    float: right;
+    margin-right: 4px;   
 }
 
 #labelcumulativegpa {
-    float: right;
+   margin-right: 8px;
+}
+
+#gpacontainer {
+  float: right;
+}
+
+#selectiongpacontainer {
+  margin-left: 8px;
+}
+
+th.code {
+  width: 10%;
+}
+
+th.title {
+  width: 60%;
+}
+
+th.grade {
+  width: 20%;
+}
+
+th.credits {
+   width: 10%;
+}
+
+#totalcreditscontainer {
+  float: right;
+  margin-right: 30px;
+}
+
+#labeltotalcreditstitle {
+  font-weight: bold;
+}
+
+#labeltotalcredits {
+   font-weight: bold;
 }
