@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-    include("config.php");
+    require_once("config.php");
     
     $username = $_GET['username'];
     if ( isset($username) && (!empty($username))) {
@@ -178,10 +178,12 @@
               <div id="filterdepartment" class="filters">
                         <select id="departmentfilter"> 
                             <option>-- Select Department --</option>
-                            <option>Business</option>
-                            <option>Computer Science</option>
-                            <option>English</option>
-                            <option>Math</option>
+                            <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
+                                  if($result) {
+                                     while($row = $result->fetch_assoc()) { ?>
+                                     <option value=<?php $row['department']; ?>><?php echo $row['department']; ?></option>
+                            <?php }
+                                     } ?>
                         </select>                        
               </div>
                   
@@ -205,8 +207,7 @@
                                         while($row = $result->fetch_assoc()) { ?>
                                          <option value=<?php echo $row['professor'] ?>><?php echo $row['professor'] ?></option>
                             <?php       }  
-                                     }
-                            ?>
+                                     } ?>
                         </select>
                   </div>
                   
@@ -256,33 +257,25 @@
                         if($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param($username, $semester);
                             if($stmt->execute()) {
-                                 $stmt->bind_result($code, $title, $department, $professor_last_name, 
-                                                    $professor_first_name, $begin_time, $end_time,
-                                                    $am_pm, $days, $location, $credits);
-                                 while($stmt->fetch()) { 
-                            ?>     
-                            <tr>
-                                <td><input type="checkbox" class="checkbox id="checkboxrow"/></th>
-                                <td><?php echo $row['code']; ?></td>
-                                <td><?php echo $row['title']; ?></td>
-                                <td><?php echo $row['department']; ?></td>
-                                <td><?php echo $row['professor_last_name'] . ", " .$row['professor_first_name']; ?></td>
-                                <td><?php echo $row['begin_time'] . "-" . $row['end_time'] . $row['am_pm'] . " " . $row['days']; ?></td>
-                                <td><?php echo $row['location']; ?></td>
-                                <td><?php echo $row['credits']; ?></td>
-                            </tr>
-                            
+                                 $stmt->bind_result($code, $title, $days, $department, $begin_time, 
+                                                    $end_time, $am_pm, $credits, $professor_last_name, 
+                                                    $professor_first_name, $location, $department );
+                                 while($stmt->fetch()) { ?>     
+                                    <tr>
+                                        <td><input type="checkbox" class="checkbox id="checkboxrow"/></th>
+                                        <td><?php echo $code; ?></td>
+                                        <td><?php echo $title; ?></td>
+                                        <td><?php echo $department; ?></td>
+                                        <td><?php echo $professor_last_name,  ", ", $professor_first_name; ?></td>
+                                        <td><?php echo $begin_time, "-" . $end_time, $am_pm,  " ",  $days; ?></td>
+                                        <td><?php echo $location; ?></td>
+                                        <td><?php echo $credits; ?></td>
+                                    </tr>
                             <?php
-                            }  // end while
-                            ?>
-                         
-                        <?php
-                        } // end result check
-                        ?>
-                        <?php
-                            mysqli_free_result($result);
-                            mysqli_close($conn);
-                        ?>
+                                  }  
+                            }                       
+                        } 
+                   } ?>
                  </tbody>                  
              </table>
       </div>                
