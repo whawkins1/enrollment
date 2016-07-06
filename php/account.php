@@ -236,6 +236,53 @@
                         </tr>
                    </thead>     
                  <tbody>
+                 <?php
+                    $sql = "SELECT getYearsAttended(?)";           
+                   if ($stmt = $conn->prepare($sql)) {
+                       $stmt->bind_param('s', $username);
+                       if($stmt->execute()) {
+                          $stmt->bind_result($years_attended_commas);
+                          $stmt->fetch();
+                          $stmt->close();
+                       }
+                       $years_attended_arr = explode(",", $years_attended_commas);
+                       $most_recent_year_enrolled = max($years_attended_arr);
+                   }
+                   if(!empty($most_recent_year_enrolled) {
+                        $sql = "SELECT * FROM courses AS c INNER JOIN " . "enrolled_" . $most_recent_year_enrolled . " AS e" .
+                               " ON c.code = e.user_course_code WHERE e.user_email_" . $most_recent_year_enrolled . "= ? " .
+                               " AND user_semester_" . $enrolled_appended_recent_year . " = ?";
+                        
+                        if($stmt = $conn->prepare($sql)) {
+                            $stmt->bind_param($username, $semester);
+                            if($stmt->execute()) {
+                                 $stmt->bind_result($code, $title, $department, $professor_last_name, 
+                                                    $professor_first_name, $begin_time, $end_time,
+                                                    $am_pm, $days, $location, $credits);
+                                 while($stmt->fetch()) { 
+                            ?>     
+                            <tr>
+                                <td><input type="checkbox" class="checkbox id="checkboxrow"/></th>
+                                <td><?php echo $row['code']; ?></td>
+                                <td><?php echo $row['title']; ?></td>
+                                <td><?php echo $row['department']; ?></td>
+                                <td><?php echo $row['professor_last_name'] . ", " .$row['professor_first_name']; ?></td>
+                                <td><?php echo $row['begin_time'] . "-" . $row['end_time'] . $row['am_pm'] . " " . $row['days']; ?></td>
+                                <td><?php echo $row['location']; ?></td>
+                                <td><?php echo $row['credits']; ?></td>
+                            </tr>
+                            
+                            <?php
+                            }  // end while
+                            ?>
+                         
+                        <?php
+                        } // end result check
+                        ?>
+                        <?php
+                            mysqli_free_result($result);
+                            mysqli_close($conn);
+                        ?>
                  </tbody>                  
              </table>
       </div>                
