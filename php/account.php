@@ -181,9 +181,9 @@
                             <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
                                   if($result) {
                                      while($row = $result->fetch_assoc()) { ?>
-                                     <option value=<?php $row['department']; ?>><?php echo $row['department']; ?></option>
-                            <?php }
-                                     } ?>
+                                         <option value=<?php $row['department']; ?>><?php echo $row['department']; ?></option>
+                               <?php }
+                                  } ?>
                         </select>                        
               </div>
                   
@@ -247,33 +247,37 @@
                           $stmt->close();
                        }
                        $years_attended_arr = explode(",", $years_attended_commas);
-                       $most_recent_year_enrolled = max($years_attended_arr);
+                       //$most_recent_year_enrolled = max($years_attended_arr);
+                       $most_recent_year_enrolled = 2016;
                    }
-                   if(!empty($most_recent_year_enrolled) {
-                        $sql = "SELECT * FROM courses AS c INNER JOIN " . "enrolled_" . $most_recent_year_enrolled . " AS e" .
-                               " ON c.code = e.user_course_code WHERE e.user_email_" . $most_recent_year_enrolled . "= ? " .
-                               " AND user_semester_" . $enrolled_appended_recent_year . " = ?";
+                   if(!empty($most_recent_year_enrolled)) {
+                        $sql = "SELECT c.code, c.title, c.days, c.department, c.begin_time, c.end_time, 
+                                    c.am_pm, c.credits, c.professor_last_name, c.professor_first_name, c.location, c.department 
+                                   FROM courses AS c INNER JOIN " . "enrolled_" . $most_recent_year_enrolled . " AS e" .
+                                   " ON c.code = e.user_course_code WHERE e.user_email_" . $most_recent_year_enrolled . " = ? " .
+                                   " AND user_semester_" . $most_recent_year_enrolled . " = ?;";
                         
                         if($stmt = $conn->prepare($sql)) {
-                            $stmt->bind_param($username, $semester);
+                            $semester = "Fall";
+                            $stmt->bind_param('ss', $username, $semester);
                             if($stmt->execute()) {
                                  $stmt->bind_result($code, $title, $days, $department, $begin_time, 
                                                     $end_time, $am_pm, $credits, $professor_last_name, 
                                                     $professor_first_name, $location, $department );
-                                 while($stmt->fetch()) { ?>     
-                                    <tr>
-                                        <td><input type="checkbox" class="checkbox id="checkboxrow"/></th>
-                                        <td><?php echo $code; ?></td>
-                                        <td><?php echo $title; ?></td>
-                                        <td><?php echo $department; ?></td>
-                                        <td><?php echo $professor_last_name,  ", ", $professor_first_name; ?></td>
-                                        <td><?php echo $begin_time, "-", $end_time, $am_pm,  " ",  $days; ?></td>
-                                        <td><?php echo $location; ?></td>
-                                        <td><?php echo $credits; ?></td>
-                                    </tr>
-                            <?php
+                                 while($stmt->fetch()) {      
+                                    echo "<tr>";
+                                        echo "<td><input type='checkbox' class='checkbox' id='checkboxrow'/></th>";
+                                        echo "<td>", $code, "</td>";
+                                        echo "<td>", $title, "</td>";
+                                        echo "<td>", $department, "</td>";
+                                        echo "<td>", $professor_last_name,  ", ", $professor_first_name; "</td>";
+                                        echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days; "</td>";
+                                        echo "<td>", $location, "</td>";
+                                        echo "<td>", $credits, "</td>";
+                                    echo "</tr>";
                                   }  
-                            }                       
+                               $stmt->close();   
+                            }            
                         } 
                    } ?>
                  </tbody>                  
@@ -400,7 +404,7 @@
                            " FROM enrolled_" . $most_recent_year_enrolled . " AS e 
                              INNER JOIN courses AS c ON c.code = e.user_course_code" . 
                            " WHERE e.user_semester_" . $most_recent_year_enrolled . " = ? 
-                             AND e.user_email_".$most_recent_year_enrolled . " = ?";
+                             AND e.user_email_".$most_recent_year_enrolled . " = ?;";
                              
                 if ( $stmt = $conn->prepare($sql)) {
                     $semester = "Fall";  //Temporary

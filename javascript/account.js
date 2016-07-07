@@ -28,6 +28,7 @@ $(function() {
       $('#homephone').val("");
       $('#mobilephone').val("");
       $('#email').val("");      
+      $('#tablecourses').remove();
     });
     
     //Hold original Values to Reset Defaults
