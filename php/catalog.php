@@ -1,5 +1,7 @@
 <!DOCTYPE html>     
 
+<?php require_once("config.php"); ?>
+
 <html>
     <head>
        <link rel="stylesheet" href="../css/catalogstyles.css"/>
@@ -11,10 +13,12 @@
                  <label>Filter Department:        
                     <select id="departmentfilter"> 
                             <option>-- Select Department --</option>
-                            <option>Business</option>
-                            <option>Computer Science</option>
-                            <option>English</option>
-                            <option>Math</option>
+                            <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
+                                  if($result) {
+                                     while($row = $result->fetch_assoc()) { ?>
+                                     <option value=<?php $row['department']; ?>><?php echo $row['department']; ?></option>
+                            <?php }
+                                     } ?>
                     </select>        
                  </label>
         </div>
@@ -32,6 +36,21 @@
                     </tr>
                </thead>     
                  <tbody>
+                    <?php $result = $conn->query("SELECT * FROM courses");
+                          if($result) {
+                                while($row = $result->fetch_assoc()) { ?>     
+                                    <tr>
+                                        <td><?php echo $row['code']; ?></td>
+                                        <td><?php echo $row['title']; ?></td>
+                                        <td><?php echo $row['department']; ?></td>
+                                        <td><?php echo $row['professor_last_name'],  ", ", $row['professor_first_name']; ?></td>
+                                        <td><?php echo $row['begin_time'], "-", $row['end_time'], $row['am_pm'],  " ",  $row['days']; ?></td>
+                                        <td><?php echo $row['location']; ?></td>
+                                        <td><?php echo $row['credits']; ?></td>
+                                    </tr>
+                            <?php
+                                  }  
+                            } ?>
                  </tbody>    
              </table>
               <script src="../plugins/jquery-1.12.0.js"></script>

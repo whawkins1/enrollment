@@ -58,7 +58,7 @@
         
       <ul class="tabs">
          <li><a href="#tab-personal">Personal</a></li>
-         <li><a href="#tab-courses">Courses</a></li>
+         <li><a href="#tab-courses">Current Courses</a></li>
          <li><a href="#tab-grades">Grades</a></li>
          <li><a href="#tab-financial">Financial</a></li>
          <li><a href="#tab-payment">Make Payment</a></li>
@@ -76,7 +76,7 @@
                     <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
                      <label class="contactlabel">Country* :</label> <select id="countrydropdown" class="contactinput">
                         <?php
-                            $result =  $conn->query("SELECT * FROM countries");
+                            $result = $conn->query("SELECT * FROM countries");
                                if ($result) {
                                   while ($row = $result->fetch_assoc()) { 
                                         $selected = ($country == $row["country_name"]) ? " selected" : "";
@@ -267,7 +267,7 @@
                                         <td><?php echo $title; ?></td>
                                         <td><?php echo $department; ?></td>
                                         <td><?php echo $professor_last_name,  ", ", $professor_first_name; ?></td>
-                                        <td><?php echo $begin_time, "-" . $end_time, $am_pm,  " ",  $days; ?></td>
+                                        <td><?php echo $begin_time, "-", $end_time, $am_pm,  " ",  $days; ?></td>
                                         <td><?php echo $location; ?></td>
                                         <td><?php echo $credits; ?></td>
                                     </tr>
