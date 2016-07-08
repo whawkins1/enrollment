@@ -16,7 +16,7 @@
                             <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
                                   if($result) {
                                      while($row = $result->fetch_assoc()) { ?>
-                                     <option value=<?php $row['department']; ?>><?php echo $row['department']; ?></option>
+                                     <option value=<?php echo $row['department']; ?>><?php echo $row['department']; ?></option>
                             <?php }
                                      } ?>
                     </select>        

@@ -28,7 +28,7 @@ $(function() {
       $('#homephone').val("");
       $('#mobilephone').val("");
       $('#email').val("");      
-      $('#tablecourses').remove();
+      $('#tablecourses').html("");
     });
     
     //Hold original Values to Reset Defaults

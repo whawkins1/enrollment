@@ -54,7 +54,7 @@
            <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $username ?></span></label>
       </div>
       
-      <?php include("../php/navigation.php")?>;         
+      <?php include("../php/navigation.php");?>         
         
       <ul class="tabs">
          <li><a href="#tab-personal">Personal</a></li>
@@ -181,7 +181,7 @@
                             <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
                                   if($result) {
                                      while($row = $result->fetch_assoc()) { ?>
-                                         <option value=<?php $row['department']; ?>><?php echo $row['department']; ?></option>
+                                         <option value=<?php echo $row['department']; ?>><?php echo $row['department']; ?></option>
                                <?php }
                                   } ?>
                         </select>                        
@@ -201,7 +201,7 @@
 
                  <div id="filterprofessor" class="filters">
                         <select id="professorfilter"> 
-                            <option>-- Select Professor </option>
+                            <option>-- Select Professor -- </option>
                             <?php $result = $conn->query("SELECT DISTINCT concat(professor_last_name, ', ', professor_first_name) AS professor FROM courses;");
                                      if ($result) {
                                         while($row = $result->fetch_assoc()) { ?>
@@ -226,7 +226,7 @@
               <table id="tablecourses" class="tablesorter">      
                   <thead>
                         <tr id="headerRow">
-                             <th class="checkbox"><input type="checkbox" id="checkboxhead"/></th>
+                             <th class="checkbox"><input type="checkbox" id="checkboxhead"></th>
                              <th class="code">Code</th>
                              <th class="name">Name</th>
                              <th class="department">Department</th>
@@ -248,7 +248,8 @@
                        }
                        $years_attended_arr = explode(",", $years_attended_commas);
                        //$most_recent_year_enrolled = max($years_attended_arr);
-                       $most_recent_year_enrolled = 2016;
+                       $most_recent_year_enrolled = 2010;
+                       $semester = "Fall";
                    }
                    if(!empty($most_recent_year_enrolled)) {
                         $sql = "SELECT c.code, c.title, c.days, c.department, c.begin_time, c.end_time, 
@@ -264,14 +265,16 @@
                                  $stmt->bind_result($code, $title, $days, $department, $begin_time, 
                                                     $end_time, $am_pm, $credits, $professor_last_name, 
                                                     $professor_first_name, $location, $department );
+                                 $count = 0;
                                  while($stmt->fetch()) {      
+                                    $count = $count + 1;
                                     echo "<tr>";
-                                        echo "<td><input type='checkbox' class='checkbox' id='checkboxrow'/></th>";
+                                        echo "<td><input type='checkbox' class='checkbox' id='checkboxrow'></td>";
                                         echo "<td>", $code, "</td>";
                                         echo "<td>", $title, "</td>";
                                         echo "<td>", $department, "</td>";
-                                        echo "<td>", $professor_last_name,  ", ", $professor_first_name; "</td>";
-                                        echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days; "</td>";
+                                        echo "<td>",  $professor_last_name,  ", ", $professor_first_name, "</td>";
+                                        echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
                                         echo "<td>", $location, "</td>";
                                         echo "<td>", $credits, "</td>";
                                     echo "</tr>";
@@ -368,7 +371,7 @@
                   <label id="labelgpatitle">GPA:</label>
                   <label id="labelgpasemestertitle">Semester:</label>
                   
-                  <label id="labelgpasemester" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
+                  <label id="labelgpasemester" value = <?php echo $gpa; ?>><?php echo $count;?></label> 
                   <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
                   <?php
                      $cumulative_gpa = "ERROR";
@@ -629,7 +632,7 @@
                         </label>
                     </div>
                     <div id="showpasswordcontainer">
-                        <input type="checkbox" id="showpasscb">Show Password</br>
+                        <input type="checkbox" id="showpasscb">Show Password
                     </div>
                 </div>
             </div>            
@@ -642,7 +645,7 @@
                 </div>
                 
                 <div id="instructionscontainer">
-                    <label class="instructions">Enter Payment<label>
+                    <label class="instructions">Enter Payment</label>
                 </div>
                 
                 <div id="makepaymentcontainer">
