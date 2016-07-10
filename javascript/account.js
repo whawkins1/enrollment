@@ -28,7 +28,6 @@ $(function() {
       $('#homephone').val("");
       $('#mobilephone').val("");
       $('#email').val("");      
-      $('#tablecourses').html("");
     });
     
     //Hold original Values to Reset Defaults
@@ -1033,28 +1032,6 @@ function validCardNumber(number) {
         break;
    }
    return filter.test(number);
-}
-
-function loadTableData() {
-  var ajaxCall = $.ajax({
-             type: 'POST',
-             url: "/php/getCourses.php",
-             data: {includeCheckbox: true},
-             dataType: 'html',
-             cache: false             
-         });
-         
-    ajaxCall.done (function(data) {         
-            $('#tablecourses tbody').append(data);
-            $('tr:odd').css('background-color', '#D3D3D3');
-            $('#tablecourses').tablesorter({
-                headers: { 0: { sorter: false} } 
-            });             
-         }); 
-         
-         ajaxCall.fail (function(jqXHR, textStatus, errorThrown) { 
-                          alert("Error Loading Courses");
-         });
 }
 
 function getCurrentBalance() {
