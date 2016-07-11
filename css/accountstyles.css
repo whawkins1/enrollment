@@ -612,3 +612,14 @@ th.credits {
 #labeltotalcredits {
    font-weight: bold;
 }
+
+#buttoncoursescontainer {
+   margin-top: 8px;
+   text-align: center;
+}
+
+.buttonscourses {
+  width: 9%;
+  margin-left: 10px;
+  font-size: 105%;
+}

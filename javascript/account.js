@@ -43,7 +43,6 @@ $(function() {
     originalMajor = $('majordropdown').text();
     originalEmail = $('#email').val();
     
-    loadTableData();
     setDropDownFilterDepartment();
     setDropDownFilterCode();
     setDropDownFilterProfessor();
@@ -54,6 +53,14 @@ $(function() {
     $('#tablepayments').tablesorter();
     $('#amount').autoNumeric('init');
     $('#vin').val("");
+    
+    $('#tablecourses th input[type=checkbox]').on('change', function() {
+         setStatusRemoveCourseButton();
+    });
+    
+    $('#tablecourses td input[type=checkbox]').on('change', function() {
+        setStatusRemoveCourseButton($this);
+    });
     
     $('#zipcode').on('keydown', function(e) {
        var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
@@ -556,6 +563,15 @@ $(function() {
         getCumulaitveGPA();
     });
 });
+
+function setStatusRemoveCourseButton(checkbox) {
+    var $button = $('#buttonremovecourses');
+        if(($button.prop("disabled", true)) && (checkbox.prop('checked'))) {
+            $button.prop("disabled", false);
+        } else {
+            $button.prop("disabled", true);
+       }
+}
 
 function populateGradeTable() {
     //Instead of passing parameters just get from dropdown

@@ -285,6 +285,10 @@
                    } ?>
                  </tbody>                  
              </table>
+             <div id="buttoncoursescontainer">
+                  <button type="button" id="buttonshowcourses" class="buttonscourses">Show Course Catalog</button>
+                  <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
+             </div>
       </div>                
       
       <div id="tab-grades" class="tabsjump">
