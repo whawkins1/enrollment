@@ -52,14 +52,25 @@ $(function() {
     setMakePaymentAction();
     $('#tablepayments').tablesorter();
     $('#amount').autoNumeric('init');
-    $('#vin').val("");
+    $('#vin').val("");        
+         
+     $('#checkboxhead').on('change', function() {
+        var checked = $(this).prop('checked', true);
+        setEnableRemoveCourseButton(checked);
+        $('#tablecourses tbody tr td input[type="checkbox"]').each(function () {
+             $(this).prop('checked', checked);
+        });
+     });
     
-    $('#tablecourses th input[type=checkbox]').on('change', function() {
-         setStatusRemoveCourseButton();
-    });
-    
-    $('#tablecourses td input[type=checkbox]').on('change', function() {
-        setStatusRemoveCourseButton($this);
+    $('#tablecourses tr td input[type="checkbox"]').on('change', function() {
+        var indivChecked = $(this).prop('checked', true);
+        setEnableRemoveCourseButton(indivChecked);    
+        
+        var $checkboxHead = $('#checkboxhead');
+        var headChecked = $checkboxHead.prop('checked', true);
+        if((headChecked) && (!indivChecked)) {
+            $checkboxHead.prop('checked', false);
+        }
     });
     
     $('#zipcode').on('keydown', function(e) {
@@ -522,9 +533,7 @@ $(function() {
     
     $('#yeardropdown').on('change', function() {
          var yearSelected = $(this).val();
-         var semesterSelected = $('#semesterdropdown :selected').val();
-         
-         
+         var semesterSelected = $('#semesterdropdown :selected').val();        
     });
     
     $('#semesterdropdown').on('change', function() {
@@ -564,9 +573,9 @@ $(function() {
     });
 });
 
-function setStatusRemoveCourseButton(checkbox) {
+function setEnableRemoveCourseButton(checked) {
     var $button = $('#buttonremovecourses');
-        if(($button.prop("disabled", true)) && (checkbox.prop('checked'))) {
+        if(($button.prop("disabled", true)) && (checked)) {
             $button.prop("disabled", false);
         } else {
             $button.prop("disabled", true);
