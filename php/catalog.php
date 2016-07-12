@@ -38,17 +38,17 @@
                  <tbody>
                     <?php $result = $conn->query("SELECT * FROM courses");
                           if($result) {
-                                while($row = $result->fetch_assoc()) { ?>     
-                                    <tr>
-                                        <td><?php echo $row['code']; ?></td>
-                                        <td><?php echo $row['title']; ?></td>
-                                        <td><?php echo $row['department']; ?></td>
-                                        <td><?php echo $row['professor_last_name'],  ", ", $row['professor_first_name']; ?></td>
-                                        <td><?php echo $row['begin_time'], "-", $row['end_time'], $row['am_pm'],  " ",  $row['days']; ?></td>
-                                        <td><?php echo $row['location']; ?></td>
-                                        <td><?php echo $row['credits']; ?></td>
-                                    </tr>
-                            <?php
+                                while($row = $result->fetch_assoc()) {      
+                                    echo "<tr>";
+                                        echo "<td>", $row['code'], "</td>";
+                                        echo "<td>", $row['title'], "</td>";
+                                        echo "<td>", $row['department'], "</td>";
+                                        echo "<td>", $row['professor_last_name'],  ", ", $row['professor_first_name']; "</td>";
+                                        echo "<td>", $row['begin_time'], "-", $row['end_time'], $row['am_pm'],  " ",  $row['days'], "</td>";
+                                        echo "<td>", $row['location'], "</td>";
+                                        echo "<td>", $row['credits'], "</td>";
+                                    echo "</tr>";
+                            
                                   }  
                             } ?>
                  </tbody>    

@@ -54,22 +54,33 @@ $(function() {
     $('#amount').autoNumeric('init');
     $('#vin').val("");        
          
+     //Check All Boxes and enable remove button   
      $('#checkboxhead').on('change', function() {
-        var checked = $(this).prop('checked', true);
+        var checked = $(this).prop('checked');
         setEnableRemoveCourseButton(checked);
         $('#tablecourses tbody tr td input[type="checkbox"]').each(function () {
              $(this).prop('checked', checked);
         });
      });
     
+    //Enable remove button and check or uncheck header checkbox
     $('#tablecourses tr td input[type="checkbox"]').on('change', function() {
-        var indivChecked = $(this).prop('checked', true);
+        var indivChecked = $(this).prop('checked');
         setEnableRemoveCourseButton(indivChecked);    
         
         var $checkboxHead = $('#checkboxhead');
-        var headChecked = $checkboxHead.prop('checked', true);
+        var headChecked = $checkboxHead.prop('checked');
         if((headChecked) && (!indivChecked)) {
             $checkboxHead.prop('checked', false);
+        } else if (!headChecked) {
+            var allChecked = true;
+            $('#tablecourses tr td input[type="checkbox"]').each(function () {
+                if(!($(this).prop('checked'))) {
+                   allChecked = false;
+                   return false;
+                }
+            });
+            $checkboxHead.prop('checked', allChecked);
         }
     });
     

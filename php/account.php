@@ -285,9 +285,41 @@
                    } ?>
                  </tbody>                  
              </table>
-             <div id="buttoncoursescontainer">
-                  <button type="button" id="buttonshowcourses" class="buttonscourses">Show Course Catalog</button>
+             <div class="buttonscontainer">
                   <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
+             </div>
+             
+             <table id="tablecatalog" class="tablesorter">      
+              <thead>
+                    <tr id="headerRow">
+                         <th class="code">Code</th>
+                         <th class="name">Name</th>
+                         <th class="department">Department</th>
+                         <th class="professor">Professor</th>
+                         <th class="time">Time</th>
+                         <th class="location">Location</th>
+                         <th class="credits">Credits</th>
+                    </tr>
+               </thead>     
+                 <tbody>
+                    <?php $result = $conn->query("SELECT * FROM courses");
+                          if($result) {
+                                while($row = $result->fetch_assoc()) {      
+                                    echo "<tr>";
+                                        echo "<td>", $row['code'], "</td>";
+                                        echo "<td>", $row['title'], "</td>";
+                                        echo "<td>", $row['department'], "</td>";
+                                        echo "<td>", $row['professor_last_name'],  ", ", $row['professor_first_name'], "</td>";
+                                        echo "<td>", $row['begin_time'], "-", $row['end_time'], $row['am_pm'],  " ",  $row['days'], "</td>";
+                                        echo "<td>", $row['location'], "</td>";
+                                        echo "<td>", $row['credits'], "</td>";
+                                    echo "</tr>";
+                                  }  
+                            } ?>
+                 </tbody>    
+             </table>
+             <div class="buttonscontainer">
+                  <button type="button" id="buttonremovecourses" class="buttonscourses">Add</button>
              </div>
       </div>                
       
