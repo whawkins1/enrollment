@@ -11,7 +11,7 @@ var originalMajor;
 var originalEmail;
 
 $(function() { 
-    $('#tablegrades tr:odd').css('background-color', '#D3D3D3');
+    $('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
             $('#tablegrades').tablesorter({
                 headers: { 0: { sorter: false} } 
             });   
