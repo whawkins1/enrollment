@@ -53,7 +53,9 @@ $(function() {
     $('#tablepayments').tablesorter();
     $('#amount').autoNumeric('init');
     $('#vin').val("");        
-         
+
+    $('#nav').remove();
+    
      //Check All Boxes and enable remove button   
      $('#checkboxhead').on('change', function() {
         var checked = $(this).prop('checked');

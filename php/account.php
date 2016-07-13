@@ -285,10 +285,29 @@
                    } ?>
                  </tbody>                  
              </table>
+             
+             <div class="creditscontainer">
+                <label class="creditscontainer">Current Credit Total: </label> <label id="labelcurrentcredittotal"></label>
+             </div>
+             
              <div class="buttonscontainer">
                   <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
              </div>
              
+             <div id="filterdepartment">
+                 <label>Filter Department:        
+                    <select id="departmentfilter"> 
+                            <option>-- Select Department --</option>
+                            <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
+                                  if($result) {
+                                     while($row = $result->fetch_assoc()) { ?>
+                                     <option value=<?php echo $row['department']; ?>><?php echo $row['department']; ?></option>
+                            <?php    }
+                                  } ?>
+                    </select>        
+                 </label>
+             </div>
+        
              <table id="tablecatalog" class="tablesorter">      
               <thead>
                     <tr id="headerRow">
@@ -318,8 +337,11 @@
                             } ?>
                  </tbody>    
              </table>
-             <div class="buttonscontainer">
-                  <button type="button" id="buttonremovecourses" class="buttonscourses">Add</button>
+             <div class="creditscontainer">
+                 <label class="labelcreditstitle">Selected Credits: </label> <label id="labelselectedcredits"></label>
+                 <div class="buttonscontainer">
+                      <button type="button" id="buttonaddcourses" class="buttonscourses">Add</button>
+                 </div>
              </div>
       </div>                
       
