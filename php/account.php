@@ -248,7 +248,7 @@
                        }
                        $years_attended_arr = explode(",", $years_attended_commas);
                        //$most_recent_year_enrolled = max($years_attended_arr);
-                       $most_recent_year_enrolled = 2010;
+                       $most_recent_year_enrolled = 2010; // temporary
                        $semester = "Fall";
                    }
                    if(!empty($most_recent_year_enrolled)) {
@@ -265,9 +265,8 @@
                                  $stmt->bind_result($code, $title, $days, $department, $begin_time, 
                                                     $end_time, $am_pm, $credits, $professor_last_name, 
                                                     $professor_first_name, $location, $department );
-                                 $count = 0;
+
                                  while($stmt->fetch()) {      
-                                    $count = $count + 1;
                                     echo "<tr>";
                                         echo "<td><input type='checkbox' class='checkbox' id='checkboxrow'></td>";
                                         echo "<td>", $code, "</td>";
@@ -287,15 +286,16 @@
              </table>
              
              <div class="creditscontainer">
-                <label class="creditscontainer">Current Credit Total: </label> <label id="labelcurrentcredittotal"></label>
+                <label class="labelcreditstitle">Current Credit Total: </label> 
+                <label id="labelcurrentcredittotal">21</label>
              </div>
              
              <div class="buttonscontainer">
                   <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
              </div>
              
-             <div id="filterdepartment">
-                 <label>Filter Department:        
+             <div id="filterdepartmentcontainer">
+                 <label id="labelfilterdepartmenttitle">Filter By: </label>       
                     <select id="departmentfilter"> 
                             <option>-- Select Department --</option>
                             <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
@@ -305,12 +305,12 @@
                             <?php    }
                                   } ?>
                     </select>        
-                 </label>
              </div>
         
              <table id="tablecatalog" class="tablesorter">      
               <thead>
                     <tr id="headerRow">
+                         <th class="checkbox"><input type="checkbox" id="checkboxheadcatalog"></th>
                          <th class="code">Code</th>
                          <th class="name">Name</th>
                          <th class="department">Department</th>
@@ -325,6 +325,7 @@
                           if($result) {
                                 while($row = $result->fetch_assoc()) {      
                                     echo "<tr>";
+                                        echo "<td><input type='checkbox' class='checkbox' id='checkboxcatalog'></td>";
                                         echo "<td>", $row['code'], "</td>";
                                         echo "<td>", $row['title'], "</td>";
                                         echo "<td>", $row['department'], "</td>";
@@ -338,10 +339,11 @@
                  </tbody>    
              </table>
              <div class="creditscontainer">
-                 <label class="labelcreditstitle">Selected Credits: </label> <label id="labelselectedcredits"></label>
-                 <div class="buttonscontainer">
+                 <label class="labelcreditstitle">Selected Credits: </label> 
+                 <label id="labelselectedcredits">21</label>
+             </div>
+             <div class="buttonscontainer">
                       <button type="button" id="buttonaddcourses" class="buttonscourses">Add</button>
-                 </div>
              </div>
       </div>                
       
@@ -429,7 +431,7 @@
                   <label id="labelgpatitle">GPA:</label>
                   <label id="labelgpasemestertitle">Semester:</label>
                   
-                  <label id="labelgpasemester" value = <?php echo $gpa; ?>><?php echo $count;?></label> 
+                  <label id="labelgpasemester" value = <?php echo $gpa; ?>><?php echo $gpa;?></label> 
                   <!-- Calculate Cumulative GPA Set Database Session Variable $gpa -->
                   <?php
                      $cumulative_gpa = "ERROR";

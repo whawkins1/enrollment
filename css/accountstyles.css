@@ -125,6 +125,7 @@ legend {
    border-collapse: collapse;
    margin-left: 6px;
    width: 100%;
+   border: 1px solid black;
 }
 
 .tablesorter thead tr th {
@@ -157,7 +158,7 @@ legend {
 }
 
 th.checkbox, th.credits {
-  width: 6%;
+  width: 2%;
 }
 
 th.code {
@@ -173,7 +174,7 @@ th.location {
 }
 
 th.name {
-   width: 22%;
+   width: 26%;
 }
 
 th.department {
@@ -181,13 +182,13 @@ th.department {
 }
 
 th.professor {
-   width: 20%;
+   width: 24%;
 }
 
 .filters {
   display: inline-block;
   margin-bottom: 4px;
-  margin-right: 40px;
+  margin-right: 14px;
 }
 
 #filterlabel {
@@ -195,9 +196,8 @@ th.professor {
   margin-left: 8px;
 }
 
-#tablecourses td {
-   border: 1px solid #e3e3e3;
-   padding: 4px 8px;
+.tablesorter td {
+   border: 1px solid black;
 }
 
 #tablesummary th {
@@ -622,4 +622,30 @@ th.credits {
   width: 9%;
   margin: 10px;
   font-size: 105%;
+}
+
+#labelfilterdepartmenttitle {
+  font-weight: bold;
+}
+
+.labelcreditstitle {
+  font-weight: bold;
+  font-size: 108%;
+  margin-right: 4px;
+}
+
+.creditscontainer {
+  float: right;
+  margin-top: 8px;
+  margin-right: 4px;
+}
+
+#filterdepartmentcontainer {
+  margin-bottom: 8px;
+  margin-left: 7px;
+}
+
+#labelfilterdepartmenttitle {
+   font-weight: bold;
+   padding-right: 14px;
 }
