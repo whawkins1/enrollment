@@ -310,7 +310,6 @@
              <table id="tablecatalog" class="tablesorter">      
               <thead>
                     <tr id="headerRow">
-                         <th class="checkbox"><input type="checkbox" id="checkboxheadcatalog"></th>
                          <th class="code">Code</th>
                          <th class="name">Name</th>
                          <th class="department">Department</th>
@@ -343,7 +342,7 @@
                  <label id="labelselectedcredits">21</label>
              </div>
              <div class="buttonscontainer">
-                      <button type="button" id="buttonaddcourses" class="buttonscourses">Add</button>
+                      <button type="button" id="buttonaddcourses" class="buttonscourses" disabled>Add</button>
              </div>
       </div>                
       

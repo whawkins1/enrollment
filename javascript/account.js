@@ -66,7 +66,6 @@ $(function() {
     //Enable remove button and check or uncheck header checkbox
     $('#tablecourses tr td input[type="checkbox"]').on('change', function() {
         var indivChecked = $(this).prop('checked');
-        setEnableRemoveCourseButton(indivChecked);    
         
         var $checkboxHead = $('#checkboxhead');
         var headChecked = $checkboxHead.prop('checked');
@@ -82,7 +81,45 @@ $(function() {
             });
             $checkboxHead.prop('checked', allChecked);
         }
+        var noneChecked = true;
+        if(!indivChecked) {
+            $('#tablecourses tr td input[type="checkbox"]').on('change', function() {
+                if($(this).prop('checked')) {
+                    noneChecked = false;
+                    return false;
+                }
+            });            
+        } 
+        
+        var $buttonCourses = $('#buttonremovecourses');
+        var buttonDisabled = $buttonCourses.prop('disabled');
+        
+        //Change to single statement
+        var disable = (buttonDisabled && !noneChecked);
+        if(buttonDisabled && !noneChecked) {
+            disable = true;
+        } else if (!buttonDisabled && noneChecked) {
+            disable = false;
+        }
+        setEnabledCourseButton($buttoncourses, disable);
+
+           
     });
+    
+    $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
+        var indivChecked = $(this).prop('checked');
+        setEnabelCourseButton($('#buttonAddcourses'), indivChecked);
+        
+        if(!indivChecked) {
+            var noneChecked = true;            
+            $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
+                if($(this).prop('checked')) {
+                    noneChecked = false;
+                }
+            });
+            
+        }
+    });   
     
     $('#zipcode').on('keydown', function(e) {
        var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
@@ -584,12 +621,11 @@ $(function() {
     });
 });
 
-function setEnableRemoveCourseButton(checked) {
-    var $button = $('#buttonremovecourses');
-        if(($button.prop("disabled", true)) && (checked)) {
-            $button.prop("disabled", false);
+function setEnableCourseButton(button, checked) {
+        if((button.prop("disabled", true)) && (checked)) {
+            button.prop("disabled", false);
         } else {
-            $button.prop("disabled", true);
+            button.prop("disabled", true);
        }
 }
 
