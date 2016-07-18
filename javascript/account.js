@@ -91,19 +91,11 @@ $(function() {
             });            
         } 
         
-        var $buttonCourses = $('#buttonremovecourses');
-        var buttonDisabled = $buttonCourses.prop('disabled');
+        var $buttonRemove = $('#buttonremovecourses');
+        var buttonRemoveDisabled = $buttonRemove.prop('disabled');
         
-        //Change to single statement
-        var disable = (buttonDisabled && !noneChecked);
-        if(buttonDisabled && !noneChecked) {
-            disable = true;
-        } else if (!buttonDisabled && noneChecked) {
-            disable = false;
-        }
-        setEnabledCourseButton($buttoncourses, disable);
-
-           
+        var disable = (buttonRemoveDisabled && !noneChecked);
+        setEnabledCourseButton($buttonRemove, disable);          
     });
     
     $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
@@ -116,9 +108,14 @@ $(function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
                 }
-            });
-            
+            });            
         }
+        
+        var $buttonAdd = $('#buttonaddcourses');
+        var buttonAddDisabled = $buttonRemove.prop('disabled');
+        
+        var disable = (buttonAddDisabled && !noneChecked);
+        setEnabledCoursesButton($buttonAdd, disable);
     });   
     
     $('#zipcode').on('keydown', function(e) {
