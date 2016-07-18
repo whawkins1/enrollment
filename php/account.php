@@ -310,6 +310,7 @@
              <table id="tablecatalog" class="tablesorter">      
               <thead>
                     <tr id="headerRow">
+                         <th></th>
                          <th class="code">Code</th>
                          <th class="name">Name</th>
                          <th class="department">Department</th>

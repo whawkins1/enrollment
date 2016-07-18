@@ -57,7 +57,7 @@ $(function() {
      //Check All Boxes and enable remove button   
      $('#checkboxhead').on('change', function() {
         var checked = $(this).prop('checked');
-        setEnableRemoveCourseButton(checked);
+        setEnableCoursesButton($('#buttonremovecourses'), checked);
         $('#tablecourses tbody tr td input[type="checkbox"]').each(function () {
              $(this).prop('checked', checked);
         });
@@ -95,7 +95,7 @@ $(function() {
         var buttonRemoveDisabled = $buttonRemove.prop('disabled');
         
         var disable = (buttonRemoveDisabled && !noneChecked);
-        setEnabledCourseButton($buttonRemove, disable);          
+        setEnableCoursesButton($buttonRemove, disable);          
     });
     
     $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
@@ -115,7 +115,7 @@ $(function() {
         var buttonAddDisabled = $buttonRemove.prop('disabled');
         
         var disable = (buttonAddDisabled && !noneChecked);
-        setEnabledCoursesButton($buttonAdd, disable);
+        setEnableCoursesButton($buttonAdd, disable);
     });   
     
     $('#zipcode').on('keydown', function(e) {
@@ -618,7 +618,7 @@ $(function() {
     });
 });
 
-function setEnableCourseButton(button, checked) {
+function setEnableCoursesButton(button, checked) {
         if((button.prop("disabled", true)) && (checked)) {
             button.prop("disabled", false);
         } else {
