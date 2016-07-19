@@ -57,7 +57,14 @@ $(function() {
      //Check All Boxes and enable remove button   
      $('#checkboxhead').on('change', function() {
         var checked = $(this).prop('checked');
-        setEnableCoursesButton($('#buttonremovecourses'), checked);
+        $button = $('#buttonremovecourses');
+        //Move to function
+        if(checked) {
+            $button.prop("disabled", false);
+        } else {
+            $button.prop("disabled", true);
+        }
+        
         $('#tablecourses tbody tr td input[type="checkbox"]').each(function () {
              $(this).prop('checked', checked);
         });
@@ -83,7 +90,7 @@ $(function() {
         }
         var noneChecked = true;
         if(!indivChecked) {
-            $('#tablecourses tr td input[type="checkbox"]').on('change', function() {
+            $('#tablecourses tr td input[type="checkbox"]').each(function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
                     return false;
@@ -617,14 +624,6 @@ $(function() {
         getCumulaitveGPA();
     });
 });
-
-function setEnableCoursesButton(button, checked) {
-        if((button.prop("disabled", true)) && (checked)) {
-            button.prop("disabled", false);
-        } else {
-            button.prop("disabled", true);
-       }
-}
 
 function populateGradeTable() {
     //Instead of passing parameters just get from dropdown
