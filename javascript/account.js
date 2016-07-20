@@ -54,7 +54,27 @@ $(function() {
     $('#amount').autoNumeric('init');
     $('#vin').val("");        
     
-     //Check All Boxes and enable remove button   
+    //Add Row From Catalog
+    $('#buttonaddcourses').on('click', function() {
+       $('#tablecatalog tr td input[type="checkbox"]').each(function () {
+           if($(this).prop("checked")) {
+               var checkedRow = $(this).closest("tr").clone();
+               checkedRow.appendTo($('#tablecourses tbody'));
+           }
+       });
+    });
+    
+    //Remove Row From Current Courses
+    $('#buttonremovecourses').on('click', function() {
+        if('#tablecourses tr td input[type="checkbox"]').each(function () {
+           if($(this).prop("checked")) {
+              $(this).closest("tr").remove();
+           }
+        });
+    });
+    
+    
+     //Check All Boxes and enable or disable remove button   
      $('#checkboxhead').on('change', function() {
         var checked = $(this).prop('checked');
         $button = $('#buttonremovecourses');
