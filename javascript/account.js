@@ -58,8 +58,8 @@ $(function() {
      $('#checkboxhead').on('change', function() {
         var checked = $(this).prop('checked');
         $button = $('#buttonremovecourses');
-        //Move to function
-        if(checked) {
+       
+        if($(this).prop('checked')) {
             $button.prop("disabled", false);
         } else {
             $button.prop("disabled", true);
@@ -101,8 +101,11 @@ $(function() {
         var $buttonRemove = $('#buttonremovecourses');
         var buttonRemoveDisabled = $buttonRemove.prop('disabled');
         
-        var disable = (buttonRemoveDisabled && !noneChecked);
-        setEnableCoursesButton($buttonRemove, disable);          
+        if (!buttonRemoveDisabled && noneChecked) {
+            $buttonRemove.prop('disabled', true);
+        } else {
+            $buttonRemove.prop('disabled', false);
+        }
     });
     
     $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
