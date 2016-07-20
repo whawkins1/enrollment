@@ -59,14 +59,10 @@ $(function() {
         var checked = $(this).prop('checked');
         $button = $('#buttonremovecourses');
        
-        if($(this).prop('checked')) {
-            $button.prop("disabled", false);
-        } else {
-            $button.prop("disabled", true);
-        }
+        var enable = $(this).prop('checked') ? true : false;
         
         $('#tablecourses tbody tr td input[type="checkbox"]').each(function () {
-             $(this).prop('checked', checked);
+             $(this).prop('checked', enable);
         });
      });
     
@@ -101,31 +97,28 @@ $(function() {
         var $buttonRemove = $('#buttonremovecourses');
         var buttonRemoveDisabled = $buttonRemove.prop('disabled');
         
-        if (!buttonRemoveDisabled && noneChecked) {
-            $buttonRemove.prop('disabled', true);
-        } else {
-            $buttonRemove.prop('disabled', false);
-        }
+        var enable = !buttonRemoveDisabled && noneChecked ? true : false;
+        $buttonRemove.prop('disabled', enable);
     });
     
     $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
         var indivChecked = $(this).prop('checked');
-        setEnabelCourseButton($('#buttonAddcourses'), indivChecked);
         
+        var noneChecked = true;
         if(!indivChecked) {
-            var noneChecked = true;            
             $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
+                    return false;
                 }
             });            
         }
         
         var $buttonAdd = $('#buttonaddcourses');
-        var buttonAddDisabled = $buttonRemove.prop('disabled');
+        var buttonAddDisabled = $buttonAdd.prop('disabled');
         
-        var disable = (buttonAddDisabled && !noneChecked);
-        setEnableCoursesButton($buttonAdd, disable);
+        var disable = (!buttonAddDisabled && noneChecked) ? true : false;
+        $buttonAdd.prop('disabled', disable);
     });   
     
     $('#zipcode').on('keydown', function(e) {
