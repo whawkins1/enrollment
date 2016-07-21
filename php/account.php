@@ -275,7 +275,7 @@
                                         echo "<td>",  $professor_last_name,  ", ", $professor_first_name, "</td>";
                                         echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
                                         echo "<td>", $location, "</td>";
-                                        echo "<td>", $credits, "</td>";
+                                        echo "<td id='credits'>", $credits, "</td>";
                                     echo "</tr>";
                                   }  
                                $stmt->close();   

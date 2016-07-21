@@ -56,21 +56,32 @@ $(function() {
     
     //Add Row From Catalog
     $('#buttonaddcourses').on('click', function() {
+       var currentTotal = +($('#labelcurrentcredittotal').text());
        $('#tablecatalog tr td input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
                var checkedRow = $(this).closest("tr").clone();
                checkedRow.appendTo($('#tablecourses tbody'));
            }
-       });
+       });       
     });
     
     //Remove Row From Current Courses
     $('#buttonremovecourses').on('click', function() {
-        if('#tablecourses tr td input[type="checkbox"]').each(function () {
+        if ('#tablecourses tr td input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
               $(this).closest("tr").remove();
            }
         });
+        
+        var rowCount = $('#tablecourses tr').length;
+        var $checkBoxHead = $('#checkboxhead');
+        var headChecked = $checkBoxHead.prop('checked');
+        
+        if (rowCount === 0 && headChecked) {
+            $checkBoxHead.prop('checked', false);
+            $checkBoxhead.prop('disabled', true);
+            $(this).prop('disabled', true);
+        }
     });
     
     
