@@ -54,32 +54,70 @@ $(function() {
     $('#amount').autoNumeric('init');
     $('#vin').val("");        
     
-    //Add Row From Catalog
+    //Add Row To Current Courses and Remove It From Catalog
     $('#buttonaddcourses').on('click', function() {
        var currentTotal = +($('#labelcurrentcredittotal').text());
        $('#tablecatalog tr td input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
-               var checkedRow = $(this).closest("tr").clone();
-               checkedRow.appendTo($('#tablecourses tbody'));
+               $(this).prop('checked', false);
+               $(this).off('click');
+               $(this).on('click', function() {
+                    var indivChecked = $(this).prop('checked');
+                    
+                    var $checkboxHead = $('#checkboxhead');
+                    var headChecked = $checkboxHead.prop('checked');
+                    if((headChecked) && (!indivChecked)) {
+                        $checkboxHead.prop('checked', false);
+                    } else if (!headChecked) {
+                        var allChecked = true;
+                        $('#tablecourses tr td input[type="checkbox"]').each(function () {
+                            if(!($(this).prop('checked'))) {
+                               allChecked = false;
+                               return false;
+                            }
+                        });
+                        $checkboxHead.prop('checked', allChecked);
+                    }
+                    var noneChecked = true;
+                    if(!indivChecked) {
+                        $('#tablecourses tr td input[type="checkbox"]').each(function() {
+                            if($(this).prop('checked')) {
+                                noneChecked = false;
+                                return false;
+                            }
+                        });            
+                    } 
+                    
+                    var $buttonRemove = $('#buttonremovecourses');
+                    var buttonRemoveDisabled = $buttonRemove.prop('disabled');
+                    
+                    var enable = !buttonRemoveDisabled && noneChecked ? true : false;
+                    $buttonRemove.prop('disabled', enable);
+                    });
+                           
+                    var checkedRow = $(this).closest("tr").remove().clone();
+                    checkedRow.appendTo($('#tablecourses tbody'));
            }
-       });       
+        });       
     });
     
-    //Remove Row From Current Courses
+    //Remove Row From Current Courses And Add it back to Catalog
     $('#buttonremovecourses').on('click', function() {
-        if ('#tablecourses tr td input[type="checkbox"]').each(function () {
+        $('#tablecourses tr td input[type="checkbox"]').each(function() {
            if($(this).prop("checked")) {
-              $(this).closest("tr").remove();
+              var removedRow = $(this).closest("tr").remove().clone();
+              removedRow.appendTo($('#tablecatalog tbody'));
            }
         });
         
-        var rowCount = $('#tablecourses tr').length;
+        var rowCount = $('#tablecourses tbody tr').length;
         var $checkBoxHead = $('#checkboxhead');
         var headChecked = $checkBoxHead.prop('checked');
         
         if (rowCount === 0 && headChecked) {
+            $('#labelcurrentcredittotal').text("here");
             $checkBoxHead.prop('checked', false);
-            $checkBoxhead.prop('disabled', true);
+            $checkBoxHead.prop('disabled', true);
             $(this).prop('disabled', true);
         }
     });
@@ -92,7 +130,7 @@ $(function() {
        
         var enable = $(this).prop('checked') ? true : false;
         
-        $('#tablecourses tbody tr td input[type="checkbox"]').each(function () {
+        $('#tablecourses tbody tr td input[type="checkbox"]').each(function() {
              $(this).prop('checked', enable);
         });
      });
