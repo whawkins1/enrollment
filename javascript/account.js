@@ -60,51 +60,18 @@ $(function() {
        $('#tablecatalog tr td input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
                $(this).prop('checked', false);
-               $(this).off('click');
-               $(this).on('click', function() {
-                    var indivChecked = $(this).prop('checked');
-                    
-                    var $checkboxHead = $('#checkboxhead');
-                    var headChecked = $checkboxHead.prop('checked');
-                    if((headChecked) && (!indivChecked)) {
-                        $checkboxHead.prop('checked', false);
-                    } else if (!headChecked) {
-                        var allChecked = true;
-                        $('#tablecourses tr td input[type="checkbox"]').each(function () {
-                            if(!($(this).prop('checked'))) {
-                               allChecked = false;
-                               return false;
-                            }
-                        });
-                        $checkboxHead.prop('checked', allChecked);
-                    }
-                    var noneChecked = true;
-                    if(!indivChecked) {
-                        $('#tablecourses tr td input[type="checkbox"]').each(function() {
-                            if($(this).prop('checked')) {
-                                noneChecked = false;
-                                return false;
-                            }
-                        });            
-                    } 
-                    
-                    var $buttonRemove = $('#buttonremovecourses');
-                    var buttonRemoveDisabled = $buttonRemove.prop('disabled');
-                    
-                    var enable = !buttonRemoveDisabled && noneChecked ? true : false;
-                    $buttonRemove.prop('disabled', enable);
-                    });
-                           
-                    var checkedRow = $(this).closest("tr").remove().clone();
-                    checkedRow.appendTo($('#tablecourses tbody'));
+                                        
+               var checkedRow = $(this).closest("tr").remove().clone();
+               checkedRow.appendTo($('#tablecourses tbody'));
            }
         });       
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
     $('#buttonremovecourses').on('click', function() {
-        $('#tablecourses tr td input[type="checkbox"]').each(function() {
+        $('#tablecourses tbody input[type="checkbox"]').each(function() {
            if($(this).prop("checked")) {
+              $(this).prop('checked', false); 
               var removedRow = $(this).closest("tr").remove().clone();
               removedRow.appendTo($('#tablecatalog tbody'));
            }
@@ -128,15 +95,19 @@ $(function() {
         var checked = $(this).prop('checked');
         $button = $('#buttonremovecourses');
        
-        var enable = $(this).prop('checked') ? true : false;
-        
-        $('#tablecourses tbody tr td input[type="checkbox"]').each(function() {
-             $(this).prop('checked', enable);
+        $('#tablecourses tbody input[type="checkbox"]').each(function() {
+             $(this).prop('checked', checked);
         });
+        
+        if ( ($button.prop('disabled')) && (checked) ) {
+             $button.prop('disabled', false); 
+        } else  {
+             $button.prop('disabled', true);
+        }            
      });
     
     //Enable remove button and check or uncheck header checkbox
-    $('#tablecourses tr td input[type="checkbox"]').on('change', function() {
+    $('#tablecourses').on('click', 'tbody input[type="checkbox"]', function() {
         var indivChecked = $(this).prop('checked');
         
         var $checkboxHead = $('#checkboxhead');
@@ -153,8 +124,11 @@ $(function() {
             });
             $checkboxHead.prop('checked', allChecked);
         }
+        
         var noneChecked = true;
-        if(!indivChecked) {
+        if (indivChecked) {
+            noneChecked = false;
+        } else if (!indivChecked) {
             $('#tablecourses tr td input[type="checkbox"]').each(function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
@@ -170,12 +144,14 @@ $(function() {
         $buttonRemove.prop('disabled', enable);
     });
     
-    $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
+    $('#tablecatalog').on('click', 'input[type="checkbox"]', function() {
         var indivChecked = $(this).prop('checked');
         
         var noneChecked = true;
-        if(!indivChecked) {
-            $('#tablecatalog tr td input[type="checkbox"]').on('change', function() {
+        if (indivChecked) {
+          noneChecked = false;  
+        } else if (!indivChecked) {
+            $('#tablecatalog tr td input[type="checkbox"]').each(function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
                     return false;
@@ -186,9 +162,13 @@ $(function() {
         var $buttonAdd = $('#buttonaddcourses');
         var buttonAddDisabled = $buttonAdd.prop('disabled');
         
-        var disable = (!buttonAddDisabled && noneChecked) ? true : false;
+        var disable = false;
+        if (!buttonAddDisabled && noneChecked) {
+            disable = true;
+        }
+
         $buttonAdd.prop('disabled', disable);
-    });   
+    });
     
     $('#zipcode').on('keydown', function(e) {
        var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46, 86, 88];
