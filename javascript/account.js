@@ -64,7 +64,20 @@ $(function() {
                var checkedRow = $(this).closest("tr").remove().clone();
                checkedRow.appendTo($('#tablecourses tbody'));
            }
-        });       
+        });      
+
+        var rowCount = $('#tablecourses tr').length;
+        if (($('#departmentfilter').prop('disabled') 
+                   && $('#codefilter').prop('disabled')
+                   && $('#professorfilter').prop('disabled')
+                   && $('#locationfilter').prop('disabled')) && rowCount !== 0) {
+                         $('#checkboxhead').prop('disabled', false);
+                         $(this).prop('disabled', false);
+                         $('#departmentfilter').prop('disabled', false);
+                         $('#codefilter').prop('disabled', false);
+                         $('#professorfilter').prop('disabled', false);
+                         $('#locationfilter').prop('disabled', false);
+        }        
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -86,7 +99,11 @@ $(function() {
             $checkBoxHead.prop('checked', false);
             $checkBoxHead.prop('disabled', true);
             $(this).prop('disabled', true);
-        }
+            $('#departmentfilter').prop('disabled', true);
+            $('#codefilter').prop('disabled', true);
+            $('#professorfilter').prop('disabled', true);
+            $('#locationfilter').prop('disabled', true);
+        } 
     });
     
     
