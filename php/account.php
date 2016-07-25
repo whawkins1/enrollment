@@ -174,6 +174,7 @@
       </div>
       
        <div id="tab-courses" class="tabsjump">
+           <div id="containerfilterscurrentcourses">
               <label id="filterlabel" class="filters"> Filter By: </label> 
               <div id="filterdepartment" class="filters">
                         <select id="departmentfilter"> 
@@ -222,6 +223,7 @@
                                   }  ?>                         
                         </select>                        
                   </div>
+               </div>
               
               <table id="tablecourses" class="tablesorter">      
                   <thead>
@@ -238,6 +240,7 @@
                    </thead>     
                  <tbody>
                  <?php
+                   $currentCreditTotal = 0;
                     $sql = "SELECT getYearsAttended(?)";           
                    if ($stmt = $conn->prepare($sql)) {
                        $stmt->bind_param('s', $username);
@@ -276,6 +279,7 @@
                                         echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
                                         echo "<td>", $location, "</td>";
                                         echo "<td id='credits'>", $credits, "</td>";
+                                        $currentCreditTotal = ($currentCreditTotal + $credits);
                                     echo "</tr>";
                                   }  
                                $stmt->close();   
@@ -287,11 +291,15 @@
              
              <div class="creditscontainer">
                 <label class="labelcreditstitle">Current Credit Total: </label> 
-                <label id="labelcurrentcredittotal">21</label>
+                <label id="labelcurrentcredittotal"><?php echo $currentCreditTotal; ?></label>
              </div>
              
              <div class="buttonscontainer">
                   <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
+             </div>
+             
+             <div id="containercatalogtitle">
+                  <label id="labelcatalogtitle">Catalog</label>
              </div>
              
              <div id="filterdepartmentcontainer">
@@ -340,7 +348,7 @@
              </table>
              <div class="creditscontainer">
                  <label class="labelcreditstitle">Selected Credits: </label> 
-                 <label id="labelselectedcredits">21</label>
+                 <label id="labelselectedcredits">0</label>
              </div>
              <div class="buttonscontainer">
                       <button type="button" id="buttonaddcourses" class="buttonscourses" disabled>Add</button>

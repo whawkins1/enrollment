@@ -649,3 +649,21 @@ th.credits {
    font-weight: bold;
    padding-right: 14px;
 }
+
+#containercatalogtitle {
+    margin-top: 20px;
+    margin-bottom: -5px;
+    text-align: center;
+    padding-right: 150px;
+}
+
+#labelcatalogtitle {
+  font-size: 160%;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#containerfilterscurrentcourses {
+  margin-top: 12px;
+  margin-bottom: 8px;
+}

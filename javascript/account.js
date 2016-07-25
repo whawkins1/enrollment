@@ -57,7 +57,7 @@ $(function() {
     //Add Row To Current Courses and Remove It From Catalog
     $('#buttonaddcourses').on('click', function() {
        var currentTotal = +($('#labelcurrentcredittotal').text());
-       $('#tablecatalog tr td input[type="checkbox"]').each(function () {
+       $('#tablecatalog input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
                $(this).prop('checked', false);
                                         
@@ -78,6 +78,7 @@ $(function() {
                          $('#professorfilter').prop('disabled', false);
                          $('#locationfilter').prop('disabled', false);
         }        
+        $('#labelselectedcredits').text("0");        
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -133,7 +134,7 @@ $(function() {
             $checkboxHead.prop('checked', false);
         } else if (!headChecked) {
             var allChecked = true;
-            $('#tablecourses tr td input[type="checkbox"]').each(function () {
+            $('#tablecourses input[type="checkbox"]').each(function () {
                 if(!($(this).prop('checked'))) {
                    allChecked = false;
                    return false;
@@ -146,7 +147,7 @@ $(function() {
         if (indivChecked) {
             noneChecked = false;
         } else if (!indivChecked) {
-            $('#tablecourses tr td input[type="checkbox"]').each(function() {
+            $('#tablecourses input[type="checkbox"]').each(function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
                     return false;
@@ -173,7 +174,7 @@ $(function() {
             $labelselectedcredits.text(addCredits);
             noneChecked = false;  
         } else if (!indivChecked) {            
-            $('#tablecatalog tr td input[type="checkbox"]').each(function() {
+            $('#tablecatalog input[type="checkbox"]').each(function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
                     return false;
