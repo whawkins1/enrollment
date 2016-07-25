@@ -165,15 +165,22 @@ $(function() {
         var indivChecked = $(this).prop('checked');
         
         var noneChecked = true;
-        if (indivChecked) {
-          noneChecked = false;  
-        } else if (!indivChecked) {
+        var $labelselectedcredits = $('#labelselectedcredits');
+        var selectedCredits = +($labelselectedcredits.text());
+        var rowCredits = +($(this).closest('tr').find('td:eq(7)').text());
+        if (indivChecked) {                       
+            var addCredits = (selectedCredits + rowCredits);
+            $labelselectedcredits.text(addCredits);
+            noneChecked = false;  
+        } else if (!indivChecked) {            
             $('#tablecatalog tr td input[type="checkbox"]').each(function() {
                 if($(this).prop('checked')) {
                     noneChecked = false;
                     return false;
                 }
             });            
+            var subCredits = (selectedCredits - rowCredits);
+            $labelselectedcredits.text(subCredits);
         }
         
         var $buttonAdd = $('#buttonaddcourses');
