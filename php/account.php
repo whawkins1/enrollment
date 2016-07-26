@@ -268,8 +268,9 @@
                                  $stmt->bind_result($code, $title, $days, $department, $begin_time, 
                                                     $end_time, $am_pm, $credits, $professor_last_name, 
                                                     $professor_first_name, $location, $department );
-
-                                 while($stmt->fetch()) {      
+                                 $count_current_courses = 0;
+                                 while($stmt->fetch()) {    
+                                    $count_current_courses++;                                 
                                     echo "<tr>";
                                         echo "<td><input type='checkbox' class='checkbox' id='checkboxrow'></td>";
                                         echo "<td>", $code, "</td>";
@@ -296,6 +297,7 @@
              
              <div class="buttonscontainer">
                   <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
+                  <button type="button" id="buttonsubmitcourses" class="buttonscourses" <?php if($count_current_courses == 0) { echo "disabled"; } ?>>Update</button>
              </div>
              
              <div id="containercatalogtitle">
