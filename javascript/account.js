@@ -9,6 +9,8 @@ var originalHomePhone;
 var originalMobilePhone;
 var originalMajor;
 var originalEmail;
+var delCurrCoursesArr = [];
+var origCurrCoursesArr = [];
 
 $(function() { 
     //Remove all Data Fields to avoid caching previous results
@@ -24,6 +26,15 @@ $(function() {
       $('#homephone').val("");
       $('#mobilephone').val("");
       $('#email').val("");      
+    });
+    
+    //Populate codes from current courses into array
+    $('#tablecourses').find('tr').each(function() {
+       var $row = $(this);
+       if ($row.find('input[type="checkbox"]').prop('checked')) {
+           var code = $row.find("td").eq(1).html();
+           origCurrCoursesArr.add(code);
+       }
     });
     
     //Hold original Values to Reset Defaults
@@ -84,6 +95,7 @@ $(function() {
               $(this).prop('checked', false); 
               var removedRow = $(this).closest("tr").remove().clone();
               removedRow.appendTo($('#tablecatalog tbody'));
+              delCurrCourseArr.add();              
            }
         });
         
@@ -697,7 +709,7 @@ $(function() {
     });
     
     $('#buttonsubmitcourses').on('click', function() {
-       $.ajax({
+       
            
     });
 });
