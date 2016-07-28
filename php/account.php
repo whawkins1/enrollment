@@ -297,7 +297,7 @@
              
              <div class="buttonscontainer">
                   <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
-                  <button type="button" id="buttonsubmitcourses" class="buttonscourses" <?php if($count_current_courses == 0) { echo "disabled"; } ?>>Update</button>
+                  <button type="button" id="buttonupdatecourses" class="buttonscourses" <?php if($count_current_courses == 0) { echo "disabled"; } ?>>Update</button>
              </div>
              
              <div id="containercatalogtitle">

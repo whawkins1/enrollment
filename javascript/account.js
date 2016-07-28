@@ -69,6 +69,10 @@ $(function() {
                $(this).prop('checked', false);
                                         
                var checkedRow = $(this).closest("tr").remove().clone();
+               var code = checkedRow.find("td").eq(1).html();
+               if ($.contains(code, delCurrCourseArr)) {
+                   delCurrCourseArr.splice($.inArray(code, deleCurrCourseArr), 1);
+               }
                checkedRow.appendTo($('#tablecourses tbody'));
            }
         });      
@@ -93,9 +97,12 @@ $(function() {
         $('#tablecourses tbody input[type="checkbox"]').each(function() {
            if($(this).prop("checked")) {
               $(this).prop('checked', false); 
-              var removedRow = $(this).closest("tr").remove().clone();
-              removedRow.appendTo($('#tablecatalog tbody'));
-              delCurrCourseArr.add();              
+              var $removedRow = $(this).closest("tr").remove().clone();
+              var code = $row.find("td").eq(1).html();
+              $removedRow.appendTo($('#tablecatalog tbody'));
+              if ($.contains(code, origCurrCoursesArr)) {
+                   delCurrCourseArr.add(code);              
+              }
            }
         });
         
@@ -708,8 +715,9 @@ $(function() {
          headers: { 0: { sorter: false} } 
     });
     
-    $('#buttonsubmitcourses').on('click', function() {
-       
+    
+    $('#buttonupdatecourses').on('click', function() {
+        
            
     });
 });
