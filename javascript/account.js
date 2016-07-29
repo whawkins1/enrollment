@@ -715,9 +715,30 @@ $(function() {
          headers: { 0: { sorter: false} } 
     });
     
-    
     $('#buttonupdatecourses').on('click', function() {
+        //Delete Rows in enrolled table based on code
+        delCurrCoursesArr.forEach(function(value) {
+           $.ajax({
+               type: 'POST',
+               url: "deletCurrentCourses.php",
+               data: {
+                         email: originalEmail,
+                         code: value,
+                         semester: semester
+                         //year:  new Date().getFullYear();                                                
+           })
+           .done(function(data) {
+           
+           })
+           .fail(function (jqHXR, textStatus, errorThrown) {
+           
+           });
+        });
         
+        //Insert Rows into enrolled based on code
+        $('#tablecourses td input:checked').each(function() {
+           
+        });
            
     });
 });

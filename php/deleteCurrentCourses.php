@@ -1,4 +1,3 @@
-
 <?php
    require("config.php");   
    
@@ -13,8 +12,8 @@
            //isset($year) && !empty($year)
            ) {
           
-           $year = new simepleDate()->now()->getYear();
-           $sql = "SELECT EXISTS(SELECT 1 FROM enrolled_" . $year . " WHERE user_email" . $year . "= ? AND enrolled_semester" . $year . "= ? AND code = ? LIMIT 1);";
+            $year = new simepleDate()->now()->getYear();
+            $sql = "SELECT EXISTS(SELECT 1 FROM enrolled_" . $year . " WHERE user_email_" . $year . "= ? AND enrolled_semester_" . $year . "= ? AND user_course_code = ? LIMIT 1);";
             
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param("ss", $email, $semester, $code);
@@ -23,12 +22,12 @@
                     $stmt->fetch();
                     $stmt->close();
                     
-                    // If row Does not exist add
-                    if ($result == 0) {
-                        $sql = "INSERT INTO enrolled_". $year . " SELECT c.* FROM courses c WHERE c.code = ? LIMIT 1;";
+                    // If row Does exist remove
+                    if ($result == 1) {
+                        $sql = "DELETE from enrolled_". $year . " WHERE user_email_" . $year . "=? AND user_course_code = ? AND enrolled_semester_" . $year . "= ? LIMIT 1;";
                         
                         if ($stmt = $conn->prepare($sql)) {
-                           $stmt->bind_param("s", $code);
+                           $stmt->bind_param("ss", $email, $code, $semester);
                            $stmt->execute(); 
                         }
                     }                   
