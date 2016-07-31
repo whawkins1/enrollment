@@ -717,34 +717,57 @@ $(function() {
     
     $('#buttonupdatecourses').on('click', function() {
         //Delete Rows in enrolled table based on code
-        delCurrCoursesArr.forEach(function(value) {
+        
+        $.each(delCurrCoursesArr, function(i, item) {
            $.ajax({
                type: 'POST',
                url: "deletCurrentCourses.php",
+               cache: false,
                data: {
                          email: originalEmail,
-                         code: value,
+                         code: item,
                          semester: semester
-                         //year:  new Date().getFullYear();                                                
+                         //year:  new Date().getFullYear();           
+                     }                         
            })
            .done(function(data) {
-           
+                 if (data.startsWith("ERROR_DELETE")) {
+                     alert("Unable to remove course code " + item);
+                 }
            })
            .fail(function (jqHXR, textStatus, errorThrown) {
-           
+                 alert("Error Deleting Previous Courses");
            });
         });
         
         //Insert Rows into enrolled based on code
         $('#tablecourses td input:checked').each(function() {
-           
+            $.each(origCurrCoursesArr, function(i, item) {
+                $.ajax({
+                         type: 'POST',
+                         url: "updateCurrentCourses",
+                         cache: false,
+                         data: {
+                                 email: originalEmail,
+                                 code: item,
+                                 semester: semester
+                         }
+                })
+                .done(function(data) {
+                    if(data.startsWith("ERROR_UPDATE")) {
+                        alert("Unable to update course code " + item);
+                    }
+                })
+                .fail(function (jqHXR, textStats, errorThrown) {
+                    alert("Error updating current courses");
+                });                         
+            });
         });
            
     });
 });
 
 function populateGradeTable() {
-    //Instead of passing parameters just get from dropdown
    $.ajax({
            type: 'GET',
            url: "getGradesYearSemester.php",
