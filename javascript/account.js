@@ -70,8 +70,8 @@ $(function() {
                                         
                var checkedRow = $(this).closest("tr").remove().clone();
                var code = checkedRow.find("td").eq(1).html();
-               if ($.contains(code, delCurrCourseArr)) {
-                   delCurrCourseArr.splice($.inArray(code, deleCurrCourseArr), 1);
+               if ($.contains(code, delCurrCoursesArr)) {
+                   delCurrCoursesArr.splice($.inArray(code, deleCurrCourseArr), 1);
                }
                checkedRow.appendTo($('#tablecourses tbody'));
            }
@@ -101,7 +101,7 @@ $(function() {
               var code = $row.find("td").eq(1).html();
               $removedRow.appendTo($('#tablecatalog tbody'));
               if ($.contains(code, origCurrCoursesArr)) {
-                   delCurrCourseArr.add(code);              
+                   delCurrCoursesArr.add(code);              
               }
            }
         });
@@ -149,12 +149,13 @@ $(function() {
             $checkboxHead.prop('checked', false);
         } else if (!headChecked) {
             var allChecked = true;
-            $('#tablecourses input[type="checkbox"]').each(function () {
-                if(!($(this).prop('checked'))) {
-                   allChecked = false;
-                   return false;
-                }
-            });
+            
+               $('#tablecourses tbody input[type="checkbox"]').each(function () {
+                    if(!($(this).prop('checked'))) {
+                       allChecked = false;
+                       return false;
+                    }
+                });
             $checkboxHead.prop('checked', allChecked);
         }
         

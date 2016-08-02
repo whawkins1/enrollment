@@ -174,8 +174,8 @@
       </div>
       
        <div id="tab-courses" class="tabsjump">
-           <div id="containerlabelcoursesdate">
-                 <label class="labeltitletables"> <?php echo "Fall ", new simpleDate()->now()->getYear(); ?> </label>
+           <div class="containercoursestitle">
+                 <label class="labeltitletables"> <?php echo "Fall ", getTimeZoneObject(null)->format("Y"); ?> </label>
            </div>
            <div id="containerfilterscurrentcourses">
               <label id="filterlabel" class="filters"> Filter By: </label> 
@@ -305,7 +305,7 @@
                   <button type="button" id="buttonupdatecourses" class="buttonscourses" <?php if($count_current_courses == 0) { echo "disabled"; } ?>>Update</button>
              </div>
              
-             <div id="containercatalogtitle">
+             <div class="containercoursestitle">
                   <label class="labeltitletables">Catalog</label>
              </div>
              

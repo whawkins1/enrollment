@@ -650,7 +650,7 @@ th.credits {
    padding-right: 14px;
 }
 
-#containercatalogtitle {
+.containercoursestitle {
     margin-top: 20px;
     margin-bottom: -5px;
     text-align: center;
@@ -671,3 +671,4 @@ th.credits {
   font-weight: bold;
   text-decoration: underline;
 }
+
