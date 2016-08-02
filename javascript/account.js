@@ -359,15 +359,14 @@ $(function() {
                       var username = $('#username').val();
                       var password = $('#password').val();
                       
-                      var ajaxCall = $.ajax({
+                      $.ajax({
                                type: 'POST',    
                                url: "/php/verifyUsernamePass.php",
                                data: {email: "johnboy@gmail.com", pass: "chase"},
                                dataType: 'html',
                                cache: false
-                          });
-                          
-                          ajaxCall.done (function(data) {
+                          }).
+                          done (function(data) {
                              if (data === "valid") {
                                 $('#username').val() = "";
                                 $('#password').val() = "";                                
@@ -376,9 +375,8 @@ $(function() {
                                 alert("Invalid Login, Please Try Again.");
                                 $('username').focus();
                              }
-                          });
-                          
-                          ajaxCall.fail (function(jqXHR, textStatus, errorThrown) {
+                          })
+                          .fail (function(jqXHR, textStatus, errorThrown) {
                                           alert("Error Getting User Balance");
                           });
               }       
@@ -436,16 +434,15 @@ $(function() {
                 
                     if (regexEmail.test(input)) {
                         if ( input !== originalEmail ) {
-                            var ajaxCall = $.ajax({
+                             $.ajax({
                                    type: 'GET',
                                    url: "../php/checkDuplicateUser.php",
                                    data: {
                                             email : input
                                          },
                                    dataType: 'text'
-                            });
-                            
-                            ajaxCall.done( function(data) {
+                            })
+                            .done( function(data) {
                                 var response = $.trim(data);
                                 if ( response === "email not in use" ) { 
                                    addUpdates();
@@ -457,9 +454,8 @@ $(function() {
                                 } else if ( response === "error" ) {
                                     $('#errorcontainer').html("ERROR: Email Check could not be completed!");
                                 }
-                            });
-                            
-                            ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                            })
+                            .fail (function(jqHXR, textStatus, errorThrown) {
                                 $('#errorcontainer').html("ERROR: check for duplicate email failed?");
                                 $('#editbutton').focus();
                                 setEditMode = false;
@@ -566,7 +562,7 @@ $(function() {
            } else {
                // Check Password Exists
                var email = $('#email').val();
-               ajaxCall = $.ajax({
+               $.ajax({
                   type: 'POST',
                   url: "../php/login.php",
                   data: {
@@ -575,20 +571,19 @@ $(function() {
                         },
                   dataType: 'text'                        
                })
-               
-               ajaxCall.done( function(data) {
+               .done( function(data) {
                   if ( data === "valid" ) {
                       //Change Password
-                      var ajaxCall = $.ajax({
-                                              type: 'POST',
-                                              url: "../php/changePassword.php",
-                                              data: {
-                                                       email : email,
-                                                       password : newPassInput
-                                                    },
-                                               dataType: 'text'
-                                           });
-                      ajaxCall.done( function (data) {
+                      $.ajax({
+                              type: 'POST',
+                              url: "../php/changePassword.php",
+                              data: {
+                                        email : email,
+                                        password : newPassInput
+                                    },
+                              dataType: 'text'
+                      })
+                      .done( function (data) {
                           console.log(data);
                           if (data.startsWith("ERROR")) {
                              $oldPassField.focus();
@@ -602,9 +597,8 @@ $(function() {
                              $(this).text("Change Password");                             
                           }
                           $passwordMessage.text(data);
-                      });
-                      
-                      ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+                      })
+                      .fail (function(jqHXR, textStatus, errorThrown) {
                             $oldPassField.focus();
                             $passwordMessage.text("SERVER ERROR: Problem Processing Request");
                       });                      
@@ -612,9 +606,8 @@ $(function() {
                       $passwordMessage.text("ERROR: Old Password Incorrect!");
                       $oldPassField.focus();
                   }
-               });
-               
-               ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+               })
+               .fail (function(jqHXR, textStatus, errorThrown) {
                       $passwordMessage.html("SERVER ERROR: failed to update account!");
                       $(this).focus();
                });
@@ -624,47 +617,43 @@ $(function() {
     
     //Populate State Dropdown Based on Country
     $('#countrydropdown').change(function() {		
-         var ajaxCall = $.ajax({
-                          type: 'POST',
-                          url: "findState.php",
-                          datatype: 'html',
-                          data: { 
-                                   country_id : ($('#countrydropdown option:selected').val())
-                                }
-                        }); 
-            
-          ajaxCall.done (function(data) { 
-                                $("#statedropdown").html(data);
-                                $("#statedropdown").prop("selectedIndex", -1);
-                                $('#citydropdown').html("<option></option>");
-                         });                  
-           
-           ajaxCall.fail (function(jqHXR, textStatus, errorThrown) { 
-                             alert("Error Loading States");
-                         });         
+          $.ajax({
+              type: 'POST',
+              url: "findState.php",
+              datatype: 'html',
+              data: { 
+                       country_id : ($('#countrydropdown option:selected').val())
+                    }
+            })
+            .done (function(data) { 
+                    $("#statedropdown").html(data);
+                    $("#statedropdown").prop("selectedIndex", -1);
+                    $('#citydropdown').html("<option></option>");
+             })
+             .fail (function(jqHXR, textStatus, errorThrown) { 
+                 alert("Error Loading States");
+             });         
     }); 
     
     //Populate City Dropdown Based on State
     $('#statedropdown').on('change',function() {	
           $selected = $('#statedropdown :selected').text();
           if (!($selected === "none" || $selected === "error")) {
-               var ajaxCall = $.ajax({
+               $.ajax({
                   type: 'POST',
                   url: "findCity.php",
                   datatype: 'html',
                   data: { 
                           state_id : ($('#statedropdown option:selected').val()) 
                         }
-              }); 
-              
-              ajaxCall.done (function(data) {
+              })
+              .done (function(data) {
                   $('#citydropdown').html(data);
                   $('#citydropdown').prop('selectedIndex', -1);
-              });
-              
-              ajaxCall.fail (function(jqHXR, textStatus, errorThrown) { 
+              })
+              .fail (function(jqHXR, textStatus, errorThrown) { 
                                alert("Error Loading States");
-                            });
+              });
            }
 	}); 
     
@@ -824,7 +813,7 @@ function getCumulativeGPA() {
 }
 
 function addUpdates() { 
-          ajaxCall = $.ajax({
+          $.ajax({
               type: 'POST',
               url: "updateAccount.php",
               data: {
@@ -843,8 +832,7 @@ function addUpdates() {
                    }, 
               dataType: 'text'
           })
-          
-          ajaxCall.done( function(data) {
+          .done( function(data) {
               var response = $.trim(data);
               if ( response === "success" ) {
                   $('#errorcontainer').html("SUCCESS: completed update of account!");
@@ -856,9 +844,8 @@ function addUpdates() {
                   $('#errorcontainer').html("ERROR: failed to update account!");
                   setEditMode = false;
               }
-          });
-          
-          ajaxCall.fail (function(jqHXR, textStatus, errorThrown) {
+          })
+          .fail (function(jqHXR, textStatus, errorThrown) {
               $('#errorcontainer').html("SERVER ERROR: failed to update account!");
               $('#editbutton').focus();
               setEditMode = false;                                  
@@ -1244,19 +1231,17 @@ function validCardNumber(number) {
 }
 
 function getCurrentBalance() {
-            var ajaxCall = $.ajax({
-                               type: 'POST',    
-                               url: "/php/getUserBalance.php",
-                               data: {email: "johnboy@gmail.com"},
-                               dataType: 'html',
-                               cache: false
-                          });
-                          
-                          ajaxCall.done (function(data) {
-                             return data;
-                          });
-                          
-                          ajaxCall.fail (function(jqXHR, textStatus, errorThrown) {
-                                          alert("Error Getting User Balance");
-                          });
+    $.ajax({
+        type: 'POST',    
+              url: "/php/getUserBalance.php",
+              data: {email: "johnboy@gmail.com"},
+              dataType: 'html',
+              cache: false
+      })
+      .done (function(data) {
+               return data;
+      })
+      .fail (function(jqXHR, textStatus, errorThrown) {
+                   alert("Error Getting User Balance");
+      });
 }

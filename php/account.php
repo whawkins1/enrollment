@@ -174,6 +174,9 @@
       </div>
       
        <div id="tab-courses" class="tabsjump">
+           <div id="containerlabelcoursesdate">
+                 <label class="labeltitletables"> <?php echo "Fall ", new simpleDate()->now()->getYear(); ?> </label>
+           </div>
            <div id="containerfilterscurrentcourses">
               <label id="filterlabel" class="filters"> Filter By: </label> 
               <div id="filterdepartment" class="filters">
@@ -251,7 +254,8 @@
                        }
                        $years_attended_arr = explode(",", $years_attended_commas);
                        //$most_recent_year_enrolled = max($years_attended_arr);
-                       $most_recent_year_enrolled = 2010; // temporary
+                       $most_recent_year_enrolled = 2010;
+                       // temporary
                        $semester = "Fall";
                    }
                    if(!empty($most_recent_year_enrolled)) {
@@ -262,6 +266,7 @@
                                    " AND user_semester_" . $most_recent_year_enrolled . " = ?;";
                         
                         if($stmt = $conn->prepare($sql)) {
+                            // temporary
                             $semester = "Fall";
                             $stmt->bind_param('ss', $username, $semester);
                             if($stmt->execute()) {
@@ -301,7 +306,7 @@
              </div>
              
              <div id="containercatalogtitle">
-                  <label id="labelcatalogtitle">Catalog</label>
+                  <label class="labeltitletables">Catalog</label>
              </div>
              
              <div id="filterdepartmentcontainer">
