@@ -63,8 +63,7 @@ $(function() {
     
     //Add Row To Current Courses and Remove It From Catalog
     $('#buttonaddcourses').on('click', function() {
-       var currentTotal = +($('#labelcurrentcredittotal').text());
-       $('#tablecatalog input[type="checkbox"]').each(function () {
+       $('#tablecatalog tbody input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
                $(this).prop('checked', false);
                                         
@@ -75,9 +74,10 @@ $(function() {
                }
                checkedRow.appendTo($('#tablecourses tbody'));
            }
-        });      
+        });
+        $('#tablecatalog tr:odd').css('background-color', '#D3D3D3');        
 
-        var rowCount = $('#tablecourses tr').length;
+        var rowCount = $('#tablecourses tbody tr').length;
         if (($('#departmentfilter').prop('disabled') 
                    && $('#codefilter').prop('disabled')
                    && $('#professorfilter').prop('disabled')
@@ -88,23 +88,32 @@ $(function() {
                          $('#codefilter').prop('disabled', false);
                          $('#professorfilter').prop('disabled', false);
                          $('#locationfilter').prop('disabled', false);
-        }        
-        $('#labelselectedcredits').text("0");        
+        }
+        var currentTotal = +($('#labelcurrentcredittotal').text());        
+        var selectedTotal = +$('#labelselectedcredits').text(); 
+        var newTotal = (currentTotal + selectedTotal);
+        $('#labelcurrentcredittotal').text(newTotal);
+        $('#labelselectedcredits').text("0");
+        $(this).prop('disabled', true);        
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
     $('#buttonremovecourses').on('click', function() {
+        var currentTotal = +($('#labelcurrentcredittotal').text());
         $('#tablecourses tbody input[type="checkbox"]').each(function() {
            if($(this).prop("checked")) {
               $(this).prop('checked', false); 
               var $removedRow = $(this).closest("tr").remove().clone();
-              var code = $row.find("td").eq(1).html();
+              var code = $removedRow.find("td").eq(1).html();
+              var credits = $removedRow.find("td").eq(7).html();
+              currentTotal = (currentTotal - credits);
               $removedRow.appendTo($('#tablecatalog tbody'));
               if ($.contains(code, origCurrCoursesArr)) {
                    delCurrCoursesArr.add(code);              
               }
            }
         });
+        $('#tablecatalog tr:odd').css('background-color', '#D3D3D3');
         
         var rowCount = $('#tablecourses tbody tr').length;
         var $checkBoxHead = $('#checkboxhead');
@@ -113,13 +122,14 @@ $(function() {
         if (rowCount === 0 && headChecked) {
             $('#labelcurrentcredittotal').text("here");
             $checkBoxHead.prop('checked', false);
-            $checkBoxHead.prop('disabled', true);
             $(this).prop('disabled', true);
             $('#departmentfilter').prop('disabled', true);
             $('#codefilter').prop('disabled', true);
             $('#professorfilter').prop('disabled', true);
             $('#locationfilter').prop('disabled', true);
-        } 
+            $checkBoxHead.prop('disabled', true);
+        }
+         $('#labelcurrentcredittotal').text(currentTotal);
     });
     
     
