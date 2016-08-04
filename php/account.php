@@ -2,12 +2,16 @@
 
 <?php
     require_once("config.php");
+    session_start();
     
-    $username = $_GET['username'];
-    if ( isset($username) && (!empty($username))) {
-      session_start();
-      $_SESSION['username'] = $username;
+    if (isset($_GET['username'])) {
+        $username = $_GET['username'];
+        $_SESSION['username'] = $username;
+    } else {
+       $username = $_SESSION['username'];
+    }        
       
+    if (!empty($username)) { 
       $sql = "SELECT user_first_name, 
                      user_last_name, 
                      user_country, 

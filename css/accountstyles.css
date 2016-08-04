@@ -672,3 +672,10 @@ th.credits {
   text-decoration: underline;
 }
 
+.tablesorter tbody tr:nth-child(odd) {
+  background-color: #D3D3D3;
+}
+
+.tablesorter tbody tr:nth-child(even) {
+    background-color: #FFFFFF;
+}

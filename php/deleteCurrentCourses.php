@@ -28,7 +28,11 @@
                         
                         if ($stmt = $conn->prepare($sql)) {
                            $stmt->bind_param("ss", $email, $code, $semester);
-                           $stmt->execute(); 
+                             if (!$stmt->execute()) {
+                                echo "ERROR_DELETE";
+                             }                                 
+                        } else { 
+                            echo "ERROR_DELETE";
                         }
                   /* }                   
                 }

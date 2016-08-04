@@ -29,7 +29,11 @@
                         
                         if ($stmt = $conn->prepare($sql)) {
                            $stmt->bind_param("s", $code);
-                           $stmt->execute(); 
+                           if(!$stmt->execute()) {
+                              echo "ERROR_UPDATE";
+                           }                               
+                        } else {
+                             echo "ERROR_UPDATE";
                         }
                    /* }                   
                 }

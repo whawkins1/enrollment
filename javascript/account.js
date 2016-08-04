@@ -95,8 +95,6 @@ $(function() {
         $('#labelcurrentcredittotal').text(newTotal);
         $('#labelselectedcredits').text("0");
         $(this).prop('disabled', true);   
-        $('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
-        
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -131,7 +129,6 @@ $(function() {
         }
         $(this).prop('disabled', true);
         $('#labelcurrentcredittotal').text(currentTotal);
-        $('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
     });
     
     
@@ -711,7 +708,7 @@ $(function() {
         getCumulaitveGPA();
     });
     
-    $('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
+    //$('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
     
     $('.tablesorter').tablesorter({
          headers: { 0: { sorter: false} } 
@@ -719,6 +716,7 @@ $(function() {
     
     $('#buttonupdatecourses').on('click', function() {
         //Delete Rows in enrolled table based on code
+        $(this).css('background-image', 'url(/images/loader.gif'));        
         
         $.each(delCurrCoursesArr, function(i, item) {
            $.ajax({
@@ -765,7 +763,8 @@ $(function() {
                 });                         
             });
         });
-           
+      $(this).css('background-image', '');
+      $(this).html("Update");      
     });
 });
 
