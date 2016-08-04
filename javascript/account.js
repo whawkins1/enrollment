@@ -75,7 +75,6 @@ $(function() {
                checkedRow.appendTo($('#tablecourses tbody'));
            }
         });
-        $('#tablecatalog tr:odd').css('background-color', '#D3D3D3');        
 
         var rowCount = $('#tablecourses tbody tr').length;
         if (($('#departmentfilter').prop('disabled') 
@@ -89,12 +88,15 @@ $(function() {
                          $('#professorfilter').prop('disabled', false);
                          $('#locationfilter').prop('disabled', false);
         }
+        
         var currentTotal = +($('#labelcurrentcredittotal').text());        
         var selectedTotal = +$('#labelselectedcredits').text(); 
         var newTotal = (currentTotal + selectedTotal);
         $('#labelcurrentcredittotal').text(newTotal);
         $('#labelselectedcredits').text("0");
-        $(this).prop('disabled', true);        
+        $(this).prop('disabled', true);   
+        $('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
+        
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -113,7 +115,6 @@ $(function() {
               }
            }
         });
-        $('#tablecatalog tr:odd').css('background-color', '#D3D3D3');
         
         var rowCount = $('#tablecourses tbody tr').length;
         var $checkBoxHead = $('#checkboxhead');
@@ -122,14 +123,15 @@ $(function() {
         if (rowCount === 0 && headChecked) {
             $('#labelcurrentcredittotal').text("here");
             $checkBoxHead.prop('checked', false);
-            $(this).prop('disabled', true);
             $('#departmentfilter').prop('disabled', true);
             $('#codefilter').prop('disabled', true);
             $('#professorfilter').prop('disabled', true);
             $('#locationfilter').prop('disabled', true);
             $checkBoxHead.prop('disabled', true);
         }
-         $('#labelcurrentcredittotal').text(currentTotal);
+        $(this).prop('disabled', true);
+        $('#labelcurrentcredittotal').text(currentTotal);
+        $('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
     });
     
     
@@ -709,7 +711,7 @@ $(function() {
         getCumulaitveGPA();
     });
     
-    $('.tablesorter tr:odd').css('background-color', '#D3D3D3');
+    $('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
     
     $('.tablesorter').tablesorter({
          headers: { 0: { sorter: false} } 
