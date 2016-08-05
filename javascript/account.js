@@ -708,63 +708,64 @@ $(function() {
         getCumulaitveGPA();
     });
     
-    //$('.tablesorter tbody tr:odd').css('background-color', '#D3D3D3');
-    
     $('.tablesorter').tablesorter({
          headers: { 0: { sorter: false} } 
     });
     
     $('#buttonupdatecourses').on('click', function() {
         //Delete Rows in enrolled table based on code
-        $(this).css('background-image', 'url(/images/loader.gif'));        
-        
-        $.each(delCurrCoursesArr, function(i, item) {
-           $.ajax({
-               type: 'POST',
-               url: "deletCurrentCourses.php",
-               cache: false,
-               data: {
-                         email: originalEmail,
-                         code: item,
-                         semester: semester
-                         //year:  new Date().getFullYear();           
-                     }                         
-           })
-           .done(function(data) {
-                 if (data.startsWith("ERROR_DELETE")) {
-                     alert("Unable to remove course code " + item);
-                 }
-           })
-           .fail(function (jqHXR, textStatus, errorThrown) {
-                 alert("Error Deleting Previous Courses");
-           });
-        });
+        //$(this).css('background-image', 'url(/images/loader.gif'));        
+
+        if (delCurrCoursesArr.length !== 0) {          
+            $.each(delCurrCoursesArr, function(i, item) {
+               $.ajax({
+                   type: 'POST',
+                   url: "deleteCurrentCourses.php",
+                   cache: false,
+                   data: {
+                             email: originalEmail,
+                             code: item,
+                             semester: semester,
+                         }                         
+               })
+               .done(function(data) {
+                     if (data.startsWith("ERROR_DELETE")) {
+                         alert("Unable to remove course code " + item);
+                     }
+               })
+               .fail(function (jqHXR, textStatus, errorThrown) {
+                     alert("Error Deleting Previous Courses");
+               });
+            });
+        }
         
         //Insert Rows into enrolled based on code
-        $('#tablecourses td input:checked').each(function() {
-            $.each(origCurrCoursesArr, function(i, item) {
-                $.ajax({
-                         type: 'POST',
-                         url: "updateCurrentCourses",
-                         cache: false,
-                         data: {
-                                 email: originalEmail,
-                                 code: item,
-                                 semester: semester
-                         }
-                })
-                .done(function(data) {
-                    if(data.startsWith("ERROR_UPDATE")) {
-                        alert("Unable to update course code " + item);
-                    }
-                })
-                .fail(function (jqHXR, textStats, errorThrown) {
-                    alert("Error updating current courses");
-                });                         
-            });
+        $('#tablecourses tbody tr').each(function() {
+            var code = $(this).find("td").eq(1).html();
+                console.log(code);
+                if (!($.contains(code, origCurrCoursesArr))) { 
+                    $.ajax({
+                             type: 'POST',
+                             url: "updateCurrentCourses",
+                             cache: false,
+                             data: {
+                                     email: originalEmail,
+                                     code: code,
+                                     semester: semester
+                             }
+                    })
+                    .done(function(data) {
+                        if(data.startsWith("ERROR_UPDATE")) {
+                            alert("Unable to update course code " + item);
+                        }
+                    })
+                    .fail(function (jqHXR, textStats, errorThrown) {
+                        alert("Error updating current courses");
+                    });                         
+                }
         });
-      $(this).css('background-image', '');
-      $(this).html("Update");      
+      //$(this).css('background-image', '');
+      //$(this).html("Update");      
     });
 });
 
