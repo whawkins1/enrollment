@@ -11,6 +11,7 @@ var originalMajor;
 var originalEmail;
 var delCurrCoursesArr = [];
 var origCurrCoursesArr = [];
+var updateCurrCoursesArr = [];
 
 $(function() { 
     //Remove all Data Fields to avoid caching previous results
@@ -30,11 +31,8 @@ $(function() {
     
     //Populate codes from current courses into array
     $('#tablecourses').find('tr').each(function() {
-       var $row = $(this);
-       if ($row.find('input[type="checkbox"]').prop('checked')) {
-           var code = $row.find("td").eq(1).html();
-           origCurrCoursesArr.add(code);
-       }
+           var code = $(this).find("td").eq(1).html();
+           origCurrCoursesArr.push(code);
     });
     
     //Hold original Values to Reset Defaults
@@ -66,11 +64,13 @@ $(function() {
        $('#tablecatalog tbody input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
                $(this).prop('checked', false);
-                                        
                var checkedRow = $(this).closest("tr").remove().clone();
                var code = checkedRow.find("td").eq(1).html();
                if ($.contains(code, delCurrCoursesArr)) {
                    delCurrCoursesArr.splice($.inArray(code, deleCurrCourseArr), 1);
+               }
+               if (!($.contains(code, origCurrCoursesArr))) {
+                   updateCurrCoursesArr.push(code);
                }
                checkedRow.appendTo($('#tablecourses tbody'));
            }
@@ -740,21 +740,20 @@ $(function() {
         }
         
         //Insert Rows into enrolled based on code
-        $('#tablecourses tbody tr').each(function() {
-            var code = $(this).find("td").eq(1).html();
-                console.log(code);
-                if (!($.contains(code, origCurrCoursesArr))) { 
+        $.each(updateCurrCoursesArr, function(index, value) {
                     $.ajax({
                              type: 'POST',
-                             url: "updateCurrentCourses",
+                             url: "updateCurrentCourses.php",
                              cache: false,
                              data: {
                                      email: originalEmail,
-                                     code: code,
-                                     semester: semester
+                                     code: value,
+                                     semester: semester,
+                                     grade: "-"
                              }
                     })
                     .done(function(data) {
+                        console.log(data);
                         if(data.startsWith("ERROR_UPDATE")) {
                             alert("Unable to update course code " + item);
                         }
@@ -762,7 +761,6 @@ $(function() {
                     .fail(function (jqHXR, textStats, errorThrown) {
                         alert("Error updating current courses");
                     });                         
-                }
         });
       //$(this).css('background-image', '');
       //$(this).html("Update");      

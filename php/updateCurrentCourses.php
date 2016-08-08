@@ -5,23 +5,27 @@
        $email = $_POST['email'];
        $code = $_POST['code'];
        $semester = $_POST['semester'];
+       $grade = $_POST['grade'];
        
        if (isset($email) && !empty($email) &&
            isset($code) && !empty($code) && 
-           isset($semester) && !empty($semester)  
+           isset($semester) && !empty($semester) &&
+           isset($grade) && !empty($grade)            
            ) {
           
            $year = "2010"; 
            //$year = new simpleDate()->now()->getYear();
-            $sql = "INSERT INTO enrolled_". $year . " SELECT c.* FROM courses AS c WHERE c.code = ? LIMIT 1;";
+            $sql = "INSERT INTO enrolled_". $year . " (user_email_" . $year . ", user_grade_" . $year . 
+                                                    ", user_semester_" . $year . ", user_course_code_" . $year . 
+                   " VALUES( " . $email . ", " . $grade . ", " . $semester . ", " . $code . ");";
             
             if ($stmt = $conn->prepare($sql)) {
-               $stmt->bind_param("s", $code);
                if(!$stmt->execute()) {
-                  echo "ERROR_UPDATE";
+                  //echo "ERROR_UPDATE1";
                }                               
             } else {
-                 echo "ERROR_UPDATE";
+                 //echo "ERROR_UPDATE2";
             }
+            echo $sql,  " ",  $code;
       }
 ?>
