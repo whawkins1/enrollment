@@ -699,13 +699,13 @@ $(function() {
     $('#semesterdropdown').on('change', function() {
         populateGradeTable();
         getSemesterGPA();
-        getCumulaitveGPA();
+        getCumulativeGPA();
     });
     
     $('#yeardropdown').on('change', function() {
         populateGradeTable();
         getSemesterGPA();
-        getCumulaitveGPA();
+        getCumulativeGPA();
     });
     
     $('.tablesorter').tablesorter({

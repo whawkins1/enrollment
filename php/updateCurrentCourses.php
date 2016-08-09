@@ -16,16 +16,15 @@
            $year = "2010"; 
            //$year = new simpleDate()->now()->getYear();
             $sql = "INSERT INTO enrolled_". $year . " (user_email_" . $year . ", user_grade_" . $year . 
-                                                    ", user_semester_" . $year . ", user_course_code_" . $year . 
-                   " VALUES( " . $email . ", " . $grade . ", " . $semester . ", " . $code . ");";
+                                                    ", user_semester_" . $year . ", user_course_code 
+                   ) VALUES( '" . $email . "', '" . $grade . "', '" . $semester . "', '" . $code . "');";
             
             if ($stmt = $conn->prepare($sql)) {
                if(!$stmt->execute()) {
-                  //echo "ERROR_UPDATE1";
+                  echo "ERROR_UPDATE1";
                }                               
             } else {
-                 //echo "ERROR_UPDATE2";
+                 echo "ERROR_UPDATE2";
             }
-            echo $sql,  " ",  $code;
       }
 ?>
