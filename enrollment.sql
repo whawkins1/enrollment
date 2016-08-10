@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.30, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.10, for Win64 (x86_64)
 --
 -- Host: localhost    Database: enrollment
 -- ------------------------------------------------------
--- Server version	5.6.30-log
+-- Server version	5.7.10-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -269,7 +269,7 @@ CREATE TABLE `enrolled_2010` (
 
 LOCK TABLES `enrolled_2010` WRITE;
 /*!40000 ALTER TABLE `enrolled_2010` DISABLE KEYS */;
-INSERT INTO `enrolled_2010` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
+INSERT INTO `enrolled_2010` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('bpomp@yahoo.com','-','spring','ENG101'),('bpomp@yahoo.com','-','spring','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2010` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -824,12 +824,10 @@ BEGIN
   DECLARE gradeTotal INT(3) DEFAULT 0;
   DECLARE creditHours INT(3) DEFAULT 0;
   DECLARE yearsAttended VARCHAR(100) DEFAULT getYearsAttended(email);
+  SET @tempGradeTotal = 0;
+  SET @tempCreditHours = 0;
   
   IF yearsAttended != "" THEN      
-    SET @tempGradeTotal = 0;
-    SET @tempCreditHours = 0;
-    SET @email = email;
-    
     perform_totaling:
       LOOP
             SET stringLength = CHAR_LENGTH(yearsAttended);
@@ -851,11 +849,10 @@ BEGIN
                               FROM ", enrolledTable, " 
                               INNER JOIN courses
                               ON courses.code = user_course_code
-                              WHERE ", enrolledEmail, " = ?");
+                              WHERE ", enrolledEmail, " = '",email,"'");
         
                 PREPARE stmt FROM @sqlText;
-                EXECUTE stmt
-                USING @email;
+                EXECUTE stmt;
                 DEALLOCATE PREPARE stmt;
               
               SET gradeTotal = (gradeTotal + (@tempGradeTotal * @tempCreditHours));
@@ -884,38 +881,37 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getSemesterGPA`(IN email VARCHAR(30),
-                                IN semester VARCHAR(6), 
-                                IN year INT(4),
-                                OUT semesterGPA DECIMAL(10, 2))
+                               IN semester VARCHAR(6), 
+                               IN year INT(4),
+                               OUT semesterGPA DECIMAL(10, 2))
     DETERMINISTIC
 BEGIN
     DECLARE enrolledTable CHAR(13) DEFAULT CONCAT('enrolled_', year);
     DECLARE userGrade CHAR(15) DEFAULT CONCAT('user_grade_', year);
     DECLARE userSemester CHAR(18) DEFAULT CONCAT('user_semester_', year);
     DECLARE userEmail CHAR(15) DEFAULT CONCAT('user_email_', year);
-    SET @gpa = 0.00;
-    SET @email = email;
-    SET @semester = semester;
+    SET @gradeTotal = 0;
+    SET @creditHours = 0;
     
-    SET @sqlText = CONCAT("SELECT SUM(courses.credits) * (CASE ",userGrade,"
-                                                            WHEN 'A' THEN 4
-                                                            WHEN 'B' THEN 3
-                                                            WHEN 'C' THEN 2
-                                                            WHEN 'D' THEN 1
-                                                            WHEN 'F' THEN 0
-                                                          END)  
-                                                       /  SUM(courses.credits)     
-                          INTO @gpa 
+    SET @sqlText = CONCAT("SELECT SUM(courses.credits), 
+                                   SUM(CASE ",userGrade,"
+                                            WHEN 'A' THEN 4
+                                            WHEN 'B' THEN 3
+                                            WHEN 'C' THEN 2
+                                            WHEN 'D' THEN 1
+                                            WHEN 'F' THEN 0
+                                       END)                                         
+                          INTO @creditHours, @gradeTotal 
                           FROM ", enrolledTable, " 
                           INNER JOIN courses
                           ON courses.code = user_course_code
-                          WHERE ", userEmail, " = ? AND ",userSemester," = ?");
+                          WHERE ", userEmail, " = '",email,"' AND ",userSemester," = '",semester, "'");
     
     PREPARE stmt FROM @sqlText;
-    EXECUTE stmt
-    USING @email, @semester;
+    EXECUTE stmt;
     DEALLOCATE PREPARE stmt;    
-    SET semesterGPA = @gpa;
+    
+    SELECT (@gradeTotal * @creditHours / @creditHours) INTO semesterGPA;
  END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1001,4 +997,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-18 14:42:15
+-- Dump completed on 2016-08-09 22:51:53

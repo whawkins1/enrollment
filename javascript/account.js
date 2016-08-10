@@ -715,16 +715,17 @@ $(function() {
     $('#buttonupdatecourses').on('click', function() {
         //Delete Rows in enrolled table based on code
         //$(this).css('background-image', 'url(/images/loader.gif'));        
+                   console.log("here");
 
-        if (delCurrCoursesArr.length !== 0) {          
-            $.each(delCurrCoursesArr, function(i, item) {
+        
+            $.each(delCurrCoursesArr, function(index, value) {
                $.ajax({
                    type: 'POST',
                    url: "deleteCurrentCourses.php",
                    cache: false,
                    data: {
                              email: originalEmail,
-                             code: item,
+                             code: value,
                              semester: semester,
                          }                         
                })
@@ -737,8 +738,7 @@ $(function() {
                      alert("Error Deleting Previous Courses");
                });
             });
-        }
-        
+                
         //Insert Rows into enrolled based on code
         $.each(updateCurrCoursesArr, function(index, value) {
                     $.ajax({
@@ -753,7 +753,6 @@ $(function() {
                              }
                     })
                     .done(function(data) {
-                        console.log(data);
                         if(data.startsWith("ERROR_UPDATE")) {
                             alert("Unable to update course code " + item);
                         }

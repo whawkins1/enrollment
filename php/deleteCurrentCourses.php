@@ -24,5 +24,6 @@
             } else { 
                 echo "ERROR_DELETE";
             }
+            echo $sql;
       }
 ?>
