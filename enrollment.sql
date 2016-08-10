@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.10, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.30, for Win32 (AMD64)
 --
 -- Host: localhost    Database: enrollment
 -- ------------------------------------------------------
--- Server version	5.7.10-log
+-- Server version	5.6.30-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -269,7 +269,7 @@ CREATE TABLE `enrolled_2010` (
 
 LOCK TABLES `enrolled_2010` WRITE;
 /*!40000 ALTER TABLE `enrolled_2010` DISABLE KEYS */;
-INSERT INTO `enrolled_2010` VALUES ('bpomp@yahoo.com','B','Fall','MATH101'),('bpomp@yahoo.com','-','spring','ENG101'),('bpomp@yahoo.com','-','spring','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
+INSERT INTO `enrolled_2010` VALUES ('bpomp@yahoo.com','-','Spring','MATH101'),('jjaso@gmail.com','C','Spring','ENG101'),('jsvens@gmail.com','A','Summer','MATH101'),('mjordan@gmail.com','F','Fall','ENG101'),('up@yahoo.com','D','Spring','MATH101');
 /*!40000 ALTER TABLE `enrolled_2010` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -997,4 +997,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-09 22:51:53
+-- Dump completed on 2016-08-10 17:36:18

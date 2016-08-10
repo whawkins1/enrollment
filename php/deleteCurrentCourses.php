@@ -11,19 +11,17 @@
            ) {
           
             $year = "2010"; 
-            $sql = "DELETE from enrolled_". $year .
-                   " WHERE user_email_" . $year . " = ?
-                     AND user_course_code = ? 
-                     AND enrolled_semester_" . $year . "= ? LIMIT 1;";
+            $sql = "DELETE from enrolled_". $year . " WHERE user_email_" . $year . " = ? 
+                   AND user_course_code = ? 
+                   AND user_semester_" . $year . " = ?;";
             
             if ($stmt = $conn->prepare($sql)) {
-               $stmt->bind_param("ss", $email, $code, $semester);
+               $stmt->bind_param("sss", $email, $code, $semester);
                  if (!$stmt->execute()) {
                     echo "ERROR_DELETE";
                  }                                 
             } else { 
                 echo "ERROR_DELETE";
             }
-            echo $sql;
       }
 ?>

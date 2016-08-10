@@ -30,7 +30,7 @@ $(function() {
     });
     
     //Populate codes from current courses into array
-    $('#tablecourses').find('tr').each(function() {
+    $('#tablecourses tbody').find('tr').each(function() {
            var code = $(this).find("td").eq(1).html();
            origCurrCoursesArr.push(code);
     });
@@ -63,6 +63,9 @@ $(function() {
     $('#buttonaddcourses').on('click', function() {
        $('#tablecatalog tbody input[type="checkbox"]').each(function () {
            if($(this).prop("checked")) {
+               if ($('#tablecourses tbody tr').length === 0) {
+                  $('#buttonupdatecourses').prop('disabled', false);    
+               }               
                $(this).prop('checked', false);
                var checkedRow = $(this).closest("tr").remove().clone();
                var code = checkedRow.find("td").eq(1).html();
@@ -108,8 +111,8 @@ $(function() {
               var credits = $removedRow.find("td").eq(7).html();
               currentTotal = (currentTotal - credits);
               $removedRow.appendTo($('#tablecatalog tbody'));
-              if ($.contains(code, origCurrCoursesArr)) {
-                   delCurrCoursesArr.add(code);              
+              if ($.inArray(code, origCurrCoursesArr) > -1) {
+                   delCurrCoursesArr.push(code);
               }
            }
         });
@@ -685,11 +688,11 @@ $(function() {
     
     //Set Default Semester Based On Month
     if (currentMonth >= 9 && currentMonth <= 12) {
-        semester = 'summer';
+        semester = 'Summer';
     } else if (currentMonth >=1 && currentMonth <=5) {
-        semester = 'fall';
+        semester = 'Fall';
     } else if (currentMonth >=6 && currentMonth <=8) {
-        semester = 'spring';
+        semester = 'Spring';
     }
     $('#semesterdropdown').val(semester);
     
@@ -715,9 +718,7 @@ $(function() {
     $('#buttonupdatecourses').on('click', function() {
         //Delete Rows in enrolled table based on code
         //$(this).css('background-image', 'url(/images/loader.gif'));        
-                   console.log("here");
-
-        
+            
             $.each(delCurrCoursesArr, function(index, value) {
                $.ajax({
                    type: 'POST',
@@ -726,12 +727,13 @@ $(function() {
                    data: {
                              email: originalEmail,
                              code: value,
-                             semester: semester,
+                             semester: "Fall"
                          }                         
                })
                .done(function(data) {
+                     console.log(data);
                      if (data.startsWith("ERROR_DELETE")) {
-                         alert("Unable to remove course code " + item);
+                         alert("Unable to remove course code " + value);
                      }
                })
                .fail(function (jqHXR, textStatus, errorThrown) {
@@ -740,7 +742,9 @@ $(function() {
             });
                 
         //Insert Rows into enrolled based on code
+        origCurrCoursesArr.length = 0;
         $.each(updateCurrCoursesArr, function(index, value) {
+                  origCurrCoursesArr.push(value);
                     $.ajax({
                              type: 'POST',
                              url: "updateCurrentCourses.php",
