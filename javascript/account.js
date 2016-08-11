@@ -717,8 +717,8 @@ $(function() {
     
     $('#buttonupdatecourses').on('click', function() {
         //Delete Rows in enrolled table based on code
-        //$(this).css('background-image', 'url(/images/loader.gif'));        
-            
+        $(this).css('background-image', 'url(/images/loader.gif');        
+            $delete_success = true;
             $.each(delCurrCoursesArr, function(index, value) {
                $.ajax({
                    type: 'POST',
@@ -727,46 +727,52 @@ $(function() {
                    data: {
                              email: originalEmail,
                              code: value,
-                             semester: "Fall"
+                             semester: semester
                          }                         
                })
                .done(function(data) {
                      console.log(data);
                      if (data.startsWith("ERROR_DELETE")) {
                          alert("Unable to remove course code " + value);
+                         $delete_success = false;
                      }
                })
                .fail(function (jqHXR, textStatus, errorThrown) {
                      alert("Error Deleting Previous Courses");
+                     $delete_success = false;
                });
             });
                 
         //Insert Rows into enrolled based on code
-        origCurrCoursesArr.length = 0;
-        $.each(updateCurrCoursesArr, function(index, value) {
-                  origCurrCoursesArr.push(value);
-                    $.ajax({
-                             type: 'POST',
-                             url: "updateCurrentCourses.php",
-                             cache: false,
-                             data: {
-                                     email: originalEmail,
-                                     code: value,
-                                     semester: semester,
-                                     grade: "-"
-                             }
-                    })
-                    .done(function(data) {
-                        if(data.startsWith("ERROR_UPDATE")) {
-                            alert("Unable to update course code " + item);
-                        }
-                    })
-                    .fail(function (jqHXR, textStats, errorThrown) {
-                        alert("Error updating current courses");
-                    });                         
-        });
-      //$(this).css('background-image', '');
-      //$(this).html("Update");      
+        if ($delete_success) {
+            origCurrCoursesArr.length = 0;
+            $.each(updateCurrCoursesArr, function(index, value) {
+                      origCurrCoursesArr.push(value);
+                        $.ajax({
+                                 type: 'POST',
+                                 url: "updateCurrentCourses.php",
+                                 cache: false,
+                                 data: {
+                                         email: originalEmail,
+                                         code: value,
+                                         semester: semester,
+                                         grade: "-"
+                                 }
+                        })
+                        .done(function(data) {
+                            if(data.startsWith("ERROR_UPDATE")) {
+                                alert("Unable to update course code " + item);
+                            } else {
+                                alert("Update Successfully Completed");
+                            }
+                        })
+                        .fail(function (jqHXR, textStats, errorThrown) {
+                            alert("Error updating current courses");
+                        });                         
+            });
+        }
+      $(this).css('background-image', '');
+      $(this).html("Update");      
     });
 });
 

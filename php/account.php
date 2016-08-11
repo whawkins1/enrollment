@@ -248,6 +248,7 @@
                  <tbody>
                  <?php
                    $currentCreditTotal = 0;
+                   $current_courses_codes = [];
                     $sql = "SELECT getYearsAttended(?)";           
                    if ($stmt = $conn->prepare($sql)) {
                        $stmt->bind_param('s', $username);
@@ -260,7 +261,7 @@
                        //$most_recent_year_enrolled = max($years_attended_arr);
                        $most_recent_year_enrolled = 2010;
                        // temporary
-                       $semester = "Fall";
+                       $semester = "Spring";
                    }
                    if(!empty($most_recent_year_enrolled)) {
                         $sql = "SELECT c.code, c.title, c.days, c.department, c.begin_time, c.end_time, 
@@ -270,8 +271,6 @@
                                    " AND user_semester_" . $most_recent_year_enrolled . " = ?;";
                         
                         if($stmt = $conn->prepare($sql)) {
-                            // temporary
-                            $semester = "Fall";
                             $stmt->bind_param('ss', $username, $semester);
                             if($stmt->execute()) {
                                  $stmt->bind_result($code, $title, $days, $department, $begin_time, 
@@ -279,7 +278,8 @@
                                                     $professor_first_name, $location, $department );
                                  $count_current_courses = 0;
                                  while($stmt->fetch()) {    
-                                    $count_current_courses++;                                 
+                                    $count_current_courses++;     
+                                    array_push($current_courses_codes, $code);
                                     echo "<tr>";
                                         echo "<td><input type='checkbox' class='checkbox' id='checkboxrow'></td>";
                                         echo "<td>", $code, "</td>";
@@ -343,18 +343,21 @@
                     <?php $result = $conn->query("SELECT * FROM courses");
                           if($result) {
                                 while($row = $result->fetch_assoc()) {      
-                                    echo "<tr>";
-                                        echo "<td><input type='checkbox' class='checkbox' id='checkboxcatalog'></td>";
-                                        echo "<td>", $row['code'], "</td>";
-                                        echo "<td>", $row['title'], "</td>";
-                                        echo "<td>", $row['department'], "</td>";
-                                        echo "<td>", $row['professor_last_name'],  ", ", $row['professor_first_name'], "</td>";
-                                        echo "<td>", $row['begin_time'], "-", $row['end_time'], $row['am_pm'],  " ",  $row['days'], "</td>";
-                                        echo "<td>", $row['location'], "</td>";
-                                        echo "<td>", $row['credits'], "</td>";
-                                    echo "</tr>";
-                                  }  
-                            } ?>
+                                     $code = $row['code'];
+                                     if (!(in_array($code, $current_courses_codes))) {
+                                        echo "<tr>";
+                                            echo "<td><input type='checkbox' class='checkbox' id='checkboxcatalog'></td>";
+                                            echo "<td>", $row['code'], "</td>";
+                                            echo "<td>", $row['title'], "</td>";
+                                            echo "<td>", $row['department'], "</td>";
+                                            echo "<td>", $row['professor_last_name'],  ", ", $row['professor_first_name'], "</td>";
+                                            echo "<td>", $row['begin_time'], "-", $row['end_time'], $row['am_pm'],  " ",  $row['days'], "</td>";
+                                            echo "<td>", $row['location'], "</td>";
+                                            echo "<td>", $row['credits'], "</td>";
+                                        echo "</tr>";
+                                     }
+                                }  
+                         } ?>
                  </tbody>    
              </table>
              <div class="creditscontainer">
@@ -489,7 +492,7 @@
                              AND e.user_email_".$most_recent_year_enrolled . " = ?;";
                              
                 if ( $stmt = $conn->prepare($sql)) {
-                    $semester = "Fall";  //Temporary
+                    $semester = "Spring";  //Temporary
                     $stmt->bind_param('ss', $semester, $username);
                     
                     if ($stmt->execute()) {
