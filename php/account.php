@@ -54,6 +54,7 @@
     <meta charset="UTF-8">
   </head>
     <body>
+      <!-- insert this container into each page opening -->
       <div id="loggedincontainer">
            <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $username ?></span></label>
       </div>
