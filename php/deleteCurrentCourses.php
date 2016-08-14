@@ -23,6 +23,5 @@
             } else { 
                 echo "ERROR_DELETE";
             }
-            echo $code, " ", $email, " ", $semester;
       }
 ?>
