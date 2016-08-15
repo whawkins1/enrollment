@@ -1,16 +1,42 @@
 
 $(function() {
     $('#searchbutton').on('click', function() {
-        var searchTerm = $('#searchinput').val().trim();
+        var searchTerm = $('#searchinput').val();
         
         if (isEmpty(searchTerm)) {
             alert("Must Enter Search Term");
         } else {
-            var searchInText = $('#indropdown option:selected').text();
+            var searchInText = $('#indropdown option:selected').val();
             if (isEmpty(searchInText)) {
                 alert("Must Select Where to Search In");
             } else {
-                //Proceed To Search
+                var  searchByText = $('#bydropdown option:selected').val();
+                if (isEmpty(searchByText)) {
+                    alert('Must Select Where to Search By');
+                } else {
+                    var errorMessage = "Error Processing Search, Please Try Again";
+                    $.ajax({
+                         type: 'GET',
+                         url: 'search.php',
+                         cache: false,
+                         data: {
+                                  term: searchTerm,
+                                  searchIn: searchIn,
+                                  searchBy: searchBy                         
+                               }
+                    
+                    })
+                    .done(function(data) {
+                        if (data.startswith("ERROR_PROCESS_SEARCH") {
+                           alert(errorMessage);
+                        } else {
+                           
+                        }                            
+                    })
+                    .fail(function(jqHXR, textStats, errorThrown) {
+                        alert(errorMessage);
+                    });
+                }
             }
         }
     });
