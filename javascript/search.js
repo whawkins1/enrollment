@@ -6,12 +6,12 @@ $(function() {
         if (isEmpty(searchTerm)) {
             alert("Must Enter Search Term");
         } else {
-            var searchInText = $('#indropdown option:selected').val();
-            if (isEmpty(searchInText)) {
+            var searchIn = $('#indropdown option:selected').val();
+            if (isEmpty(searchIn)) {
                 alert("Must Select Where to Search In");
             } else {
-                var  searchByText = $('#bydropdown option:selected').val();
-                if (isEmpty(searchByText)) {
+                var  searchBy = $('#bydropdown option:selected').val();
+                if (isEmpty(searchBy)) {
                     alert('Must Select Where to Search By');
                 } else {
                     var errorMessage = "Error Processing Search, Please Try Again";
@@ -37,7 +37,8 @@ $(function() {
                         if (data.startswith("ERROR_PROCESS_SEARCH") {
                            alert(errorMessage);
                         } else {
-                           
+                            $('#searchtextcontainer').empty();
+                            $('#searchtextcontainer').innerHTML(data);
                         }                            
                     })
                     .fail(function(jqHXR, textStats, errorThrown) {
