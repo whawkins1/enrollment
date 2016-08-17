@@ -19,7 +19,13 @@
                </div>    
                <div id="searchbycontainer">
                    <label class="searchlabels">Search By:</label>
-                   <select id="bydropdown"></select>
+                   <select id="bydropdown">
+                      <option value="department">Department</option>
+                      <option value="location">Location</option>
+                      <option value="professorFirstName">Professor First Name</option>
+                      <option value="professorLastName">Professor Last Name</option>
+                      <option value="title">Title</option>
+                   </select>
                <div>
                <div id="searchbuttoncontainer">               
                    <button type="button" id="searchbutton">Start Search</button>               

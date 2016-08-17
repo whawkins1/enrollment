@@ -15,6 +15,13 @@ $(function() {
                     alert('Must Select Where to Search By');
                 } else {
                     var errorMessage = "Error Processing Search, Please Try Again";
+                    //Insert underscore for sql column
+                    if (searchBy.indexOf(' ') > -1) {
+                        searchBy.replace(/ /g, "_");
+                    }
+                    //Convert to lower case easier to read sql
+                    searchIn = searchIn.toLowerCase();
+                    searchBy = searchBy.toLowerCase();
                     $.ajax({
                          type: 'GET',
                          url: 'search.php',
