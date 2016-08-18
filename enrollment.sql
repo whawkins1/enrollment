@@ -111,7 +111,12 @@ CREATE TABLE `courses` (
   `location` varchar(40) NOT NULL,
   `department` varchar(40) NOT NULL,
   `am_pm` varchar(2) NOT NULL,
-  PRIMARY KEY (`code`)
+  PRIMARY KEY (`code`),
+  FULLTEXT KEY `title` (`title`),
+  FULLTEXT KEY `professor_last_name` (`professor_last_name`),
+  FULLTEXT KEY `professor_first_name` (`professor_first_name`),
+  FULLTEXT KEY `location` (`location`),
+  FULLTEXT KEY `department` (`department`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -997,4 +1002,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-10 17:36:18
+-- Dump completed on 2016-08-18 17:37:40

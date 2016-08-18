@@ -50,8 +50,12 @@
                     echo "</tr>";
                 }
                 echo "</tbody>";
-              }
-          }
-     }
+            } else {
+               echo "ERROR_PROCESS_SEARCH";
+            }
+       } else {
+         echo "ERROR_PROCESS_SEARCH";
+       }
+   }
  }
 ?>
