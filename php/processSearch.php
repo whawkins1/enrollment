@@ -29,18 +29,29 @@
                 echo       "<th class='location'>Location</th>";
                 echo       "<th class='credits'>Credits</th>";
                 echo       "</tr>";
-                echo   "</thead>";                 
+                echo   "</thead>"; 
+                echo "<tbody>";
+                
                 $stmt->bind_result($code, $title, $days, $begin_time, 
                                    $end_time, $am_pm, $credits, 
                                    $professor_last_name, $professor_first_name, 
                                    $location, $department);
                                    
                 while ($row = $stmt->fetch()) {
-                    
+                    while ($stmt->fetch()) {
+                    echo "<tr>";
+                      echo "<td>", $code, "</td>";
+                      echo "<td>", $title, "</td>";
+                      echo "<td>", $department, "</td>";
+                      echo "<td>",  $professor_last_name,  ", ", $professor_first_name, "</td>";
+                      echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
+                      echo "<td>", $location, "</td>";
+                      echo "<td id='credits'>", $credits, "</td>";
+                    echo "</tr>";
                 }
-            }
-        }
-        
-        
+                echo "</tbody>";
+              }
+          }
      }
+ }
 ?>
