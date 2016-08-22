@@ -2,36 +2,41 @@
    <html lang="en">
       <head>
          <title>Enrollment Center</title>
+         <link rel="stylesheet" href="../css/search.css"/>
          <meta charset="UTF-8">
       </head>
       <body>
           <?php include("../php/navigation.php") ?>
           <div id="searchtextcontainer">
-               <div id="searchinputcontainer">
-                   <label class="searchlabel">Search</label>
+               <div id="searchinputcontainer" class="format_div">
+                   <label class="searchlabels">Search Term:</label>
                    <input type="text" id="searchinput">
                </div>
-               <div id="searchincontainer">
+               <div id="searchincontainer" class="format_div">
                    <label class="searchlabels">Search In:</label>
-                   <select id="indropdown">
+                   <select id="indropdown" class="format_select">
+                     <option label=" "></option>
                      <option value="courses">courses</option>
                    </select>    
                </div>    
-               <div id="searchbycontainer">
+               <div id="searchbycontainer" class="format_div">
                    <label class="searchlabels">Search By:</label>
-                   <select id="bydropdown">
+                   <select id="bydropdown" class="format_select">
+                      <option label=" "></option>
                       <option value="department">Department</option>
                       <option value="location">Location</option>
                       <option value="professorFirstName">Professor First Name</option>
                       <option value="professorLastName">Professor Last Name</option>
                       <option value="title">Title</option>
                    </select>
-               <div>
-               <div id="searchbuttoncontainer">               
+               </div>
+               <div id="searchbuttoncontainer" class="format_div">               
                    <button type="button" id="searchbutton">Start Search</button>               
                </div>
+               <div>
                <table id="searchtable" class="tablesorter">
                </table>
+               </div>
           </div>
       </body>
    </html>   

@@ -1,0 +1,50 @@
+
+#searchtextcontainer {
+    width: 20%;
+    height: 20%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+#searchbuttoncontainer {
+    text-align: center;
+}
+
+#searchinput {
+    width: 68%;
+    height: 70%;
+}
+
+#indropdown {
+    width: 75%;
+    height: 70%;
+}
+
+#bydropdown {
+    width: 73%;
+    height: 70%;
+}
+
+.format_div {
+  width: 100%;
+  height: 20%;  
+  float: left;
+  margin: 4px;
+}
+
+.searchlabels {
+   padding-right: 4px;
+   height: 70%;
+   font-size: 1.3em;
+}
+
+#searchbutton {
+   width: 50%;
+   height: 70%;
+   font-size: 1.1em;
+}
+
+
+
+
