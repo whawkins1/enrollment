@@ -5,6 +5,8 @@ $(function() {
         
         if (isEmpty(searchTerm)) {
             alert("Must Enter Search Term");
+        } else if(!(/^[a-zA-Z0-9- ]$/.test(searchTerm))) {
+            alert("Search Term Must Not Contain Special Characters except hyphen");
         } else {
             var searchIn = $('#indropdown option:selected').val();
             if (isEmpty(searchIn)) {
