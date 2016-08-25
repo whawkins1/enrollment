@@ -1,6 +1,9 @@
 <!DOCTYPE html>     
 
-<?php require_once("config.php"); ?>
+<?php 
+    require_once("config.php"); 
+    session_start();  
+?>
 
 <html>
     <head>
@@ -8,6 +11,9 @@
        <meta charset="UTF-8">
     </head>
      <body>     
+        <div id="loggedincontainer">
+               <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $_SESSION['username'] ?></span></label>
+        </div>
         <?php include("../php/navigation.php"); ?>
         <div id="filterdepartment">
                  <label>Filter Department:        

@@ -15,7 +15,6 @@
             $stmt->bind_param("s", $search_term);
             
             if($stmt->execute()) {
-                echo "<div id='containerresults>";
                 echo "<label id='labelresultstitle'>Results For ", $search_term, " In ", $search_in, " By ", $search_by, "</label>";
                 echo "<div id='containerresultstable'>";
                 echo "<table id='tableresults' class='tablesorter'>";

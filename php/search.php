@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
    <html lang="en">
       <head>
          <title>Enrollment Center</title>
@@ -6,7 +6,10 @@
          <meta charset="UTF-8">
       </head>
       <body>
-          <?php include("../php/navigation.php") ?>
+          <div id="loggedincontainer">
+               <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php session_start(); echo $_SESSION['username']; ?></span></label>
+          </div>
+          <?php include("../php/navigation.php"); ?>
           <div id="searchtextcontainer">
                <div id="searchinputcontainer" class="format_div">
                    <label class="searchlabels">Search Term:</label>
@@ -14,14 +17,14 @@
                </div>
                <div id="searchincontainer" class="format_div">
                    <label class="searchlabels">Search In:</label>
-                   <select id="indropdown" class="format_select">
+                   <select id="indropdown">
                      <option label=" "></option>
                      <option value="courses">courses</option>
                    </select>    
                </div>    
                <div id="searchbycontainer" class="format_div">
                    <label class="searchlabels">Search By:</label>
-                   <select id="bydropdown" class="format_select">
+                   <select id="bydropdown">
                       <option label=" "></option>
                       <option value="department">Department</option>
                       <option value="location">Location</option>
@@ -33,13 +36,11 @@
                <div id="searchbuttoncontainer" class="format_div">               
                    <button type="button" id="searchbutton">Start Search</button>               
                </div>
-               <div>
-               <table id="searchtable" class="tablesorter">
-               </table>
+               <div id="searchresultscontainer">
                </div>
           </div>
+          <script src="../plugins/jquery-1.12.0.js"></script>
+          <script src="../plugins/tablesorter/jquery.tablesorter.js"></script>
+          <script src="../javascript/search.js"></script>
       </body>
-   </html>   
-
-
-
+   </html>
