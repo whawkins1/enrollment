@@ -1,6 +1,6 @@
 
 #searchtextcontainer {
-    width: 24%;
+    width: 26%;
     text-align: center;
     margin: 0 auto;    
     overflow: hidden;
@@ -39,10 +39,6 @@
 }
 
 #searchbutton {
-   width: 30%;
+   width: 40%;
    font-size: 1.1em;
 }
-
-
-
-

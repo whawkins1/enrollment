@@ -23,12 +23,7 @@ $(function() {
                 } else {
                     var errorMessage = "Error Processing Search, Please Try Again";
                     //Insert underscore for sql column
-                    if (searchBy.indexOf(' ') > -1) {
-                        searchBy.replace(/ /g, "_");
-                    }
-                    //Convert to lower case easier to read sql
-                    searchIn = searchIn.toLowerCase();
-                    searchBy = searchBy.toLowerCase();
+                                     
                     console.log("Search Term: " + searchTerm + " Search In: " + searchIn + " Search By: " + searchBy);
                     // $.ajax({
                          // type: 'GET',

@@ -19,7 +19,7 @@
                    <label class="searchlabels">Search In:</label>
                    <select id="indropdown">
                      <option label=" "></option>
-                     <option value="courses">courses</option>
+                     <option value="courses">Courses</option>
                    </select>    
                </div>    
                <div id="searchbycontainer" class="format_div">
@@ -28,8 +28,8 @@
                       <option label=" "></option>
                       <option value="department">Department</option>
                       <option value="location">Location</option>
-                      <option value="professorFirstName">Professor First Name</option>
-                      <option value="professorLastName">Professor Last Name</option>
+                      <option value="professor_first_name">Professor First Name</option>
+                      <option value="professor_last_name">Professor Last Name</option>
                       <option value="title">Title</option>
                    </select>
                </div>
