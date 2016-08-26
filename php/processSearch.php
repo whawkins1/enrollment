@@ -1,9 +1,11 @@
 <?php
-  include("config");
+  include("config.php");
+
+  //echo $_GET['searchTerm'], " ", $_GET['searchIn'], " ", $_GET['searchBy'];
   
-  if(isSet($_GET['searchTerm'] && !isEmpty($_GET['searchTerm'] && 
-     isSet($_GET['searchIn'] && !isEmpty($_GET['searchIn'] && 
-     isSet($_GET['searchBy'] && !isEmpty($_GET['searchBy'])  {
+  if((isSet($_GET['searchTerm'])) && (!empty($_GET['searchTerm'])) && 
+     (isSet($_GET['searchIn'])) && (!empty($_GET['searchIn'])) && 
+     (isSet($_GET['searchBy'])) && (!empty($_GET['searchBy'])))  {
          
         $search_term = $_GET['searchTerm'];
         $search_in = $_GET['searchIn'];
@@ -35,9 +37,8 @@
                                    $end_time, $am_pm, $credits, 
                                    $professor_last_name, $professor_first_name, 
                                    $location, $department);
-                                   
-                while ($row = $stmt->fetch()) {
-                    while ($stmt->fetch()) {
+                
+                 while ($stmt->fetch()) {
                     echo "<tr>";
                       echo "<td>", $code, "</td>";
                       echo "<td>", $title, "</td>";
@@ -56,5 +57,4 @@
          echo "ERROR_PROCESS_SEARCH";
        }
    }
- }
 ?>

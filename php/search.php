@@ -13,7 +13,7 @@
           <div id="searchtextcontainer">
                <div id="searchinputcontainer" class="format_div">
                    <label class="searchlabels">Search Term:</label>
-                   <input type="text" id="searchinput">
+                   <input type="text" id="searchinput" autofocus>
                </div>
                <div id="searchincontainer" class="format_div">
                    <label class="searchlabels">Search In:</label>

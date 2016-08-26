@@ -1,7 +1,7 @@
 
 $(function() {
     $('#searchbutton').on('click', function() {
-        var searchTerm = $('#searchinput').val();
+        var searchTerm = $('#searchinput').val().trim();
         var regexAllLetters = /^[a-zA-Z- ]+$/;
         
         if (isEmpty(searchTerm)) {
@@ -23,30 +23,29 @@ $(function() {
                 } else {
                     var errorMessage = "Error Processing Search, Please Try Again";
                     //Insert underscore for sql column
-                                     
-                    console.log("Search Term: " + searchTerm + " Search In: " + searchIn + " Search By: " + searchBy);
-                    // $.ajax({
-                         // type: 'GET',
-                         // url: 'search.php',
-                         // cache: false,
-                         // data: {
-                                  // term: searchTerm,
-                                  // searchIn: searchIn,
-                                  // searchBy: searchBy                         
-                               // }
                     
-                    // })
-                    // .done(function(data) {
-                        // if (data.startswith("ERROR_PROCESS_SEARCH") {
-                           // alert(errorMessage);
-                        // } else {
-                            // $('#searchtextcontainer').empty();
-                            // $('#searchcontainer').innerHTML(data);
-                        // }                            
-                    // })
-                    // .fail(function(jqHXR, textStats, errorThrown) {
-                        // alert(errorMessage);
-                    // });
+                    $.ajax({
+                         type: 'GET',
+                         url: 'processSearch.php',
+                         cache: false,
+                         data: {
+                                  searchTerm: searchTerm,
+                                  searchIn: searchIn,
+                                  searchBy: searchBy                         
+                               }
+                    
+                    })
+                    .done(function(data) {
+                        console.log(data);
+                         if (data.match("^ERROR_PROCESS_SEARCH")) {
+                            alert(errorMessage);
+                         } else {
+                             $('#searchresultscontainer').html(data);
+                         }                            
+                    })
+                    .fail(function(jqHXR, textStats, errorThrown) {
+                        alert(errorMessage);
+                    });
                 }
             }
         }
