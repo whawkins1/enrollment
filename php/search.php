@@ -35,10 +35,10 @@
                </div>
                <div id="searchbuttoncontainer" class="format_div">               
                    <button type="button" id="searchbutton">Start Search</button>               
-               </div>
-               <div id="searchresultscontainer">
-               </div>
           </div>
+           </div>
+               <div id="searchresultscontainer">
+           </div>
           <script src="../plugins/jquery-1.12.0.js"></script>
           <script src="../plugins/tablesorter/jquery.tablesorter.js"></script>
           <script src="../javascript/search.js"></script>

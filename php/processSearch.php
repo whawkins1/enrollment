@@ -1,7 +1,5 @@
 <?php
   include("config.php");
-
-  //echo $_GET['searchTerm'], " ", $_GET['searchIn'], " ", $_GET['searchBy'];
   
   if((isSet($_GET['searchTerm'])) && (!empty($_GET['searchTerm'])) && 
      (isSet($_GET['searchIn'])) && (!empty($_GET['searchIn'])) && 
@@ -17,7 +15,11 @@
             $stmt->bind_param("s", $search_term);
             
             if($stmt->execute()) {
-                echo "<label id='labelresultstitle'>Results For ", $search_term, " In ", $search_in, " By ", $search_by, "</label>";
+                echo "<div id='containerresultstitle'>";
+                echo "<label id='labelresultstitle'><span class='resultsforinby'>Results For </span>", $search_term, 
+                            "<span class='resultsforinby'> In </span>", $search_in, 
+                            "<span class='resultsforinby'>By </span>", $search_by, "</label>";
+                echo "</div>";
                 echo "<div id='containerresultstable'>";
                 echo "<table id='tableresults' class='tablesorter'>";
                 echo "<thead>";
@@ -29,14 +31,14 @@
                 echo       "<th class='time'>Time</th>";
                 echo       "<th class='location'>Location</th>";
                 echo       "<th class='credits'>Credits</th>";
-                echo       "</tr>";
-                echo   "</thead>"; 
+                echo    "</tr>";
+                echo  "</thead>"; 
                 echo "<tbody>";
                 
                 $stmt->bind_result($code, $title, $days, $begin_time, 
-                                   $end_time, $am_pm, $credits, 
-                                   $professor_last_name, $professor_first_name, 
-                                   $location, $department);
+                                   $end_time, $credits , $professor_last_name, 
+                                   $professor_first_name, $location ,
+                                   $department, $am_pm);
                 
                  while ($stmt->fetch()) {
                     echo "<tr>";

@@ -22,7 +22,7 @@
 }
 
 #bydropdown {
-    width: 70%;
+    width: 69%;
     font-size: 1.1em;
 }
 
@@ -41,4 +41,12 @@
 #searchbutton {
    width: 40%;
    font-size: 1.1em;
+}
+
+.resultsforinby {
+    font-weight: bold;
+}
+
+#containerresultstitle {
+    text-align: center;
 }
