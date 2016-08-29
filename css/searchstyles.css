@@ -43,10 +43,13 @@
    font-size: 1.1em;
 }
 
-.resultsforinby {
+.labelresultstitle {
+    font-size: 1.8em;
     font-weight: bold;
+    text-decoration: underline;
 }
 
 #containerresultstitle {
+    margin: 20px;
     text-align: center;
 }

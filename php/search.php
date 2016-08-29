@@ -2,7 +2,7 @@
    <html lang="en">
       <head>
          <title>Enrollment Center</title>
-         <link rel="stylesheet" href="../css/search.css"/>
+         <link rel="stylesheet" href="../css/searchstyles.css"/>
          <meta charset="UTF-8">
       </head>
       <body>
