@@ -644,8 +644,7 @@
                     <button type="button" id="makepaymentbutton">Make Payment</button>
                 </div>
           </div>
-          
-          </div>
+        </div>
       </div>      
       
       <div id="tab-payment" class="tabsjump">

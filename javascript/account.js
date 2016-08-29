@@ -55,7 +55,6 @@ $(function() {
     setDropDownFilterPayments();
     setPaymentTypeDropDown();
     setMakePaymentAction();
-    $('#tablepayments').tablesorter();
     $('#amount').autoNumeric('init');
     $('#vin').val("");        
     
@@ -711,9 +710,7 @@ $(function() {
         getCumulativeGPA();
     });
     
-    $('.tablesorter').tablesorter({
-         headers: { 0: { sorter: false} } 
-    });
+    $('#tablegrades').tablesorter();
     
     $('#buttonupdatecourses').on('click', function() {
         //Delete Rows in enrolled table based on code

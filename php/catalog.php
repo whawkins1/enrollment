@@ -29,7 +29,7 @@
                  </label>
         </div>
      
-        <table id="tablecourses" class="tablesorter">      
+        <table id="tablecatalog" class="tablesorter">      
               <thead>
                     <tr id="headerRow">
                          <th class="code">Code</th>

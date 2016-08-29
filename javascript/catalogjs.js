@@ -1,5 +1,7 @@
 
 $(function() {
+      $('#tablecatalog').tablesorter();
+    
      //Reset Drop Down On Refresh
      $('#departmentfilter').prop('selectedIndex', 0);
      
