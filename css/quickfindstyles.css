@@ -1,0 +1,22 @@
+#containerinputcode {
+   text-align: center;
+   margin-top: 30px;
+   margin-bottom: 20px;
+}
+
+#containerbutton {
+   text-align: center;
+}
+
+#labelinputcodetitle  {
+  font-size: 2.0em;
+  margin-right: 20px;
+}
+
+#inputcoursecode {
+  font-size: 2.0em;
+}
+
+#quickfindbutton {
+  font-size: 1.2em;
+}

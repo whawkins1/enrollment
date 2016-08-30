@@ -54,10 +54,6 @@
     <meta charset="UTF-8">
   </head>
     <body>
-      <div id="loggedincontainer">
-           <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php echo $username ?></span></label>
-      </div>
-      
       <?php include("../php/navigation.php");?>         
         
       <ul class="tabs">
