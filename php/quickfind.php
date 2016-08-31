@@ -17,8 +17,8 @@
                     <label id="labelinputcodetitle">Enter Course Code:</label>
                     <input type="text" id="inputcoursecode" autofocus>
                 </div>
-                    <button type="button" id="quickfindbutton" disabled>Find Course</button>
                 <div id="containerbutton">
+                      <button type="button" id="quickfindbutton" disabled>Find Course</button>
                 </div>
           </div>      
               <script src="../plugins/jquery-1.12.0.js"></script>

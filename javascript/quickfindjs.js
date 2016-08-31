@@ -3,19 +3,39 @@ $(function() {
    $('#inputcoursecode').on('keypress', function(e) {
        var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
        var text = String.fromCharCode(e.which);
-       if (allowedChars.test(text) || e.keyCode === 8) {
+       var keyCodes = [8, 37, 39, 46, 116];
+       var code = e.keyCode;
+       
+       console.log(code);
+       if (allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey) {
            return true;           
        }
        return false;
    });
    
-   $('#inputcoursecode').on('keyup', function() {
+   $('#inputcoursecode').on('keyup', function(e) {
         var $button = $('#quickfindbutton');
-        var enableButton = ($button.prop('disabled') && $('#inputcoursecode').val().length > 0  ?  false : true);
-        $button.prop('disabled', enableButton);
+        var disableButton;
+        if ($button.prop('disabled') && $('#inputcoursecode').val().length > 0) {
+            disableButton = false;
+        } else if((!($button.prop('disabled'))) && $('#inputcoursecode').val().length === 0) {
+            disableButton = true;
+        }
+        $button.prop('disabled', disableButton);
    });
    
    $('#quickfindbutton').on('click', function() {
-       //Process request with ajax
+       $.ajax({
+           type: 'GET',
+           url: 'quickfind.php',
+           cache: false,
+           data: {
+                    term: text
+                 }           
+       })
+       .done(function(data){
+       })
+       .fail(function(jqHXR, textStats, errorThrown){
+       });
    });
 });
