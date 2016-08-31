@@ -3,13 +3,19 @@ $(function() {
    $('#inputcoursecode').on('keypress', function(e) {
        var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
        var text = String.fromCharCode(e.which);
-       var $button = $('#quickfindbutton');
        if (allowedChars.test(text) || e.keyCode === 8) {
-           var enableButton = ($button.prop('disabled') && $(this).val().length > 0  ?  false : true);
-           console.log($(this).val().length);
-           $button.prop('disabled', enableButton);
            return true;           
        }
        return false;
+   });
+   
+   $('#inputcoursecode').on('keyup', function() {
+        var $button = $('#quickfindbutton');
+        var enableButton = ($button.prop('disabled') && $('#inputcoursecode').val().length > 0  ?  false : true);
+        $button.prop('disabled', enableButton);
+   });
+   
+   $('#quickfindbutton').on('click', function() {
+       //Process request with ajax
    });
 });
