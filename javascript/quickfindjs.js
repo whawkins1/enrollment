@@ -1,16 +1,20 @@
 
 $(function() {
    $('#inputcoursecode').on('keypress', function(e) {
-       var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
-       var text = String.fromCharCode(e.which);
-       var keyCodes = [8, 37, 39, 46, 116];
-       var code = e.keyCode;
-       
-       console.log(code);
-       if (allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey) {
-           return true;           
+       if (e.which === 13) {
+           $('#quickfindbutton').click();
+       } else {
+           var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
+           var text = String.fromCharCode(e.which);
+           var keyCodes = [8, 37, 39, 46, 116];
+           var code = e.keyCode;
+           
+           console.log(code);
+           if (allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey) {
+               return true;           
+           }
+           return false;
        }
-       return false;
    });
    
    $('#inputcoursecode').on('keyup', function(e) {
