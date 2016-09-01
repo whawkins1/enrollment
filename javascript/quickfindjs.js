@@ -9,7 +9,6 @@ $(function() {
            var keyCodes = [8, 37, 39, 46, 116];
            var code = e.keyCode;
            
-           console.log(code);
            if (allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey) {
                return true;           
            }
@@ -34,12 +33,18 @@ $(function() {
            url: 'quickfind.php',
            cache: false,
            data: {
-                    term: text
+                    code: $('#inputcoursecode').val();
                  }           
        })
        .done(function(data){
+           if (data.match("ERROR_EXECUTING_STATEMENT")) {
+              alert("Error Executing Statment");
+           } else if (data.match("ERROR_PREPARING_STATEMENT")) {
+              alert("Error Preparing Statment");
+           }
        })
        .fail(function(jqHXR, textStats, errorThrown){
+           alert ("Error Retrieving Course Code " + $('#inputcoursecode').val();
        });
    });
 });

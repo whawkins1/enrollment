@@ -36,7 +36,6 @@ $(function() {
                     
                     })
                     .done(function(data) {
-                        console.log(data);
                          if (data.match("^ERROR_PROCESS_SEARCH")) {
                             alert(errorMessage);
                          } else {
