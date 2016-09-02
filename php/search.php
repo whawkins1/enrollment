@@ -6,10 +6,7 @@
          <meta charset="UTF-8">
       </head>
       <body>
-          <div id="loggedincontainer">
-               <label id="loggedinlabel"> Logged in as <span id="fontusername"><?php session_start(); echo $_SESSION['username']; ?></span></label>
-          </div>
-          <?php include("../php/navigation.php"); ?>
+          <?php session_start(); include("../php/navigation.php"); ?>
           <div id="searchtextcontainer">
                <div id="searchinputcontainer" class="format_div">
                    <label class="searchlabels">Search Term:</label>
