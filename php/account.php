@@ -11,7 +11,7 @@
        $username = $_SESSION['username'];
     }        
       
-    if (!empty($username)) { 
+    if (!isset($_GET['firstname'])) {
       $sql = "SELECT user_first_name, 
                      user_last_name, 
                      user_country, 
@@ -41,10 +41,21 @@
                               $mobilePhone, 
                               $postalCode, 
                               $balance);
+           $_SESSION['firstname'] = $firstName;
+           $_SESSION['lastname'] = $lastName;
+           $_SESSION['country'] = $country;
+           $_SESSION['state'] = $state;
+           $_SESSION['city'] = $city;
+           $_SESSION['major'] = $major;
+           $_SESSION['address'] = $address;
+           $_SESSION['homephone'] = $homePhone;
+           $_SESSION['mobilephone'] = $mobilePhone;
+           $_SESSION['postalcode'] = $postalcode;
+           $_SESSION['balance'] = $balance;
            $stmt->fetch();
            $stmt->close();
-       }           
-    }
+       }      
+    } 
 ?>
 
 <html lang="en">
@@ -71,15 +82,15 @@
                 <fieldset id="contactfieldset">
                    <legend>Contact</legend>
                     <div id="errorcontainer" class="error"></div>
-                    <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $firstName?>" readonly>
-                    <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $lastName?>" readonly>
-                    <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $address?>" readonly>
+                    <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $_SESSION['firstname'];?>" readonly>
+                    <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $_SESSION['lastname']?>" readonly>
+                    <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $_SESSION['address'];?>" readonly>
                      <label class="contactlabel">Country* :</label> <select id="countrydropdown" class="contactinput">
                         <?php
                             $result = $conn->query("SELECT * FROM countries");
                                if ($result) {
                                   while ($row = $result->fetch_assoc()) { 
-                                        $selected = ($country == $row["country_name"]) ? " selected" : "";
+                                        $selected = ($_SESSION['country'] == $row["country_name"]) ? " selected" : "";
                                         echo "<option value=", $row["country_id"], $selected,  ">", $row["country_name"], "</option>";
                                   }
                                }
@@ -89,7 +100,7 @@
                      <label class="contactlabel">State* :</label> <select id="statedropdown" class="contactinput">
                         <?php 
                           $stmt = $conn->prepare("SELECT country_id FROM countries WHERE country_name = ?");
-                          $stmt->bind_param('s', $country);
+                          $stmt->bind_param('s', $_SESSION['country']);
                           
                           if ($stmt->execute()) {
                              $stmt->bind_result($countryID);
@@ -104,7 +115,7 @@
                               $stmt->bind_result($stateID, $stateName);
 
                               while ($stmt->fetch())   { 
-                                    $selected = ($state == $stateName) ? " selected" : "";
+                                    $selected = ($_SESSION['state'] == $stateName) ? " selected" : "";
                                     echo "<option value=", $stateID,  $selected,  ">",  $stateName,  "</option>";
                               }
                           } 
@@ -121,7 +132,7 @@
                                $stmt->bind_result($cityName, $cityID);
                                
                                while ($stmt->fetch()) {
-                                  $selected = ($city == $cityName) ? " selected" : "";
+                                  $selected = ($_SESSION['city'] == $cityName) ? " selected" : "";
                                   echo "<option value=", $cityID, $selected, ">", $cityName, "</option>";
                                }
                             }
@@ -129,22 +140,22 @@
                           ?>
                      </select>
                     
-                    <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode?>" readonly>
-                    <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone?>" readonly>
-                    <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
+                    <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $_SESSION['postalcode'];?>" readonly>
+                    <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $_SESSION['homephone'];?>" readonly>
+                    <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $_SESSION['mobilephone']?>" readonly>
                     <label class="contactlabel">Major* : </label> <select id="majordropdown" class="contactinput">
                         <?php 
                           $result = $conn->query("SELECT DISTINCT user_major FROM users");
                           if($result) {
                               while ($row = $result->fetch_assoc())   { 
-                                    $selected = ($major == $row['user_major']) ? " selected" : "";
+                                    $selected = ($_SESSION['major'] == $row['user_major']) ? " selected" : "";
                                     echo "<option value=", $row["user_major"], $selected, ">", $row["user_major"], "</option>";
                               }
                           } 
                           ?>
                     </select> 
                      
-                    <label class="contactlabel">Email* :</label><input type="text" id="email" class="contactinput" value="<?php echo $username?>" readonly>
+                    <label class="contactlabel">Email* :</label><input type="text" id="email" class="contactinput" value="<?php echo $_SESSION['username'];?>" readonly>
                     
                     <div id="editbuttoncontainer">
                         <button type="button" id="editbutton">Edit</button>
