@@ -527,24 +527,10 @@
 
       <div id="tab-financial" class="tabsjump">
           <div id="containerfinancial">      
-             <fieldset id="financialfieldSet">
-               <label id="paymentslabel">History</label>
-
-               <legend>Financial</legend>
-            
-                <label for="selecttype" id="filterbylabel">Filter By:                    
-                       <select id="selecttype">
-                          <option>All</option>
-                          <option>Payment</option>
-                          <option>Charge</option>
-                       </select> 
-               </label>
-               <table id="tablesummary">
-                 <thead>
-                    <tr>
-                       <th colspan="2">Summary</th>
-                    </tr>
-                 </thead>
+          <div id="containersummarytitle">
+                <label id="labelsummarytitle">Summary</label>
+          </div>
+          <table id="tablesummary">                 
                  <tbody>
                     <tr>
                         <td>Tuition</td>
@@ -560,6 +546,20 @@
                     </tr>
                  </tbody>
              </table>
+             <div id="containertransactionstitle">
+                   <label id="labeltransactionstitle">Transactions</label>
+             </div>
+
+            <div id="containerfilterby">
+                <label for="selecttype" id="filterbylabel">Filter By:                    
+                       <select id="selecttype">
+                          <option>All</option>
+                          <option>Payment</option>
+                          <option>Charge</option>
+                       </select> 
+               </label>
+            </div>
+               
              
              <table id="tablepayments" class="tablesorter">
                          <thead>
@@ -646,7 +646,6 @@
                             </tr>
                          </tbody>
                        </table>
-          </fieldset>
             <div id="makepaymentbuttoncontainer">
                     <button type="button" id="makepaymentbutton">Make Payment</button>
                 </div>
