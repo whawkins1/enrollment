@@ -15,7 +15,7 @@ var updateCurrCoursesArr = [];
 
 $(function() { 
     //Remove all Data Fields to avoid caching previous results
-    $(window).unload( function () {
+    $(window).on('unload', function () {
       $('#firstname').val("");
       $('#lastname').val("");
       $('#streetaddress').val("");

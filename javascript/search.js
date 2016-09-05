@@ -1,5 +1,16 @@
 
 $(function() {
+    $(window).on('unload', function() {
+        $.ajax({
+             type: 'POST',
+             url: 'saveSearch.php',
+             data:
+                   {
+                       
+                   }                   
+        )};
+    });
+    
     $('#searchbutton').on('click', function() {
         var searchTerm = $('#searchinput').val().trim();
         var regexAllLetters = /^[a-zA-Z- ]+$/;

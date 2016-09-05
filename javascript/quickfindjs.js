@@ -1,6 +1,31 @@
 var holdCourseCode;
+var holdTableCode;
+var holdTableTitle;
+var holdTableDepartment;
+var holdTableProfessorName;
+var holdTableTime;
+var holdTableLocation;
+var holdTableCredits; 
 
 $(function() {
+   $(window).on('unload', function() {
+       $.ajax({
+                type: 'POST',
+                url: 'saveQuickfind.php',
+                data:
+                      {
+                          courseCode: holdCourseCode,
+                          tableCode: holdTableCode,
+                          tableTitle: holdTableTitle,
+                          tableDepartment: holdTableDepartment,
+                          tableProfessorName: holdTableProfessorName,
+                          tableTime: holdTableTime,
+                          tableLocation: holdTableLocation,
+                          tableCredits: holdTableCredits
+                      }
+   });       
+    
+    
    $('#inputcoursecode').on('keypress', function(e) {
        if (e.which === 13) {
            $('#quickfindbutton').click();
@@ -19,14 +44,16 @@ $(function() {
    
    $('#inputcoursecode').on('keyup', function(e) {
         var $button = $('#quickfindbutton');
+        var input = $(this).val().trim();
+        var lengthInput = $(this).val().trim().length();
         var disableButton;
-        if ($button.prop('disabled') && $(this).val().length > 0) {
+        if ($button.prop('disabled') && lengthInput > 0) {
             disableButton = false;
-        } else if((!($button.prop('disabled'))) && $(this).val().length === 0) {
+        } else if((!($button.prop('disabled'))) && lengthInput === 0) {
             disableButton = true;
         }
-        if ($(this).val().length > 0) {
-            holdCourseCode = $(this).val().trim();
+        if (input > 0) {
+            holdCourseCode = input;
         }
         $button.prop('disabled', disableButton);
    });
@@ -47,6 +74,17 @@ $(function() {
               alert("Error Preparing Statment");
            } else {
                $('#containerresult').html(data);
+               
+               if ($('#tableresults').length) {
+                   holdCourseCode = $('#inputcoursecode').text();
+                   holdTableCode = $table.find('#code').text();
+                   holdTableTitle = $table.find('#title').text();
+                   holdTableDepartment = $table.find('#department').text();
+                   holdTableProfessorName = $table.find('#professorname').text();
+                   holdTableTime = $table.find('#time').text();
+                   holdTableLocation = $table.find('#location').text();
+                   holdTableCredits = $table.find('#credits').text();
+               }
            }
        })
        .fail(function(jqHXR, textStats, errorThrown){

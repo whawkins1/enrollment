@@ -35,12 +35,12 @@
                                        $department, $am_pm);
                                        
                     echo "<tr>";
-                          echo "<td>", $code, "</td>";
-                          echo "<td>", $title, "</td>";
-                          echo "<td>", $department, "</td>";
-                          echo "<td>",  $professor_last_name, ", ", $professor_first_name, "</td>";
-                          echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
-                          echo "<td>", $location, "</td>";
+                          echo "<td id='code'>", $code, "</td>";
+                          echo "<td id='title'>", $title, "</td>";
+                          echo "<td id='department'>", $department, "</td>";
+                          echo "<td id='professorname'>",  $professor_last_name, ", ", $professor_first_name, "</td>";
+                          echo "<td id='time'>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
+                          echo "<td id='location'>", $location, "</td>";
                           echo "<td id='credits'>", $credits, "</td>";
                     echo "</tr>";
                     echo "</tbody>";
