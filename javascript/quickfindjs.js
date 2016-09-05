@@ -1,3 +1,4 @@
+var holdCourseCode;
 
 $(function() {
    $('#inputcoursecode').on('keypress', function(e) {
@@ -19,10 +20,13 @@ $(function() {
    $('#inputcoursecode').on('keyup', function(e) {
         var $button = $('#quickfindbutton');
         var disableButton;
-        if ($button.prop('disabled') && $('#inputcoursecode').val().length > 0) {
+        if ($button.prop('disabled') && $(this).val().length > 0) {
             disableButton = false;
-        } else if((!($button.prop('disabled'))) && $('#inputcoursecode').val().length === 0) {
+        } else if((!($button.prop('disabled'))) && $(this).val().length === 0) {
             disableButton = true;
+        }
+        if ($(this).val().length > 0) {
+            holdCourseCode = $(this).val().trim();
         }
         $button.prop('disabled', disableButton);
    });
@@ -41,6 +45,8 @@ $(function() {
               alert("Error Executing Statment");
            } else if (data.match("ERROR_PREPARING_STATEMENT")) {
               alert("Error Preparing Statment");
+           } else {
+               $('#containerresult').html(data);
            }
        })
        .fail(function(jqHXR, textStats, errorThrown){

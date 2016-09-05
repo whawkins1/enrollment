@@ -527,130 +527,127 @@
 
       <div id="tab-financial" class="tabsjump">
           <div id="containerfinancial">      
-          <div id="containersummarytitle">
-                <label id="labelsummarytitle">Summary</label>
-          </div>
-          <table id="tablesummary">                 
-                 <tbody>
-                    <tr>
-                        <td>Tuition</td>
-                        <td>0.00</td>
-                    </tr>
-                    <tr>           
-                         <td>Fines</td>
-                        <td>0.00</td>
-                    </tr> 
-                    <tr class="separatorlinetotal">            
-                         <td>Total</td>
-                        <td>0.00</td>
-                    </tr>
-                 </tbody>
-             </table>
-             <div id="containertransactionstitle">
-                   <label id="labeltransactionstitle">Transactions</label>
-             </div>
-
-            <div id="containerfilterby">
-                <label for="selecttype" id="filterbylabel">Filter By:                    
-                       <select id="selecttype">
-                          <option>All</option>
-                          <option>Payment</option>
-                          <option>Charge</option>
-                       </select> 
-               </label>
-            </div>
-               
-             
-             <table id="tablepayments" class="tablesorter">
-                         <thead>
-                            <tr id="headerRow">
-                               <th>Code</th>
-                               <th>Date</th>
-                               <th>Type</th>
-                               <th>Amount</th>
-                            </tr>
-                         </thead>
-                         <tbody>
-                            <tr>
-                                <td>TRANS1</td>
-                                <td>9/10/12</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                                <td>
-                                   <a href="#">
-                                     <div style="height:100%;width:100%">
-                                         details
-                                     </div>
-                                   </a>
-                                </td>  
-                            </tr>
-                            <tr>
-                                <td>TRANS2</td>
-                                <td>4/1/11</td>
-                                <td>Charge</td>
-                                <td>8.65</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS3</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS4</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS5</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS6</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS7</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS8</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS9</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS10</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                            <tr>
-                                <td>TRANS11</td>
-                                <td>8/24/08</td>
-                                <td>Payment</td>
-                                <td>100.45</td>
-                            </tr>
-                         </tbody>
-                       </table>
-            <div id="makepaymentbuttoncontainer">
+              <div id="containersummarytitle">
+                    <label id="labelsummarytitle">Summary</label>
                     <button type="button" id="makepaymentbutton">Make Payment</button>
+              </div>
+              <table id="tablesummary">                 
+                     <tbody>
+                        <tr>
+                            <td>Tuition</td>
+                            <td>0.00</td>
+                        </tr>
+                        <tr>           
+                             <td>Fines</td>
+                            <td>0.00</td>
+                        </tr> 
+                        <tr class="separatorlinetotal">            
+                             <td>Total</td>
+                            <td>0.00</td>
+                        </tr>
+                     </tbody>
+                 </table>
+                 <div id="containertransactionstitle">
+                       <label id="labeltransactionstitle">Transactions</label>
+                 </div>
+
+                <div id="containerfilterby">
+                    <label for="selecttype" id="filterbylabel">Filter By:                    
+                           <select id="selecttype">
+                              <option>All</option>
+                              <option>Payment</option>
+                              <option>Charge</option>
+                           </select> 
+                   </label>
                 </div>
-          </div>
-        </div>
+                                    
+                 <table id="tablepayments" class="tablesorter">
+                             <thead>
+                                <tr id="headerRow">
+                                   <th>Code</th>
+                                   <th>Date</th>
+                                   <th>Type</th>
+                                   <th>Amount</th>
+                                </tr>
+                             </thead>
+                             <tbody>
+                                <tr>
+                                    <td>TRANS1</td>
+                                    <td>9/10/12</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                    <td>
+                                       <a href="#">
+                                         <div style="height:100%;width:100%">
+                                             details
+                                         </div>
+                                       </a>
+                                    </td>  
+                                </tr>
+                                <tr>
+                                    <td>TRANS2</td>
+                                    <td>4/1/11</td>
+                                    <td>Charge</td>
+                                    <td>8.65</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS3</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS4</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS5</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS6</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS7</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS8</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS9</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS10</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                                <tr>
+                                    <td>TRANS11</td>
+                                    <td>8/24/08</td>
+                                    <td>Payment</td>
+                                    <td>100.45</td>
+                                </tr>
+                             </tbody>
+                           </table>
+              </div>
+            </div>
       </div>      
       
       <div id="tab-payment" class="tabsjump">

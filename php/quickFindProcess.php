@@ -44,6 +44,8 @@
                           echo "<td id='credits'>", $credits, "</td>";
                     echo "</tr>";
                     echo "</tbody>";
+                } else {
+                    echo "<label id='labelnoresults'>NO RESULTS</label>";
                 }
             } else {
                 echo "ERROR_EXECUTING_STATEMENT";

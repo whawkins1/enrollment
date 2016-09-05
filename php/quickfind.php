@@ -20,6 +20,8 @@
                 <div id="containerbutton">
                       <button type="button" id="quickfindbutton" disabled>Find Course</button>
                 </div>
+                <div id="containerresult">
+                </div>
           </div>      
               <script src="../plugins/jquery-1.12.0.js"></script>
               <script src="../javascript/quickfindjs.js"></script>
