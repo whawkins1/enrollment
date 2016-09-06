@@ -1,3 +1,6 @@
+var holdSearchInput;
+var holdSearchIn;
+var holdSearchBy;
 
 $(function() {
     $(window).on('unload', function() {
@@ -6,6 +9,10 @@ $(function() {
              url: 'saveSearch.php',
              data:
                    {
+                       searchInput: holdSearchInput,
+                       searchIn: holdSearchIn,
+                       searchBy: holdSearchBy,
+                       
                        
                    }                   
         )};
@@ -59,6 +66,19 @@ $(function() {
                 }
             }
         }
+        holdSearchInput = searchTerm;
+    });
+    
+    $('#searchinput').on('keyup', function() {
+        holdSearchInput = $(this).val().trim();
+    });
+    
+    $('#indropdown').on('change', function() {
+        holdSearchIn = $(this).find('option:selected').text();
+    });
+    
+    $('#bydropdown').on('change', function() {
+        holdSearchBy = $(this).find('option:selected').text();
     });
     
     function isEmpty(str) {
