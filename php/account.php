@@ -275,8 +275,8 @@
                                     c.am_pm, c.credits, c.professor_last_name, c.professor_first_name, c.location, c.department 
                                    FROM courses AS c INNER JOIN " . "enrolled_" . $most_recent_year_enrolled . " AS e" .
                                    " ON c.code = e.user_course_code WHERE e.user_email_" . $most_recent_year_enrolled . " = ? " .
-                                   " AND user_semester_" . $most_recent_year_enrolled . " = ?;";
                         
+                                   " AND user_semester_" . $most_recent_year_enrolled . " = ?;";
                         if($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param('ss', $username, $semester);
                             if($stmt->execute()) {

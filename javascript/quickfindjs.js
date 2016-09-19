@@ -23,8 +23,7 @@ $(function() {
                           tableLocation: holdTableLocation,
                           tableCredits: holdTableCredits
                       }
-   });       
-    
+   });           
     
    $('#inputcoursecode').on('keypress', function(e) {
        if (e.which === 13) {
