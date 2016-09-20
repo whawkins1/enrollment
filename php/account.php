@@ -572,94 +572,50 @@
                              </thead>
                              <tbody>
                                  <?php 
-                                       $sql = "SELECT * FROM charges";
+                                       $sql = "SELECT id, charge_amount, charge_date FROM charges WHERE charge_username = ?";
                                          if($stmt = $conn->prepare($sql)) {
+                                             $stmt->bind_param('s', $username);
+                                             $stmt->bind_result('idss', $code, $amount, $date);
                                              if($stmt->execute()) {
-                                                 // process output for charges rows in table
+                                                 while ($stmt->fetch()) {
+                                                     echo "<tr>";
+                                                     echo "<td>", $code, "</td>";
+                                                     echo "<td>", $date, "</td>";
+                                                     echo "<td>Charge</td>";
+                                                     echo "<td>", $amount, "</td>";
+                                                     echo "<td>";
+                                                     echo "<a href='#'>";
+                                                     echo "   <div style='height:100%;width:100%'>";
+                                                     echo "          details";
+                                                     echo "   </div>";
+                                                     echo "</a>";
+                                                     echo "</td>";  
+                                                 }
                                              }
                                              $stmt->close();
                                          }
-                                       $sql = "SELECT * FROM payments";
+                                       $sql = "SELECT id, payment_amount, payment_date FROM payments WHERE payment_username = ?";
                                          if($stmt = $conn->prepare($sql)) {
+                                             $stmt->bind_param('s', $username);
+                                             $stmt->bind_result('idss', $code, $amount, $date);
                                              if($stmt->execute()) {
-                                                 // process output for payments rows in table
+                                                 while($stmt->fetch()) {
+                                                       echo "<tr>";
+                                                     echo "<td>", $code, "</td>";
+                                                     echo "<td>", $date, "</td>";
+                                                     echo "<td>Payment</td>";
+                                                     echo "<td>", $amount, "</td>";
+                                                     echo "<a href='#'>";
+                                                     echo "   <div style='height:100%;width:100%'>";
+                                                     echo "          details";
+                                                     echo "   </div>";
+                                                     echo "</a>";
+                                                     echo "</td>";
+                                                 }
                                              }
                                              $stmt->close();
                                          }
                                        ?>
-                                <tr>
-                                    <td>TRANS1</td>
-                                    <td>9/10/12</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                    <td>
-                                       <a href="#">
-                                         <div style="height:100%;width:100%">
-                                             details
-                                         </div>
-                                       </a>
-                                    </td>  
-                                </tr>
-                                <tr>
-                                    <td>TRANS2</td>
-                                    <td>4/1/11</td>
-                                    <td>Charge</td>
-                                    <td>8.65</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS3</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS4</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS5</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS6</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS7</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS8</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS9</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS10</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
-                                <tr>
-                                    <td>TRANS11</td>
-                                    <td>8/24/08</td>
-                                    <td>Payment</td>
-                                    <td>100.45</td>
-                                </tr>
                              </tbody>
                            </table>
               </div>
