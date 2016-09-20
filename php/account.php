@@ -571,6 +571,22 @@
                                 </tr>
                              </thead>
                              <tbody>
+                                 <?php 
+                                       $sql = "SELECT * FROM charges";
+                                         if($stmt = $conn->prepare($sql)) {
+                                             if($stmt->execute()) {
+                                                 // process output for charges rows in table
+                                             }
+                                             $stmt->close();
+                                         }
+                                       $sql = "SELECT * FROM payments";
+                                         if($stmt = $conn->prepare($sql)) {
+                                             if($stmt->execute()) {
+                                                 // process output for payments rows in table
+                                             }
+                                             $stmt->close();
+                                         }
+                                       ?>
                                 <tr>
                                     <td>TRANS1</td>
                                     <td>9/10/12</td>
