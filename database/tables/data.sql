@@ -113,3 +113,28 @@ VALUES
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
     
+-- -----------------------------------------------------
+-- Insert payments
+-- -----------------------------------------------------
+INSERT INTO payments
+     (payment_amount, payment_username)
+VALUES
+     (102.11, "bpomp@yahoo.com"),
+     (12.65, "jsvens@gmail.com"),
+     (949.22, "mjordan@gmail.com"),
+     (1.44, "jjaso"),
+     (1444.00, "up@yahoo.com");
+) 
+
+-- -----------------------------------------------------
+-- insert charges
+-- -----------------------------------------------------
+INSERT INTO charges (
+   (charge_amount, charge_username)
+VALUES
+   (102.11, "bpomp@yahoo.com"),
+     (12.65, "jsvens@gmail.com"),
+     (949.22, "mjordan@gmail.com"),
+     (1.44, "jjaso"),
+     (1444.00, "up@yahoo.com");
+ }
