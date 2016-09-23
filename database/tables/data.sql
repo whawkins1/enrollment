@@ -124,12 +124,11 @@ VALUES
      (949.22, "mjordan@gmail.com"),
      (1.44, "jjaso"),
      (1444.00, "up@yahoo.com");
-) 
 
 -- -----------------------------------------------------
 -- insert charges
 -- -----------------------------------------------------
-INSERT INTO charges (
+INSERT INTO charges 
    (charge_amount, charge_username)
 VALUES
    (102.11, "bpomp@yahoo.com"),
@@ -137,4 +136,3 @@ VALUES
      (949.22, "mjordan@gmail.com"),
      (1.44, "jjaso"),
      (1444.00, "up@yahoo.com");
- }

@@ -226,9 +226,10 @@ CREATE TABLE IF NOT EXISTS courses (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS payments (
   id INT NOT NULL,
-  payment_amount DECIMAL(10,2) NOT NULL,
+  payment_amount DECIMAL(10,2) NOT NULL AUTO_INCREMENT,
   payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   payment_username VARCHAR(40) NOT NULL,
+  FOREIGN KEY(payment_username) REFERENCES users('user_email'),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
@@ -237,9 +238,10 @@ CREATE TABLE IF NOT EXISTS payments (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS charges (
   id INT NOT NULL,
-  charge_amount DECIMAL(10,2) NOT NULL,
+  charge_amount DECIMAL(10,2) NOT NULL AUTO_INCREMENT,
   charge_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   charge_username VARCHAR(40) NOT NULL,
+  FOREIGN KEY(charge_username) REFERENCES users('user_email'),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
