@@ -27,8 +27,10 @@ CREATE TABLE `charges` (
   `charge_amount` decimal(10,2) NOT NULL,
   `charge_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `charge_username` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `charge_username` (`charge_username`),
+  CONSTRAINT `charges_ibfk_1` FOREIGN KEY (`charge_username`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +39,7 @@ CREATE TABLE `charges` (
 
 LOCK TABLES `charges` WRITE;
 /*!40000 ALTER TABLE `charges` DISABLE KEYS */;
+INSERT INTO `charges` VALUES (1,102.11,'2016-09-22 20:15:43','bpomp@yahoo.com'),(2,12.65,'2016-09-22 20:15:43','jsvens@gmail.com'),(3,949.22,'2016-09-22 20:15:43','mjordan@gmail.com'),(4,1.44,'2016-09-22 20:15:43','jjaso'),(5,1444.00,'2016-09-22 20:15:43','up@yahoo.com');
 /*!40000 ALTER TABLE `charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -579,8 +582,10 @@ CREATE TABLE `payments` (
   `payment_amount` decimal(10,2) NOT NULL,
   `payment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `payment_username` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `payment_username` (`payment_username`),
+  CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`payment_username`) REFERENCES `users` (`user_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -589,6 +594,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+INSERT INTO `payments` VALUES (1,102.11,'2016-09-22 20:16:56','bpomp@yahoo.com'),(2,12.65,'2016-09-22 20:16:56','jsvens@gmail.com'),(3,949.22,'2016-09-22 20:16:56','mjordan@gmail.com'),(4,1.44,'2016-09-22 20:16:56','jjaso'),(5,1444.00,'2016-09-22 20:16:56','up@yahoo.com');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1002,4 +1008,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-18 17:37:40
+-- Dump completed on 2016-09-23 17:13:47

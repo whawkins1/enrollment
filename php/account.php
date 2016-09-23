@@ -575,12 +575,14 @@
                                        $sql = "SELECT id, charge_amount, charge_date FROM charges WHERE charge_username = ?";
                                          if($stmt = $conn->prepare($sql)) {
                                              $stmt->bind_param('s', $username);
-                                             $stmt->bind_result('idss', $code, $amount, $date);
+                                             $stmt->bind_result('ids', $code, $amount, $date);
                                              if($stmt->execute()) {
                                                  while ($stmt->fetch()) {
                                                      echo "<tr>";
                                                      echo "<td>", $code, "</td>";
-                                                     echo "<td>", $date, "</td>";
+                                                     //Remove time from date
+                                                     $date_with_time_removed = explode(" ", $date);
+                                                     echo "<td id='date'>", date_time_removed[0], "</td>";
                                                      echo "<td>Charge</td>";
                                                      echo "<td>", $amount, "</td>";
                                                      echo "<td>";
@@ -600,9 +602,11 @@
                                              $stmt->bind_result('idss', $code, $amount, $date);
                                              if($stmt->execute()) {
                                                  while($stmt->fetch()) {
-                                                       echo "<tr>";
+                                                     echo "<tr>";
                                                      echo "<td>", $code, "</td>";
-                                                     echo "<td>", $date, "</td>";
+                                                     //Remove time from date
+                                                     $date_with_time_removed = explode(" ", $date);
+                                                     echo "<td>", $date_with_time_remove[0], "</td>";
                                                      echo "<td>Payment</td>";
                                                      echo "<td>", $amount, "</td>";
                                                      echo "<a href='#'>";

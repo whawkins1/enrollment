@@ -35,6 +35,10 @@ $(function() {
            origCurrCoursesArr.push(code);
     });
     
+    $('#tablepayments tbody tr').sort( function(a, b) {
+        return new Date($(a).find('td:eq(0)').html()).getTime() < new Date($(b).find('td:eq(0)').html()).getTime();
+    }).appendTo('#tablepayments tbody');
+    
     //Hold original Values to Reset Defaults
     originalFirstName = $('#firstname').val();
     originalLastName = $('#lastname').val();
