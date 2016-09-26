@@ -50,7 +50,7 @@
            $_SESSION['address'] = $address;
            $_SESSION['homephone'] = $homePhone;
            $_SESSION['mobilephone'] = $mobilePhone;
-           $_SESSION['postalcode'] = $postalcode;
+           $_SESSION['postalcode'] = $postalCode;
            $_SESSION['balance'] = $balance;
            $stmt->fetch();
            $stmt->close();
@@ -527,9 +527,11 @@
 
       <div id="tab-financial" class="tabsjump">
           <div id="containerfinancial">      
+              <div id="containerpaymentbutton">
+                   <button type="button" id="makepaymentbutton">Make Payment</button>
+              </div>              
               <div id="containersummarytitle">
                     <label id="labelsummarytitle">Summary</label>
-                    <button type="button" id="makepaymentbutton">Make Payment</button>
               </div>
               <table id="tablesummary">                 
                      <tbody>
@@ -575,14 +577,14 @@
                                        $sql = "SELECT id, charge_amount, charge_date FROM charges WHERE charge_username = ?";
                                          if($stmt = $conn->prepare($sql)) {
                                              $stmt->bind_param('s', $username);
-                                             $stmt->bind_result('ids', $code, $amount, $date);
+                                             $stmt->bind_result($code, $amount, $date);
                                              if($stmt->execute()) {
                                                  while ($stmt->fetch()) {
                                                      echo "<tr>";
-                                                     echo "<td>", $code, "</td>";
                                                      //Remove time from date
+                                                     echo "<td>", $code, "</td>";
                                                      $date_with_time_removed = explode(" ", $date);
-                                                     echo "<td id='date'>", date_time_removed[0], "</td>";
+                                                     echo "<td id='date'>", $date_with_time_removed[0], "</td>";
                                                      echo "<td>Charge</td>";
                                                      echo "<td>", $amount, "</td>";
                                                      echo "<td>";
@@ -599,14 +601,14 @@
                                        $sql = "SELECT id, payment_amount, payment_date FROM payments WHERE payment_username = ?";
                                          if($stmt = $conn->prepare($sql)) {
                                              $stmt->bind_param('s', $username);
-                                             $stmt->bind_result('idss', $code, $amount, $date);
+                                             $stmt->bind_result($code, $amount, $date);
                                              if($stmt->execute()) {
                                                  while($stmt->fetch()) {
                                                      echo "<tr>";
                                                      echo "<td>", $code, "</td>";
                                                      //Remove time from date
                                                      $date_with_time_removed = explode(" ", $date);
-                                                     echo "<td>", $date_with_time_remove[0], "</td>";
+                                                     echo "<td>", $date_with_time_removed[0], "</td>";
                                                      echo "<td>Payment</td>";
                                                      echo "<td>", $amount, "</td>";
                                                      echo "<a href='#'>";
