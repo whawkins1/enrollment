@@ -35,6 +35,7 @@ $(function() {
            origCurrCoursesArr.push(code);
     });
     
+    //Sort financial table descending
     $('#tablepayments tbody tr').sort( function(a, b) {
         return new Date($(a).find('td:eq(0)').html()).getTime() < new Date($(b).find('td:eq(0)').html()).getTime();
     }).appendTo('#tablepayments tbody');
