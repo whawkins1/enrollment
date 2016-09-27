@@ -211,9 +211,11 @@ table {
 }
 
 #tablesummary {
-    float: left;
-    margin-left: 4px;
-    margin-bottom: 82px;
+    font-size: 1.4em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #tablesummary th, td {
@@ -295,7 +297,6 @@ table.thead, table.tbody {
 #containerfinancial {
   text-align: center;
   width: 100%;
-  border: 1px solid red;
 }
 
 #contactfieldset {
@@ -691,4 +692,26 @@ th.credits {
    width: 8%;
    height: 20%;
    font-size: 100%;
+}
+
+#tablepayments td a{
+    width: 100%;
+    display: block;
+}
+
+#tablepayments {
+    font-size: 1.4;
+}
+
+.labelfinancial {
+   font-weight: bold;
+   font-size: 2.4em;
+   text-decoration: underline;
+}
+
+
+
+#containerfilterby {
+   margin: 8px;
+   text-align: left;
 }

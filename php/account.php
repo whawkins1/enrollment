@@ -41,6 +41,7 @@
                               $mobilePhone, 
                               $postalCode, 
                               $balance);
+           $stmt->fetch();                   
            $_SESSION['firstname'] = $firstName;
            $_SESSION['lastname'] = $lastName;
            $_SESSION['country'] = $country;
@@ -52,7 +53,6 @@
            $_SESSION['mobilephone'] = $mobilePhone;
            $_SESSION['postalcode'] = $postalCode;
            $_SESSION['balance'] = $balance;
-           $stmt->fetch();
            $stmt->close();
        }      
     } 
@@ -140,9 +140,9 @@
                           ?>
                      </select>
                     
-                    <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $_SESSION['postalcode'];?>" readonly>
-                    <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $_SESSION['homephone'];?>" readonly>
-                    <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $_SESSION['mobilephone']?>" readonly>
+                    <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode;?>" readonly>
+                    <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone;?>" readonly>
+                    <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
                     <label class="contactlabel">Major* : </label> <select id="majordropdown" class="contactinput">
                         <?php 
                           $result = $conn->query("SELECT DISTINCT user_major FROM users");
@@ -531,7 +531,7 @@
                    <button type="button" id="makepaymentbutton">Make Payment</button>
               </div>              
               <div id="containersummarytitle">
-                    <label id="labelsummarytitle">Summary</label>
+                    <label id="labelsummarytitle" class="labelfinancial">Summary</label>
               </div>
               <table id="tablesummary">                 
                      <tbody>
@@ -550,7 +550,7 @@
                      </tbody>
                  </table>
                  <div id="containertransactionstitle">
-                       <label id="labeltransactionstitle">Transactions</label>
+                       <label id="labeltransactionstitle" class="labelfinancial">Transactions</label>
                  </div>
 
                 <div id="containerfilterby">
@@ -589,9 +589,7 @@
                                                      echo "<td>", $amount, "</td>";
                                                      echo "<td>";
                                                      echo "<a href='#'>";
-                                                     echo "   <div style='height:100%;width:100%'>";
-                                                     echo "          details";
-                                                     echo "   </div>";
+                                                     echo "    details";
                                                      echo "</a>";
                                                      echo "</td>";  
                                                  }
@@ -611,10 +609,9 @@
                                                      echo "<td>", $date_with_time_removed[0], "</td>";
                                                      echo "<td>Payment</td>";
                                                      echo "<td>", $amount, "</td>";
+                                                     echo "<td>";
                                                      echo "<a href='#'>";
-                                                     echo "   <div style='height:100%;width:100%'>";
-                                                     echo "          details";
-                                                     echo "   </div>";
+                                                     echo "     details";
                                                      echo "</a>";
                                                      echo "</td>";
                                                  }
