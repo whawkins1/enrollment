@@ -554,13 +554,12 @@
                  </div>
 
                 <div id="containerfilterby">
-                    <label for="selecttype" id="filterbylabel">Filter By:                    
+                    <label id="filterbylabel">Filter By:</label>                 
                            <select id="selecttype">
                               <option>All</option>
                               <option>Payment</option>
                               <option>Charge</option>
                            </select> 
-                   </label>
                 </div>
                                     
                  <table id="tablepayments" class="tablesorter">
@@ -586,7 +585,7 @@
                                                      $date_with_time_removed = explode(" ", $date);
                                                      echo "<td id='date'>", $date_with_time_removed[0], "</td>";
                                                      echo "<td>Charge</td>";
-                                                     echo "<td>", $amount, "</td>";
+                                                     echo "<td>$", $amount, "</td>";
                                                      echo "<td>";
                                                      echo "<a href='#'>";
                                                      echo "    details";
@@ -608,7 +607,7 @@
                                                      $date_with_time_removed = explode(" ", $date);
                                                      echo "<td>", $date_with_time_removed[0], "</td>";
                                                      echo "<td>Payment</td>";
-                                                     echo "<td>", $amount, "</td>";
+                                                     echo "<td>$", $amount, "</td>";
                                                      echo "<td>";
                                                      echo "<a href='#'>";
                                                      echo "     details";
@@ -623,8 +622,7 @@
                            </table>
               </div>
             </div>
-      </div>      
-      
+           
       <div id="tab-payment" class="tabsjump">
            <div class="paymentsteps">
                  <div id="steponecontainer" class="container">

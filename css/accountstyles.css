@@ -214,7 +214,7 @@ table {
     font-size: 1.4em;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 30px;
 }
 
@@ -684,12 +684,11 @@ th.credits {
 #containerpaymentbutton {
    text-align: right;
    width: 100%;
-   height: 100%;
 }
 
 #makepaymentbutton {
    margin-right: 8px;
-   width: 8%;
+   width: 10%;
    height: 20%;
    font-size: 100%;
 }
@@ -700,7 +699,10 @@ th.credits {
 }
 
 #tablepayments {
-    font-size: 1.4;
+    width: 100%;
+    max-height: 30%;
+    overflow-y: scroll;
+    font-size: 1.1em;      
 }
 
 .labelfinancial {
@@ -709,9 +711,12 @@ th.credits {
    text-decoration: underline;
 }
 
-
-
 #containerfilterby {
-   margin: 8px;
+   margin-left: 8px;
    text-align: left;
+}
+
+#filterbylabel {
+    font-weight: bold;
+    padding-right: 8px;
 }
