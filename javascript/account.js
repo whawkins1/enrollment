@@ -777,6 +777,7 @@ $(function() {
       $(this).html("Update");      
     });
     
+    //Hide or Show Rows Based on Payment Method
     $('#selecttype').on('change', function() {
         var type = $(this).val();
         var $rows = ('#tablepayments tbody tr');
