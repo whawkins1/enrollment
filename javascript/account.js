@@ -633,7 +633,7 @@ $(function() {
     });    
     
     //Populate State Dropdown Based on Country
-    $('#countrydropdown').change(function() {		
+    $('#countrydropdown').on('change', function() {		
           $.ajax({
               type: 'POST',
               url: "findState.php",
@@ -775,6 +775,22 @@ $(function() {
         }
       $(this).css('background-image', '');
       $(this).html("Update");      
+    });
+    
+    $('#selecttype').on('change', function() {
+        var type = $(this).val();
+        var $rows = ('#tablepayments tbody tr');
+        if (type !== "All") {
+            ($rows).find("td:nth-child(2)").filter(function() {
+                 return $(this).text !== type;
+            }).parent.hide();
+        } else {
+            $rows.each(function() {
+                if($(this).is(':hidden')) {
+                    $(this).hide();
+                }
+            });
+        }
     });
 });
 

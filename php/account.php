@@ -556,9 +556,9 @@
                 <div id="containerfilterby">
                     <label id="filterbylabel">Filter By:</label>                 
                            <select id="selecttype">
-                              <option>All</option>
-                              <option>Payment</option>
-                              <option>Charge</option>
+                              <option value="All">All</option>
+                              <option value="Payment">Payment</option>
+                              <option value="Charge">Charge</option>
                            </select> 
                 </div>
                                     
