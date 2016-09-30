@@ -290,3 +290,15 @@ CREATE TABLE IF NOT EXISTS user_logs (
    FOREIGN KEY (log_email) REFERENCES users(user_email)
 ) ENGINE=InnoDB;
 
+-- -----------------------------------------------------
+-- Table current_courses_capacity
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS current_courses_capacity (
+  code VARCHAR(8) NOT NULL,
+  current_capacity INT(3) NOT NULL,
+  max_capacity INT(3) NOT NULL,
+  PRIMARY KEY (code),
+  FOREIGN KEY (code) REFERENCES courses(code)
+) ENGINE=InnoDB;
+
+
