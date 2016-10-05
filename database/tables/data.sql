@@ -22,11 +22,11 @@ INSERT INTO users
     (user_email, user_first_name, user_last_name, user_password,
      user_country, user_state, user_city, user_major,
      user_address, user_home_phone, user_mobile_phone,
-     user_postal_code)
+     user_postal_code, user_balance, user_year_started, user_fine)
 VALUES
     ("johnboy@gmail.com", "john", "Boy", "f34f3f3f43f", "United States",
       "New York", "New York", "Business", "123 Avenue",
-      "3045862949", "3993939396", 34585
+      "3045862949", "3993939396", 34585, 193.99, 2012, 5.49)
     );
     
 -- -----------------------------------------------------
@@ -117,22 +117,22 @@ VALUES
 -- Insert payments
 -- -----------------------------------------------------
 INSERT INTO payments
-     (payment_amount, payment_username)
+     (id, payment_amount, payment_username)
 VALUES
-     (102.11, "bpomp@yahoo.com"),
-     (12.65, "jsvens@gmail.com"),
-     (949.22, "mjordan@gmail.com"),
-     (1.44, "jjaso"),
-     (1444.00, "up@yahoo.com");
+     (1, 102.11, "bpomp@yahoo.com"),
+     (2, 12.65, "jsvens@gmail.com"),
+     (3, 949.22, "mjordan@gmail.com"),
+     (4, 1.44, "jjaso"),
+     (5, 1444.00, "up@yahoo.com");
 
 -- -----------------------------------------------------
 -- insert charges
 -- -----------------------------------------------------
 INSERT INTO charges 
-   (charge_amount, charge_username)
+   (id, charge_amount, charge_username)
 VALUES
-   (102.11, "bpomp@yahoo.com"),
-     (12.65, "jsvens@gmail.com"),
-     (949.22, "mjordan@gmail.com"),
-     (1.44, "jjaso"),
-     (1444.00, "up@yahoo.com");
+     (6, 102.11, "bpomp@yahoo.com"),
+     (7, 12.65, "jsvens@gmail.com"),
+     (8, 949.22, "mjordan@gmail.com"),
+     (9, 1.44, "jjaso"),
+     (10, 1444.00, "up@yahoo.com");

@@ -216,6 +216,7 @@ table {
     margin-right: auto;
     margin-top: 20px;
     margin-bottom: 30px;
+    border-collapse: collapse;
 }
 
 #tablesummary th, td {
@@ -719,4 +720,12 @@ th.credits {
 #filterbylabel {
     font-weight: bold;
     padding-right: 8px;
+}
+
+.cellssummary {
+   text-align: right;
+}
+
+.cellsummarylabel {
+  text-align: left;
 }

@@ -533,28 +533,31 @@
               <div id="containersummarytitle">
                     <label id="labelsummarytitle" class="labelfinancial">Summary</label>
               </div>
-              <table id="tablesummary">                 
+              <?php 
+                      $sql = "SELECT user_balance, user_fine FROM users WHERE user_email = ?";
+                                     if($stmt = $conn->prepare($sql)) {
+                                         $stmt->bind_param('s', $username);
+                                         $stmt->bind_result($tuition, $fine);
+                                         if($stmt->execute()) {
+                                             $stmt->fetch();
+                                         } 
+                                     }
+              ?>
+              <table id="tablesummary">                
                      <tbody>
-                       <?php $sql = "SELECT user_balance, user_fine FROM users WHERE user_email = ?";
-                                         if($stmt = $conn->prepare($sql)) {
-                                             $stmt->bind_param('s', $username);
-                                             $stmt->bind_result($tuition, $fine);
-                                             if($stmt->execute()) {
-                                                 $stmt->fetch();
-                                             } ?>
                         <tr>
-                            <td>Tuition</td>
-                            <td><?php echo $tuition; ?></td>
+                            <td class="cellsummarylabel">Tuition</td>
+                            <td class="cellssummary"><?php echo $tuition; ?></td>
                         </tr>
                         <tr>           
-                             <td>Fines</td>
-                            <td><?php echo $fine; ?></td>
+                             <td class="cellsummarylabel">Fines</td>
+                            <td class="cellssummary"><?php echo $fine; ?></td>
                         </tr> 
                         <tr class="separatorlinetotal">            
-                             <td>Total</td>
-                            <td><?php echo ($tuition + $fine); ?></td>
+                             <td class="cellsummarylabel">Total</td>
+                            <td class="cellssummary"><?php echo ($tuition + $fine); ?></td>
                         </tr>
-                        <?php $stmt->close; ?>
+                        <?php $stmt->close(); ?>
                      </tbody>
                  </table>
                  <div id="containertransactionstitle">
