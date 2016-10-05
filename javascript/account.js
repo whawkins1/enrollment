@@ -387,7 +387,7 @@ $(function() {
                              if (data === "valid") {
                                 $('#username').val() = "";
                                 $('#password').val() = "";                                
-                                populateReviewForm();           
+                                populateReviewForm();
                              } else {
                                 alert("Invalid Login, Please Try Again.");
                                 $('username').focus();
@@ -406,7 +406,7 @@ $(function() {
     
     // Set Submit Button On Review
     $('#submitButton').on('click', function() {
-    
+         //Also Set Transaction number to next highest in either charges or payments table
     });
     
     // Set Edit Button

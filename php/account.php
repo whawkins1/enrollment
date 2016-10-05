@@ -535,18 +535,26 @@
               </div>
               <table id="tablesummary">                 
                      <tbody>
+                       <?php $sql = "SELECT user_balance, user_fine FROM users WHERE user_email = ?";
+                                         if($stmt = $conn->prepare($sql)) {
+                                             $stmt->bind_param('s', $username);
+                                             $stmt->bind_result($tuition, $fine);
+                                             if($stmt->execute()) {
+                                                 $stmt->fetch();
+                                             } ?>
                         <tr>
                             <td>Tuition</td>
-                            <td>0.00</td>
+                            <td><?php echo $tuition; ?></td>
                         </tr>
                         <tr>           
                              <td>Fines</td>
-                            <td>0.00</td>
+                            <td><?php echo $fine; ?></td>
                         </tr> 
                         <tr class="separatorlinetotal">            
                              <td>Total</td>
-                            <td>0.00</td>
+                            <td><?php echo ($tuition + $fine); ?></td>
                         </tr>
+                        <?php $stmt->close; ?>
                      </tbody>
                  </table>
                  <div id="containertransactionstitle">

@@ -15,7 +15,8 @@
   user_mobile_phone VARCHAR(15) DEFAULT NULL,
   user_postal_code INT(5) NOT NULL,
   user_balance DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-  user_year_started INT(4) NOT NULL
+  user_year_started INT(4) NOT NULL,
+  user_fine DECIMAL(10,2) NOT NULL DEFAULT 0.00
   PRIMARY KEY (user_email),
   FOREIGN KEY(user_country)
      REFERENCES countries(country_name),
