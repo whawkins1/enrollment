@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `charges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `charges` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `charge_amount` decimal(10,2) NOT NULL,
   `charge_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `charge_username` varchar(40) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `charge_username` (`charge_username`),
   CONSTRAINT `charges_ibfk_1` FOREIGN KEY (`charge_username`) REFERENCES `users` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `charges` (
 
 LOCK TABLES `charges` WRITE;
 /*!40000 ALTER TABLE `charges` DISABLE KEYS */;
-INSERT INTO `charges` VALUES (1,102.11,'2016-09-22 20:15:43','bpomp@yahoo.com'),(2,12.65,'2016-09-22 20:15:43','jsvens@gmail.com'),(3,949.22,'2016-09-22 20:15:43','mjordan@gmail.com'),(4,1.44,'2016-09-22 20:15:43','jjaso'),(5,1444.00,'2016-09-22 20:15:43','up@yahoo.com');
+INSERT INTO `charges` VALUES (6,102.11,'2016-10-05 20:20:07','bpomp@yahoo.com'),(7,12.65,'2016-10-05 20:20:07','jsvens@gmail.com'),(8,949.22,'2016-10-05 20:20:07','mjordan@gmail.com'),(9,1.44,'2016-10-05 20:20:07','jjaso'),(10,1444.00,'2016-10-05 20:20:07','up@yahoo.com');
 /*!40000 ALTER TABLE `charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,6 +227,31 @@ CREATE TABLE `credit_card_visa` (
 LOCK TABLES `credit_card_visa` WRITE;
 /*!40000 ALTER TABLE `credit_card_visa` DISABLE KEYS */;
 /*!40000 ALTER TABLE `credit_card_visa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `current_courses_capacity`
+--
+
+DROP TABLE IF EXISTS `current_courses_capacity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `current_courses_capacity` (
+  `code` varchar(8) NOT NULL,
+  `current_capacity` int(3) NOT NULL,
+  `max_capacity` int(3) NOT NULL,
+  PRIMARY KEY (`code`),
+  CONSTRAINT `current_courses_capacity_ibfk_1` FOREIGN KEY (`code`) REFERENCES `courses` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `current_courses_capacity`
+--
+
+LOCK TABLES `current_courses_capacity` WRITE;
+/*!40000 ALTER TABLE `current_courses_capacity` DISABLE KEYS */;
+/*!40000 ALTER TABLE `current_courses_capacity` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -578,14 +603,14 @@ DROP TABLE IF EXISTS `payments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `payment_amount` decimal(10,2) NOT NULL,
   `payment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `payment_username` varchar(40) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `payment_username` (`payment_username`),
   CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`payment_username`) REFERENCES `users` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -672,6 +697,7 @@ CREATE TABLE `users` (
   `user_postal_code` int(5) NOT NULL,
   `user_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
   `user_year_started` int(4) NOT NULL,
+  `user_fine` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`user_email`),
   KEY `country` (`user_country`),
   KEY `state` (`user_state`),
@@ -690,7 +716,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('Pompeani','Bob','bpomp@yahoo.com','$2y$11$USg6gVx5rmywRyhLnanE8..5xnpSixkRG/oh6uyZVjm152xHGBYvG','Iraq','Karbala','Karbala','Math','123 slow lane','895-757-4463','142-342-4242',97978,0.00,0),('Jaso','John','jjaso@gmail.com','$2y$11$k/a6HG/fgEdJwD.uBEgwVeHO2/xCKtI9MCB9Yyqdx2Laxn7gWXRMO','Djibouti','Djibouti','Djibouti','Business','123 wow lane','645-347-5867','978-456-7357',56858,0.00,0),('Stevens','John','jsvens@gmail.com','$2y$11$zZDavUx4BTeWQwZXnGYMZeZftZIxgsw0H9OddKxlaquIdS2gL9zNe','Kiribati','South Tarawa','Bikenibeu','English','Maltese Street','896-478-4678','234-124-1242',66767,0.00,0),('Michael','Jordan','mjordan@gmail.com','$2y$11$tj3GWi.vC4hNSJPplRMl4uZuXGq1b2K1lWpttX.jp7cArWf0PNDsi','Mexico','Durango','Durango','English','4545 First Lane','456-435-6457','657-567-5675',45345,0.00,0),('Jordy','Mercer','up@yahoo.com','$2y$11$P8viKyPH.8i09gvF.VlWE.D52169TXk//pinUePNA.gIkJG5zfbO6','Croatia','Osijek-Baranja','Osijek','Business','123 fast lane','222-224-5533','585-858-6585',45678,0.00,0);
+INSERT INTO `users` VALUES ('Pompeani','Bob','bpomp@yahoo.com','$2y$11$USg6gVx5rmywRyhLnanE8..5xnpSixkRG/oh6uyZVjm152xHGBYvG','Iraq','Karbala','Karbala','Math','123 slow lane','895-757-4463','142-342-4242',97978,1044.23,2012,5.35),('Jaso','John','jjaso@gmail.com','$2y$11$k/a6HG/fgEdJwD.uBEgwVeHO2/xCKtI9MCB9Yyqdx2Laxn7gWXRMO','Djibouti','Djibouti','Djibouti','Business','123 wow lane','645-347-5867','978-456-7357',56858,0.00,0,0.00),('Stevens','John','jsvens@gmail.com','$2y$11$zZDavUx4BTeWQwZXnGYMZeZftZIxgsw0H9OddKxlaquIdS2gL9zNe','Kiribati','South Tarawa','Bikenibeu','English','Maltese Street','896-478-4678','234-124-1242',66767,0.00,0,0.00),('Michael','Jordan','mjordan@gmail.com','$2y$11$tj3GWi.vC4hNSJPplRMl4uZuXGq1b2K1lWpttX.jp7cArWf0PNDsi','Mexico','Durango','Durango','English','4545 First Lane','456-435-6457','657-567-5675',45345,0.00,0,0.00),('Jordy','Mercer','up@yahoo.com','$2y$11$P8viKyPH.8i09gvF.VlWE.D52169TXk//pinUePNA.gIkJG5zfbO6','Croatia','Osijek-Baranja','Osijek','Business','123 fast lane','222-224-5533','585-858-6585',45678,0.00,0,0.00);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1008,4 +1034,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-23 17:13:47
+-- Dump completed on 2016-10-05 20:56:25
