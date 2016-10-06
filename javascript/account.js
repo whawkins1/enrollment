@@ -394,7 +394,7 @@ $(function() {
                              }
                           })
                           .fail (function(jqXHR, textStatus, errorThrown) {
-                                          alert("Error Getting User Balance");
+                                 alert("Error Getting User Balance");
                           });
               }       
            }               
@@ -407,6 +407,13 @@ $(function() {
     // Set Submit Button On Review
     $('#submitButton').on('click', function() {
          //Also Set Transaction number to next highest in either charges or payments table
+         //Get html of label then parse out value after colon
+         $('#datelabel')           
+         $('#transactionid')
+         $('#paymenttype')
+         $('#currentbalance')
+         $('#payment')
+         $('#balance')
     });
     
     // Set Edit Button
