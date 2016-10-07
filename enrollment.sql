@@ -144,6 +144,7 @@ CREATE TABLE `credit_card_american_express` (
   `american_express_number_hash` varchar(140) NOT NULL,
   `american_express_expire` date NOT NULL,
   `american_express_cvv` int(11) NOT NULL,
+  `american_express_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`american_express_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -154,6 +155,7 @@ CREATE TABLE `credit_card_american_express` (
 
 LOCK TABLES `credit_card_american_express` WRITE;
 /*!40000 ALTER TABLE `credit_card_american_express` DISABLE KEYS */;
+INSERT INTO `credit_card_american_express` VALUES ('343453656979423','2019-02-00',3754,0.00),('345858484825353','2017-03-00',2435,0.00),('349493027412456','2018-04-00',8823,0.00),('376789124367894','2020-06-00',1287,0.00),('379555789643345','2018-12-00',9176,0.00);
 /*!40000 ALTER TABLE `credit_card_american_express` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,6 +170,7 @@ CREATE TABLE `credit_card_discover` (
   `discover_number_hash` varchar(140) NOT NULL,
   `discover_expire` date NOT NULL,
   `discover_cvv` int(11) NOT NULL,
+  `discover_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`discover_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -192,6 +195,7 @@ CREATE TABLE `credit_card_mastercard` (
   `mastercard_number_hash` varchar(140) NOT NULL,
   `mastercard_expire` date NOT NULL,
   `mastercard_cvv` int(11) NOT NULL,
+  `mastercard_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`mastercard_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -216,6 +220,7 @@ CREATE TABLE `credit_card_visa` (
   `visa_number_hash` varchar(140) NOT NULL,
   `visa_expire` date NOT NULL,
   `visa_cvv` int(11) NOT NULL,
+  `visa_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`visa_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1034,4 +1039,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-05 20:56:25
+-- Dump completed on 2016-10-06 22:09:59

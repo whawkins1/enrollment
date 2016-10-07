@@ -140,6 +140,7 @@ CREATE TABLE IF NOT EXISTS credit_card_visa (
   visa_number_hash VARCHAR(140) NOT NULL,
   visa_expire DATE NOT NULL,
   visa_cvv INT NOT NULL,
+  visa_balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00
   PRIMARY KEY(visa_number_hash)
 ) ENGINE=InnoDB;
 
@@ -150,6 +151,7 @@ CREATE TABLE IF NOT EXISTS credit_card_mastercard (
   mastercard_number_hash VARCHAR(140) NOT NULL,
   mastercard_expire DATE NOT NULL,
   mastercard_cvv INT NOT NULL,
+  mastercard_balance DECIMAIL(10, 2) NOT NULL DEFAULT 0.00
   PRIMARY KEY(mastercard_number_hash)
 ) ENGINE=InnoDB;
 
@@ -160,6 +162,7 @@ CREATE TABLE IF NOT EXISTS credit_card_american_express (
   american_express_number_hash VARCHAR(140) NOT NULL,
   american_express_expire DATE NOT NULL,
   american_express_cvv INT NOT NULL,
+  american_express_balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00
   PRIMARY KEY(american_express_number_hash)
 ) ENGINE=InnoDB;
 
@@ -170,6 +173,7 @@ CREATE TABLE IF NOT EXISTS credit_card_discover (
   discover_number_hash VARCHAR(140) NOT NULL,
   discover_expire DATE NOT NULL,
   discover_cvv INT NOT NULL,
+  discover_balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00
   PRIMARY KEY(discover_number_hash)
 ) ENGINE=InnoDB;
 
