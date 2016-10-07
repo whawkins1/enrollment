@@ -141,48 +141,46 @@ VALUES
 -- insert credit_card_american_express
 -- -----------------------------------------------------
 INSERT INTO credit_card_american_express 
-   (american_express_number_hash, american_express_expire, american_express_cvv)
+   (american_express_number_hash, american_express_expire, american_express_cvv, american_express_balance, american_express_fullname)
 VALUES
-     (349493027412456, '2018-04-00', 8823),
-     (376789124367894, '2020-06-00', 1287),
-     (345858484825353, '2017-03-00', 2435),
-     (379555789643345, '2018-12-00', 9176),
-     (343453656979423, '2019-02-00', 3754);
+     (349493027412456, '2018-04-00', 8823, 400.15, 'john l stevens'),
+     (376789124367894, '2020-06-00', 1287, 2800.12, 'bob h pompeani'),
+     (345858484825353, '2017-03-00', 2435, 384.15, 'michael j jordan'),
+     (379555789643345, '2018-12-00', 9176, 908.45, 'john w jaso'),
+     (343453656979423, '2019-02-00', 3754, 4045.15, 'ulysses s parker');
 
 -- -----------------------------------------------------
 -- insert credit_card_discover
 -- -----------------------------------------------------
-INSERT INTO credit_card_american_express 
-   (american_express_number_hash, american_express_expire, american_express_cvv)
+INSERT INTO credit_card_discover 
+   (discover_number_hash, discover_expire, discover_cvv, discover_balance, discover_fullname)
 VALUES
-     (349493027412456, '2018-04-00', 8823),
-     (376789124367894, '2020-06-00', 1287),
-     (345858484825353, '2017-03-00', 2435),
-     (379555789643345, '2018-12-00', 9176),
-     (343453656979423, '2019-02-00', 3754);
+     (6011057085920365, '2018-04-00', 823, 8456.12, 'michael j jordan'),
+     (6508314038920492, '2020-06-00', 287, 3456.23, 'john w jaso'),
+     (6221283237582934, '2017-03-00', 235, 495.12, 'bob h pompeani'),
+     (6011245585923345, '2018-12-00', 176, 904.75, 'ulysses s parker'),
+     (6508274038920492, '2019-02-00', 374, 12.73, 'john l stevens');
 
 -- -----------------------------------------------------
 -- insert credit_card_mastercard
 -- -----------------------------------------------------
-INSERT INTO credit_card_american_express 
-   (american_express_number_hash, american_express_expire, american_express_cvv)
+INSERT INTO credit_card_mastercard 
+   (mastercard_number_hash, mastercard_expire, mastercard_cvv, mastercard_balance, mastercard_fullname)
 VALUES
-     (349493027412456, '2018-04-00', 8823),
-     (376789124367894, '2020-06-00', 1287),
-     (345858484825353, '2017-03-00', 2435),
-     (379555789643345, '2018-12-00', 9176),
-     (343453656979423, '2019-02-00', 3754);
+     (5474938278319496, '2018-04-00', 423, 5923.56, 'bob h pompeani'),
+     (5247691283367394, '2020-06-00', 138, 123.56, 'ulysses s parker'),
+     (5492584384845373, '2017-03-00', 864, 67.83, 'john w jaso'),
+     (5315552789543375, '2018-12-00', 626, 9.73, 'michael j jordan'),
+     (5454536529477453, '2019-02-00', 937, 3739.23, 'john l stevens');
      
 -- -----------------------------------------------------
 -- insert credit_card_visa
 -- -----------------------------------------------------
-INSERT INTO credit_card_american_express 
-   (american_express_number_hash, american_express_expire, american_express_cvv)
+INSERT INTO credit_card_visa
+   (visa_number_hash, visa_expire, visa_cvv, visa_balance, visa_fullname)
 VALUES
-     (349493027412456, '2018-04-00', 8823),
-     (376789124367894, '2020-06-00', 1287),
-     (345858484825353, '2017-03-00', 2435),
-     (379555789643345, '2018-12-00', 9176),
-     (343453656979423, '2019-02-00', 3754);
-
-     
+     (4494950677124563, '2018-04-00', 753, 1894.34, 'michael j jordan'),
+     (4767891243679, '2020-06-00', 457, 9485.93, 'john l stevens'),
+     (4458584848253532, '2017-03-00', 396, 765.45, 'john w jaso'),
+     (4795537443945, '2018-12-00', 946, 345.00, 'ulysses s parker'),
+     (4434855697948, '2019-02-00', 283, 649.49, 'bob h pompeani');

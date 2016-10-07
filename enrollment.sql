@@ -145,6 +145,7 @@ CREATE TABLE `credit_card_american_express` (
   `american_express_expire` date NOT NULL,
   `american_express_cvv` int(11) NOT NULL,
   `american_express_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `american_express_fullname` varchar(40) NOT NULL,
   PRIMARY KEY (`american_express_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -155,7 +156,7 @@ CREATE TABLE `credit_card_american_express` (
 
 LOCK TABLES `credit_card_american_express` WRITE;
 /*!40000 ALTER TABLE `credit_card_american_express` DISABLE KEYS */;
-INSERT INTO `credit_card_american_express` VALUES ('343453656979423','2019-02-00',3754,0.00),('345858484825353','2017-03-00',2435,0.00),('349493027412456','2018-04-00',8823,0.00),('376789124367894','2020-06-00',1287,0.00),('379555789643345','2018-12-00',9176,0.00);
+INSERT INTO `credit_card_american_express` VALUES ('343453656979423','2019-02-00',3754,4045.15,'ulysses s parker'),('345858484825353','2017-03-00',2435,384.15,'michael j jordan'),('349493027412456','2018-04-00',8823,400.15,'john l stevens'),('376789124367894','2020-06-00',1287,2800.12,'bob h pompeani'),('379555789643345','2018-12-00',9176,908.45,'john w jaso');
 /*!40000 ALTER TABLE `credit_card_american_express` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,6 +172,7 @@ CREATE TABLE `credit_card_discover` (
   `discover_expire` date NOT NULL,
   `discover_cvv` int(11) NOT NULL,
   `discover_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `discover_fullname` varchar(40) NOT NULL,
   PRIMARY KEY (`discover_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -181,6 +183,7 @@ CREATE TABLE `credit_card_discover` (
 
 LOCK TABLES `credit_card_discover` WRITE;
 /*!40000 ALTER TABLE `credit_card_discover` DISABLE KEYS */;
+INSERT INTO `credit_card_discover` VALUES ('6011057085920365','2018-04-00',823,8456.12,'michael j jordan'),('6011245585923345','2018-12-00',176,904.75,'ulysses s parker'),('6221283237582934','2017-03-00',235,495.12,'bob h pompeani'),('6508274038920492','2019-02-00',374,12.73,'john l stevens'),('6508314038920492','2020-06-00',287,3456.23,'john w jaso');
 /*!40000 ALTER TABLE `credit_card_discover` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,6 +199,7 @@ CREATE TABLE `credit_card_mastercard` (
   `mastercard_expire` date NOT NULL,
   `mastercard_cvv` int(11) NOT NULL,
   `mastercard_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `mastercard_fullname` varchar(40) NOT NULL,
   PRIMARY KEY (`mastercard_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -206,6 +210,7 @@ CREATE TABLE `credit_card_mastercard` (
 
 LOCK TABLES `credit_card_mastercard` WRITE;
 /*!40000 ALTER TABLE `credit_card_mastercard` DISABLE KEYS */;
+INSERT INTO `credit_card_mastercard` VALUES ('5247691283367394','2020-06-00',138,123.56,'ulysses s parker'),('5315552789543375','2018-12-00',626,9.73,'michael j jordan'),('5454536529477453','2019-02-00',937,3739.23,'john l stevens'),('5474938278319496','2018-04-00',423,5923.56,'bob h pompeani'),('5492584384845373','2017-03-00',864,67.83,'john w jaso');
 /*!40000 ALTER TABLE `credit_card_mastercard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,6 +226,7 @@ CREATE TABLE `credit_card_visa` (
   `visa_expire` date NOT NULL,
   `visa_cvv` int(11) NOT NULL,
   `visa_balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `visa_fullname` varchar(40) NOT NULL,
   PRIMARY KEY (`visa_number_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -231,6 +237,7 @@ CREATE TABLE `credit_card_visa` (
 
 LOCK TABLES `credit_card_visa` WRITE;
 /*!40000 ALTER TABLE `credit_card_visa` DISABLE KEYS */;
+INSERT INTO `credit_card_visa` VALUES ('4434855697948','2019-02-00',283,649.49,'bob h pompeani'),('4458584848253532','2017-03-00',396,765.45,'john w jaso'),('4494950677124563','2018-04-00',753,1894.34,'michael j jordan'),('4767891243679','2020-06-00',457,9485.93,'john l stevens'),('4795537443945','2018-12-00',946,345.00,'ulysses s parker');
 /*!40000 ALTER TABLE `credit_card_visa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1039,4 +1046,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-06 22:09:59
+-- Dump completed on 2016-10-07 16:19:28
