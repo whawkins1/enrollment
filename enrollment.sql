@@ -39,7 +39,7 @@ CREATE TABLE `charges` (
 
 LOCK TABLES `charges` WRITE;
 /*!40000 ALTER TABLE `charges` DISABLE KEYS */;
-INSERT INTO `charges` VALUES (6,102.11,'2016-10-05 20:20:07','bpomp@yahoo.com'),(7,12.65,'2016-10-05 20:20:07','jsvens@gmail.com'),(8,949.22,'2016-10-05 20:20:07','mjordan@gmail.com'),(9,1.44,'2016-10-05 20:20:07','jjaso'),(10,1444.00,'2016-10-05 20:20:07','up@yahoo.com');
+INSERT INTO `charges` VALUES (6,102.11,'2016-10-05 20:20:07','bpomp@yahoo.com'),(7,12.65,'2016-10-05 20:20:07','jsvens@gmail.com'),(8,949.22,'2016-10-05 20:20:07','mjordan@gmail.com'),(9,1.44,'2016-10-05 20:20:07','jjaso@gmail.com'),(10,1444.00,'2016-10-05 20:20:07','up@yahoo.com');
 /*!40000 ALTER TABLE `charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,8 +546,9 @@ DROP TABLE IF EXISTS `online_payment_amazon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `online_payment_amazon` (
-  `online_amazon_username` varchar(50) NOT NULL DEFAULT '',
+  `online_amazon_username` varchar(50) NOT NULL,
   `online_amazon_password` varchar(50) DEFAULT NULL,
+  `online_amazon_balance` decimal(10,2) NOT NULL,
   PRIMARY KEY (`online_amazon_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -558,6 +559,7 @@ CREATE TABLE `online_payment_amazon` (
 
 LOCK TABLES `online_payment_amazon` WRITE;
 /*!40000 ALTER TABLE `online_payment_amazon` DISABLE KEYS */;
+INSERT INTO `online_payment_amazon` VALUES ('bpomp@yahoo.com','pass1',849.23),('jjaso.gmail.com','pass4',194.25),('jsvens@gmail','pass2',3945.93),('mjordan@gmail.com','pass3',2390.19),('up@yahoo.com','pass5',1834.73);
 /*!40000 ALTER TABLE `online_payment_amazon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -569,8 +571,9 @@ DROP TABLE IF EXISTS `online_payment_google`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `online_payment_google` (
-  `online_google_username` varchar(50) NOT NULL DEFAULT '',
+  `online_google_username` varchar(50) NOT NULL,
   `online_google_password` varchar(50) DEFAULT NULL,
+  `online_google_balance` decimal(10,2) NOT NULL,
   PRIMARY KEY (`online_google_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -581,6 +584,7 @@ CREATE TABLE `online_payment_google` (
 
 LOCK TABLES `online_payment_google` WRITE;
 /*!40000 ALTER TABLE `online_payment_google` DISABLE KEYS */;
+INSERT INTO `online_payment_google` VALUES ('bpomp@yahoo.com','pass1',742.23),('jjaso.gmail.com','pass4',4194.25),('jsvens@gmail','pass2',1935.92),('mjordan@gmail.com','pass3',90.19),('up@yahoo.com','pass5',7434.43);
 /*!40000 ALTER TABLE `online_payment_google` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -592,8 +596,9 @@ DROP TABLE IF EXISTS `online_payment_paypal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `online_payment_paypal` (
-  `online_paypal_username` varchar(50) NOT NULL DEFAULT '',
+  `online_paypal_username` varchar(50) NOT NULL,
   `online_paypal_password` varchar(50) DEFAULT NULL,
+  `online_paypal_balance` decimal(10,2) NOT NULL,
   PRIMARY KEY (`online_paypal_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -604,6 +609,7 @@ CREATE TABLE `online_payment_paypal` (
 
 LOCK TABLES `online_payment_paypal` WRITE;
 /*!40000 ALTER TABLE `online_payment_paypal` DISABLE KEYS */;
+INSERT INTO `online_payment_paypal` VALUES ('bpomp@yahoo.com','pass1',42.23),('jjaso.gmail.com','pass4',0.23),('jsvens@gmail','pass2',1632.26),('mjordan@gmail.com','pass3',1256.83),('up@yahoo.com','pass5',2535.38);
 /*!40000 ALTER TABLE `online_payment_paypal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -631,7 +637,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` VALUES (1,102.11,'2016-09-22 20:16:56','bpomp@yahoo.com'),(2,12.65,'2016-09-22 20:16:56','jsvens@gmail.com'),(3,949.22,'2016-09-22 20:16:56','mjordan@gmail.com'),(4,1.44,'2016-09-22 20:16:56','jjaso'),(5,1444.00,'2016-09-22 20:16:56','up@yahoo.com');
+INSERT INTO `payments` VALUES (1,102.11,'2016-09-22 20:16:56','bpomp@yahoo.com'),(2,12.65,'2016-09-22 20:16:56','jsvens@gmail.com'),(3,949.22,'2016-09-22 20:16:56','mjordan@gmail.com'),(4,1.44,'2016-09-22 20:16:56','jjaso@gmail.com'),(5,1444.00,'2016-09-22 20:16:56','up@yahoo.com');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1046,4 +1052,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-07 16:19:28
+-- Dump completed on 2016-10-10 17:14:21

@@ -122,7 +122,7 @@ VALUES
      (1, 102.11, "bpomp@yahoo.com"),
      (2, 12.65, "jsvens@gmail.com"),
      (3, 949.22, "mjordan@gmail.com"),
-     (4, 1.44, "jjaso"),
+     (4, 1.44, "jjaso@gmail.com"),
      (5, 1444.00, "up@yahoo.com");
 
 -- -----------------------------------------------------
@@ -134,7 +134,7 @@ VALUES
      (6, 102.11, "bpomp@yahoo.com"),
      (7, 12.65, "jsvens@gmail.com"),
      (8, 949.22, "mjordan@gmail.com"),
-     (9, 1.44, "jjaso"),
+     (9, 1.44, "jjaso@gmail.com"),
      (10, 1444.00, "up@yahoo.com");
      
 -- -----------------------------------------------------
@@ -184,3 +184,39 @@ VALUES
      (4458584848253532, '2017-03-00', 396, 765.45, 'john w jaso'),
      (4795537443945, '2018-12-00', 946, 345.00, 'ulysses s parker'),
      (4434855697948, '2019-02-00', 283, 649.49, 'bob h pompeani');
+
+-- -----------------------------------------------------
+-- insert online_payment_amazon
+-- -----------------------------------------------------
+INSERT INTO online_payment_amazon 
+    (online_amazon_username, online_amazon_password, online_amazon_balance)  
+  VALUES
+    ('bpomp@yahoo.com', 'pass1', 849.23),
+    ('jsvens@gmail', 'pass2', 3945.93),
+    ('mjordan@gmail.com', 'pass3', 2390.19),
+    ('jjaso.gmail.com', 'pass4', 194.25),
+    ('up@yahoo.com', 'pass5', 1834.73);
+ 
+-- -----------------------------------------------------
+-- insert online_payment_google
+-- -----------------------------------------------------
+INSERT INTO online_payment_google
+    (online_google_username, online_google_password, online_google_balance)  
+  VALUES
+    ('bpomp@yahoo.com', 'pass1', 742.23),
+    ('jsvens@gmail', 'pass2', 1935.92),
+    ('mjordan@gmail.com', 'pass3', 90.19),
+    ('jjaso.gmail.com', 'pass4', 4194.25),
+    ('up@yahoo.com', 'pass5', 7434.43);
+
+-- -----------------------------------------------------
+-- insert online_payment_paypal
+-- -----------------------------------------------------
+INSERT INTO online_payment_paypal
+    (online_paypal_username, online_paypal_password, online_paypal_balance)  
+  VALUES
+    ('bpomp@yahoo.com', 'pass1', 42.23),
+    ('jsvens@gmail', 'pass2', 1632.26),
+    ('mjordan@gmail.com', 'pass3', 1256.83),
+    ('jjaso.gmail.com', 'pass4', 0.23),
+    ('up@yahoo.com', 'pass5', 2535.38);

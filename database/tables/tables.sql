@@ -181,8 +181,9 @@ CREATE TABLE IF NOT EXISTS credit_card_discover (
 -- Table online_payment_amazon
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS online_payment_amazon (
-  online_amazon_username VARCHAR(50),
-  online_amazon_password VARCHAR(50),
+  online_amazon_username VARCHAR(50) NOT NULL,
+  online_amazon_password VARCHAR(50) NOT NULL,
+  online_amazon_balance DECIMAL(10, 2) NOT NULL
   PRIMARY KEY(online_amazon_username)
 ) ENGINE=InnoDB;
 
@@ -190,8 +191,9 @@ CREATE TABLE IF NOT EXISTS online_payment_amazon (
 -- Table online_payment_google
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS online_payment_google (
-  online_google_username VARCHAR(50),
-  online_google_password VARCHAR(50),
+  online_google_username VARCHAR(50) NOT NULL,
+  online_google_password VARCHAR(50) NOT NULL,
+  onelin_google_balance DECIMAL(10, 2) NOT NULL
   PRIMARY KEY(online_google_username)
 ) ENGINE=InnoDB;
 
@@ -199,8 +201,9 @@ CREATE TABLE IF NOT EXISTS online_payment_google (
 -- Table online_payment_paypal
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS online_payment_paypal (
-  online_paypal_username VARCHAR(50),
-  online_paypal_password VARCHAR(50),
+  online_paypal_username VARCHAR(50) NOT NULL,
+  online_paypal_password VARCHAR(50) NOT NULL,
+  online_paypal_balance DECIMAL(10, 2) NOT NULL
   PRIMARY KEY(online_paypal_username)
 ) ENGINE=InnoDB;
 
