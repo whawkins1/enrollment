@@ -12,6 +12,7 @@ var originalEmail;
 var delCurrCoursesArr = [];
 var origCurrCoursesArr = [];
 var updateCurrCoursesArr = [];
+var methodPayment;
 
 $(function() { 
     //Remove all Data Fields to avoid caching previous results
@@ -353,7 +354,6 @@ $(function() {
        var ccValue = $('#creditcard').val();
        var payment = $('#amount').val().replace(/,/g, "");
        var currentBalance = getCurrentBalance();
-       var methodPayment;
        var calculatedBalance = (currentBalance - payment)
        
        if (amount.length > 0) {
@@ -373,13 +373,13 @@ $(function() {
                   }  
               } else { //Online Payment Action
                       methodPayment = "Online Payment";
-                      var username = $('#username').val();
-                      var password = $('#password').val();
                       
                       $.ajax({
                                type: 'POST',    
                                url: "/php/verifyUsernamePass.php",
-                               data: {email: "johnboy@gmail.com", pass: "chase"},
+                               data: {email: $('#username').val(), 
+                                      pass: $('#password').val()},
+                                      checkType: "online"
                                dataType: 'html',
                                cache: false
                           }).
