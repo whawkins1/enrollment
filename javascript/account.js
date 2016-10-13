@@ -384,13 +384,16 @@ $(function() {
                                cache: false
                           }).
                           done (function(data) {
-                             if (data === "valid") {
+                             if (data === "VALID") {
                                 $('#username').val() = "";
                                 $('#password').val() = "";                                
                                 populateReviewForm();
-                             } else {
+                             } else if (data === "INVALID") {
                                 alert("Invalid Login, Please Try Again.");
-                                $('username').focus();
+                                $('#username').focus();
+                             } else if (data.startsWith("ERROR")) {
+                                alert(data);
+                                $('#username').focus();
                              }
                           })
                           .fail (function(jqXHR, textStatus, errorThrown) {
@@ -907,20 +910,20 @@ function isValidKey ( event ) {
 
 function populateReviewForm () {
   //Set Date Box For Payment Review
-                var d = new Date();
+                /*var d = new Date();
                 var month = d.getMonth() + 1;
                 var day = d.getDay();
                 
                 var formattedDate = (d.getFullYear() + "/" +
                                     (month < 10 ? "0" : "") + month + "/" +
-                                    (day < 10 ? "0" : "") + day);
+                                    (day < 10 ? "0" : "") + day); */
                                     
-                $('#datelabel').html("Date: " + formattedDate);               
-                $('#transactionid').append("Transaction ID: ");
-                $('#paymenttype').append("Payment Type: ".concat(methodPayment));
-                $('#currentbalance').append("Current Balance: ".concat(currentBalance.toString()));
-                $('#payment').append("Payment: ".concat(payment.toString()));
-                $('#balance').append("Balance: ".concat(calculatedBalance.toString()));                
+                $('#datelabel').text(new Date().toIOString().splice(0, 10));               
+                $('#transactionidlabel').text("Transaction ID: ");
+                $('#paymenttype').text(methodPayment);
+                $('#currentbalance').text(currentBalance.toString());
+                $('#payment').text(payment.toString());
+                $('#balance').text(calculatedBalance.toString());                
 }    
     
 function validCreditCardFormat (ccNum) {

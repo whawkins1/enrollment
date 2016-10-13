@@ -729,31 +729,30 @@
              </div>
         </div>
         
-        <!--<div id="reviewpaymentcontainer">
+        <div id="reviewpaymentcontainer">
              <div class="paymentcontainers">
-                <label id="datelabel"></label>
+                <label id="datelabeltitle">Date:</label><label id="datelabel></label>
              </div>
              
              </div class="paymentcontainers">
-                 <label id="transactionid">Transaction ID: </label>
+                 <label id="transactionidtitle">Transaction ID:</label><label id ="transactionidlabel</label>
              </div>
              
              <div class="paymentcontainers">
-                 <label id="paymenttype">Payment Type: </label>
+                 <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel>
              </div>
              
              <div class="paymentcontainers">
-                 <label id="currentbalance">Current Balance</label>
-                 <label id="payment">Payment</label>
+                 <label id="currentbalancetitle">Current Balance:</label><label id="currentbalancelabel"></label>
+                 <label id="paymenttitle">Payment:</label><label id="paymentlabel"</label>
                  <label>_________<label>
-                 <label id="balance">Balance</label>                 
+                 <label id="balancetitle">Balance:</label><label id="balancelabel"</label>                 
              </div>
              
              <div id="submitbuttoncontainer">
                  <input type="button" id="submitbutton">
              </div>
          </div>
-         -->
       </div>
      
       <script src="../plugins/jquery-1.12.0.js"></script>

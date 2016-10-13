@@ -27,7 +27,7 @@
                    $sql = "SELECT EXITS(SELECT 1 FROM online_payment_amazon online_amazon_username = ? LIMIT 1)";
                    break;
               default:
-                   echo "ERROR : Does Not Support ", $payment_company;
+                   echo "ERROR Does Not Support ", $payment_company;
           }          
        }
        if (isset($sql)) {
@@ -47,10 +47,10 @@
                   }
                   $result->free();
               } else {
-                 echo "ERROR : executing sql";
+                 echo "ERROR executing sql";
               }
            } else {
-               echo "ERROR : preparing sql";
+               echo "ERROR preparing sql";
            }
    }
 ?>   
