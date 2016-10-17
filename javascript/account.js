@@ -364,7 +364,7 @@ $(function() {
                   if (validCreditCardFormat(ccValue)) {
                      if (validCardNumber(ccValue)) {
                          methodPayment = "Credit Card"; 
-                         populateReviewForm();
+                         populateReviewForm(payment, currentBalance, calculatedBalance);
                      } else {
                         alert("Incorrect Number");
                      }
@@ -908,7 +908,7 @@ function isValidKey ( event ) {
           (event.which >= 48 && event.which <= 57));
 }
 
-function populateReviewForm () {
+function populateReviewForm (payment, currentBalance, calculatedBalance) {
   //Set Date Box For Payment Review
                 /*var d = new Date();
                 var month = d.getMonth() + 1;
@@ -918,8 +918,27 @@ function populateReviewForm () {
                                     (month < 10 ? "0" : "") + month + "/" +
                                     (day < 10 ? "0" : "") + day); */
                                     
-                $('#datelabel').text(new Date().toIOString().splice(0, 10));               
-                $('#transactionidlabel').text("Transaction ID: ");
+                $('#datelabel').text(new Date().toIOString().splice(0, 10));  
+                $transID = 0;
+                $.ajax({
+              type: 'GET',
+              url: "getHighestTransactionID.php",
+              dataType: 'text'
+          })
+          .done( function(data) {
+              // Parse Out Error Message check startswith
+              if ( data === "ERROR" ) {
+                  //Alert Message With Parsed
+              } else {
+                  transID = (parseInt(data, 10) + 1);
+              }
+          })
+          .fail (function(jqHXR, textStatus, errorThrown) {
+              $('#errorcontainer').html("SERVER ERROR: failed to update account!");
+              $('#editbutton').focus();
+              setEditMode = false;                                  
+          });                
+                $('#transactionidlabel').text(transID.toString());
                 $('#paymenttype').text(methodPayment);
                 $('#currentbalance').text(currentBalance.toString());
                 $('#payment').text(payment.toString());
