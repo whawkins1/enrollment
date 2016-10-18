@@ -926,9 +926,9 @@ function populateReviewForm (payment, currentBalance, calculatedBalance) {
               dataType: 'text'
           })
           .done( function(data) {
-              // Parse Out Error Message check startswith
-              if ( data === "ERROR" ) {
-                  //Alert Message With Parsed
+              if ( data.indexOf("ERROR") == 0 ) {
+                  var message = data.split(':');
+                  alert("ERROR : " + message[1]);
               } else {
                   transID = (parseInt(data, 10) + 1);
               }
