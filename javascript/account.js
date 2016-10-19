@@ -378,8 +378,8 @@ $(function() {
                                type: 'POST',    
                                url: "/php/verifyUsernamePass.php",
                                data: {email: $('#username').val(), 
-                                      pass: $('#password').val()},
-                                      checkType: "online"
+                                      pass: $('#password').val()}
+                                      checkType: $('#companydropdown :selected').text()}
                                dataType: 'html',
                                cache: false
                           }).
@@ -411,12 +411,26 @@ $(function() {
     $('#submitButton').on('click', function() {
          //Also Set Transaction number to next highest in either charges or payments table
          //Get html of label then parse out value after colon
-         $('#datelabel')           
-         $('#transactionid')
-         $('#paymenttype')
-         $('#currentbalance')
-         $('#payment')
-         $('#balance')
+         
+         
+         $.ajax({
+             type: 'POST',
+             url: "/php/completeTransaction.php",
+             data: todaysDate: $('#datelabel').text();           
+                   transID: $('#transactionid');
+                   currentBalance: $('#currentbalance');
+                   paymentMethod: $methodPayment;
+                   paymentType: $('#paymenttypelabel').text();
+                   paymentCompany: $('#companydropdown :selected').text()
+                   finalBalance = $('#balance');
+         )}
+         .done (function(data) {
+             alert("
+         })
+         .fail (function(jqXHR, textStatus, errorThrown) {
+             alert("Error Performing Transaction, Please Try Again.");
+         });
+         
     });
     
     // Set Edit Button
@@ -921,9 +935,9 @@ function populateReviewForm (payment, currentBalance, calculatedBalance) {
                 $('#datelabel').text(new Date().toIOString().splice(0, 10));  
                 $transID = 0;
                 $.ajax({
-              type: 'GET',
-              url: "getHighestTransactionID.php",
-              dataType: 'text'
+                      type: 'GET',
+                      url: "getHighestTransactionID.php",
+                      dataType: 'text'
           })
           .done( function(data) {
               if ( data.indexOf("ERROR") == 0 ) {
