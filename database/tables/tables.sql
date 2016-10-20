@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS online_payment_amazon (
 CREATE TABLE IF NOT EXISTS online_payment_google (
   online_google_username VARCHAR(50) NOT NULL,
   online_google_password VARCHAR(50) NOT NULL,
-  onelin_google_balance DECIMAL(10, 2) NOT NULL
+  online_google_balance DECIMAL(10, 2) NOT NULL
   PRIMARY KEY(online_google_username)
 ) ENGINE=InnoDB;
 

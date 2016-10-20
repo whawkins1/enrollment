@@ -1,3 +1,4 @@
+--Will Concatenate years attended separated by comma
 DROP FUNCTION IF EXISTS getYearsAttended$$
 CREATE FUNCTION getYearsAttended (email VARCHAR(30))
 RETURNS VARCHAR(100)

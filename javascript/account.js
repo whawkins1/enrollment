@@ -412,20 +412,21 @@ $(function() {
          //Also Set Transaction number to next highest in either charges or payments table
          //Get html of label then parse out value after colon
          
-         
          $.ajax({
              type: 'POST',
              url: "/php/completeTransaction.php",
-             data: todaysDate: $('#datelabel').text();           
+             data: username: $('#email').text();
+                   todaysDate: $('#datelabel').text();           
                    transID: $('#transactionid');
                    currentBalance: $('#currentbalance');
                    paymentMethod: $methodPayment;
+                   payment: ('#payment').text();
                    paymentType: $('#paymenttypelabel').text();
                    paymentCompany: $('#companydropdown :selected').text()
                    finalBalance = $('#balance');
          )}
          .done (function(data) {
-             alert("
+             
          })
          .fail (function(jqXHR, textStatus, errorThrown) {
              alert("Error Performing Transaction, Please Try Again.");
