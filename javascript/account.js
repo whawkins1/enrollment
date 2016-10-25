@@ -103,6 +103,21 @@ $(function() {
         $('#labelcurrentcredittotal').text(newTotal);
         $('#labelselectedcredits').text("0");
         $(this).prop('disabled', true);   
+        
+          $.ajax({
+               type: 'POST',    
+               url: "/php/addCourse.php",
+               data: {code: $('#username').val()}
+               dataType: 'html'
+          }).
+          done (function(data) {
+             if (data === "ERROR") {
+                
+             } 
+          })
+          .fail (function(jqXHR, textStatus, errorThrown) {
+                 alert("Error Adding Course");
+          });
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -137,6 +152,21 @@ $(function() {
         }
         $(this).prop('disabled', true);
         $('#labelcurrentcredittotal').text(currentTotal);
+        
+        $.ajax({
+               type: 'POST',    
+               url: "/php/removeCourse.php",
+               data: {code: $('#username').val()}
+               dataType: 'html'
+          }).
+          done (function(data) {
+             if (data === "ERROR") {
+                
+             } 
+          })
+          .fail (function(jqXHR, textStatus, errorThrown) {
+                 alert("Error Removing Course");
+          });
     });
     
     
@@ -409,9 +439,6 @@ $(function() {
     
     // Set Submit Button On Review
     $('#submitButton').on('click', function() {
-         //Also Set Transaction number to next highest in either charges or payments table
-         //Get html of label then parse out value after colon
-         
          $.ajax({
              type: 'POST',
              url: "/php/completeTransaction.php",

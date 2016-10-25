@@ -220,3 +220,12 @@ INSERT INTO online_payment_paypal
     ('mjordan@gmail.com', 'pass3', 1256.83),
     ('jjaso.gmail.com', 'pass4', 0.23),
     ('up@yahoo.com', 'pass5', 2535.38);
+    
+-- -----------------------------------------------------
+-- insert current_courses_capacity
+-- -----------------------------------------------------
+INSERT INTO current_courses_capacity
+    (code, current_capacity, max_capacity)  
+  VALUES
+    ('ENG101', 13, 28),
+    ('MATH101', 22, 34);    

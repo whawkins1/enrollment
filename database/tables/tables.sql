@@ -308,5 +308,3 @@ CREATE TABLE IF NOT EXISTS current_courses_capacity (
   PRIMARY KEY (code),
   FOREIGN KEY (code) REFERENCES courses(code)
 ) ENGINE=InnoDB;
-
-
