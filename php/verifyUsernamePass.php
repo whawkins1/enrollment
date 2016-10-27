@@ -1,6 +1,6 @@
 <?php
+   require_once("config.php");
    session_start();
-   include("config.php");
    
    if (isset($_POST['email']) && 
        isset($_POST['pass']) &&
