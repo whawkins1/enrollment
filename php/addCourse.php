@@ -8,7 +8,13 @@
       
       $current_date = new simpleDate();
       $current_year = $current_date->now()->getYear();
-     $sql = "INSERT INTO enrolled_" . $current_year " user_email_" . $current_year .
+      
+       if () { //Fall 9-1 to 1-14
+        } elseif() { //Spring 1-15 to 5-15
+        } elseif() { //Summer 6-1 to 8-30
+        }
+      
+      $sql = "INSERT INTO enrolled_" . $current_year " user_email_" . $current_year .
             ", user_grade_" . $current_year . ", user_semester_" . 
             $current_year_", user_course_code VALUES(?, ?, ?)";
             
@@ -21,10 +27,8 @@
          }         
      } else {
          echo "ERROR : Preparing Add Course";
-     }
-        
-        //Fall 9-1 to 1-14
-        //Spring 1-15 to 5-15
-        //Summer 6-1 to 8-30
+     }       
+  } else {
+      echo "ERROR : Parameters not set for addCourse.php";
   }
 ?>
