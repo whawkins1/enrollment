@@ -68,13 +68,13 @@
            $sql_update_user_balance = "UPDATE users SET user_balance = ? WHERE user_email = ?";
            
            if ($stmt = $conn->prepare($sql_get_user_balance)) {
-               $stmt->bind_param($username);
+               $stmt->bind_param("s", $username);
                $stmt->bind_result($userBalance);
                if ($stmt->execute()) {
                    $recalculated_user_balance = ($user_balance - $payment);
                    $stmt->close();
                    if ($stmt = $conn->prepare($sql_update_user_balance)) {
-                       $stmt->bind_param($recalculated_user_balance, $username);
+                       $stmt->bind_param("ds", $recalculated_user_balance, $username);
                        if ($stmt->execute()) {
                           echo "SUCCESS";
                        }  else {
@@ -103,7 +103,7 @@
                        $recalculated_balance = ($balance - $payment);
                        $stmt->close();
                        if ($stmt = $conn->prepare($sqlUpdateBalance)) {
-                          $stmt->bind_param($recalculated_balance, $username);
+                          $stmt->bind_param("ds", $recalculated_balance, $username);
                           if ($stmt->execute()) {
                               echo "SUCCESS";
                           } else {
