@@ -6,9 +6,9 @@
       $username = $_POST['username'];
       $code = $_POST['code'];
       
-      $current_date = new simpleDate();
-      $current_year = $current_date->now()->getYear();
-      $today_date_semester = new DateTime();
+      $today_date_semester = new DateTime(null, new DateTimeZone("UTC"));
+      $today_date_semester->setTimeZone(new DateTimeZone("America/New_York"));
+      $current_year = $today_date_semester->format("Y");
       $today_timestamp_semester = $today_date_semester->getTimestamp();
       
        $fall_start_date = new DateTime($current_year . "-09-01");
@@ -47,7 +47,9 @@
          $stmt->bind_param("ssss", $username, "-", $current_semester, $code);
          if ($stmt->execute()) {
              $stmt->close();
-             $sql = "UPDATE current_courses_capacity SET current_capacity = current_capacity - 1 WHERE code = ?";
+             $sql = "UPDATE current_courses_capacity 
+                     SET current_capacity = current_capacity - 1
+                     WHERE code = ?";
              if ($stmt = $conn->prepare("s", $sql)) {
                  $stmt->bind_param("s", $code);
                  if ($stmt->execute()) {

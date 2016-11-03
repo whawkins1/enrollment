@@ -6,10 +6,11 @@
       $username = $_POST['username'];
       $code = $_POST['code'];
       
-      $current_date = new simpleDate();
-      $current_year = $current_date->now()->getYear();
-      $sql = "DELETE FROM enrolled_" . $current_year . " WHERE user_email_" .
-             $current_year . " = ? AND user_course_code = ?";
+      $current_date = new DateTime(null, new DateTimeZone("UTC"));
+      $today_date_semester->setTimeZone(new DateTimeZone("America/New_York"));
+      $current_year = $current_date->format("Y");      
+      $sql = "DELETE FROM enrolled_" . $current_year . 
+             " WHERE user_email_" . $current_year . " = ? AND user_course_code = ?";
              
       if ($stmt = $conn->prepare($sql)) {
            $stmt->bind_param("ss", $username, $code);

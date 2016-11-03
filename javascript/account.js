@@ -111,8 +111,9 @@ $(function() {
                dataType: 'html'
           }).
           done (function(data) {
-             if (data === "ERROR") {
-                
+             if (data.indexOf("ERROR") === 0) {
+                $message = data.split(":");
+                alert($message[0]);
              } 
           })
           .fail (function(jqXHR, textStatus, errorThrown) {
@@ -160,8 +161,9 @@ $(function() {
                dataType: 'html'
           }).
           done (function(data) {
-             if (data === "ERROR") {
-                
+             if (data.indexOf("ERROR") === 0) {
+                $message = data.split(":");
+                alert($message[0]);
              } 
           })
           .fail (function(jqXHR, textStatus, errorThrown) {
@@ -412,8 +414,8 @@ $(function() {
                                       checkType: $('#companydropdown :selected').text()}
                                dataType: 'html',
                                cache: false
-                          }).
-                          done (function(data) {
+                          })
+                          .done (function(data) {
                              if (data === "VALID") {
                                 $('#username').val() = "";
                                 $('#password').val() = "";                                
