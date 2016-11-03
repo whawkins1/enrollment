@@ -47,9 +47,7 @@
          $stmt->bind_param("ssss", $username, "-", $current_semester, $code);
          if ($stmt->execute()) {
              $stmt->close();
-             $sql = "UPDATE current_courses_capacity 
-                     SET current_capacity = current_capacity - 1
-                     WHERE code = ?";
+             $sql = "UPDATE current_courses_capacity SET current_capacity = current_capacity - 1 WHERE code = ?";
              if ($stmt = $conn->prepare("s", $sql)) {
                  $stmt->bind_param("s", $code);
                  if ($stmt->execute()) {
@@ -58,7 +56,6 @@
                     echo "ERROR : Subtracting course capacity for ", $code;
                  }
              }
-             echo "SUCCESS";
          } else {
              echo "ERROR : Executing Add Course";
          }         

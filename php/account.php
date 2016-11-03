@@ -347,7 +347,10 @@
                     </tr>
                </thead>     
                  <tbody>
-                    <?php $result = $conn->query("SELECT * FROM courses");
+                    <?php $result = $conn->query("SELECT * FROM courses 
+                                                  INNER JOIN current_courses_capacity
+                                                  ON courses.code = current_courses_capacity.code
+                                                  WHERE current_courses_capacity.current_capacity < current_courses_capacity.max_capacity");
                           if($result) {
                                 while($row = $result->fetch_assoc()) {      
                                      $code = $row['code'];
