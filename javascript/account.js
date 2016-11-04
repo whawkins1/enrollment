@@ -107,7 +107,7 @@ $(function() {
           $.ajax({
                type: 'POST',    
                url: "/php/addCourse.php",
-               data: {code: $('#username').val()}
+               data: {code: $('#username').val()},
                dataType: 'html'
           }).
           done (function(data) {
@@ -157,7 +157,7 @@ $(function() {
         $.ajax({
                type: 'POST',    
                url: "/php/removeCourse.php",
-               data: {code: $('#username').val()}
+               data: {code: $('#username').val()},
                dataType: 'html'
           }).
           done (function(data) {
@@ -409,10 +409,12 @@ $(function() {
                       $.ajax({
                                type: 'POST',    
                                url: "/php/verifyUsernamePass.php",
-                               data: {email: $('#username').val(), 
-                                      pass: $('#password').val()}
-                                      checkType: $('#companydropdown :selected').text()}
                                dataType: 'html',
+                               data: {
+                                      email: $('#username').val(), 
+                                      pass: $('#password').val(),
+                                      checkType: $('#companydropdown :selected').text()
+                                      },
                                cache: false
                           })
                           .done (function(data) {
@@ -444,16 +446,18 @@ $(function() {
          $.ajax({
              type: 'POST',
              url: "/php/completeTransaction.php",
-             data: username: $('#email').text();
-                   todaysDate: $('#datelabel').text();           
-                   transID: $('#transactionid');
-                   currentBalance: $('#currentbalance');
-                   paymentMethod: $methodPayment;
-                   payment: ('#payment').text();
-                   paymentType: $('#paymenttypelabel').text();
-                   paymentCompany: $('#companydropdown :selected').text()
-                   finalBalance = $('#balance');
-         )}
+             data: {
+                       username: $('#email').text(),
+                       todaysDate: $('#datelabel').text(),           
+                       transID: $('#transactionid'),
+                       currentBalance: $('#currentbalance'),
+                       paymentMethod: $methodPayment,
+                       payment: ('#payment').text(),
+                       paymentType: $('#paymenttypelabel').text(),
+                       paymentCompany: $('#companydropdown :selected').text(),
+                       finalBalance: $('#balance')
+                  }
+         })
          .done (function(data) {
              
          })
