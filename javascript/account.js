@@ -104,21 +104,31 @@ $(function() {
         $('#labelselectedcredits').text("0");
         $(this).prop('disabled', true);   
         
-          $.ajax({
-               type: 'POST',    
-               url: "/php/addCourse.php",
-               data: {code: $('#username').val()},
-               dataType: 'html'
-          }).
-          done (function(data) {
-             if (data.indexOf("ERROR") === 0) {
-                $message = data.split(":");
-                alert($message[0]);
-             } 
-          })
-          .fail (function(jqXHR, textStatus, errorThrown) {
-                 alert("Error Adding Course");
-          });
+        var addCourseCodes = [];
+        $('#checkboxcatalog').find('tbody tr').each(function() {
+            addCourseCodes.push($(this).find("td:eq(0)").text());
+        });
+           
+        $.each(addCourseCodes, function(index, value) {           
+              $.ajax({
+                   type: 'POST',    
+                   url: "/php/addCourse.php",
+                   data: {
+                           username: $('#username').val(),
+                           code: $value                      
+                         },
+                   dataType: 'html'
+              })
+              .done (function(data) {
+                 if (data.indexOf("ERROR") === 0) {
+                    $message = data.split(":");
+                    alert($message[0]);
+                 } 
+              })
+              .fail (function(jqXHR, textStatus, errorThrown) {
+                     alert("Error Adding Course");
+              });
+        });
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
