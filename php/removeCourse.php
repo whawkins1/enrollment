@@ -2,9 +2,9 @@
    require_once('config.php');
    session_start();
    
-   if (isset($_POST['username']) && isset($_POST['code'])) {
+   if (isset($_POST['username']) && isset($_POST['codes'])) {
       $username = $_POST['username'];
-      $code = $_POST['code'];
+      $code = json_encode($_POST['codes']);
       
       $current_date = new DateTime(null, new DateTimeZone("UTC"));
       $today_date_semester->setTimeZone(new DateTimeZone("America/New_York"));

@@ -105,17 +105,16 @@ $(function() {
         $(this).prop('disabled', true);   
         
         var addCourseCodes = [];
-        $('#checkboxcatalog').find('tbody tr').each(function() {
-            addCourseCodes.push($(this).find("td:eq(0)").text());
+        $('#tablecatalog').find('tbody tr').each(function() {
+            addCourseCodesArr.push($(this).find("td:eq(0)").text());
         });
            
-        $.each(addCourseCodes, function(index, value) {           
-              $.ajax({
+=              $.ajax({
                    type: 'POST',    
                    url: "/php/addCourse.php",
                    data: {
                            username: $('#username').val(),
-                           code: $value                      
+                           codes: JSON.stringify(addCourseCodesArr)                      
                          },
                    dataType: 'html'
               })
@@ -128,7 +127,6 @@ $(function() {
               .fail (function(jqXHR, textStatus, errorThrown) {
                      alert("Error Adding Course");
               });
-        });
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -164,10 +162,18 @@ $(function() {
         $(this).prop('disabled', true);
         $('#labelcurrentcredittotal').text(currentTotal);
         
+        var removeCourseCodes = [];
+        $('#tablecourses').find('tbody tr').each(function() {
+            removeCourseCodesArr.push($(this).find("td:eq(0)").text());
+        });
+        
         $.ajax({
                type: 'POST',    
                url: "/php/removeCourse.php",
-               data: {code: $('#username').val()},
+               data: {
+                       username: $('#username').val(),
+                       codes: JSON.stringify(removeCourseCodesArr)
+                     },
                dataType: 'html'
           }).
           done (function(data) {
@@ -179,8 +185,7 @@ $(function() {
           .fail (function(jqXHR, textStatus, errorThrown) {
                  alert("Error Removing Course");
           });
-    });
-    
+    });    
     
      //Check All Boxes and enable or disable remove button   
      $('#checkboxhead').on('change', function() {
