@@ -263,6 +263,7 @@ CREATE TABLE `current_courses_capacity` (
 
 LOCK TABLES `current_courses_capacity` WRITE;
 /*!40000 ALTER TABLE `current_courses_capacity` DISABLE KEYS */;
+INSERT INTO `current_courses_capacity` VALUES ('ENG101',13,28),('MATH101',22,34);
 /*!40000 ALTER TABLE `current_courses_capacity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1052,4 +1053,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-10 17:14:21
+-- Dump completed on 2016-11-09 14:00:34
