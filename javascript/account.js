@@ -104,12 +104,14 @@ $(function() {
         $('#labelselectedcredits').text("0");
         $(this).prop('disabled', true);   
         
-        var addCourseCodes = [];
+        var addCourseCodesArr = [];
         $('#tablecatalog').find('tbody tr').each(function() {
             addCourseCodesArr.push($(this).find("td:eq(0)").text());
         });
+        
+        console.log(addCourseCodesArr.length);
            
-=              $.ajax({
+             $.ajax({
                    type: 'POST',    
                    url: "/php/addCourse.php",
                    data: {
