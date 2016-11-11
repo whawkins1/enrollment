@@ -103,32 +103,6 @@ $(function() {
         $('#labelcurrentcredittotal').text(newTotal);
         $('#labelselectedcredits').text("0");
         $(this).prop('disabled', true);   
-        
-        var addCourseCodesArr = [];
-        $('#tablecatalog').find('tbody tr').each(function() {
-            addCourseCodesArr.push($(this).find("td:eq(0)").text());
-        });
-        
-        console.log(addCourseCodesArr.length);
-           
-             $.ajax({
-                   type: 'POST',    
-                   url: "/php/addCourse.php",
-                   data: {
-                           username: $('#username').val(),
-                           codes: JSON.stringify(addCourseCodesArr)                      
-                         },
-                   dataType: 'html'
-              })
-              .done (function(data) {
-                 if (data.indexOf("ERROR") === 0) {
-                    $message = data.split(":");
-                    alert($message[0]);
-                 } 
-              })
-              .fail (function(jqXHR, textStatus, errorThrown) {
-                     alert("Error Adding Course");
-              });
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -164,25 +138,21 @@ $(function() {
         $(this).prop('disabled', true);
         $('#labelcurrentcredittotal').text(currentTotal);
         
-        var removeCourseCodes = [];
-        $('#tablecourses').find('tbody tr').each(function() {
-            removeCourseCodesArr.push($(this).find("td:eq(0)").text());
-        });
-        
         $.ajax({
                type: 'POST',    
                url: "/php/removeCourse.php",
                data: {
-                       username: $('#username').val(),
-                       codes: JSON.stringify(removeCourseCodesArr)
+                       username: $('#email').val(),
+                       codes: JSON.stringify(delCurrCoursesArr)
                      },
                dataType: 'html'
           }).
           done (function(data) {
-             if (data.indexOf("ERROR") === 0) {
-                $message = data.split(":");
-                alert($message[0]);
-             } 
+             console.log(data);
+             // if (data.indexOf("ERROR") === 0) {
+                 // $message = data.split(":");
+                 // alert($message[0]);
+              // } 
           })
           .fail (function(jqXHR, textStatus, errorThrown) {
                  alert("Error Removing Course");
