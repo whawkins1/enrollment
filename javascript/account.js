@@ -146,13 +146,13 @@ $(function() {
                        codes: JSON.stringify(delCurrCoursesArr)
                      },
                dataType: 'html'
-          }).
-          done (function(data) {
+          })
+          .done (function(data) {
              console.log(data);
-             // if (data.indexOf("ERROR") === 0) {
-                 // $message = data.split(":");
-                 // alert($message[0]);
-              // } 
+              if (data.indexOf("ERROR") === 0) {
+                  $message = data.split(":");
+                  alert($message[0]);
+              } 
           })
           .fail (function(jqXHR, textStatus, errorThrown) {
                  alert("Error Removing Course");
