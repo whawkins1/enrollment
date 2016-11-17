@@ -184,99 +184,102 @@
              
       </div>
       
-       <div id="tab-courses" class="tabsjump">
-           <div class="containercoursestitle">
-                 <label class="labeltitletables"> <?php echo "Fall ", getTimeZoneObject(null)->format("Y"); ?> </label>
-           </div>
-           <div id="containerfilterscurrentcourses">
-              <label id="filterlabel" class="filters"> Filter By: </label> 
-              <div id="filterdepartment" class="filters">
-                        <select id="departmentfilter"> 
-                            <option>-- Select Department --</option>
-                            <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
-                                  if($result) {
-                                     while($row = $result->fetch_assoc()) { ?>
-                                         <option value=<?php echo $row['department']; ?>><?php echo $row['department']; ?></option>
-                               <?php }
-                                  } ?>
-                        </select>                        
-              </div>
-                  
-                  <div id="filtercodes" class="filters">
-                        <select id="codefilter"> 
-                            <option>-- Select Code --</option>
-                            <?php $result = $conn->query("SELECT DISTINCT code FROM courses;");
-                                  if($result) {
-                                     while ($row = $result->fetch_assoc()) { ?>
-                                       <option value=<?php echo $row['code']; ?>><?php echo $row['code']; ?></option>
-                            <?php    } 
-                                 } ?>
-                        </select>
-                  </div>
-
-                 <div id="filterprofessor" class="filters">
-                        <select id="professorfilter"> 
-                            <option>-- Select Professor -- </option>
-                            <?php $result = $conn->query("SELECT DISTINCT concat(professor_last_name, ', ', professor_first_name) AS professor FROM courses;");
-                                     if ($result) {
-                                        while($row = $result->fetch_assoc()) { ?>
-                                         <option value=<?php echo $row['professor'] ?>><?php echo $row['professor'] ?></option>
-                            <?php       }  
-                                     } ?>
-                        </select>
-                  </div>
-                  
-                  <div id="filterlocation" class="filters">
-                        <select id="locationfilter"> 
-                            <option>-- Select Location --</option>
-                            <?php $result = $conn->query("SELECT DISTINCT location FROM courses;");
-                                  if ($result) {
-                                      while($row = $result->fetch_assoc()) { ?>
-                                        <option value=<?php echo $row['location'];?>><?php echo $row['location'];?></option>
-                             <?php    } 
-                                  }  ?>                         
-                        </select>                        
-                  </div>
-               </div>
-              
-              <table id="tablecourses" class="tablesorter">      
-                  <thead>
-                        <tr id="headerRow">
-                             <th class="checkbox"><input type="checkbox" id="checkboxhead"></th>
-                             <th class="code">Code</th>
-                             <th class="name">Name</th>
-                             <th class="department">Department</th>
-                             <th class="professor">Professor</th>
-                             <th class="time">Time</th>
-                             <th class="location">Location</th>
-                             <th class="credits">Credits</th>
-                        </tr>
-                   </thead>     
-                 <tbody>
-                 <?php
-                   $currentCreditTotal = 0;
-                   $current_courses_codes = [];
-                    $sql = "SELECT getYearsAttended(?)";           
+      <?php
+      $sql = "SELECT currently_enrolled FROM users WHERE user_email = ?";           
                    if ($stmt = $conn->prepare($sql)) {
                        $stmt->bind_param('s', $username);
                        if($stmt->execute()) {
-                          $stmt->bind_result($years_attended_commas);
+                          $stmt->bind_result($currently_enrolled);
                           $stmt->fetch();
                           $stmt->close();
                        }
-                       $years_attended_arr = explode(",", $years_attended_commas);
-                       //$most_recent_year_enrolled = max($years_attended_arr);
-                       $most_recent_year_enrolled = 2010;
+       if($currently_enrolled === 1) {                
+          echo '<div id="tab-courses" class="tabsjump">';
+          echo '<div class="containercoursestitle">';
+                 echo '<label class="labeltitletables"> <?php echo "Fall ", getTimeZoneObject(null)->format("Y"); ?> </label>';
+           echo '</div>';
+           echo '<div id="containerfilterscurrentcourses">';
+           echo '<label id="filterlabel" class="filters"> Filter By: </label>';
+              echo '<div id="filterdepartment" class="filters">';
+                        echo '<select id="departmentfilter">';
+                            echo '<option>-- Select Department --</option>';
+                             $result = $conn->query("SELECT DISTINCT department FROM courses");
+                                  if($result) {
+                                     while($row = $result->fetch_assoc()) { 
+                                         echo '<option value=', $row['department'], '>', $row['department'], '<', '</option>';
+                                     }
+                                  } 
+                        echo '</select>';                        
+              echo '</div>';
+                  
+                  echo '<div id="filtercodes" class="filters">';
+                        echo '<select id="codefilter">'; 
+                            echo '<option>-- Select Code --</option>';
+                             $result = $conn->query("SELECT DISTINCT code FROM courses;");
+                                  if($result) {
+                                     while ($row = $result->fetch_assoc()) { 
+                                       echo '<option value=', $row['code'], '>', $row['code'], '>', '</option>';
+                                     } 
+                                  } 
+                        echo '</select>';
+                  echo '</div>';
+
+                 echo '<div id="filterprofessor" class="filters">';
+                        echo '<select id="professorfilter">'
+                            echo '<option>-- Select Professor -- </option>';
+                            $result = $conn->query("SELECT DISTINCT concat(professor_last_name, ', ', professor_first_name) AS professor FROM courses;");
+                                     if ($result) {
+                                        while($row = $result->fetch_assoc()) { 
+                                         <option value= '$row['professor']',  '>', $row['professor'], '</option>'
+                                        }  
+                                     } 
+                                     echo '</select>';
+                  echo '</div>';
+                  
+                  echo '<div id="filterlocation" class="filters">';
+                        echo '<select id="locationfilter">'; 
+                            echo '<option>-- Select Location --</option>';
+                              $result = $conn->query("SELECT DISTINCT location FROM courses;");
+                                  if ($result) {
+                                      while($row = $result->fetch_assoc()) { 
+                                        echo '<option value=', $row['location'], '>', $row['location'], '</option>';
+                                      } 
+                                  }                         
+                        echo '</select>';                        
+                  echo '</div>';
+               echo '</div>';
+              
+              echo '<table id="tablecourses" class="tablesorter">'      
+                  echo '<thead>';
+                        echo '<tr id="headerRow">';
+                             echo '<th class="checkbox"><input type="checkbox" id="checkboxhead"></th>';
+                             echo '<th class="code">Code</th>';
+                             echo '<th class="name">Name</th>';
+                             echo '<th class="department">Department</th>';
+                             echo '<th class="professor">Professor</th>';
+                             echo '<th class="time">Time</th>';
+                             echo '<th class="location">Location</th>';
+                             echo '<th class="credits">Credits</th>';
+                        echo '</tr>';
+                   echo '</thead>';     
+                 echo '<tbody>';
+                 
+                   $currentCreditTotal = 0;
+                   $current_courses_codes = [];
+                    
+                       $today_date = new DateTime(null, new DateTimeZone("UTC"));
+                       $today_date->setTimeZone(new DateTimeZone("America/New_York"));
+                       $current_year = $today_date->format("Y");
                        // temporary
                        $semester = "Spring";
                    }
-                   if(!empty($most_recent_year_enrolled)) {
+                   
                         $sql = "SELECT c.code, c.title, c.days, c.department, c.begin_time, c.end_time, 
                                     c.am_pm, c.credits, c.professor_last_name, c.professor_first_name, c.location, c.department 
-                                   FROM courses AS c INNER JOIN " . "enrolled_" . $most_recent_year_enrolled . " AS e" .
-                                   " ON c.code = e.user_course_code WHERE e.user_email_" . $most_recent_year_enrolled . " = ? " .
+                                   FROM courses AS c INNER JOIN " . "enrolled_" . $current_year .  " AS e" .
+                                   " ON c.code = e.user_course_code WHERE e.user_email_" . $current_year . " = ? " .
                         
-                                   " AND user_semester_" . $most_recent_year_enrolled . " = ?;";
+                                   " AND user_semester_" . $current_year . " = ?;";
                         if($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param('ss', $username, $semester);
                             if($stmt->execute()) {
@@ -302,52 +305,52 @@
                                $stmt->close();   
                             }            
                         } 
-                   } ?>
-                 </tbody>                  
-             </table>
+                   } 
+                 echo '</tbody>';                  
+             echo '</table>';
              
-             <div class="creditscontainer">
-                <label class="labelcreditstitle">Current Credit Total: </label> 
-                <label id="labelcurrentcredittotal"><?php echo $currentCreditTotal; ?></label>
-             </div>
+             echo '<div class="creditscontainer">';
+                echo '<label class="labelcreditstitle">Current Credit Total: </label>'; 
+                echo '<label id="labelcurrentcredittotal"><?php echo $currentCreditTotal; ?></label>';
+             echo '</div>';
              
-             <div class="buttonscontainer">
-                  <button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>
-                  <button type="button" id="buttonupdatecourses" class="buttonscourses" <?php if($count_current_courses == 0) { echo "disabled"; } ?>>Update</button>
-             </div>
+             echo '<div class="buttonscontainer">'
+                  echo '<button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>';
+                  echo '<button type="button" id="buttonupdatecourses" class="buttonscourses" <?php if($count_current_courses == 0) { echo "disabled"; } ?>>Update</button>';
+             echo '</div>';
              
-             <div class="containercoursestitle">
-                  <label class="labeltitletables">Catalog</label>
-             </div>
+             echo '<div class="containercoursestitle">';
+                  echo '<label class="labeltitletables">Catalog</label>';
+             echo '</div>';
              
-             <div id="filterdepartmentcontainer">
-                 <label id="labelfilterdepartmenttitle">Filter By: </label>       
-                    <select id="departmentfilter"> 
-                            <option>-- Select Department --</option>
-                            <?php $result = $conn->query("SELECT DISTINCT department FROM courses");
+             echo '<div id="filterdepartmentcontainer">';
+                 echo '<label id="labelfilterdepartmenttitle">Filter By: </label>';       
+                    echo '<select id="departmentfilter">'; 
+                            echo '<option>-- Select Department --</option>';
+                             $result = $conn->query("SELECT DISTINCT department FROM courses");
                                   if($result) {
-                                     while($row = $result->fetch_assoc()) { ?>
-                                     <option value=<?php echo $row['department']; ?>><?php echo $row['department']; ?></option>
-                            <?php    }
-                                  } ?>
-                    </select>        
-             </div>
+                                     while($row = $result->fetch_assoc()) { 
+                                        echo '<option value=', $row['department'], '>', $row['department'],  '</option>';
+                                     }
+                                  } 
+                    echo '</select>';        
+             echo '</div>';
         
-             <table id="tablecatalog" class="tablesorter">      
-              <thead>
-                    <tr id="headerRow">
-                         <th></th>
-                         <th class="code">Code</th>
-                         <th class="name">Name</th>
-                         <th class="department">Department</th>
-                         <th class="professor">Professor</th>
-                         <th class="time">Time</th>
-                         <th class="location">Location</th>
-                         <th class="credits">Credits</th>
-                    </tr>
-               </thead>     
-                 <tbody>
-                    <?php $result = $conn->query("SELECT * FROM courses 
+             echo '<table id="tablecatalog" class="tablesorter">';      
+              echo '<thead>';
+                    echo '<tr id="headerRow">'
+                         echo '<th></th>';
+                         echo '<th class="code">Code</th>';
+                         echo '<th class="name">Name</th>';
+                         echo '<th class="department">Department</th>';
+                         echo '<th class="professor">Professor</th>';
+                         echo '<th class="time">Time</th>';
+                         echo '<th class="location">Location</th>';
+                         echo '<th class="credits">Credits</th>';
+                    echo '</tr>';
+               echo '</thead>';     
+                 echo '<tbody>';
+                     $result = $conn->query("SELECT * FROM courses 
                                                   INNER JOIN current_courses_capacity
                                                   ON courses.code = current_courses_capacity.code
                                                   WHERE current_courses_capacity.current_capacity < current_courses_capacity.max_capacity");
@@ -367,17 +370,17 @@
                                         echo "</tr>";
                                      }
                                 }  
-                         } ?>
-                 </tbody>    
-             </table>
-             <div class="creditscontainer">
-                 <label class="labelcreditstitle">Selected Credits: </label> 
-                 <label id="labelselectedcredits">0</label>
-             </div>
-             <div class="buttonscontainer">
-                      <button type="button" id="buttonaddcourses" class="buttonscourses" disabled>Add</button>
-             </div>
-      </div>                
+                         } 
+                 echo '</tbody>';    
+             echo '</table>';
+             echo '<div class="creditscontainer">';
+                 echo '<label class="labelcreditstitle">Selected Credits: </label>' 
+                 echo '<label id="labelselectedcredits">0</label>';
+             echo '</div>';
+             echo '<div class="buttonscontainer">';
+                      echo '<button type="button" id="buttonaddcourses" class="buttonscourses" disabled>Add</button>';
+             echo '</div>';
+      echo '</div>';                
       
       <div id="tab-grades" class="tabsjump">
          <div id="selectiongpacontainer">
