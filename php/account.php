@@ -65,11 +65,27 @@
     <meta charset="UTF-8">
   </head>
     <body>
-      <?php include("../php/navigation.php");?>         
+      <?php include("../php/navigation.php");         
+        
+      // Check if user is enrolled to show current courses tab to add and remove  
+      $sql = "SELECT currently_enrolled FROM users WHERE user_email = ?";           
+                   if ($stmt = $conn->prepare($sql)) {
+                       $stmt->bind_param('s', $username);
+                       if($stmt->execute()) {
+                          $stmt->bind_result($currently_enrolled);
+                          $stmt->fetch();
+                          $stmt->close();
+                       }
+                   } 
+      ?>             
         
       <ul class="tabs">
          <li><a href="#tab-personal">Personal</a></li>
-         <li><a href="#tab-courses">Current Courses</a></li>
+         <?php
+                if ($currently_enrolled === 1) {         
+                     echo '<li><a href="#tab-courses">Current Courses</a></li>';
+                }
+         ?>       
          <li><a href="#tab-grades">Grades</a></li>
          <li><a href="#tab-financial">Financial</a></li>
          <li><a href="#tab-payment">Make Payment</a></li>
@@ -185,18 +201,10 @@
       </div>
       
       <?php
-      $sql = "SELECT currently_enrolled FROM users WHERE user_email = ?";           
-                   if ($stmt = $conn->prepare($sql)) {
-                       $stmt->bind_param('s', $username);
-                       if($stmt->execute()) {
-                          $stmt->bind_result($currently_enrolled);
-                          $stmt->fetch();
-                          $stmt->close();
-                       }
        if($currently_enrolled === 1) {                
           echo '<div id="tab-courses" class="tabsjump">';
           echo '<div class="containercoursestitle">';
-                 echo '<label class="labeltitletables"> <?php echo "Fall ", getTimeZoneObject(null)->format("Y"); ?> </label>';
+                 echo '<label class="labeltitletables">  Fall ', getTimeZoneObject(null)->format("Y"), '</label>';
            echo '</div>';
            echo '<div id="containerfilterscurrentcourses">';
            echo '<label id="filterlabel" class="filters"> Filter By: </label>';
@@ -225,12 +233,12 @@
                   echo '</div>';
 
                  echo '<div id="filterprofessor" class="filters">';
-                        echo '<select id="professorfilter">'
+                        echo '<select id="professorfilter">';
                             echo '<option>-- Select Professor -- </option>';
                             $result = $conn->query("SELECT DISTINCT concat(professor_last_name, ', ', professor_first_name) AS professor FROM courses;");
                                      if ($result) {
                                         while($row = $result->fetch_assoc()) { 
-                                         <option value= '$row['professor']',  '>', $row['professor'], '</option>'
+                                         echo '<option value=',  $row['professor'],  '>', $row['professor'], '</option>';
                                         }  
                                      } 
                                      echo '</select>';
@@ -249,7 +257,7 @@
                   echo '</div>';
                echo '</div>';
               
-              echo '<table id="tablecourses" class="tablesorter">'      
+              echo '<table id="tablecourses" class="tablesorter">';      
                   echo '<thead>';
                         echo '<tr id="headerRow">';
                              echo '<th class="checkbox"><input type="checkbox" id="checkboxhead"></th>';
@@ -272,7 +280,6 @@
                        $current_year = $today_date->format("Y");
                        // temporary
                        $semester = "Spring";
-                   }
                    
                         $sql = "SELECT c.code, c.title, c.days, c.department, c.begin_time, c.end_time, 
                                     c.am_pm, c.credits, c.professor_last_name, c.professor_first_name, c.location, c.department 
@@ -305,7 +312,6 @@
                                $stmt->close();   
                             }            
                         } 
-                   } 
                  echo '</tbody>';                  
              echo '</table>';
              
@@ -314,9 +320,9 @@
                 echo '<label id="labelcurrentcredittotal"><?php echo $currentCreditTotal; ?></label>';
              echo '</div>';
              
-             echo '<div class="buttonscontainer">'
+             echo '<div class="buttonscontainer">';
                   echo '<button type="button" id="buttonremovecourses" class="buttonscourses" disabled>Remove</button>';
-                  echo '<button type="button" id="buttonupdatecourses" class="buttonscourses" <?php if($count_current_courses == 0) { echo "disabled"; } ?>>Update</button>';
+                  echo '<button type="button" id="buttonupdatecourses" class="buttonscourses"'; if($count_current_courses == 0) { echo "disabled"; }; echo '>Update</button>';
              echo '</div>';
              
              echo '<div class="containercoursestitle">';
@@ -338,7 +344,7 @@
         
              echo '<table id="tablecatalog" class="tablesorter">';      
               echo '<thead>';
-                    echo '<tr id="headerRow">'
+                    echo '<tr id="headerRow">';
                          echo '<th></th>';
                          echo '<th class="code">Code</th>';
                          echo '<th class="name">Name</th>';
@@ -374,13 +380,15 @@
                  echo '</tbody>';    
              echo '</table>';
              echo '<div class="creditscontainer">';
-                 echo '<label class="labelcreditstitle">Selected Credits: </label>' 
+                 echo '<label class="labelcreditstitle">Selected Credits: </label>'; 
                  echo '<label id="labelselectedcredits">0</label>';
              echo '</div>';
              echo '<div class="buttonscontainer">';
                       echo '<button type="button" id="buttonaddcourses" class="buttonscourses" disabled>Add</button>';
              echo '</div>';
-      echo '</div>';                
+          echo '</div>';    
+       }
+        ?>      
       
       <div id="tab-grades" class="tabsjump">
          <div id="selectiongpacontainer">
