@@ -1,5 +1,6 @@
 <?php 
    require_once('config.php');
+   require_once('getSemester.php');
    session_start();
    
    if (isset($_POST['username']) && isset($_POST['codes'])) {
@@ -8,40 +9,12 @@
           
           $current_date = new DateTime(null, new DateTimeZone("UTC"));
           $current_date->setTimeZone(new DateTimeZone("America/New_York"));
-          $current_year = $current_date->format("Y");      
-          $today_timestamp_semester = $current_date->getTimestamp();
-      
-           $fall_start_date = new DateTime($current_year . "-09-01");
-           $fall_end_date = new DateTime($current_year . "-01-14");      
+          $current_year = $current_date->format("Y");
           
-           if ($fall_start_date->getTimestamp() < $today_timestamp_semester &&
-               $fall_end_date->getTimestamp() > $today_timestamp_semester  ) {
-               $semester = "spring";               
-           }          
-           
-           if (!(isset($semester))) {
-               $spring_start_date = new DateTime($current_year . "-01-15");
-               $spring_end_date = new DateTime($current_year . "-05-15");
-               
-               if ($spring_start_date->getTimestamp() < $today_timestamp_semester &&
-                   $spring_end_date->getTimestamp() > $today_timestamp_semester) {
-                   $semester = "summer";
-               } 
-           }
-           
-           if (!(isset($semester))) {
-                $summer_start_date = new DateTime($current_year . "-06-01");
-                $summer_end_date = new DateTime($current_year . "-08-30");
-                
-                if ($summer_start_date->getTimestamp() < $today_timestamp_semester &&
-                    $summer_end_date->getTimestamp() < $today_timestamp_ ) { 
-                    $semester = 'fall'; 
-                }     
-           }
           $sql1 = "DELETE FROM enrolled_" . $current_year . " WHERE user_email_" . $current_year . " = ? 
                   AND user_course_code = ? AND user_semester_" . $current_year " = ?";
 
-          
+          $semester = get_semester();
           foreach ($codes as $code) {     
                   if ($stmt = $conn->prepare($sql1)) {
                        $stmt->bind_param("sss", $username, $code, $semester);
