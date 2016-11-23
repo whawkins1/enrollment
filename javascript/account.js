@@ -30,6 +30,17 @@ $(function() {
       $('#email').val("");      
     });
     
+    //disable possible elements based on row rount of courses table
+    if ($('#tablecourses tbody tr').length === 0) {
+            
+           $('#checkboxhead').prop('disabled', false);
+           $('#buttonaddcourses').prop('disabled', false);
+           $('#departmentfilter').prop('disabled', false);
+           $('#codefilter').prop('disabled', false);
+           $('#professorfilter').prop('disabled', false);
+           $('#locationfilter').prop('disabled', false);
+    }
+    
     //Populate codes from current courses into array
     $('#tablecourses tbody').find('tr').each(function() {
            var code = $(this).find("td").eq(1).html();
@@ -80,21 +91,52 @@ $(function() {
                if (!($.contains(code, origCurrCoursesArr))) {
                    updateCurrCoursesArr.push(code);
                }
-               checkedRow.appendTo($('#tablecourses tbody'));
+               
+               
+               $.ajax({
+               type: 'POST',    
+               url: "/php/addCourse.php",
+               data: {
+                       username: $('#email').val(),
+                       codes: JSON.stringify(updateCurrCoursesArr)
+                     },
+               dataType: 'html'
+          })
+          .done (function(data) {
+             console.log(data);
+              if (data.indexOf("ERROR") === 0) {
+                  $message = data.split(":");
+                  alert($message[0]);
+              } else if (date.indexOf("SUCCESS") === 0) {
+                 checkedRow.appendTo($('#tablecourses tbody'));
+              }                  
+          })
+          .fail (function(jqXHR, textStatus, errorThrown) {
+                 alert("Error Removing Course");
+          });
            }
         });
 
         var rowCount = $('#tablecourses tbody tr').length;
-        if (($('#departmentfilter').prop('disabled') 
-                   && $('#codefilter').prop('disabled')
-                   && $('#professorfilter').prop('disabled')
-                   && $('#locationfilter').prop('disabled')) && rowCount !== 0) {
+        if (($('#departmentfilter').prop('disabled') && $('#codefilter').prop('disabled') && $('#professorfilter').prop('disabled')
+                                                     && $('#locationfilter').prop('disabled')) && rowCount !== 0) {
                          $('#checkboxhead').prop('disabled', false);
                          $(this).prop('disabled', false);
                          $('#departmentfilter').prop('disabled', false);
                          $('#codefilter').prop('disabled', false);
                          $('#professorfilter').prop('disabled', false);
                          $('#locationfilter').prop('disabled', false);
+        } else if (!($('#departmentfilter').prop('disabled') 
+                   && $('#codefilter').prop('disabled')
+                   && $('#professorfilter').prop('disabled')
+                   && $('#locationfilter').prop('disabled')) && rowCount === 0) {
+                        $('#checkboxhead').prop('disabled', true);
+                         $(this).prop('disabled', true);
+                         $('#departmentfilter').prop('disabled', true);
+                         $('#codefilter').prop('disabled', true);
+                         $('#professorfilter').prop('disabled', true);
+                         $('#locationfilter').prop('disabled', true);
+                   }
         }
         
         var currentTotal = +($('#labelcurrentcredittotal').text());        

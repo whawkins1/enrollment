@@ -285,11 +285,12 @@
                                     c.am_pm, c.credits, c.professor_last_name, c.professor_first_name, c.location, c.department 
                                    FROM courses AS c INNER JOIN " . "enrolled_" . $current_year .  " AS e" .
                                    " ON c.code = e.user_course_code WHERE e.user_email_" . $current_year . " = ? " .
-                        
                                    " AND user_semester_" . $current_year . " = ?;";
+
                         if($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param('ss', $username, $semester);
                             if($stmt->execute()) {
+                                 $stmt->store_result();
                                  $stmt->bind_result($code, $title, $days, $department, $begin_time, 
                                                     $end_time, $am_pm, $credits, $professor_last_name, 
                                                     $professor_first_name, $location, $department );
