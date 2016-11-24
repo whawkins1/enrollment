@@ -85,35 +85,14 @@ $(function() {
                $(this).prop('checked', false);
                var checkedRow = $(this).closest("tr").remove().clone();
                var code = checkedRow.find("td").eq(1).html();
+               
                if ($.contains(code, delCurrCoursesArr)) {
                    delCurrCoursesArr.splice($.inArray(code, deleCurrCourseArr), 1);
                }
+               // If course not in original array add to update
                if (!($.contains(code, origCurrCoursesArr))) {
                    updateCurrCoursesArr.push(code);
                }
-               
-               
-               $.ajax({
-               type: 'POST',    
-               url: "/php/addCourse.php",
-               data: {
-                       username: $('#email').val(),
-                       codes: JSON.stringify(updateCurrCoursesArr)
-                     },
-               dataType: 'html'
-          })
-          .done (function(data) {
-             console.log(data);
-              if (data.indexOf("ERROR") === 0) {
-                  $message = data.split(":");
-                  alert($message[0]);
-              } else if (date.indexOf("SUCCESS") === 0) {
-                 checkedRow.appendTo($('#tablecourses tbody'));
-              }                  
-          })
-          .fail (function(jqXHR, textStatus, errorThrown) {
-                 alert("Error Removing Course");
-          });
            }
         });
 
@@ -126,10 +105,9 @@ $(function() {
                          $('#codefilter').prop('disabled', false);
                          $('#professorfilter').prop('disabled', false);
                          $('#locationfilter').prop('disabled', false);
-        } else if (!($('#departmentfilter').prop('disabled') 
-                   && $('#codefilter').prop('disabled')
-                   && $('#professorfilter').prop('disabled')
-                   && $('#locationfilter').prop('disabled')) && rowCount === 0) {
+        } else if (!($('#departmentfilter').prop('disabled') && $('#codefilter').prop('disabled') 
+                    && $('#professorfilter').prop('disabled')
+                    && $('#locationfilter').prop('disabled')) && rowCount === 0) {
                         $('#checkboxhead').prop('disabled', true);
                          $(this).prop('disabled', true);
                          $('#departmentfilter').prop('disabled', true);
