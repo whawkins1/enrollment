@@ -801,11 +801,11 @@ $(function() {
                          alert("Unable to remove course code " + value);
                      } else if (data.indexOf("SUCCESS") === 0) {
                           //Insert Rows into enrolled based on code
-                        origCurrCoursesArr.length = 0;
-                        //Insert new values into original courses array
-                        $.each(updateCurrCoursesArr, function(index, value) {
-                                  origCurrCoursesArr.push(value);
-                        });
+                            origCurrCoursesArr.length = 0;
+                            //Insert new values into original courses array
+                            $.each(updateCurrCoursesArr, function(index, value) {
+                                      origCurrCoursesArr.push(value);
+                            });
                                     $.ajax({
                                              type: 'POST',
                                              url: "updateCurrentCourses.php",
