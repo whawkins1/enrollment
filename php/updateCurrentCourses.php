@@ -1,6 +1,7 @@
 
 <?php
    require("config.php");   
+   require("utilityFunctions.php");
    
        $email = $_POST['email'];
        $code = $_POST['code'];
@@ -12,9 +13,14 @@
            isset($semester) && !empty($semester) &&
            isset($grade) && !empty($grade)            
            ) {
+           
+           $current_date = new DateTime(null, new DateTimeZone("UTC"));
+          $current_date->setTimeZone(new DateTimeZone("America/New_York"));
+          $year = $current_date->format("Y");
           
+          //temporary
            $year = "2010"; 
-           //$year = new simpleDate()->now()->getYear();
+           
             $sql = "INSERT INTO enrolled_". $year . " (user_email_" . $year . ", user_grade_" . $year . 
                                                     ", user_semester_" . $year . ", user_course_code 
                    ) VALUES( '" . $email . "', '" . $grade . "', '" . $semester . "', '" . $code . "');";
