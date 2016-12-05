@@ -1,7 +1,6 @@
 <?php 
    require_once('config.php');
    require_once('getSemester.php');
-   session_start();
    
    if (isset($_POST['username']) && isset($_POST['codes'])) {
           $username = $_POST['username'];
@@ -30,10 +29,10 @@
                              }
                          }
                        } else {
-                           echo "ERROR : Executing Remove Course";
+                           echo "ERROR : Executing Remove Course for " . $code;
                        }
                   } else {
-                      echo "ERROR : Preparing Remove Course";
+                      echo "ERROR : Preparing Remove Course for " . $code;
                   }     
               }     
     } else {

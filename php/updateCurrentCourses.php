@@ -14,8 +14,7 @@
            isset($grade) && !empty($grade)            
            ) {
            
-           $current_date = new DateTime(null, new DateTimeZone("UTC"));
-          $current_date->setTimeZone(new DateTimeZone("America/New_York"));
+          $current_date = getCurrentDateObject(); 
           $year = $current_date->format("Y");
           
           //temporary
@@ -27,10 +26,10 @@
             
             if ($stmt = $conn->prepare($sql)) {
                if(!$stmt->execute()) {
-                  echo "ERROR_UPDATE1";
+                  echo "ERROR : Executing update to courses";
                }                               
             } else {
-                 echo "ERROR_UPDATE2";
+                 echo "ERROR : Preparing update to courses";
             }
       }
 ?>

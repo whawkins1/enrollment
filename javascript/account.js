@@ -114,11 +114,10 @@ $(function() {
                          $('#codefilter').prop('disabled', true);
                          $('#professorfilter').prop('disabled', true);
                          $('#locationfilter').prop('disabled', true);
-                   }
         }
-        
+                
         var currentTotal = +($('#labelcurrentcredittotal').text());        
-        var selectedTotal = +$('#labelselectedcredits').text(); 
+        var selectedTotal = +($('#labelselectedcredits').text()); 
         var newTotal = (currentTotal + selectedTotal);
         $('#labelcurrentcredittotal').text(newTotal);
         $('#labelselectedcredits').text("0");
@@ -168,7 +167,6 @@ $(function() {
                dataType: 'html'
           })
           .done (function(data) {
-             console.log(data);
               if (data.indexOf("ERROR") === 0) {
                   $message = data.split(":");
                   alert($message[0]);
@@ -787,7 +785,7 @@ $(function() {
         $(this).css('background-image', 'url(/images/loader.gif');        
                $.ajax({
                    type: 'POST',
-                   url: "removeCourses.php",
+                   url: "removeCourse.php",
                    cache: false,
                    data: {
                              email: originalEmail,
@@ -818,22 +816,21 @@ $(function() {
                                              }
                                     })
                                     .done(function(data) {
-                                        if(data.startsWith("ERROR_UPDATE")) {
-                                            alert("Unable to update course code " + item);
-                                        } else {
+                                        if(data.indexOf("ERROR") === 0) {
+                                           alert($message[0]);
+                                        } else if(data.indexOf("SUCCESS") === 0) {
                                             alert("Update Successfully Completed");
                                         }
                                     })
                                     .fail(function (jqHXR, textStats, errorThrown) {
                                         alert("Error updating current courses");
                                     });
-                                 }
-                           })
-                           .fail(function (jqHXR, textStatus, errorThrown) {
-                                 alert("Error Deleting Previous Courses");
-                                 $delete_success = false;
-                           });                               
-        }
+                 }
+               })
+               .fail(function (jqHXR, textStatus, errorThrown) {
+                     alert("Error Deleting Previous Courses");
+                     $delete_success = false;
+               });                               
       $(this).css('background-image', '');
       $(this).html("Update");      
     });
