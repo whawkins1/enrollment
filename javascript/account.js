@@ -31,8 +31,7 @@ $(function() {
     });
     
     //disable possible elements based on row rount of courses table
-    if ($('#tablecourses tbody tr').length === 0) {
-            
+    if ($('#tablecourses tbody tr').length === 0) {            
            $('#checkboxhead').prop('disabled', false);
            $('#buttonaddcourses').prop('disabled', false);
            $('#departmentfilter').prop('disabled', false);
@@ -122,6 +121,10 @@ $(function() {
         $('#labelcurrentcredittotal').text(newTotal);
         $('#labelselectedcredits').text("0");
         $(this).prop('disabled', true);   
+        
+        if (!($('buttonupdatecourses').prop('enabled'))) {
+               $(this).prop('enabled', true);
+        }
     });
     
     //Remove Row From Current Courses And Add it back to Catalog
@@ -170,12 +173,18 @@ $(function() {
               if (data.indexOf("ERROR") === 0) {
                   $message = data.split(":");
                   alert($message[0]);
-              } 
+              } else if (data.indexOf("SUCCESS") === 0) {
+                  if (!($('buttonupdatecourses').prop('enabled'))) {
+                    $(this).prop('enabled', true);
+                  }
+              }                  
           })
           .fail (function(jqXHR, textStatus, errorThrown) {
                  alert("Error Removing Course");
           });
-    });    
+    });  
+
+        
     
      //Check All Boxes and enable or disable remove button   
      $('#checkboxhead').on('change', function() {
@@ -820,6 +829,7 @@ $(function() {
                                            alert($message[0]);
                                         } else if(data.indexOf("SUCCESS") === 0) {
                                             alert("Update Successfully Completed");
+                                            $(this).prop('enabled', false);
                                         }
                                     })
                                     .fail(function (jqHXR, textStats, errorThrown) {
