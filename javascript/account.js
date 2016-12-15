@@ -158,33 +158,8 @@ $(function() {
             $checkBoxHead.prop('disabled', true);
         }
         $(this).prop('disabled', true);
-        $('#labelcurrentcredittotal').text(currentTotal);
-        
-        $.ajax({
-               type: 'POST',    
-               url: "/php/removeCourse.php",
-               data: {
-                       username: $('#email').val(),
-                       codes: JSON.stringify(delCurrCoursesArr)
-                     },
-               dataType: 'html'
-          })
-          .done (function(data) {
-              if (data.indexOf("ERROR") === 0) {
-                  $message = data.split(":");
-                  alert($message[0]);
-              } else if (data.indexOf("SUCCESS") === 0) {
-                  if (!($('buttonupdatecourses').prop('enabled'))) {
-                    $(this).prop('enabled', true);
-                  }
-              }                  
-          })
-          .fail (function(jqXHR, textStatus, errorThrown) {
-                 alert("Error Removing Course");
-          });
-    });  
-
-        
+        $('#labelcurrentcredittotal').text(currentTotal);       
+    });         
     
      //Check All Boxes and enable or disable remove button   
      $('#checkboxhead').on('change', function() {
