@@ -778,9 +778,9 @@ $(function() {
                          }                         
                })
                .done(function(data) {
-                     console.log(data);
-                     if (data.indexOf("ERROR_DELETE") === 0) {
-                         alert("Unable to remove course code " + value);
+                     if (data.indexOf("ERROR") === 0) {
+                         var message = data.split(':');
+                         alert("Error " + message[1]);
                      } else if (data.indexOf("SUCCESS") === 0) {
                           //Insert Rows into enrolled based on code
                             origCurrCoursesArr.length = 0;
@@ -801,7 +801,8 @@ $(function() {
                                     })
                                     .done(function(data) {
                                         if(data.indexOf("ERROR") === 0) {
-                                           alert($message[0]);
+                                           var message = data.split(':');
+                                           alert("Error" + $message[0]);
                                         } else if(data.indexOf("SUCCESS") === 0) {
                                             alert("Update Successfully Completed");
                                             $(this).prop('enabled', false);
@@ -813,11 +814,10 @@ $(function() {
                  }
                })
                .fail(function (jqHXR, textStatus, errorThrown) {
-                     alert("Error Deleting Previous Courses");
-                     $delete_success = false;
+                     alert("Error Removing Previous Courses");
                });                               
       $(this).css('background-image', '');
-      $(this).html("Update");      
+      $(this).html("Update");  
     });
     
     //Hide or Show Rows Based on Payment Method
