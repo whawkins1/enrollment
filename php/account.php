@@ -2,6 +2,7 @@
 
 <?php
     require_once("config.php");
+    require_once("utilityFunctions.php");
     session_start();
     
     if (isset($_GET['username'])) {
@@ -204,6 +205,7 @@
        if($currently_enrolled === 1) {                
           echo '<div id="tab-courses" class="tabsjump">';
           echo '<div class="containercoursestitle">';
+          //
                  echo '<label class="labeltitletables">  Fall ', getTimeZoneObject(null)->format("Y"), '</label>';
            echo '</div>';
            echo '<div id="containerfilterscurrentcourses">';
@@ -273,6 +275,7 @@
                  echo '<tbody>';
                  
                    $currentCreditTotal = 0;
+                   $count_current_courses = 0;
                    $current_courses_codes = [];
                     
                        $today_date = new DateTime(null, new DateTimeZone("UTC"));
@@ -294,7 +297,6 @@
                                  $stmt->bind_result($code, $title, $days, $department, $begin_time, 
                                                     $end_time, $am_pm, $credits, $professor_last_name, 
                                                     $professor_first_name, $location, $department );
-                                 $count_current_courses = 0;
                                  while($stmt->fetch()) {    
                                     $count_current_courses++;     
                                     array_push($current_courses_codes, $code);
@@ -415,48 +417,16 @@
               <label id="semesterlabel">Semester:</label>
               <select id="semesterdropdown">
                    <?php  
-                          function getTimeZoneObject($date) {
-                             $date_zone = new DateTime($date, new DateTimeZone("UTC"));
-                             $date_zone->setTimeZone(new DateTimeZone("America/New_York"));
-                             return $date_zone;
+                          $semester = getSemesterOpenEnrollment();
+                          
+                          if ($semester === 'Fall') {
+                             echo "<option value='Fall' selected>Fall</option>";
+                          } else if ($semester === 'Spring') {
+                             echo "<option value='Spring'>Spring</option>";
+                          } else if ($semester === 'Summer') {
+                             echo "<option value='Summer'>Summer</option>"; 
                           }
-                          
-                          $semester = ""; 
-                          $current_date = getTimeZoneObject(null);
-                          $current_year = $current_date->format("Y");
-                          
-                          $today_timestamp = $current_date->getTimeStamp();
-                          
-                          $fall_start_date_year_prepended = $current_year . "-09-01";                          
-                          $fall_start_object = getTimeZoneObject($fall_start_date_year_prepended);
-                          
-                          $fall_end_date_year_prepended = ($current_year + 1) . "-01-14";
-                          $fall_end_object = getTimeZoneObject($fall_end_date_year_prepended);      
-                          
-                          $selected_fall = ( ($fall_start_object->getTimeStamp() <= $today_timestamp) && ($fall_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : "";
-                          echo "<option value='Fall' selected>Fall</option>";
-                          if (!empty($selected_fall)) { $semester = "Fall"; }
-                                  
-                         $spring_start_date_year_prepended = $current_year . "-01-15";
-                         $spring_start_object = getTimeZoneObject($spring_start_date_year_prepended);
-                         
-                         $spring_end_date_year_prepended = $current_year . "-05-15";
-                         $spring_end_object = getTimeZoneObject($spring_end_date_year_prepended);
-                         
-                         $selected_spring = ( ($spring_start_object->getTimeStamp() <= $today_timestamp) && ($spring_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
-                         echo "<option value='Spring'>Spring</option>";
-                         if (!empty($selected_spring)) { $semester = "Spring"; }
-                   
-                         $summer_start_date_year_prepended = $current_year . "-06-01"; 
-                         $summer_start_object = getTimeZoneObject($summer_start_date_year_prepended);
-                         
-                         $summer_end_date_year_prepended = $current_year . "-08-30";
-                         $summer_end_object = getTimeZoneObject($summer_end_date_year_prepended);
-                         
-                         $selected_summer = ( ($summer_start_object->getTimeStamp() <= $today_timestamp) && ($summer_end_object->getTimeStamp() >= $today_timestamp)) ? " selected" : ""; 
-                         echo "<option value='Summer'>Summer</option>"; 
-                         if (!empty($selected_summer)) { $semester = "Summer"; } ?>
-                   
+                   ?>
                </select>
                <!-- Calculate Semster GPA Set Database Session Variable $gpa -->
                <?php 
