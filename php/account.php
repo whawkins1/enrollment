@@ -206,7 +206,7 @@
           echo '<div id="tab-courses" class="tabsjump">';
           echo '<div class="containercoursestitle">';
           //
-                 echo '<label class="labeltitletables">  Fall ', getTimeZoneObject(null)->format("Y"), '</label>';
+                 echo '<label class="labeltitletables">  Fall ', getCurrentDateObject()->format("Y"), '</label>';
            echo '</div>';
            echo '<div id="containerfilterscurrentcourses">';
            echo '<label id="filterlabel" class="filters"> Filter By: </label>';
