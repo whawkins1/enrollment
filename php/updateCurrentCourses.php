@@ -31,5 +31,7 @@
             } else {
                  echo "ERROR : Preparing update to courses";
             }
+      } else {
+         echo "ERROR : Parameter Information not complete";
       }
 ?>
