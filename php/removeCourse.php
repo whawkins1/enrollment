@@ -10,17 +10,17 @@
           $current_date->setTimeZone(new DateTimeZone("America/New_York"));
           $current_year = $current_date->format("Y");
           
-          $sql1 = "DELETE FROM enrolled_" . $current_year . " WHERE user_email_" . $current_year . " = ? 
-                  AND user_course_code = ? AND user_semester_" . $current_year " = ?";
+          $sql_delete = "DELETE FROM enrolled_" . $current_year . " WHERE user_email_" . $current_year . " = ? 
+                        AND user_course_code = ? AND user_semester_" . $current_year " = ?";
 
           $semester = get_semester();
           foreach ($codes as $code) {     
-                  if ($stmt = $conn->prepare($sql1)) {
+                  if ($stmt = $conn->prepare($sql_delete)) {
                        $stmt->bind_param("sss", $username, $code, $semester);
                        if ($stmt->execute()) {
                            $stmt->close();
-                         $sql = "UPDATE current_courses_capacity SET current_capacity = current_capacity - 1 WHERE code = ?";
-                         if ($stmt = $conn->prepare($sql)) {
+                         $sql_update = "UPDATE current_courses_capacity SET current_capacity = current_capacity - 1 WHERE code = ?";
+                         if ($stmt = $conn->prepare($sql_update)) {
                              $stmt->bind_param("s", $code);
                              if ($stmt->execute()) {
                                 echo "SUCCESS";
