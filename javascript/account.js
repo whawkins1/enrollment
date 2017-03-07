@@ -404,7 +404,6 @@ $(function() {
                                       pass: $('#password').val(),
                                       checkType: $('#companydropdown :selected').text()
                                       },
-                               cache: false
                           })
                           .done (function(data) {
                              if (data === "VALID") {
@@ -770,7 +769,6 @@ $(function() {
                $.ajax({
                    type: 'POST',
                    url: "removeCourse.php",
-                   cache: false,
                    data: {
                              email: originalEmail,
                              codes: json.stringify(delCurrCoursesArr),
@@ -791,7 +789,6 @@ $(function() {
                                     $.ajax({
                                              type: 'POST',
                                              url: "updateCurrentCourses.php",
-                                             cache: false,
                                              data: {
                                                      email: originalEmail,
                                                      code: value,
@@ -1337,7 +1334,6 @@ function getCurrentBalance() {
               url: "/php/getUserBalance.php",
               data: {email: "johnboy@gmail.com"},
               dataType: 'html',
-              cache: false
       })
       .done (function(data) {
                return data;
