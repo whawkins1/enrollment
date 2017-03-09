@@ -25,32 +25,32 @@
           $noError = true;
             switch($payment_company) {
                 case "amazon":
-                     $sqlSubtractBalance = "SELECT online_payment_amazon WHERE online_amazon_username = ?";
-                     $sqlUpdateBalance = "UPDATE online_payment_amazon SET online_payment_amazon = ? WHERE online_amazon_username = ?";
+                         $sqlSubtractBalance = "SELECT online_payment_amazon WHERE online_amazon_username = ?";
+                         $sqlUpdateBalance = "UPDATE online_payment_amazon SET online_payment_amazon = ? WHERE online_amazon_username = ?";
                      break;
                 case "american express":
-                     $sqlSubtractBalance = "SELECT credit_card_american_express WHERE american_express_number_hash = ?";
-                     $sqlUpdateBalance = "UPDATE credit_card_american_express SET american_express_balance = ? WHERE american_express_number_hash = ?";
+                         $sqlSubtractBalance = "SELECT credit_card_american_express WHERE american_express_number_hash = ?";
+                         $sqlUpdateBalance = "UPDATE credit_card_american_express SET american_express_balance = ? WHERE american_express_number_hash = ?";
                      break;
                 case "discover":
-                        $sqlSubtractBalance = "SELECT credit_card_discover WHERE discover_number_hash = ?";
-                        $sqlUpdateBalance = "UPDATE credit_card_discover SET discover_balance = ? WHERE discover_number_hash = ?";
+                         $sqlSubtractBalance = "SELECT credit_card_discover WHERE discover_number_hash = ?";
+                         $sqlUpdateBalance = "UPDATE credit_card_discover SET discover_balance = ? WHERE discover_number_hash = ?";
                      break;
                 case "google":
-                       $sqlSubtractBalance = "SELECT online_payment_goodle WHERE online_google_username = ?";
-                     $sqlUpdateBalance = "UPDATE online_payment_google SET online_payment_google = ? WHERE online_google_username = ?";
+                         $sqlSubtractBalance = "SELECT online_payment_goodle WHERE online_google_username = ?";
+                         $sqlUpdateBalance = "UPDATE online_payment_google SET online_payment_google = ? WHERE online_google_username = ?";
                      break;
                 case "mastercard":
-                       $sqlSubtractBalance = "SELECT credit_card_mastercard WHERE mastercard_number_hash = ?";
-                     $sqlUpdateBalance = "UPDATE credit_card_mastercard SET mastercard_balance = ? WHERE mastercard_number_hash = ?";
+                         $sqlSubtractBalance = "SELECT credit_card_mastercard WHERE mastercard_number_hash = ?";
+                         $sqlUpdateBalance = "UPDATE credit_card_mastercard SET mastercard_balance = ? WHERE mastercard_number_hash = ?";
                      break;
                 case "paypal":
-                      $sqlSubtractBalance = "SELECT online_payment_paypal WHERE online_paypal_username = ?";
-                     $sqlUpdateBalance = "UPDATE online_payment_paypal SET online_payment_paypal = ? WHERE online_paypal_username = ?";
+                         $sqlSubtractBalance = "SELECT online_payment_paypal WHERE online_paypal_username = ?";
+                         $sqlUpdateBalance = "UPDATE online_payment_paypal SET online_payment_paypal = ? WHERE online_paypal_username = ?";
                      break;
                 case "visa":
-                       $sqlSubtractBalance = "SELECT credit_card_visa WHERE visa_number_hash = ?";
-                     $sqlUpdateBalance = "UPDATE credit_card_visa SET visa_balance = ? WHERE visa_number_hash = ?";
+                         $sqlSubtractBalance = "SELECT credit_card_visa WHERE visa_number_hash = ?";
+                         $sqlUpdateBalance = "UPDATE credit_card_visa SET visa_balance = ? WHERE visa_number_hash = ?";
                      break;                
                 default:
                      echo "ERROR : payment company not recognized";
