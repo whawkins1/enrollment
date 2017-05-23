@@ -176,7 +176,7 @@
                     
                     <div id="editbuttoncontainer">
                         <button type="button" id="editbutton">Edit</button>
-                        <button type="button" id="resetdefaultbutton" disabled>Reset Default</button>
+                        <button type="button" id="resetdefaultbutton" disabled>Reset</button>
                     </div>
                 </fieldset>
               </form>                       

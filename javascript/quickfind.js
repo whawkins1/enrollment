@@ -25,7 +25,7 @@ $(function() {
                       }
    });           
     
-   $('#inputcoursecode').on('keypress', function(e) {
+   /*$('#inputcoursecode').on('keypress', function(e) {
        if (e.which === 13) {
            $('#quickfindbutton').click();
        } else {
@@ -39,10 +39,10 @@ $(function() {
            }
            return false;
        }
-   });
+   });*/
    
-   $('#inputcoursecode').on('keyup', function(e) {
-        var $button = $('#quickfindbutton');
+   $('#inputcoursecode').on('inputchange', function(e) {
+        /* var $button = $('#quickfindbutton');
         var input = $(this).val().trim();
         var lengthInput = $(this).val().trim().length();
         var disableButton;
@@ -54,7 +54,8 @@ $(function() {
         if (input > 0) {
             holdCourseCode = input;
         }
-        $button.prop('disabled', disableButton);
+        $button.prop('disabled', disableButton); */
+		console.log("here");
    });
    
    $('#quickfindbutton').on('click', function() {

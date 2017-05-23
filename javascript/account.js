@@ -467,7 +467,7 @@ $(function() {
             $('#zipcode').prop('readonly', false);
             $('#firstname').focus();
             $(this).text("Save");
-            $('#resetdefaultbutton').show();
+            $('#resetButton').show();
         } else if (text === "Save"){ // In Save Mode
             var setEditMode = true;
             
@@ -548,7 +548,7 @@ $(function() {
         }
     });      
     
-    $('#resetdefaultbutton').on('click', function() {
+    $('#resetButton').on('click', function() {
          $('#firstname').val(originalFirstName);
          $('#lastname').val(originalLastName);
          $('#streetaddress').val(originalStreetAddress);
@@ -574,20 +574,20 @@ $(function() {
          }).prop('selected', true);
          
          $('#email').val(originalEmail);
-         $('#resetdefaultbutton').prop('disabled', true);
+         $('#resetButton').prop('disabled', true);
     });
     
     //Enable Reset Button on Key Input
     $('#contactfieldset input').on('keyup', function() {
-          if ( $('#resetdefaultbutton').prop('disabled') ) {
-             $('#resetdefaultbutton').prop('disabled', false);
+          if ( $('#resetButton').prop('disabled') ) {
+             $('#resetButton').prop('disabled', false);
           }              
     });
     
     //Enable Reset Button on Dropdown Selection
     $('#contactfieldset select').on('change', function () {
-       if ( $('#resetdefaultbutton').prop('disabled') ) {
-          $('#resetdefaultbutton').prop('disabled', false);
+       if ( $('#resetButton').prop('disabled') ) {
+          $('#resetButton').prop('disabled', false);
        }
     });
     
@@ -916,7 +916,7 @@ function addUpdates() {
               if ( response === "success" ) {
                   $('#errorcontainer').html("SUCCESS: completed update of account!");
                   originalEmail = $('email').val();
-                  var $resetButton = $('#resetdefaultbutton');
+                  var $resetButton = $('#resetButton');
                   $resetButton.prop('disabled', true);
                   $resetButton.hide();
               } else if ( response === "error" ) {
