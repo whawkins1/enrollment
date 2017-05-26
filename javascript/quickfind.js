@@ -23,9 +23,13 @@ $(function() {
                           tableLocation: holdTableLocation,
                           tableCredits: holdTableCredits
                       }
+	        })		  
+           .fail(function(jqHXR, textStats, errorThrown){
+             alert ("Error Saving Search Time " + $('#inputcoursecode').val());
+           });
    });           
     
-   /*$('#inputcoursecode').on('keypress', function(e) {
+   $('#inputcoursecode').on('keypress', function(e) {
        if (e.which === 13) {
            $('#quickfindbutton').click();
        } else {
@@ -33,18 +37,19 @@ $(function() {
            var text = String.fromCharCode(e.which);
            var keyCodes = [8, 37, 39, 46, 116];
            var code = e.keyCode;
+		   console.log(code);
            
            if (allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey) {
                return true;           
            }
            return false;
        }
-   });*/
+   });
    
-   $('#inputcoursecode').on('inputchange', function(e) {
-        /* var $button = $('#quickfindbutton');
+   $('#inputcoursecode').on('change paste keyup', function(e) {
+        var $button = $('#quickfindbutton');
         var input = $(this).val().trim();
-        var lengthInput = $(this).val().trim().length();
+        var lengthInput = input.length;
         var disableButton;
         if ($button.prop('disabled') && lengthInput > 0) {
             disableButton = false;
@@ -54,8 +59,7 @@ $(function() {
         if (input > 0) {
             holdCourseCode = input;
         }
-        $button.prop('disabled', disableButton); */
-		console.log("here");
+        $button.prop('disabled', disableButton); 
    });
    
    $('#quickfindbutton').on('click', function() {
@@ -64,7 +68,7 @@ $(function() {
            url: 'quickfind.php',
            cache: false,
            data: {
-                    code: $('#inputcoursecode').val();
+                    code: $('#inputcoursecode').val()
                  }           
        })
        .done(function(data){
@@ -88,7 +92,7 @@ $(function() {
            }
        })
        .fail(function(jqHXR, textStats, errorThrown){
-           alert ("Error Retrieving Course Code " + $('#inputcoursecode').val();
+           alert ("Error Retrieving Course Code " + $('#inputcoursecode').val());
        });
    });
 });

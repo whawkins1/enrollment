@@ -24,6 +24,6 @@
                 </div>
           </div>      
               <script src="../plugins/jquery-1.12.0.js"></script>
-              <script src="../javascript/quickfindjs.js"></script>
+              <script src="../javascript/quickfind.js"></script>
      </body>
 </html>
