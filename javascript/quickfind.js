@@ -29,21 +29,20 @@ $(function() {
            });
    });           
     
-   $('#inputcoursecode').on('keypress', function(e) {
+   $('#inputcoursecode').on('keypress paste', function(e) {
        if (e.which === 13) {
            $('#quickfindbutton').click();
        } else {
-           var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
-           var text = String.fromCharCode(e.which);
+	       var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
+           var text = String.fromCharCode(event.which);
+           // allow backspace, left arrow, right arrow, f5		   
            var keyCodes = [8, 37, 39, 46, 116];
            var code = e.keyCode;
 		   console.log(code);
-           
-           if (allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey) {
-               return true;           
-           }
-           return false;
-       }
+		   
+		   return ((allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey || e.altKey) || 
+     		      ((e.ctrlKey || e.shiftKey || e.altKey) && allowedChars.test(text))) 
+	   }	    
    });
    
    $('#inputcoursecode').on('change paste keyup', function(e) {
