@@ -34,14 +34,11 @@ $(function() {
            $('#quickfindbutton').click();
        } else {
 	       var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
-           var text = String.fromCharCode(event.which);
+           var text = String.fromCharCode(e.which);
            // allow backspace, left arrow, right arrow, f5		   
            var keyCodes = [8, 37, 39, 46, 116];
-           var code = e.keyCode;
-		   console.log(code);
 		   
-		   return ((allowedChars.test(text) || $.inArray(code, keyCodes) > -1 || e.ctrlKey || e.shiftKey || e.altKey) || 
-     		      ((e.ctrlKey || e.shiftKey || e.altKey) && allowedChars.test(text))) 
+		   return (allowedChars.test(text) || $.inArray(e.keyCode, keyCodes) > -1 || e.ctrlKey || e.shiftKey || e.altKey) ;
 	   }	    
    });
    
@@ -62,7 +59,8 @@ $(function() {
    });
    
    $('#quickfindbutton').on('click', function() {
-       $.ajax({
+	   alert("Clicked");
+       /*$.ajax({
            type: 'GET',
            url: 'quickfind.php',
            cache: false,
@@ -92,6 +90,6 @@ $(function() {
        })
        .fail(function(jqHXR, textStats, errorThrown){
            alert ("Error Retrieving Course Code " + $('#inputcoursecode').val());
-       });
+       });*/
    });
 });
