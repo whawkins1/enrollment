@@ -59,8 +59,7 @@ $(function() {
    });
    
    $('#quickfindbutton').on('click', function() {
-	   alert("Clicked");
-       /*$.ajax({
+       $.ajax({
            type: 'GET',
            url: 'quickfind.php',
            cache: false,
@@ -90,6 +89,6 @@ $(function() {
        })
        .fail(function(jqHXR, textStats, errorThrown){
            alert ("Error Retrieving Course Code " + $('#inputcoursecode').val());
-       });*/
+       });
    });
 });
