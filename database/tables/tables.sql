@@ -288,6 +288,17 @@ CREATE TABLE IF NOT EXISTS states (
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
+-- Table quick_find_course_history
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS quick_find_course_history (
+  code VARCHAR(8) NOT NULL,
+  date_time_quick_find TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+  PRIMARY KEY (code),
+  FOREIGN KEY (code) REFERENCES courses(code)   
+) ENGINE=InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table user_logs
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS user_logs (
@@ -295,7 +306,7 @@ CREATE TABLE IF NOT EXISTS user_logs (
   log_action VARCHAR(40) NOT NULL,
   log_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
   PRIMARY KEY (log_email),
-   FOREIGN KEY (log_email) REFERENCES users(user_email)
+  FOREIGN KEY (log_email) REFERENCES users(user_email)
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -308,3 +319,4 @@ CREATE TABLE IF NOT EXISTS current_courses_capacity (
   PRIMARY KEY (code),
   FOREIGN KEY (code) REFERENCES courses(code)
 ) ENGINE=InnoDB;
+

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.30, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.6.36, for Win32 (AMD64)
 --
 -- Host: localhost    Database: enrollment
 -- ------------------------------------------------------
--- Server version	5.6.30-log
+-- Server version	5.6.36-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -643,6 +643,30 @@ INSERT INTO `payments` VALUES (1,102.11,'2016-09-22 20:16:56','bpomp@yahoo.com')
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quick_find_course_history`
+--
+
+DROP TABLE IF EXISTS `quick_find_course_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `quick_find_course_history` (
+  `code` varchar(8) NOT NULL,
+  `date_time_quick_find` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`code`),
+  CONSTRAINT `quick_find_course_history_ibfk_1` FOREIGN KEY (`code`) REFERENCES `courses` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quick_find_course_history`
+--
+
+LOCK TABLES `quick_find_course_history` WRITE;
+/*!40000 ALTER TABLE `quick_find_course_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quick_find_course_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `states`
 --
 
@@ -1054,4 +1078,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-17 16:42:04
+-- Dump completed on 2017-06-09 16:27:38
