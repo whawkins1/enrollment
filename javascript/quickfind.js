@@ -74,17 +74,6 @@ $(function() {
               alert("Error Preparing Statment");
            } else {
                $('#containerresult').html(data);
-               
-               if ($('#tableresults').length) {
-                   holdCourseCode = $('#inputcoursecode').text();
-                   holdTableCode = $table.find('#code').text();
-                   holdTableTitle = $table.find('#title').text();
-                   holdTableDepartment = $table.find('#department').text();
-                   holdTableProfessorName = $table.find('#professorname').text();
-                   holdTableTime = $table.find('#time').text();
-                   holdTableLocation = $table.find('#location').text();
-                   holdTableCredits = $table.find('#credits').text();
-               }
            }
        })
        .fail(function(jqHXR, textStats, errorThrown){
