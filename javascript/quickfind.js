@@ -72,7 +72,9 @@ $(function() {
               alert("Error Executing Statment");
            } else if (data.match("ERROR_PREPARING_STATEMENT")) {
               alert("Error Preparing Statment");
-           } else {
+           } else if (data.match("NO RESULT") {
+		        $('#containerresult').html("<label id='resultsLabel'> No Results </label>");
+		   } else {
                $('#containerresult').html(data);
            }
        })
