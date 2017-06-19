@@ -30,15 +30,20 @@ $(function() {
    });           
     
    $('#inputcoursecode').on('keypress paste', function(e) {
+	   var keyCode = !e.charCode ? e.which : e.charCode;
        if (e.which === 13) {
            $('#quickfindbutton').click();
        } else {
-	       var allowedChars = new RegExp("^[a-zA-Z0-9\-]+$");
-           var text = String.fromCharCode(e.which);
-           // allow backspace, left arrow, right arrow, f5		   
-           var keyCodes = [8, 37, 39, 46, 116];
+	       var allowedChars = new RegExp("[a-zA-Z0-9]");
+           var text = String.fromCharCode(keyCode);
+		   console.log(keyCode);
+           // allow backspace, left arrow, right arrow, f5, alt, tab		   
+           var keyCodes = [8, 46, 116, 18, 9];		   
 		   
-		   return (allowedChars.test(text) || $.inArray(e.keyCode, keyCodes) > -1 || e.ctrlKey || e.shiftKey || e.altKey) ;
+		   if (allowedChars.test(text) || ((e.ctrlKey || e.altKey || e.shiftKey) && $.inArray(keyCode, [37, 39]) > -1) || $.inArray(keyCode, keyCodes) > -1) {
+		       return true;
+		   } 
+		   return false;
 	   }	    
    });
    
@@ -72,7 +77,7 @@ $(function() {
               alert("Error Executing Statment");
            } else if (data.match("ERROR_PREPARING_STATEMENT")) {
               alert("Error Preparing Statment");
-           } else if (data.match("NO RESULT") {
+           } else if (data.match("NO RESULT")) {
 		        $('#containerresult').html("<label id='resultsLabel'> No Results </label>");
 		   } else {
                $('#containerresult').html(data);
