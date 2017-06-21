@@ -28,26 +28,35 @@ $(function() {
              alert ("Error Saving Search Time " + $('#inputcoursecode').val());
            });
    });           
-    
-   $('#inputcoursecode').on('keypress paste', function(e) {
-	   var keyCode = !e.charCode ? e.which : e.charCode;
-       if (e.which === 13) {
+   $('#inputcoursecode').on('keypress', function(e) {
+	   var keyCode = e.charCode;
+       if (keyCode === 13) {
            $('#quickfindbutton').click();
        } else {
 	       var allowedChars = new RegExp("[a-zA-Z0-9]");
            var text = String.fromCharCode(keyCode);
-		   console.log(keyCode);
-           // allow backspace, left arrow, right arrow, f5, alt, tab		   
-           var keyCodes = [8, 46, 116, 18, 9];		   
-		   
-		   if (allowedChars.test(text) || ((e.ctrlKey || e.altKey || e.shiftKey) && $.inArray(keyCode, [37, 39]) > -1) || $.inArray(keyCode, keyCodes) > -1) {
+
+		   if ((allowedChars.test(text) || keyCode === 0)) {
 		       return true;
-		   } 
-		   return false;
+		   }
+		   alert("Only Letters and Numbers Allowed, Please Try Again");
+           return false;  		     
 	   }	    
    });
    
-   $('#inputcoursecode').on('change paste keyup', function(e) {
+   $('#inputcoursecode').on('paste', function(e) {
+	      var allowedChars = new RegExp("[a-zA-Z0-9]");
+		  var letterNumberRegEx = /^[0-9a-zA-Z]+$/;
+          var pastedText = e.originalEvent.clipboardData.getData('text');
+        		  
+          if(pastedText.match(letterNumberRegEx)) {
+             return true;		  
+		  }
+		  alert("Only Letters and Numbers Allowed, Please Try Again");
+          return false;		  
+   });
+   
+   $('#inputcoursecode').on('keyup', function(e) {
         var $button = $('#quickfindbutton');
         var input = $(this).val().trim();
         var lengthInput = input.length;
