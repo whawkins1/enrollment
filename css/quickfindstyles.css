@@ -8,6 +8,18 @@
    text-align: center;
 }
 
+#containerresult {
+  text-align: center;
+}
+
+#resultslabel {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.8em;
+  margin: 0 auto;
+}
+
+
 #labelinputcodetitle  {
   font-size: 2.0em;
   margin-right: 20px;
@@ -18,6 +30,7 @@
 }
 
 #quickfindbutton {
+  margin: 20px;	
   font-size: 1.2em;
 }
 
