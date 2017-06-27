@@ -17,7 +17,6 @@
                     <input type="text" id="inputcoursecode" autofocus>
                 </div>
 				<div id="containerresult">
-				     <label id='resultslabel'> No Results </label>
                 </div>
                 <div id="containerbutton">
                       <button type="button" id="quickfindbutton" disabled>Find Course</button>

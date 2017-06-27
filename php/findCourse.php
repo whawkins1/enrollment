@@ -1,8 +1,7 @@
 <?php
    require_once('config.php');
-	  if(isset($_POST['code']) {
-	     $code = $_POST['code'];
-		 
+	  if(isset($_GET['code'])) {
+	     $code = $_GET['code'];
 		 $sql = "SELECT * FROM courses WHERE code = ?";
 		 
 		 if ($stmt =  $conn->prepare($sql)) {
@@ -10,10 +9,11 @@
 		   if ($stmt->execute()) {
 			   $stmt->store_result();
 			   if ($stmt->num_rows > 0) {
-				   $stmt->bind_result($code, $title, $days, $department, $begin_time, 
-									  $end_time, $am_pm, $credits, $professor_last_name, 
-									  $professor_first_name, $location, $department );
-					  echo "<table id='quickfindtable'"
+				   $stmt->bind_result($code, $title, $days, $begin_time, 
+									  $end_time, $credits, $professor_last_name, 
+									  $professor_first_name, $location, $department, $am_pm);
+					  $stmt->fetch();				  
+					  echo "<table id='quickfindtable'";
 					  echo '<thead>';
 							echo '<tr>';
 								 echo '<th class="code">Code</th>';
@@ -22,7 +22,7 @@
 								 echo '<th class="professor">Professor</th>';
 								 echo '<th class="time">Time</th>';
 								 echo '<th class="location">Location</th>';
-								 echo '<th class="credits">Credits</th>';
+								 echo '<th class="credits">Credit</th>';
 							echo '</tr>';
 					   echo '</thead>';     
 					  echo "<tr>";
@@ -34,7 +34,7 @@
 							echo "<td>", $location, "</td>";
 							echo "<td id='credits'>", $credits, "</td>";
 					  echo "</tr>";
-					  echo "</table>"
+					  echo "</table>";
 			   } else {
 			      echo "NO RESULT";
 			   }

@@ -30,7 +30,8 @@ $(function() {
    });           
    $('#inputcoursecode').on('keypress', function(e) {
 	   var keyCode = e.charCode;
-       if (keyCode === 13) {
+	   
+       if (e.which === 13) {
            $('#quickfindbutton').click();
        } else {
 	       var allowedChars = new RegExp("[a-zA-Z0-9]");
@@ -75,7 +76,7 @@ $(function() {
    $('#quickfindbutton').on('click', function() {
        $.ajax({
            type: 'GET',
-           url: 'quickfind.php',
+           url: 'findCourse.php',
            cache: false,
            data: {
                     code: $('#inputcoursecode').val()
