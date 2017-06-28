@@ -2,10 +2,8 @@
    text-align: center;
    margin-top: 30px;
    margin-bottom: 20px;
-}
-
-#containerbutton {
-   text-align: center;
+   border: 1px solid;
+   height: 50px;
 }
 
 #containerresult {
@@ -26,11 +24,6 @@
 
 #inputcoursecode {
   font-size: 2.0em;
-}
-
-#quickfindbutton {
-  margin: 20px;	
-  font-size: 1.2em;
 }
 
 #quickfindtable {
