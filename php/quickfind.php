@@ -15,7 +15,7 @@
                 <div id="containerinputcode">
                     <label id="labelinputcodetitle">Enter Course Code:</label>
                     <input type="text" id="inputcoursecode" autofocus>
-					<button type="button" id="quickfindbutton" disabled><img src = "../images/search.png"></button>
+					<button type="button" id="quickfindbutton" title="Start Search" disabled></button>
                 </div>
 				<div id="containerresult">
                 </div>

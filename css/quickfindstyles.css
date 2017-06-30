@@ -1,9 +1,11 @@
 #containerinputcode {
    text-align: center;
-   margin-top: 30px;
-   margin-bottom: 20px;
-   border: 1px solid;
    height: 50px;
+}
+
+#containerquickfind {
+  margin-top: 30px;
+   margin-bottom: 20px;
 }
 
 #containerresult {
@@ -23,7 +25,7 @@
 }
 
 #inputcoursecode {
-  font-size: 2.0em;
+  font-size: 1.6em;
 }
 
 #quickfindtable {
@@ -38,4 +40,11 @@ thead tr th {
   background-color: limegreen;
   padding: 4px 30px 4px 8px;
   border: 1px solid green;
+}
+
+#quickfindbutton {
+  background:url(../images/search.png) no-repeat;
+  width: 2.5%;
+  height: 68%;
+  vertical-align: 9px;
 }
