@@ -9,8 +9,8 @@
 }
 
 #containerresult {
-  text-align: center;
-}
+  margin: 1%;
+  }
 
 #resultslabel {
   font-weight: bold;
@@ -31,19 +31,28 @@
 #quickfindtable {
    width: 100%;
    border-collapse: collapse;
-   border: 1px solid black;
+   border-spacing: 0;
+   border: 1px solid black;   
 }
 
-thead tr th {
+#quickfindtable th {
   text-align: left;
-  font-size: 12px;
+  font-size: 18px;
   background-color: limegreen;
-  padding: 4px 30px 4px 8px;
-  border: 1px solid green;
+  border: 1px solid black;
+  padding: 2px 4px 2px 8px;
+}
+
+#quickfindtable td {
+  text-align: left;
+  font-size: 14px;
+  border: 1px solid black;
+  background: white;
+  padding: 4px 0px 4px 8px;
 }
 
 #quickfindbutton {
-  background:url(../images/search.png) no-repeat;
+  background:url(../images/search.png) no-repeat center;
   width: 2.5%;
   height: 68%;
   vertical-align: 9px;
