@@ -74,12 +74,13 @@ $(function() {
    });
    
    $('#quickfindbutton').on('click', function() {
+	   var code = $('#inputcoursecode').val();
        $.ajax({
            type: 'GET',
            url: 'findCourse.php',
            cache: false,
            data: {
-                    code: $('#inputcoursecode').val()
+                    code: code
                  }           
        })
        .done(function(data){
@@ -88,7 +89,7 @@ $(function() {
            } else if (data.match("ERROR_PREPARING_STATEMENT")) {
               alert("Error Preparing Statment");
            } else if (data.match("NO RESULT")) {
-		        $('#containerresult').html("<label id='resultsLabel'> No Results </label>");
+			    $('#containerresult').html("<label id='noresultlabel'> No Result For Code:</label> <label id='noresultcode'> " + code + "</label>");
 		   } else {
                $('#containerresult').html(data);
            }
