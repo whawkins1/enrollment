@@ -1,5 +1,7 @@
 <?php
    require_once('config.php');
+   require_once('utilityFunctions.php');
+   //PASS USER EMAIL OR SESSION VARIABLE
 	  if(isset($_GET['code'])) {
 	     $code = $_GET['code'];
 		 $sql = "SELECT * FROM courses WHERE code = ?";
@@ -35,11 +37,25 @@
 							echo "<td id='credits'>", $credits, "</td>";
 					  echo "</tr>";
 					  echo "</table>";
+					  $stmt->close();
+					  
+					  $current_date = getCurrentDateObject(null);
+					  $current_year = $current_date->format("Y");
+					  $check_enrolled_course_sql = "SELECT EXISTS (SELECT * FROM enrolled_" . $current_year . " WHERE user_email_" . $current_year . "= '$email' AND user_course_code = '$code')";
+					  $set_button_text = "Enroll";
+					  if($result = mysqli->query($check_enrolled_course_sql)) {
+					     $row_count = $result->num_rows;
+						 if($row_count > 0) {
+						    $set_button_text = "Unenroll";
+						 }
+						 $result->close();
+					  }
+					  
+					  echo "</button id='buttonenroll'>'$set_button_text'</button>";
 			   } else {
 			      echo "NO RESULT";
 			   }
 		   }
-		   $stmt->close();
 		 }
 	  }
 ?>
