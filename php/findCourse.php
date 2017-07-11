@@ -1,6 +1,7 @@
 <?php
    require_once('config.php');
    require_once('utilityFunctions.php');
+   session_start();
    //PASS USER EMAIL OR SESSION VARIABLE
 	  if(isset($_GET['code'])) {
 	     $code = $_GET['code'];
@@ -41,17 +42,22 @@
 					  
 					  $current_date = getCurrentDateObject(null);
 					  $current_year = $current_date->format("Y");
-					  $check_enrolled_course_sql = "SELECT EXISTS (SELECT * FROM enrolled_" . $current_year . " WHERE user_email_" . $current_year . "= '$email' AND user_course_code = '$code')";
-					  $set_button_text = "Enroll";
-					  if($result = mysqli->query($check_enrolled_course_sql)) {
+					  $email_escaped_string = $conn->real_escape_string($_SESSION['username']);
+					  $check_enrolled_course_sql = "SELECT EXISTS (SELECT * FROM enrolled_" . $current_year . 
+					                               " WHERE user_email_" . $current_year . " = " . $email_escaped_string . " AND user_course_code = " . $code . ")";
+					  $button_text = "Enroll";
+					  $row_count = 50;
+					  if($result = $conn->query($check_enrolled_course_sql)) {
 					     $row_count = $result->num_rows;
+						 
 						 if($row_count > 0) {
-						    $set_button_text = "Unenroll";
+						    $button_text = "Unenroll";
 						 }
 						 $result->close();
 					  }
 					  
-					  echo "</button id='buttonenroll'>'$set_button_text'</button>";
+					  echo "<button id='buttonenroll'>", $button_text, "</button>";
+					  echo $row_count;
 			   } else {
 			      echo "NO RESULT";
 			   }
