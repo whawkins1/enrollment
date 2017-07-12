@@ -62,3 +62,9 @@
   height: 68%;
   vertical-align: 9px;
 }
+
+#buttonenroll {
+    font-size: 1.2em;
+	margin-top: 2%;
+	padding: 4px;
+}

@@ -112,6 +112,18 @@ VALUES
     ("jsvens@gmail.com", "A", "Summer", "MATH101"),
     ("mjordan@gmail.com", "F", "Fall", "ENG101"),
     ("up@yahoo.com", "D", "Spring", "MATH101");
+	
+-- -----------------------------------------------------
+-- Insert enrolled_2017
+-- ------------------------------------------------------
+INSERT INTO enrolled_2017
+    (user_email_2017, user_grade_2017, user_semester_2017, user_course_code)
+VALUES
+    ("bpomp@yahoo.com", "B", "Fall", "MATH101"),
+    ("jjaso@gmail.com", "C", "Spring", "ENG101"),
+    ("jsvens@gmail.com", "A", "Summer", "MATH101"),
+    ("mjordan@gmail.com", "F", "Fall", "ENG101"),
+    ("up@yahoo.com", "D", "Spring", "MATH101");
     
 -- -----------------------------------------------------
 -- Insert payments

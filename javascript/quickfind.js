@@ -79,16 +79,20 @@ $(function() {
            type: 'GET',
            url: 'findCourse.php',
            cache: false,
-           data: {
-                    code: code
-                 }           
+           data: { code: code }           
        })
        .done(function(data){
-           if (data.match("ERROR_EXECUTING_STATEMENT")) {
-              alert("Error Executing Statment");
-           } else if (data.match("ERROR_PREPARING_STATEMENT")) {
-              alert("Error Preparing Statment");
-           } else if (data.match("NO RESULT")) {
+           if (data.match("ERROR_EXECUTING_CHECK_ENROLLED_STATEMENT")) {
+              alert("Error Executing Check Enrolled Statement");
+           } else if (data.match("ERROR_PREPARING_CHECK_ENROLLED_STATEMENT")) {
+              alert("Error Preparing Check Enrolled Statement");
+           } else if (data.match("ERROR_EXECUTING_FIND_COURSE_STATEMENT")) {
+              alert("Error Executing Find Course Statement");
+           } else if (data.match("ERROR_PREPARING_FIND_COURSE_STATEMENT")) {
+              alert("Error Preparing Find Course Statement");
+           } else if (data.match("ERROR_CODE_PARAMETER_NOT_FOUND")) {
+		      alert("Course Code Parameter Not Found For Processing");
+		   } else if (data.match("NO RESULT")) {
 			    $('#containerresult').html("<label id='noresultlabel'> No Result For Code:</label> <label id='noresultcode'> " + code + "</label>");
 		   } else {
                $('#containerresult').html(data);

@@ -2,12 +2,11 @@
    require_once('config.php');
    require_once('utilityFunctions.php');
    session_start();
-   //PASS USER EMAIL OR SESSION VARIABLE
-	  if(isset($_GET['code'])) {
+     if(isset($_GET['code'])) {
 	     $code = $_GET['code'];
-		 $sql = "SELECT * FROM courses WHERE code = ?";
+		 $find_course_sql = "SELECT * FROM courses WHERE code = ?";
 		 
-		 if ($stmt =  $conn->prepare($sql)) {
+		 if ($stmt = $conn->prepare($find_course_sql)) {
 		   $stmt->bind_param("s", $code);
 		   if ($stmt->execute()) {
 			   $stmt->store_result();
@@ -42,26 +41,39 @@
 					  
 					  $current_date = getCurrentDateObject(null);
 					  $current_year = $current_date->format("Y");
-					  $email_escaped_string = $conn->real_escape_string($_SESSION['username']);
-					  $check_enrolled_course_sql = "SELECT EXISTS (SELECT * FROM enrolled_" . $current_year . 
-					                               " WHERE user_email_" . $current_year . " = " . $email_escaped_string . " AND user_course_code = " . $code . ")";
-					  $button_text = "Enroll";
-					  $row_count = 50;
-					  if($result = $conn->query($check_enrolled_course_sql)) {
-					     $row_count = $result->num_rows;
-						 
-						 if($row_count > 0) {
-						    $button_text = "Unenroll";
-						 }
-						 $result->close();
-					  }
+					  $username = $_SESSION['username'];
 					  
+					  $check_enrolled_course_sql = "SELECT EXISTS (SELECT * FROM enrolled_" . $current_year . 
+					                               " WHERE user_email_" . $current_year . " = ? AND user_course_code = ? )";
+					  $button_text = "Enroll";
+					  
+					  if ($stmt = $conn->prepare($check_enrolled_course_sql)) {
+					      $stmt->bind_param('ss', $username, $code);
+						  if ($stmt->execute()) {
+						     $stmt->bind_result($exists);
+							 $stmt->fetch();
+							 
+							 if ($exists) {
+							    $button_text = "Unenroll";
+							 }
+							 $stmt->close();
+						  } else {
+						    echo "ERROR_PREPARING_CHECK_ENROLLED_STATEMENT";
+						  }						  
+					  } else {
+					     echo "ERROR_EXECUTING_CHECK_ENROLLED_STATEMENT";
+					  }
 					  echo "<button id='buttonenroll'>", $button_text, "</button>";
-					  echo $row_count;
 			   } else {
 			      echo "NO RESULT";
 			   }
+		   } else {
+		      echo "ERROR_EXECUTING_FIND_COURSE_STATEMENT";
 		   }
+		 } else {
+		      echo "ERROR_PREPARING_FIND_COURSE_STATEMENT";
 		 }
+	  } else {
+	    echo "ERROR_CODE_PARAMETER_NOT_FOUND";
 	  }
 ?>
