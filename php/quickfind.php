@@ -18,8 +18,8 @@
 					<button type="button" id="quickfindbutton" title="Start Search" disabled></button>
                 </div>
 				<div id="containerresult">
-                </div>
-          </div>      
+				</div>
+         </div>      
               <script src="../plugins/jquery-1.12.0.js"></script>
               <script src="../javascript/quickfind.js"></script>
      </body>

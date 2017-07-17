@@ -3,8 +3,8 @@
   require_once('getSemester.php');
   session_start();
   
-  if (isset($_POST['username']) && isset($_POST['codes'])) {
-      $username = $_POST['username'];
+  if (isset($_SESSION['username']) && isset($_POST['codes'])) {
+      $username = $_SESSION['username'];
       $code = json_decode($_POST['codes']);
       
       $today_date_semester = new DateTime(null, new DateTimeZone("UTC"));

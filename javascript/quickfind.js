@@ -102,4 +102,49 @@ $(function() {
            alert ("Error Retrieving Course Code " + $('#inputcoursecode').val());
        });
    });
+   
+   $('.toggleenroll').on('click', function(event) {
+	   // Must Create an array because addCourse.php accepts multiple codes
+	   var code = $('#inputcoursecode').val();
+	   var codeArr = [code];
+       var mode = $(this).text(); 
+	   
+	   if (mode === 'Enroll') {
+            $.ajax({
+                 type: 'POST',
+				 url: 'findCourse.php',
+				 cache: false,
+				 data: {codes: json.stringify(codeArr)}
+		    })
+			.done(function(data){
+				if(data.indexOf("ERROR") === 0) {
+				   var message = data.split(':');
+				   alert("Error" + $message[0]);
+				} else if(data.indexOf("SUCCESS") === 0) {
+					alert("Update Successfully Completed");
+				}
+			})
+            .fail(function(jqHXR, textSTats, errorThrown) {
+			  alert ("Error Enrolling in " + $code);
+			});							  
+	   } else {
+	     $.ajax({
+                 type: 'POST',
+				 url: 'removeCourse.php',
+				 cache: false,
+				 data: {codes: json.stringify(codeArr)}
+		    })
+			.done(function(data){
+			    if(data.indexOf("ERROR") === 0) {
+				  var message = data.split(':');
+				   alert("Error" + $message[0]);
+				} else if(data.indexOf("SUCCESS") === 0) {
+					alert("Update Successfully Completed");
+				}
+			})
+            .fail(function(jqHXR, textSTats, errorThrown) {
+			  alert ("Error Uenrolling in " + $code);
+			});
+	   }
+   });
 });

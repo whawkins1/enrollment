@@ -37,6 +37,7 @@
 							echo "<td id='credits'>", $credits, "</td>";
 					  echo "</tr>";
 					  echo "</table>";
+					  echo "<div id='enrollmessage'></div>"
 					  $stmt->close();
 					  
 					  $current_date = getCurrentDateObject(null);
@@ -63,7 +64,7 @@
 					  } else {
 					     echo "ERROR_EXECUTING_CHECK_ENROLLED_STATEMENT";
 					  }
-					  echo "<button id='buttonenroll'>", $button_text, "</button>";
+					  echo "<button class='toggleenroll'>", $button_text, "</button>";
 			   } else {
 			      echo "NO RESULT";
 			   }

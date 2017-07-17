@@ -1,9 +1,10 @@
 <?php 
    require_once('config.php');
    require_once('getSemester.php');
+   session_start();
    
-   if (isset($_POST['username']) && isset($_POST['codes'])) {
-          $username = $_POST['username'];
+   if (isset($_SESSION['username']) && isset($_POST['codes'])) {
+          $username = $_SESSION['username'];
           $codes = json_decode(stripslashes($_POST['codes']));
           
           $current_date = new DateTime(null, new DateTimeZone("UTC"));
