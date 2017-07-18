@@ -799,7 +799,7 @@ $(function() {
                                     .done(function(data) {
                                         if(data.indexOf("ERROR") === 0) {
                                            var message = data.split(':');
-                                           alert("Error" + $message[0]);
+                                           alert("Error" + $message[1]);
                                         } else if(data.indexOf("SUCCESS") === 0) {
                                             alert("Update Successfully Completed");
                                             $(this).prop('enabled', false);

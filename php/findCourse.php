@@ -37,7 +37,7 @@
 							echo "<td id='credits'>", $credits, "</td>";
 					  echo "</tr>";
 					  echo "</table>";
-					  echo "<div id='enrollmessage'></div>"
+					  echo "<div id='messageContainer'><label id='enrollmessage'></label></div>"
 					  $stmt->close();
 					  
 					  $current_date = getCurrentDateObject(null);
@@ -59,22 +59,22 @@
 							 }
 							 $stmt->close();
 						  } else {
-						    echo "ERROR_PREPARING_CHECK_ENROLLED_STATEMENT";
+						    echo "ERROR : Preparing Statement to Check if Enrolled.";
 						  }						  
 					  } else {
-					     echo "ERROR_EXECUTING_CHECK_ENROLLED_STATEMENT";
+					     echo "ERROR : Executing Statement to check if Enrolled.";
 					  }
 					  echo "<button class='toggleenroll'>", $button_text, "</button>";
 			   } else {
-			      echo "NO RESULT";
+			      echo "NO_RESULT";
 			   }
 		   } else {
-		      echo "ERROR_EXECUTING_FIND_COURSE_STATEMENT";
+		      echo "ERROR : Executing Statment to Find Course.";
 		   }
 		 } else {
-		      echo "ERROR_PREPARING_FIND_COURSE_STATEMENT";
+		      echo "ERROR : Preparing Statement to Find Course.";
 		 }
 	  } else {
-	    echo "ERROR_CODE_PARAMETER_NOT_FOUND";
+	    echo "ERROR : Code Parameter Not Found.";
 	  }
 ?>

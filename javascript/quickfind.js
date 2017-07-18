@@ -82,17 +82,10 @@ $(function() {
            data: { code: code }           
        })
        .done(function(data){
-           if (data.match("ERROR_EXECUTING_CHECK_ENROLLED_STATEMENT")) {
-              alert("Error Executing Check Enrolled Statement");
-           } else if (data.match("ERROR_PREPARING_CHECK_ENROLLED_STATEMENT")) {
-              alert("Error Preparing Check Enrolled Statement");
-           } else if (data.match("ERROR_EXECUTING_FIND_COURSE_STATEMENT")) {
-              alert("Error Executing Find Course Statement");
-           } else if (data.match("ERROR_PREPARING_FIND_COURSE_STATEMENT")) {
-              alert("Error Preparing Find Course Statement");
-           } else if (data.match("ERROR_CODE_PARAMETER_NOT_FOUND")) {
-		      alert("Course Code Parameter Not Found For Processing");
-		   } else if (data.match("NO RESULT")) {
+		   if(data.indexOf("ERROR") === 0) {
+			   var message = data.split(':');
+			   alert("Error " + $message[0]);
+		   } else if (data.match("NO_RESULT")) {
 			    $('#containerresult').html("<label id='noresultlabel'> No Result For Code:</label> <label id='noresultcode'> " + code + "</label>");
 		   } else {
                $('#containerresult').html(data);
@@ -106,44 +99,41 @@ $(function() {
    $('.toggleenroll').on('click', function(event) {
 	   // Must Create an array because addCourse.php accepts multiple codes
 	   var code = $('#inputcoursecode').val();
-	   var codeArr = [code];
+	   var codeArr = [];
+	   codeArr.push(code);
        var mode = $(this).text(); 
 	   
 	   if (mode === 'Enroll') {
             $.ajax({
                  type: 'POST',
 				 url: 'findCourse.php',
-				 cache: false,
 				 data: {codes: json.stringify(codeArr)}
 		    })
 			.done(function(data){
-				if(data.indexOf("ERROR") === 0) {
-				   var message = data.split(':');
-				   alert("Error" + $message[0]);
-				} else if(data.indexOf("SUCCESS") === 0) {
-					alert("Update Successfully Completed");
+				if(data.indexOf("SUCCESS") === 0) {
+					$(this).text('Unenroll');
 				}
+				var message = data.split(':');
+				$('#enrollmessage').text($message[1]);
 			})
             .fail(function(jqHXR, textSTats, errorThrown) {
-			  alert ("Error Enrolling in " + $code);
+			  $('#enrollmessage').text("Error Enrolling in " + $code);
 			});							  
 	   } else {
 	     $.ajax({
                  type: 'POST',
 				 url: 'removeCourse.php',
-				 cache: false,
 				 data: {codes: json.stringify(codeArr)}
 		    })
 			.done(function(data){
-			    if(data.indexOf("ERROR") === 0) {
-				  var message = data.split(':');
-				   alert("Error" + $message[0]);
-				} else if(data.indexOf("SUCCESS") === 0) {
-					alert("Update Successfully Completed");
+				if(data.indexOf("SUCCESS") === 0) {
+					$(this).text('Enroll');
 				}
+				var message = data.split(':');
+				$('#enrollmessage').text($message[1]);
 			})
             .fail(function(jqHXR, textSTats, errorThrown) {
-			  alert ("Error Uenrolling in " + $code);
+			  $('#enrollmessage').text("Error Unenrolling in " + $code);
 			});
 	   }
    });

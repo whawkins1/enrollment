@@ -24,7 +24,7 @@
                          if ($stmt = $conn->prepare($sql_update)) {
                              $stmt->bind_param("s", $code);
                              if ($stmt->execute()) {
-                                echo "SUCCESS";
+                                echo "SUCCESS : Unenrolled in Course Code ", $code;
                              } else {
                                 echo "ERROR : Subtracting course capacity for ", $code;
                              }
