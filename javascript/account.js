@@ -768,12 +768,8 @@ $(function() {
         $(this).css('background-image', 'url(/images/loader.gif');        
                $.ajax({
                    type: 'POST',
-                   url: "removeCourse.php",
-                   data: {
-                             email: originalEmail,
-                             codes: json.stringify(delCurrCoursesArr),
-                             semester: semester
-                         }                         
+                   url: "removeCourses.php",
+                   data: { codes: json.stringify(delCurrCoursesArr)}                         
                })
                .done(function(data) {
                      if (data.indexOf("ERROR") === 0) {
@@ -788,12 +784,10 @@ $(function() {
                             });
                                     $.ajax({
                                              type: 'POST',
-                                             url: "updateCurrentCourses.php",
+                                             url: "addCourses.php",
                                              data: {
                                                      email: originalEmail,
                                                      code: value,
-                                                     semester: semester,
-                                                     grade: "-"
                                              }
                                     })
                                     .done(function(data) {

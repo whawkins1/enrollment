@@ -104,21 +104,39 @@ $(function() {
        var mode = $(this).text(); 
 	   
 	   if (mode === 'Enroll') {
-            $.ajax({
-                 type: 'POST',
-				 url: 'findCourse.php',
-				 data: {codes: json.stringify(codeArr)}
-		    })
-			.done(function(data){
-				if(data.indexOf("SUCCESS") === 0) {
-					$(this).text('Unenroll');
-				}
-				var message = data.split(':');
-				$('#enrollmessage').text($message[1]);
+            $.ajax({  
+			    type: 'POST',
+				url: 'checkCourseCapacity.php',
+				data: {code: code}
 			})
-            .fail(function(jqHXR, textSTats, errorThrown) {
-			  $('#enrollmessage').text("Error Enrolling in " + $code);
-			});							  
+			.done(function(data){
+			   
+               if (data.indexOf("SEATS_AVAILABLE")) {
+					$.ajax({
+						 type: 'POST',
+						 url: 'findCourse.php',
+						 data: {codes: json.stringify(codeArr)}
+					})
+					.done(function(data){
+						if(data.indexOf("SUCCESS") === 0) {
+							$(this).text('Unenroll');
+						}
+						var message = data.split(':');
+						$('#enrollmessage').text($message[1]);
+					})
+					.fail(function(jqHXR, textStats, errorThrown) {
+					  $('#enrollmessage').text("Error Enrolling in " + $code);
+					});		
+			   } else if (data.indexOf("MAX_CAPACITY")) {
+			      $('enrollmessage').text("The Course " + $code + "is at Maximum Capacity"); 
+			   } else if (data.indexOf("ERROR")) {
+			     $message = data.split(':');
+				 $('#enrollmessage').text($message[1]);
+			   }
+			})
+            .fail(function(jqHXR, textStats, errorThrown) {
+				$('#enrollmessage').text("Error Enrolling in " + $code);
+			});				
 	   } else {
 	     $.ajax({
                  type: 'POST',
@@ -132,7 +150,7 @@ $(function() {
 				var message = data.split(':');
 				$('#enrollmessage').text($message[1]);
 			})
-            .fail(function(jqHXR, textSTats, errorThrown) {
+            .fail(function(jqHXR, textStats, errorThrown) {
 			  $('#enrollmessage').text("Error Unenrolling in " + $code);
 			});
 	   }

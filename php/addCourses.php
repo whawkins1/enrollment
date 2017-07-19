@@ -3,15 +3,15 @@
   require_once('getSemester.php');
   session_start();
   
-  if (isset($_SESSION['username']) && isset($_POST['codes'])) {
+  if (isset($_SESSION['username']) && isset($_POST['codes']) && !empty($_POST['codes'])) {
       $username = $_SESSION['username'];
-      $code = json_decode($_POST['codes']);
+      $code = json_decode(stripslashes($_POST['codes']));
       
       $today_date_semester = new DateTime(null, new DateTimeZone("UTC"));
       $today_date_semester->setTimeZone(new DateTimeZone("America/New_York"));
       $current_year = $today_date_semester->format("Y");
        
-      $sql = "INSERT INTO enrolled_" . $current_year " user_email_" . $current_year .
+      $sql = "INSERT IGNORE INTO enrolled_" . $current_year " user_email_" . $current_year .
             ", user_grade_" . $current_year . ", user_semester_" . 
             $current_year_", user_course_code VALUES(?, ?, ?)";
 

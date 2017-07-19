@@ -3,7 +3,7 @@
    require_once('getSemester.php');
    session_start();
    
-   if (isset($_SESSION['username']) && isset($_POST['codes'])) {
+   if (isset($_SESSION['username']) && isset($_POST['codes']) && !empty($_POST['codes']) {
           $username = $_SESSION['username'];
           $codes = json_decode(stripslashes($_POST['codes']));
           

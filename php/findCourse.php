@@ -2,8 +2,9 @@
    require_once('config.php');
    require_once('utilityFunctions.php');
    session_start();
-     if(isset($_GET['code'])) {
-	     $code = $_GET['code'];
+     
+     $code = $_GET['code'];	 
+     if(isset($code) && !empty($code)) {
 		 $find_course_sql = "SELECT * FROM courses WHERE code = ?";
 		 
 		 if ($stmt = $conn->prepare($find_course_sql)) {
