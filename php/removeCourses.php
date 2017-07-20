@@ -5,7 +5,7 @@
    
    if (isset($_SESSION['username']) && isset($_POST['codes']) && !empty($_POST['codes']) {
           $username = $_SESSION['username'];
-          $codes = json_decode(stripslashes($_POST['codes']));
+          $codes = json_decode(stripslashes($_POST['codes']), true);
           
           $current_date = new DateTime(null, new DateTimeZone("UTC"));
           $current_date->setTimeZone(new DateTimeZone("America/New_York"));

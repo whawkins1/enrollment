@@ -114,7 +114,7 @@ $(function() {
                if (data.indexOf("SEATS_AVAILABLE")) {
 					$.ajax({
 						 type: 'POST',
-						 url: 'findCourse.php',
+						 url: 'addCourses.php',
 						 data: {codes: json.stringify(codeArr)}
 					})
 					.done(function(data){
@@ -140,7 +140,7 @@ $(function() {
 	   } else {
 	     $.ajax({
                  type: 'POST',
-				 url: 'removeCourse.php',
+				 url: 'removeCourses.php',
 				 data: {codes: json.stringify(codeArr)}
 		    })
 			.done(function(data){
