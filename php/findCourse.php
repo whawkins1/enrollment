@@ -5,7 +5,9 @@
      
      $code = $_GET['code'];	 
      if(isset($code) && !empty($code)) {
-		 $find_course_sql = "SELECT * FROM courses WHERE code = ?";
+		 $find_course_sql = "SELECT c.code, c.title, c.days, c.begin_time, c.end_time, c.credits, c.professor_last_name, c.professor_first_name,
+                             c.location, c.department, c.am_pm, p.current_capacity, p.max_capacity 
+							 FROM courses c INNER JOIN current_courses_capacity p ON c.code = p.code WHERE c.code = ?";
 		 
 		 if ($stmt = $conn->prepare($find_course_sql)) {
 		   $stmt->bind_param("s", $code);
@@ -14,7 +16,8 @@
 			   if ($stmt->num_rows > 0) {
 				   $stmt->bind_result($code, $title, $days, $begin_time, 
 									  $end_time, $credits, $professor_last_name, 
-									  $professor_first_name, $location, $department, $am_pm);
+									  $professor_first_name, $location, $department, $am_pm,
+									  $current_capacity, $max_capacity);
 					  $stmt->fetch();				  
 					  echo "<table id='quickfindtable'";
 					  echo '<thead>';
@@ -25,20 +28,24 @@
 								 echo '<th class="professor">Professor</th>';
 								 echo '<th class="time">Time</th>';
 								 echo '<th class="location">Location</th>';
-								 echo '<th class="credits">Credit</th>';
+								 echo '<th class="credits">Credits</th>';
+								 echo '<th class="enrolled">Enrolled</th>';
+								 echo '<th class="capacity">Capacity</th>';
 							echo '</tr>';
 					   echo '</thead>';     
 					  echo "<tr>";
 							echo "<td>", $code, "</td>";
 							echo "<td>", $title, "</td>";
 							echo "<td>", $department, "</td>";
-							echo "<td>",  $professor_last_name,  ", ", $professor_first_name, "</td>";
+							echo "<td>", $professor_last_name,  ", ", $professor_first_name, "</td>";
 							echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
 							echo "<td>", $location, "</td>";
+							echo "<td>", $current_capacity, "</td>";
+							echo "<td>", $max_capacity, "</td>";
 							echo "<td id='credits'>", $credits, "</td>";
 					  echo "</tr>";
 					  echo "</table>";
-					  echo "<div id='messageContainer'><label id='enrollmessage'></label></div>"
+					  echo "<div id='messageContainer'><label id='enrollmessage'></label></div>";
 					  $stmt->close();
 					  
 					  $current_date = getCurrentDateObject(null);
