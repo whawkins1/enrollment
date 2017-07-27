@@ -40,8 +40,8 @@
 							echo "<td>", $professor_last_name,  ", ", $professor_first_name, "</td>";
 							echo "<td>", $begin_time, '-', $end_time, $am_pm,  ", ",  $days, "</td>";
 							echo "<td>", $location, "</td>";
-							echo "<td>", $current_capacity, "</td>";
-							echo "<td>", $max_capacity, "</td>";
+							echo "<td id='enrolled'>", $current_capacity, "</td>";
+							echo "<td id='capacity'>", $max_capacity, "</td>";
 							echo "<td id='credits'>", $credits, "</td>";
 					  echo "</tr>";
 					  echo "</table>";

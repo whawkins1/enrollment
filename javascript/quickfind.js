@@ -109,8 +109,7 @@ $(function() {
 				url: 'checkCourseCapacity.php',
 				data: {code: code}
 			})
-			.done(function(data){
-			   
+			.done(function(data){			   
                if (data.indexOf("SEATS_AVAILABLE")) {
 					$.ajax({
 						 type: 'POST',
@@ -129,6 +128,11 @@ $(function() {
 					});		
 			   } else if (data.indexOf("MAX_CAPACITY")) {
 			      $('enrollmessage').text("The Course " + $code + "is at Maximum Capacity"); 
+				  var $enrolled = $('#enrolled').text();
+				  var $capacity = $('#capacity').text();
+				  if ($enrolled < $capacity) {
+				      $enrolled.text($capacity);
+				  }				  
 			   } else if (data.indexOf("ERROR")) {
 			     $message = data.split(':');
 				 $('#enrollmessage').text($message[1]);
