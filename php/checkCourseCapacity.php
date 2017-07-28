@@ -24,5 +24,4 @@
 	     echo "ERROR : An Error Occured Preparing Course Capacity Query";
 	  }
    }
-
 ?>

@@ -120,26 +120,26 @@ $(function() {
 						if(data.indexOf("SUCCESS") === 0) {
 							$(this).text('Unenroll');
 						}
-						var message = data.split(':');
-						$('#enrollmessage').text($message[1]);
+						displayMessage(data);
 					})
 					.fail(function(jqHXR, textStats, errorThrown) {
-					  $('#enrollmessage').text("Error Enrolling in " + $code);
+					  displayMessage("Error Enrolling in " + $code);
 					});		
 			   } else if (data.indexOf("MAX_CAPACITY")) {
-			      $('enrollmessage').text("The Course " + $code + "is at Maximum Capacity"); 
+			      displayMessage("The Course " + $code + "is at Maximum Capacity");
 				  var $enrolled = $('#enrolled').text();
 				  var $capacity = $('#capacity').text();
 				  if ($enrolled < $capacity) {
 				      $enrolled.text($capacity);
-				  }				  
+				  }
+               } else if (data.indexOf('NO_CODE_FOUND')) {
+			     displayMessage(data);				 
 			   } else if (data.indexOf("ERROR")) {
-			     $message = data.split(':');
-				 $('#enrollmessage').text($message[1]);
+			     displayMessage(data);
 			   }
 			})
             .fail(function(jqHXR, textStats, errorThrown) {
-				$('#enrollmessage').text("Error Enrolling in " + $code);
+				displayMessage("Error Enrolling in " + $code);
 			});				
 	   } else {
 	     $.ajax({
@@ -151,12 +151,16 @@ $(function() {
 				if(data.indexOf("SUCCESS") === 0) {
 					$(this).text('Enroll');
 				}
-				var message = data.split(':');
-				$('#enrollmessage').text($message[1]);
+				displayMessage(data);
 			})
             .fail(function(jqHXR, textStats, errorThrown) {
-			  $('#enrollmessage').text("Error Unenrolling in " + $code);
+			  displayMessage("Error Unenrolling in " + $code);
 			});
 	   }
    });
 });
+
+function displayMessage(messageNotParsed) {
+     $message = (messageNotParsed.indexOf(':') === -1) ? messageNotParsed : messageNotParsed.split(':')[1];
+	 $('#enrollmessage').text($message);
+}

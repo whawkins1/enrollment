@@ -10,7 +10,8 @@
       $today_date_semester = new DateTime(null, new DateTimeZone("UTC"));
       $today_date_semester->setTimeZone(new DateTimeZone("America/New_York"));
       $current_year = $today_date_semester->format("Y");
-       
+      $check_current_capacity_sql
+	  
       $sql = "INSERT IGNORE INTO enrolled_" . $current_year " user_email_" . $current_year .
             ", user_grade_" . $current_year . ", user_semester_" . 
             $current_year_", user_course_code VALUES(?, ?, ?)";
