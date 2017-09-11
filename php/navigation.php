@@ -6,9 +6,9 @@
     
     <div id="nav">
               <ul class="navelements">
-                <li><a href="http://localhost/php/account.php" class="links">Account</a></li>
-                <li><a href="http://localhost/php/catalog.php" class="links">Catalog</a></li>
-                <li><a href="http://localhost/php/search.php" class="links">Search</a></li>
-                <li><a href="http://localhost/php/quickfind.php" class="links">Quick Find</a></li>
+                <li><a href="http://localhost/enrollment/php/account.php" class="links">Account</a></li>
+                <li><a href="http://localhost/enrollment/php/catalog.php" class="links">Catalog</a></li>
+                <li><a href="http://localhost/enrollment/php/search.php" class="links">Search</a></li>
+                <li><a href="http://localhost/enrollment/php/quickfind.php" class="links">Quick&nbspFind</a></li>
               </ul>
     </div>
