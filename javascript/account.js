@@ -836,7 +836,8 @@ function populateGradeTable() {
            data: {  
                     email: originalEmail,
                     year: $('#yeardropdown option:selected').text(),
-                    semester: $('#semesterdropdown option:selected').text() 
+                    semester: $('#semesterdropdown option:selected').text()
+ 
                  },
            dataType: 'html'
      })
@@ -997,6 +998,14 @@ function setMakePaymentAction() {
      });
      
      $tabs.on('click', 'a', function(e) {
+         //Check if make payments tab active
+         $link = $($makepaymenttab).find('a');
+      $paymenttabactive = $($link[0]);
+      if($paymenttabactive.hasClass('active')) {
+           
+      }
+      $active.addClass('active');
+
          $active.removeClass('active');
          $content.hide();   
          $active = $(this);

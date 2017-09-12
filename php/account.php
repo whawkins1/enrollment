@@ -89,7 +89,9 @@
          ?>       
          <li><a href="#tab-grades">Grades</a></li>
          <li><a href="#tab-financial">Financial</a></li>
-         <li><a href="#tab-payment">Make Payment</a></li>
+         <li><a href="#tab-payment">Make Payment</a>
+             <input type="button" id="close_payment_tab" value="X">
+         </li>
       </ul>
       
       <div id="tab-personal" class="tabsjump">             

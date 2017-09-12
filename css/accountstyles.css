@@ -728,3 +728,12 @@ th.credits {
 .cellsummarylabel {
   text-align: left;
 }
+
+#close_payment_tab {
+   position: absolute;
+   margin-left: -8px;
+   background: #000066;
+   color: #fff;
+   outline: none;
+   border: none;
+}
