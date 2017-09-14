@@ -17,6 +17,7 @@ body {
    background: #666;
    color: #fff;
    text-decoration: none;
+   width: 130px;
 }
 
 .tabs a.active {
@@ -729,10 +730,10 @@ th.credits {
   text-align: left;
 }
 
-#close_payment_tab {
+#closepaymenttabbutton {
    position: absolute;
-   margin-left: -8px;
-   background: #000066;
+   margin-left: -14px;
+   background-color: transparent;
    color: #fff;
    outline: none;
    border: none;

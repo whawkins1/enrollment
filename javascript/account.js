@@ -999,12 +999,12 @@ function setMakePaymentAction() {
      
      $tabs.on('click', 'a', function(e) {
          //Check if make payments tab active
-         $link = $($makepaymenttab).find('a');
+        /* $link = $($makepaymenttab).find('a');
       $paymenttabactive = $($link[0]);
       if($paymenttabactive.hasClass('active')) {
            
-      }
-      $active.addClass('active');
+      }*/
+      
 
          $active.removeClass('active');
          $content.hide();   
@@ -1017,6 +1017,11 @@ function setMakePaymentAction() {
          
          e.preventDefault();
      });
+  
+  //Close Payment Tab
+  $('#closepaymenttabbutton').on('click', function(){
+
+  });
   
     
   $('#makepaymentbutton').on('click', function()  {
