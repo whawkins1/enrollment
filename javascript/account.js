@@ -987,8 +987,9 @@ function validCreditCardFormat (ccNum) {
 function setMakePaymentAction() {
      var $tabs = $('ul.tabs');
      var $links = $tabs.find('a');    
-     
+
      var $active = $($links[0]);
+
      $active.addClass('active');
      
      var $content = $($active[0].hash);
@@ -998,46 +999,43 @@ function setMakePaymentAction() {
      });
      
      $tabs.on('click', 'a', function(e) {
-         //Check if make payments tab active
-        /* $link = $($makepaymenttab).find('a');
-      $paymenttabactive = $($link[0]);
-      if($paymenttabactive.hasClass('active')) {
-           
-      }*/
-      
-
          $active.removeClass('active');
          $content.hide();   
          $active = $(this);
-        
+
          $content = $(this.hash);
-         
          $active.addClass('active');
          $content.show();
          
          e.preventDefault();
      });
-  
+
+  //--Callbacks placed inside function to access $active variable--
+
   //Close Payment Tab
   $('#closepaymenttabbutton').on('click', function(){
+      // Remove make payment tab and content
+      $active.removeClass('active');
+      $content.hide();
 
+      //Set Financial Tab After Removal of Make Payment Tab
+      $active = $('#financialtab a');
+      $active.addClass('active')
+      $content = $active.attr('href'); 
+      $content.show();
+      //console.log($('#financialtab a').attr('href'));
   });
   
     
   $('#makepaymentbutton').on('click', function()  {
-      var $makepaymenttab = $('.tabs li:last-child');
-      $makepaymenttab.css('visibility', 'visible'); 
       $active.removeClass('active');
       $content.hide();
 
-      $link = $($makepaymenttab).find('a');
-      $active = $($link[0]);
-      $content = $($active[0].hash);
-      
+      $active = $('#makepaymenttab a');
+      $active.css('visibility', 'visible'); 
       $active.addClass('active');
-      $content.show();   
-              
-      $(this).hide();  
+
+      $('#tab-payment').show();   
   });
 }
 

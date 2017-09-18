@@ -88,9 +88,9 @@
                 }
          ?>       
          <li><a href="#tab-grades">Grades</a></li>
-         <li><a href="#tab-financial">Financial</a></li>
-         <li><a href="#tab-payment">Make Payment</a>
-             <input type="button" title="Close Tab" id="closepaymenttabbutton" value="X">
+         <li id="financialtab"><a href="#tab-financial">Financial</a></li>
+         <li id="makepaymenttab"><a href="#tab-payment">Make Payment</a>
+             <input type="button" title="Close Tab" id="closepaymenttabbutton" value="Xxxxxxx">
          </li>
       </ul>
       
