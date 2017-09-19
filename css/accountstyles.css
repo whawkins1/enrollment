@@ -76,7 +76,7 @@ body {
 }
 
 .contactinput  {
-  padding-left: 2px;
+  padding-left :2px;
   margin: 9px;
   border: 1px solid black;
   width: 60%;
@@ -316,7 +316,7 @@ table.thead, table.tbody {
    font-size: 0.7em;
 }
 
-.tabs li:last-child {
+#makepaymenttab {
    visibility: hidden;
 }
 
@@ -737,4 +737,9 @@ th.credits {
    color: #fff;
    outline: none;
    border: none;
+   display: none;
+}
+
+#tab-payment {
+  display: none;
 }

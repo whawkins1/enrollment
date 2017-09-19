@@ -1028,14 +1028,19 @@ function setMakePaymentAction() {
   
     
   $('#makepaymentbutton').on('click', function()  {
+      //Set previous active link to unclicked and hide content
       $active.removeClass('active');
       $content.hide();
 
+      //Show Make Payments tab and set it as active
       $active = $('#makepaymenttab a');
-      $active.css('visibility', 'visible'); 
+      $active.show();
       $active.addClass('active');
-
+      $('#makepaymenttab').css('visibility', 'visible');
+      
+      //Show Make Payment content and Close Tab Button
       $('#tab-payment').show();   
+      $('#closepaymenttabbutton').show();
   });
 }
 

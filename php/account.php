@@ -90,7 +90,7 @@
          <li><a href="#tab-grades">Grades</a></li>
          <li id="financialtab"><a href="#tab-financial">Financial</a></li>
          <li id="makepaymenttab"><a href="#tab-payment">Make Payment</a>
-             <input type="button" title="Close Tab" id="closepaymenttabbutton" value="Xxxxxxx">
+             <input type="button" title="Close Tab" id="closepaymenttabbutton" value="X">
          </li>
       </ul>
       
@@ -718,15 +718,15 @@
         
         <div id="reviewpaymentcontainer">
              <div class="paymentcontainers">
-                <label id="datelabeltitle">Date:</label><label id="datelabel></label>
+                <label id="datelabeltitle">Date:</label><label id="datelabel"></label>
              </div>
              
              </div class="paymentcontainers">
-                 <label id="transactionidtitle">Transaction ID:</label><label id ="transactionidlabel</label>
+                 <label id="transactionidtitle">Transaction ID:</label><label id ="transactionidlabel"</label>
              </div>
              
              <div class="paymentcontainers">
-                 <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel>
+                 <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel">
              </div>
              
              <div class="paymentcontainers">
