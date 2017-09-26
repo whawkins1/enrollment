@@ -1039,6 +1039,7 @@ function setMakePaymentAction() {
       $('#makepaymenttab').css('visibility', 'visible');
       
       //Show Make Payment content and Close Tab Button
+      $content = $('#tab-payment');
       $('#tab-payment').show();   
       $('#closepaymenttabbutton').show();
   });
