@@ -185,7 +185,7 @@
              </div>                
              
              <div id="passwordcontainer">             
-                <form id="passwordform">
+                <!--<form id="passwordform"> -->
                      <fieldset id="passwordfieldset">
                         <legend>Change Password</legend>
                            <div id="passwordmessage" class="error"></div> 
@@ -193,14 +193,13 @@
                            <label class="contactlabel">New* :</label><input type="password" id="newpassword"  disabled>
                            <label class="contactlabel">Confirm* :</label><input type="password" id="confirmpassword" disabled>
                            
-                           <div id="passwordbuttoncontainer">
+                           <!-- <div id="passwordbuttoncontainer"> -->
                                 <button type="button" id="changepasswordbutton">Change Password</button>
-                           </div>
+                           <!-- </div> -->
                      </fieldset>
-                </form>
-                <div id="allfieldsrequirednotation">* indicates required field</div>                    
-           </div>
-             
+                <!-- </form> -->
+                <div id="allfieldsrequirednotation">* required field</div>                    
+           </div>             
       </div>
       
       <?php
