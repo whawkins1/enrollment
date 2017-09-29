@@ -101,13 +101,14 @@ body {
 
 #editbutton {
    font-size: 0.9em;
-   width: 18%;
-   margin-top: 8px;
+   width: 20%;
 }
 
 #editbuttoncontainer {
-  width: 100%;
   height: 6%;
+  width: 15%;
+  margin-left: 7%;
+  margin-top: 0.2%;
   text-align: center;
 }
 
@@ -291,8 +292,7 @@ table.thead, table.tbody {
 
 #contactcontainer {
   display: inline-block;
-  width: 25%;
-  height: 100%;
+  
 }
 
 #containerfinancial {
@@ -301,9 +301,12 @@ table.thead, table.tbody {
 }
 
 #contactfieldset {
-  width: 80%;
-  height: 92%;
-  padding: 10px;
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+  height: 91%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 #makepaymentbuttoncontainer {
@@ -501,10 +504,8 @@ table.thead, table.tbody {
 }
 
 #allfieldsrequirednotation {
-  width: 100%;
-  margin-top: -28px;
+  margin-left: 83%;
   font-size: 0.9em;
-  text-align: right;
 }
 
 #passwordform {
@@ -514,10 +515,12 @@ table.thead, table.tbody {
 }
 
 #passwordfieldset {
-    height: 38%;
-    width: 100%;
+    display: inline-block;
+    height: 40%;
+    width: 21%;
     text-align: center;
-    margin-bottom: 83%;
+    vertical-align: top;
+    /*margin-bottom: 83%;*/
 }
 
 #passwordcontainer {
@@ -543,7 +546,9 @@ table.thead, table.tbody {
 }
 
 #resetdefaultbutton {
-  display: none;
+  font-size: 0.9em;
+   width: 20%;  
+   display: none;
 }
 
 #labelyear {
