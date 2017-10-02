@@ -65,18 +65,18 @@ body {
   float: left;
   clear: both;
   width: 110px;
-  padding-top: 6px;
+  /*padding-top: 6px;*/
 }
 
 #tab-personal input {
   float: left;
-  padding-top: 3px;
+  /*padding-top: 3px;*/
   margin-top: 6px;
   width: 200px;
 }
 
 .contactinput  {
-  padding-left :2px;
+  /*padding-left :2px;*/
   margin: 9px;
   border: 1px solid black;
   width: 60%;
@@ -84,7 +84,7 @@ body {
 } 
 
 #streetaddress {
-  padding-left: 2px;
+  /*padding-left: 2px;*/
   margin: 6px;
   border: 1px solid black;
   width: 60%;
@@ -92,7 +92,7 @@ body {
 }
 
 #zipcode {
-  padding-left: 2px;
+  /*padding-left: 2px;*/
   margin: 6px;
   border: 1px solid black;
   width: 60%;
@@ -471,10 +471,10 @@ table.thead, table.tbody {
 }
 
 .contactlabel {
-  width: 40%;
-  margin-left: 6px;
+  width: 48%;
+  /*margin-left: 6px;*/
   text-align: right;
-  margin: 2px;
+  margin: 4px;
 }
 
 .error {
@@ -749,4 +749,9 @@ th.credits {
 
 #tab-payment {
   display: none;
+}
+
+.changepasswordinput {
+  left-margin
+  
 }

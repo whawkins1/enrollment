@@ -101,9 +101,9 @@
                 <fieldset id="contactfieldset">
                    <legend>Contact</legend>
                     <div id="errorcontainer" class="error"></div>
-                    <label class="contactlabel">First Name* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $_SESSION['firstname'];?>" readonly>
+                    <label class="contactlabel">FirstName* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $_SESSION['firstname'];?>" readonly>
                     <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $_SESSION['lastname']?>" readonly>
-                    <label class="contactlabel">Street Address* :</label><input type="text" id="streetaddress" value="<?php echo $_SESSION['address'];?>" readonly>
+                    <label class="contactlabel">Street&nbsp;Address*&nbsp;:</label><input type="text" id="streetaddress" value="<?php echo $_SESSION['address'];?>" readonly>
                      <label class="contactlabel">Country* :</label> <select id="countrydropdown" class="contactinput">
                         <?php
                             $result = $conn->query("SELECT * FROM countries");
@@ -160,8 +160,8 @@
                      </select>
                     
                     <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode;?>" readonly>
-                    <label class="contactlabel">Home Phone* :</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone;?>" readonly>
-                    <label class="contactlabel">Mobile Phone* :</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
+                    <label class="contactlabel">Home&nbsp;Phone*&nbsp;:</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone;?>" readonly>
+                    <label class="contactlabel">Mobile&nbsp;Phone*:</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
                     <label class="contactlabel">Major* : </label> <select id="majordropdown" class="contactinput">
                         <?php 
                           $result = $conn->query("SELECT DISTINCT user_major FROM users");
@@ -186,9 +186,9 @@
                      <fieldset id="passwordfieldset">
                         <legend>Change Password</legend>
                            <div id="passwordmessage" class="error"></div> 
-                           <label class="contactlabel">Old :</label><input type="password" id="oldpassword"  disabled>
-                           <label class="contactlabel">New :</label><input type="password" id="newpassword"  disabled>
-                           <label class="contactlabel">Confirm :</label><input type="password" id="confirmpassword" disabled>
+                           <label class="contactlabel">Old :</label><input class="changepasswordinput" type="password" id="oldpassword"  disabled>
+                           <label class="contactlabel">New :</label><input class="changepasswordinput" type="password" id="newpassword"  disabled>
+                           <label class="contactlabel">Confirm :</label><input class="changepasswordinput" type="password" id="confirmpassword" disabled>
                            
                            <!-- <div id="passwordbuttoncontainer"> -->
                                 <button type="button" id="changepasswordbutton">Change Password</button>
