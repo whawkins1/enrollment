@@ -95,9 +95,6 @@
       </ul>
       
       <div id="tab-personal" class="tabsjump">             
-             <!-- <div id="contactcontainer" >           -->
-                             
-             <!-- <form id="contactform" > -->
                 <fieldset id="contactfieldset">
                    <legend>Contact</legend>
                     <div id="errorcontainer" class="error"></div>
@@ -177,25 +174,14 @@
                     <label class="contactlabel">Email* :</label><input type="text" id="email" class="contactinput" value="<?php echo $_SESSION['username'];?>" readonly>
                     <label id="allfieldsrequirednotation">* required</label>                    
                 </fieldset>
-
-              <!-- </form>                        -->
-             <!-- </div>                 -->
-             
-             <!-- <div id="passwordcontainer">              -->
-                <!--<form id="passwordform"> -->
                      <fieldset id="passwordfieldset">
                         <legend>Change Password</legend>
                            <div id="passwordmessage" class="error"></div> 
                            <label class="contactlabel">Old :</label><input class="changepasswordinput" type="password" id="oldpassword"  disabled>
                            <label class="contactlabel">New :</label><input class="changepasswordinput" type="password" id="newpassword"  disabled>
                            <label class="contactlabel">Confirm :</label><input class="changepasswordinput" type="password" id="confirmpassword" disabled>
-                           
-                           <!-- <div id="passwordbuttoncontainer"> -->
-                                <button type="button" id="changepasswordbutton">Change Password</button>
-                           <!-- </div> -->
                      </fieldset>
-                <!-- </form> -->
-           <!-- </div>              -->
+                     <button type="button" id="changepasswordbutton">Change Password</button>
            <div id="editbuttoncontainer">
                         <button type="button" id="editbutton">Edit</button>
                         <button type="button" id="resetdefaultbutton" disabled>Reset</button>
