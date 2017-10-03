@@ -103,7 +103,7 @@
                     <div id="errorcontainer" class="error"></div>
                     <label class="contactlabel">FirstName* :</label><input type="text" id="firstname" class="contactinput" value="<?php echo $_SESSION['firstname'];?>" readonly>
                     <label class="contactlabel">Last Name* :</label><input type="text" id="lastname" class="contactinput" value="<?php echo $_SESSION['lastname']?>" readonly>
-                    <label class="contactlabel">Street&nbsp;Address*&nbsp;:</label><input type="text" id="streetaddress" value="<?php echo $_SESSION['address'];?>" readonly>
+                    <label class="contactlabel">Street&nbsp;Address*&nbsp;:</label><input type="text" id="streetaddress" class="contactinput" value="<?php echo $_SESSION['address'];?>" readonly>
                      <label class="contactlabel">Country* :</label> <select id="countrydropdown" class="contactinput">
                         <?php
                             $result = $conn->query("SELECT * FROM countries");
@@ -159,9 +159,9 @@
                           ?>
                      </select>
                     
-                    <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" value="<?php echo $postalCode;?>" readonly>
+                    <label class="contactlabel">Zip Code* :</label><input type="text" id="zipcode" class="contactinput" value="<?php echo $postalCode;?>" readonly>
                     <label class="contactlabel">Home&nbsp;Phone*&nbsp;:</label><input type="text" id="homephone" class="contactinput" value="<?php echo $homePhone;?>" readonly>
-                    <label class="contactlabel">Mobile&nbsp;Phone*:</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
+                    <label class="contactlabel">Mobile&nbsp;Phone*&nbsp;:</label><input type="text" id="mobilephone" class="contactinput" value="<?php echo $mobilePhone?>" readonly>
                     <label class="contactlabel">Major* : </label> <select id="majordropdown" class="contactinput">
                         <?php 
                           $result = $conn->query("SELECT DISTINCT user_major FROM users");

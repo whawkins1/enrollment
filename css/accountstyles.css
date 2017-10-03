@@ -65,39 +65,23 @@ body {
   float: left;
   clear: both;
   width: 110px;
-  /*padding-top: 6px;*/
 }
 
 #tab-personal input {
   float: left;
-  /*padding-top: 3px;*/
+  padding-top: 3px;
   margin-top: 6px;
   width: 200px;
 }
 
 .contactinput  {
-  /*padding-left :2px;*/
-  margin: 9px;
+  padding:1px;
+  margin-top: 3.2%;
+  margin-left: 6%;
   border: 1px solid black;
-  width: 60%;
+  width: 55%;
   pointer-events: none;
 } 
-
-#streetaddress {
-  /*padding-left: 2px;*/
-  margin: 6px;
-  border: 1px solid black;
-  width: 60%;
-  pointer-events: none;
-}
-
-#zipcode {
-  /*padding-left: 2px;*/
-  margin: 6px;
-  border: 1px solid black;
-  width: 60%;
-  pointer-events: none;
-}
 
 #editbutton {
    font-size: 0.9em;
@@ -304,7 +288,7 @@ table.thead, table.tbody {
   display: inline-block;
   vertical-align: top;
   width: 25%;
-  height: 91%;
+  height: 84%;
   margin-left: 2%;
   margin-right: 2%;
 }
@@ -471,10 +455,9 @@ table.thead, table.tbody {
 }
 
 .contactlabel {
-  width: 48%;
-  /*margin-left: 6px;*/
-  text-align: right;
-  margin: 4px;
+  width: 52%;
+  margin-top: 3.2%;
+  margin-left: 3%;
 }
 
 .error {
