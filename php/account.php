@@ -610,7 +610,7 @@
            <!-- <div class="paymentsteps"> -->
                  <div id="steponecontainer" class="paymentcontainer">
                       <!-- <div class="headingcontainer"> -->
-                          <label class="heading">Step One:</label>
+                          <!-- <label class="heading">Step One:</label> -->
                       <!-- </div> -->
                       
                       <!-- <div class="instructioncontainer">
@@ -618,7 +618,7 @@
                       </div>   -->                    
                       
 <!--                        <div id="paymenttypecontainer">  
- -->                          <label class="input">Type:
+ -->                          <label id="paymenttypelabel" class="input">Type:
                                <select id="selectpaymenttype" class="dropdown">
                                      <option value="" style="display:none;"></option>
                                      <option value="cc">Credit Card</option>
@@ -638,7 +638,7 @@
         <!-- <div class="paymentsteps"> -->
            <div id="steptwocontainer" class="paymentcontainer">
                 <!-- <div class="headingcontainer"> -->
-                    <label class="heading">Step Two:</label>
+                    <!-- <label class="heading">Step Two:</label> -->
                 <!-- </div> -->
                 
                 <!-- <div class="instructionscontainer">
@@ -659,7 +659,7 @@
                     <!-- </div> -->
                 <!-- </div> -->
                 
-                <div id="onlineinputcontainer" class="hidden">
+                <!-- <div id="onlineinputcontainer" class="hidden">
                     <div id="usernamecontainer">
                         <label class="input">Username:
                              <input type="text" id="username" class="inputtext">
@@ -674,14 +674,14 @@
                     <div id="showpasswordcontainer">
                         <input type="checkbox" id="showpasscb">Show Password
                     </div>
-                </div>
+                </div> -->
             </div>            
         <!-- </div> -->
         
         <!-- <div class="paymentsteps"> -->
              <div id="stepthreecontainer" class="paymentcontainer">
                 <!-- <div class="headingcontainer"/> -->
-                    <label class="heading">Step Three:</label>
+                    <!-- <label class="heading">Step Three:</label> -->
                 <!-- </div> -->
                 
                 <!-- <div id="instructionscontainer">
