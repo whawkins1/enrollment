@@ -319,7 +319,7 @@ table.thead, table.tbody {
  font-size: 2em;
 }
 
-.hidden {
+/*.hidden {
   position: absolute;
   top: 0;
   right: 0;
@@ -328,13 +328,11 @@ table.thead, table.tbody {
   margin: auto;
   width: 100%;
   height: 15%;
-}
+}*/
 
 #onlineinputcontainer {
- padding-top: 25px;
- padding-left: 4px;
- visibility: hidden;  
-}
+/* visibility: hidden;  
+*/}
 
 .inputtext {
    font-size: 0.7em;
@@ -354,6 +352,10 @@ table.thead, table.tbody {
 
 #creditcard {
   width: 49%;
+}
+
+#showpasscb {
+  vertical-align: top;
 }
 
 #finishbutton {
@@ -647,4 +649,8 @@ th.credits {
 
 #tab-personal {
   position:relative;
+}
+
+#passwordlabel {
+  display: block;
 }

@@ -622,31 +622,32 @@
               </div>  
         
            <div id="steptwocontainer" class="paymentcontainer">                
-                        <label class="input">Credit Card #:
+                        <!-- <label class="input">Credit Card #:
                              <input type="text" id="creditcard" maxlength="19" class="inputtext"/>
                         </label>
                     
                         <label class="input">VIN #:
                              <input type="text" id="vin" maxlength="4" class="inputtext"/>
-                        </label>
+                        </label> -->
                 
-                <!-- <div id="onlineinputcontainer" class="hidden">
-                    <div id="usernamecontainer">
+<!--                 <div id="onlineinputcontainer" class="hidden">
+ -->                    <!-- <div id="usernamecontainer"> -->
                         <label class="input">Username:
                              <input type="text" id="username" class="inputtext">
                         </label>
-                    </div>
+                    <!-- </div> -->
                     
-                    <div id="passcontainer">
-                        <label class="input">Password:
+                    <!-- <div id="passcontainer"> -->
+                        <label id="passwordlabel" class="input">Password:
                              <input type="password" id="password" class="inputtext">
                         </label>
-                    </div>
-                    <div id="showpasswordcontainer">
-                        <input type="checkbox" id="showpasscb">Show Password
-                    </div>
-                </div> -->
-            </div>            
+                    <!-- </div> -->
+                    <!-- <div id="showpasswordcontainer"> -->
+                        <input type="checkbox" id="showpasscb"/>
+                        <label for="showpasscb" id="showpasslabel">Show Password</label>  
+                    <!-- </div> -->
+<!--                 </div>
+ -->            </div>            
         
              <div id="stepthreecontainer" class="paymentcontainer">
                         <label class="input">Amount:
