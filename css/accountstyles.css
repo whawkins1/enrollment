@@ -296,17 +296,6 @@ table.thead, table.tbody {
    visibility: hidden;
 }*/
 
-#paymenttypecontainer {
-   margin-top: 10px;
-   height: 30%;
-   width: 100%;
-}
-
-#companycontainer {
-  height: 30%;
-  width: 100%;
-}
-
 .paymentcontainer {
   padding: 0.5%;  
   border: 1px solid black;
@@ -330,21 +319,6 @@ table.thead, table.tbody {
  font-size: 2em;
 }
 
-.heading {
-    font-weight: bold;
-    font-style: italic;
-    font-size: 2.5em;
-}
-
-.paymentsteps {
-  float: left;
-  position: relative;
-  margin-left: 8px;
-  border: 1px solid black;
-  width: 32%;
-  height: 100%;
-}
-
 .hidden {
   position: absolute;
   top: 0;
@@ -356,31 +330,14 @@ table.thead, table.tbody {
   height: 15%;
 }
 
-/*#creditvincontainer {
- padding-top: 25px;
- padding-left: 4px;
- visibility: hidden;  
-}*/
-
 #onlineinputcontainer {
  padding-top: 25px;
  padding-left: 4px;
  visibility: hidden;  
 }
 
-#makepaymentcontainer {
-  width: 100%;
-  height: 100%;  
-  padding-top: 25px;
-  padding-left: 4px;
-}
-
 .inputtext {
    font-size: 0.7em;
-}
-
-#vincontainer {
- margin-top: 8px;
 }
 
 #passcontainer {
@@ -399,11 +356,6 @@ table.thead, table.tbody {
   width: 49%;
 }
 
-#instructionscontainer {
-   width: 80%;
-   height: 5%;
-}
-
 #finishbutton {
    /*margin-left: 50%;*/
    /*width: 33.3%;
@@ -414,13 +366,6 @@ table.thead, table.tbody {
 }
 
 #stepthreecontainer {
-}
-
-#finishbuttoncontainer {
-  text-align: center;    
-  width: 80%;
-  height: 45%;
-  margin-top: 15px;
 }
 
 #loggedincontainer {

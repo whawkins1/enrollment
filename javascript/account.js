@@ -467,7 +467,7 @@ $(function() {
             $('#zipcode').prop('readonly', false);
             $('#firstname').focus();
             $(this).text("Save");
-            $('#resetButton').show();
+            $('#resetdefaultbutton').show();
         } else if (text === "Save"){ // In Save Mode
             var setEditMode = true;
             

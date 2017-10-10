@@ -607,57 +607,28 @@
             </div>
            
       <div id="tab-payment" class="tabsjump">
-           <!-- <div class="paymentsteps"> -->
                  <div id="steponecontainer" class="paymentcontainer">
-                      <!-- <div class="headingcontainer"> -->
-                          <!-- <label class="heading">Step One:</label> -->
-                      <!-- </div> -->
-                      
-                      <!-- <div class="instructioncontainer">
-                          <label class="instructions">Choose Payment Type and Company</label>
-                      </div>   -->                    
-                      
-<!--                        <div id="paymenttypecontainer">  
- -->                          <label id="paymenttypelabel" class="input">Type:
+                          <label id="paymenttypelabel" class="input">Type:
                                <select id="selectpaymenttype" class="dropdown">
                                      <option value="" style="display:none;"></option>
                                      <option value="cc">Credit Card</option>
                                      <option value="op">Online Payment</option>
                                </select>
                           </label>
-                       <!-- </div> -->                   
                 
-                <!-- <div id="companycontainer"> -->
                        <label class="input">Company:        
                            <select id="companydropdown" class="dropdown"> </select>
                        </label>
-                <!-- </div> -->
               </div>  
-        <!-- </div> -->
         
-        <!-- <div class="paymentsteps"> -->
-           <div id="steptwocontainer" class="paymentcontainer">
-                <!-- <div class="headingcontainer"> -->
-                    <!-- <label class="heading">Step Two:</label> -->
-                <!-- </div> -->
-                
-                <!-- <div class="instructionscontainer">
-                    <label id="steptwoinstructions" class="instructions">Complete Step One First</label>
-                </div> -->
-                
-                <!-- <div id="creditvincontainer" class="hidden">
-                    <div id="creditinputcontainer"> -->
+           <div id="steptwocontainer" class="paymentcontainer">                
                         <label class="input">Credit Card #:
                              <input type="text" id="creditcard" maxlength="19" class="inputtext"/>
                         </label>
-                    <!-- </div> -->
                     
-                    <!-- <div id="vincontainer"> -->
                         <label class="input">VIN #:
                              <input type="text" id="vin" maxlength="4" class="inputtext"/>
                         </label>
-                    <!-- </div> -->
-                <!-- </div> -->
                 
                 <!-- <div id="onlineinputcontainer" class="hidden">
                     <div id="usernamecontainer">
@@ -676,30 +647,13 @@
                     </div>
                 </div> -->
             </div>            
-        <!-- </div> -->
         
-        <!-- <div class="paymentsteps"> -->
              <div id="stepthreecontainer" class="paymentcontainer">
-                <!-- <div class="headingcontainer"/> -->
-                    <!-- <label class="heading">Step Three:</label> -->
-                <!-- </div> -->
-                
-                <!-- <div id="instructionscontainer">
-                    <label class="instructions">Enter Payment</label>
-                </div> -->
-                
-                <!-- <div id="makepaymentcontainer"> -->
-                    <!-- <div id="inputpaymentcontainer"> -->
                         <label class="input">Amount:
                           <input type="text" id="amount" class="inputtext" disabled>
                         </label>
-                    <!-- </div>                 -->
-                    <!-- <div id="finishbuttoncontainer"> -->
                        <input type="button" id="finishbutton" value="Finish" disabled/> 
-                    <!-- </div> -->
-                <!-- </div> -->
              </div>
-        <!-- </div> -->
         
         <!-- <div id="reviewpaymentcontainer">
              <div class="paymentcontainers">
