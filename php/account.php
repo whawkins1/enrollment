@@ -621,33 +621,34 @@
                        </label>
               </div>  
         
-           <div id="steptwocontainer" class="paymentcontainer">                
-                        <!-- <label class="input">Credit Card #:
-                             <input type="text" id="creditcard" maxlength="19" class="inputtext"/>
-                        </label>
-                    
-                        <label class="input">VIN #:
-                             <input type="text" id="vin" maxlength="4" class="inputtext"/>
-                        </label> -->
+           <div id="steptwocontainer" class="paymentcontainer">  
+                <div id="messagecompletesteponecontainer">
+                      <label id="completestephonelabel">Complete First Box to Activate</label>
+                </div>
+
+                <div id="creditinputcontainer">
+                     <label class="input">Credit Card #:
+                         <input type="text" id="creditcard" maxlength="19" class="inputtext"/>
+                    </label>
                 
-<!--                 <div id="onlineinputcontainer" class="hidden">
- -->                    <!-- <div id="usernamecontainer"> -->
-                        <label class="input">Username:
-                             <input type="text" id="username" class="inputtext">
-                        </label>
-                    <!-- </div> -->
-                    
-                    <!-- <div id="passcontainer"> -->
-                        <label id="passwordlabel" class="input">Password:
-                             <input type="password" id="password" class="inputtext">
-                        </label>
-                    <!-- </div> -->
-                    <!-- <div id="showpasswordcontainer"> -->
-                        <input type="checkbox" id="showpasscb"/>
-                        <label for="showpasscb" id="showpasslabel">Show Password</label>  
-                    <!-- </div> -->
-<!--                 </div>
- -->            </div>            
+                    <label class="input">VIN #:
+                         <input type="text" id="vin" maxlength="4" class="inputtext"/>
+                    </label> 
+                </div>
+                
+                <div id="onlineinputcontainer"> 
+                    <label class="input">Username:
+                         <input type="text" id="username" class="inputtext">
+                    </label>
+                
+                    <label id="passwordlabel" class="input">Password:
+                         <input type="password" id="password" class="inputtext">
+                    </label>
+                
+                    <input type="checkbox" id="showpasscb"/>
+                    <label for="showpasscb" id="showpasslabel">Show Password</label>  
+                </div>
+            </div>            
         
              <div id="stepthreecontainer" class="paymentcontainer">
                         <label class="input">Amount:
