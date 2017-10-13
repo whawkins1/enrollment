@@ -623,7 +623,7 @@
         
            <div id="steptwocontainer" class="paymentcontainer">  
                 <div id="messagecompletesteponecontainer">
-                      <label id="completestephonelabel">Complete First Box to Activate</label>
+                      <label id="completestephonelabel">Complete Type and Company in First Box to Activate</label>
                 </div>
 
                 <div id="creditinputcontainer">
