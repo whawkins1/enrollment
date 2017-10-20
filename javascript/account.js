@@ -298,21 +298,20 @@ $(function() {
     
     $('#companydropdown').on('change', function() {
        var type = $('#selectpaymenttype').val();
-       var $credit = $('#creditvincontainer');
-       var $online = $('#onlineinputcontainer');
+       var $messageContainer = $('#messagecompletesteponecontainer');
+       var $creditContainer = $('#creditinputcontainer');
+       var $onlineContainer = $('#onlineinputcontainer');
+       
+       $messageContainer.hide();
        
        switch(type) {
          case "cc":
-            if(!(($online).css('visibility') == 'hidden')) { 
-                $online.css('visibility', 'hidden'); 
-            }                        
-            $credit.css('visibility', 'visible');
+              $onlineContainer.hide();
+              $creditContainer.show();
             break;
          case "op":
-          if(!(($credit).css('visibility') == 'hidden')) {
-             $credit.css('visibility', 'hidden');
-          }
-           $online.css('visibility', 'visible');             
+              $creditContainer.hide();
+              $onlineContainer.show();
            break;
        }
     });
@@ -1287,8 +1286,11 @@ function setEditButtonFunctionality() {
 function setPaymentTypeDropDown() {
  $('#selectpaymenttype').on('change', function() {
          var selectedtype = $(this).val();
+         var $messageContainer = $('#messagecompletesteponecontainer');
          var $companymenu = $('#companydropdown');
-         
+         var $creditcontainer = $('#creditinputcontainer');
+         var $onlinecontainer = $('#onlineinputcontainer');
+
          if($companymenu.find('option').length >= 1) {
              $companymenu.empty();
          }
@@ -1305,16 +1307,14 @@ function setPaymentTypeDropDown() {
                                         <option value=\"gc\">Google Checkout</option>\
                                         <option value=\"pp\">PayPal</option>");
          }         
+
+         if($creditcontainer.css('display') === "block") {
+            $creditcontainer.hide();
+         } else if ($onlinecontainer.css('display') === 'block') {
+            $creditcontainer.hide();
+         }  
          
-         // RESET STEP TWO CONTAINERS
-         var $credit = $('#creditvincontainer');
-         var $online = $('#onlineinputcontainer');
-         
-         if (!($credit.css('visiblity') == 'hidden')) {
-            $credit.css('visibility', 'hidden');
-         } else if (!($online.css('visibility') == 'hidden')) {
-            $online.css('visibility', 'hidden');
-         }
+         $messageContainer.css('display', 'flex');
    });       
 }
 
