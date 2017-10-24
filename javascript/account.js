@@ -1295,26 +1295,24 @@ function setPaymentTypeDropDown() {
              $companymenu.empty();
          }
          
-         if(selectedtype == "cc") {
+         if(selectedtype === "cc") {
                   $companymenu.append(" <option value=\"\" style=\"display:none;\"></option>\
                                         <option value=\"visa\">Visa</option>\
                                         <option value=\"mc\">MasterCard</option>\
                                         <option value=\"ae\">America Express</option>\
                                         <option value=\"disc\">Discover</option>");
-         } else if(selectedtype = "op") {
+         } else if(selectedtype === "op") {
                  $companymenu.append("  <option value=\"\" style=\"display:none;\"></option>\
-                                       <option value=\"ap\">Amazon Payments</option>\
+                                        <option value=\"ap\">Amazon Payments</option>\
                                         <option value=\"gc\">Google Checkout</option>\
                                         <option value=\"pp\">PayPal</option>");
          }         
 
-         if($creditcontainer.css('display') === "block") {
-            $creditcontainer.hide();
-         } else if ($onlinecontainer.css('display') === 'block') {
-            $creditcontainer.hide();
-         }  
+         ($companymenu.val() !== "") ? $creditcontainer.show() : $creditcontainer.hide();
          
-         $messageContainer.css('display', 'flex');
+         ($companymenu.val() !== "") ? $onlinecontainer.show() : $onlinecontainer.hide();
+
+         ($companymenu.val() === "") ? $messageContainer.css('display', 'flex') : $messageContainer.hide();
    });       
 }
 

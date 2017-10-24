@@ -654,7 +654,10 @@
                         <label class="input">Amount:
                           <input type="text" id="amount" class="inputtext" disabled>
                         </label>
-                       <input type="button" id="finishbutton" value="Finish" disabled/> 
+             </div>
+
+             <div id="finishbuttoncontainer">
+                  <input type="button" id="finishbutton" value="Submit Payment" disabled/> 
              </div>
         
         <!-- <div id="reviewpaymentcontainer">

@@ -315,7 +315,7 @@ table.thead, table.tbody {
   vertical-align: bottom;
   margin-left: 4.5%;
   margin-top: 5%;
-  margin-bottom: 6%;
+  margin-bottom: 1%;
 }
 
 .dropdown {
@@ -366,12 +366,10 @@ table.thead, table.tbody {
 }
 
 #finishbutton {
-   /*margin-left: 50%;*/
-   /*width: 33.3%;
-   height: 20%;
-   margin-left: 33.3%;
-   margin-right: 33.3%;*/
-   font-size: 1.0em;
+   width: 10%;
+   height: 80%;
+   margin-bottom: 1%;
+   font-size: 1.2em;
 }
 
 #messagecompletesteponecontainer {
@@ -383,10 +381,18 @@ table.thead, table.tbody {
   z-index: 2;
 }
 
+#finishbuttoncontainer {
+  text-align: center;
+}
+
 #completestephonelabel {
   margin-top: 20%;
   margin-bottom: 20%;
   font-weight: bold;
+}
+
+#stepthreecontainer {
+  text-align: center;
 }
 
 #loggedincontainer {
