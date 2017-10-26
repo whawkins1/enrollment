@@ -1308,10 +1308,8 @@ function setPaymentTypeDropDown() {
                                         <option value=\"pp\">PayPal</option>");
          }         
 
-         ($companymenu.val() !== "") ? $creditcontainer.show() : $creditcontainer.hide();
-         
+         ($companymenu.val() !== "") ? $creditcontainer.show() : $creditcontainer.hide();         
          ($companymenu.val() !== "") ? $onlinecontainer.show() : $onlinecontainer.hide();
-
          ($companymenu.val() === "") ? $messageContainer.css('display', 'flex') : $messageContainer.hide();
    });       
 }

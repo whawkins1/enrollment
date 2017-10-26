@@ -627,11 +627,11 @@
                 </div>
 
                 <div id="creditinputcontainer">
-                     <label class="input">Credit Card #:
+                     <label id="creditcardlabel" class="input">Credit Card #:
                          <input type="text" id="creditcard" maxlength="19" class="inputtext"/>
                     </label>
                 
-                    <label class="input">VIN #:
+                    <label id="vinlabel" class="input">VIN #:
                          <input type="text" id="vin" maxlength="4" class="inputtext"/>
                     </label> 
                 </div>

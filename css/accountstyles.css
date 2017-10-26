@@ -314,7 +314,7 @@ table.thead, table.tbody {
   width: 26%;
   vertical-align: bottom;
   margin-left: 4.5%;
-  margin-top: 5%;
+  margin-top: 4%;
   margin-bottom: 1%;
 }
 
@@ -324,6 +324,12 @@ table.thead, table.tbody {
 
 #paymenttypelabel {
   display: block;
+  margin-bottom: 3.3%;
+}
+
+#creditcardlabel {
+  display: block;
+  margin-bottom: 3.2%;
 }
 
 .input {
@@ -376,8 +382,8 @@ table.thead, table.tbody {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 7%;
+  margin-bottom: 7%;
   z-index: 2;
 }
 
