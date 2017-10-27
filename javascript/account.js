@@ -317,11 +317,15 @@ $(function() {
     });
     
     $('#creditcard').on('input', function() {
-       if ($(this).val().length === 0 || $('#vin').val().length === 0)  {
-          $('#amount').prop('disabled', true); 
-       } else {
-          $('#amount').prop('disabled', false);          
-       }
+       var $amountInput = $('#amount');
+       var isAmountInputDisabled = $amountInput.prop('disabled');
+       
+       var disableAmountInput = ($(this).val().length === 0 || $('#vin').val().length === 0)  
+          if ((!isAmountInputDisabled) && (disableAmountInput)) {
+              $amountInput.prop('disabled', true);
+          } else if ((isAmountInputDisabled) && (!disableAmountInput)) {
+              $amountInput.prop('disabled', false);
+          }
     });
     
     $('#vin').on('input', function() {
