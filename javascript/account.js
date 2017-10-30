@@ -296,6 +296,8 @@ $(function() {
          });         
     });
     
+    
+
     $('#companydropdown').on('change', function() {
        var type = $('#selectpaymenttype').val();
        var $messageContainer = $('#messagecompletesteponecontainer');
@@ -308,10 +310,12 @@ $(function() {
          case "cc":
               $onlineContainer.hide();
               $creditContainer.show();
+              $('#creditcard').focus();
             break;
          case "op":
               $creditContainer.hide();
               $onlineContainer.show();
+              $('#username').focus();
            break;
        }
     });
@@ -320,7 +324,7 @@ $(function() {
        var $amountInput = $('#amount');
        var isAmountInputDisabled = $amountInput.prop('disabled');
        
-       var disableAmountInput = ($(this).val().length === 0 || $('#vin').val().length === 0)  
+       var disableAmountInput = ($(this).val().length === 0 || $('#vin').val().length === 0);  
           if ((!isAmountInputDisabled) && (disableAmountInput)) {
               $amountInput.prop('disabled', true);
           } else if ((isAmountInputDisabled) && (!disableAmountInput)) {
@@ -329,10 +333,14 @@ $(function() {
     });
     
     $('#vin').on('input', function() {
-       if ($(this).val().length === 0 || $('#creditcard').val().length === 0) {
-          $('#amount').prop('disabled', true);
-       } else {
-          $('#amount').prop('disabled', false);
+       var $amountInput = $('#amount');
+       var isAmountInputDisabled = $amountInput.prop('disabled');
+
+       var disableAmountInput = ($(this).val().length === 0 || $('#creditcard').val().length === 0);  
+       if ((!isAmountInputDisabled) && (disableAmountInput)) {
+          $amountInput.prop('disabled', true);
+       } else if ((isAmountInputDisabled) && (!disableAmountInput)) {
+          $amountInput.prop('disabled', false);
        }
     });
     
@@ -596,7 +604,7 @@ $(function() {
     
     //Switch Password Visbility
     $('#showpasscb').on('click', function () {
-        $('#password').attr(type, $(this).prop('checked') ? 'text' : 'password');
+        $('#password').attr('type', $(this).prop('checked') ? 'text' : 'password');
     });
     
     //enable change password fields and change text button

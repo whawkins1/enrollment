@@ -609,7 +609,7 @@
       <div id="tab-payment" class="tabsjump">
                  <div id="steponecontainer" class="paymentcontainer">
                           <label id="paymenttypelabel" class="input">Type:
-                               <select id="selectpaymenttype" class="dropdown">
+                               <select id="selectpaymenttype" class="dropdown" tabindex="1">
                                      <option value="" style="display:none;"></option>
                                      <option value="cc">Credit Card</option>
                                      <option value="op">Online Payment</option>
@@ -617,7 +617,7 @@
                           </label>
                 
                        <label class="input">Company:        
-                           <select id="companydropdown" class="dropdown"> </select>
+                           <select id="companydropdown" class="dropdown" tabindex="2"> </select>
                        </label>
               </div>  
         
@@ -628,31 +628,31 @@
 
                 <div id="creditinputcontainer">
                      <label id="creditcardlabel" class="input">Credit Card:
-                         <input type="text" id="creditcard" maxlength="19" class="inputtext"/>
+                         <input type="text" id="creditcard" maxlength="19" tabindex="3" class="inputtext"/>
                     </label>
                 
                     <label id="vinlabel" class="input">VIN:
-                         <input type="text" id="vin" maxlength="4" class="inputtext"/>
+                         <input type="text" id="vin" maxlength="4" tabindex="4" class="inputtext"/>
                     </label> 
                 </div>
                 
                 <div id="onlineinputcontainer"> 
                     <label class="input">Username:
-                         <input type="text" id="username" class="inputtext">
+                         <input type="text" id="username" class="inputtext" tabindex="3">
                     </label>
                 
                     <label id="passwordlabel" class="input">Password:
-                         <input type="password" id="password" class="inputtext">
+                         <input type="password" id="password" class="inputtext" tabindex="4">
                     </label>
                 
                     <input type="checkbox" id="showpasscb"/>
-                    <label for="showpasscb" id="showpasslabel">Show Password</label>  
+                    <label for="showpasscb" id="showpasslabel" tabindex="5">Show Password</label>  
                 </div>
             </div>            
         
              <div id="stepthreecontainer" class="paymentcontainer">
                         <label class="input">Amount:
-                          <input type="text" id="amount" class="inputtext" disabled>
+                          <input type="text" id="amount" class="inputtext" tabindex="5" disabled>
                         </label>
              </div>
 
