@@ -299,6 +299,12 @@ $(function() {
     
 
     $('#companydropdown').on('change', function() {
+       /*if (this.value.length) {
+           $(this).addClass('highlight');
+       } else {
+           $(this).removeClass('highlight');
+       }*/
+
        var type = $('#selectpaymenttype').val();
        var $messageContainer = $('#messagecompletesteponecontainer');
        var $creditContainer = $('#creditinputcontainer');
@@ -940,7 +946,7 @@ function addUpdates() {
 function isValidKey ( event ) {
     //Check keycodes spacebar devare backspace and number range
    return (event.which === 37 || event.which === 39 || 
-           event.which === 8 || event.which === 46 || 
+           event.which === 8 || event.which === 46 || event.which === 9 || 
           (event.which >= 48 && event.which <= 57));
 }
 
