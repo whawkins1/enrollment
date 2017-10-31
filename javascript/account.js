@@ -299,12 +299,6 @@ $(function() {
     
 
     $('#companydropdown').on('change', function() {
-       /*if (this.value.length) {
-           $(this).addClass('highlight');
-       } else {
-           $(this).removeClass('highlight');
-       }*/
-
        var type = $('#selectpaymenttype').val();
        var $messageContainer = $('#messagecompletesteponecontainer');
        var $creditContainer = $('#creditinputcontainer');
@@ -317,7 +311,22 @@ $(function() {
               $onlineContainer.hide();
               $creditContainer.show();
               $('#creditcard').focus();
-            break;
+               var creditCardCompany = $(this).val();
+               switch(creditCardCompany) {
+                 case visa:
+                 // 13 or 16
+                 break;
+                 case mc:
+                 //16
+                 break;
+                 case ae:
+                 //15
+                 break;
+                 case disc
+                 //16
+                 break;
+               }
+           break;
          case "op":
               $creditContainer.hide();
               $onlineContainer.show();
