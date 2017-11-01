@@ -310,22 +310,7 @@ $(function() {
          case "cc":
               $onlineContainer.hide();
               $creditContainer.show();
-              $('#creditcard').focus();
-               var creditCardCompany = $(this).val();
-               switch(creditCardCompany) {
-                 case visa:
-                 // 13 or 16
-                 break;
-                 case mc:
-                 //16
-                 break;
-                 case ae:
-                 //15
-                 break;
-                 case disc
-                 //16
-                 break;
-               }
+              $('#creditcard').focus()
            break;
          case "op":
               $creditContainer.hide();
@@ -398,7 +383,7 @@ $(function() {
     
     //Finish Payment Submittal
     $('#finishbutton').on('click', function () {
-       var ccValue = $('#creditcard').val();
+       var ccValue = $('#creditcard').val().replace(/\s/g, '');
        var payment = $('#amount').val().replace(/,/g, "");
        var currentBalance = getCurrentBalance();
        var calculatedBalance = (currentBalance - payment)
@@ -1344,7 +1329,25 @@ function setPaymentTypeDropDown() {
 
 function validCardNumber(number) {
    var company = $('#companydropdown').val();
-   var filter;
+   var valid;
+
+   switch(company) {
+     case "visa":
+        valid = ((number === 13) || (number === 16))
+        break;
+     case "mc":
+        valid = (number === 16);
+        break;
+     case "ae":
+        valid = (number === 15);
+        break;
+     case "disc":
+        valid = (number === 16);
+        break;
+   }
+   return return valid;
+
+   /*var filter;
    
    switch(company) {
      case "visa":
@@ -1360,7 +1363,7 @@ function validCardNumber(number) {
         filter = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/; 
         break;
    }
-   return filter.test(number);
+   return filter.test(number);*/
 }
 
 function getCurrentBalance() {
