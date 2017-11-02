@@ -298,7 +298,7 @@ $(function() {
     
     
 
-    $('#companydropdown').on('change', function() {
+    $('#companydropdown').on('blur change', function() {
        var type = $('#selectpaymenttype').val();
        var $messageContainer = $('#messagecompletesteponecontainer');
        var $creditContainer = $('#creditinputcontainer');
@@ -938,10 +938,11 @@ function addUpdates() {
 }
 
 function isValidKey ( event ) {
-    //Check keycodes spacebar devare backspace and number range
-   return (event.which === 37 || event.which === 39 || 
+    //Check keycodes spacebar backspace and number range
+
+   return (event.which === 37 || event.which === 39 || event.which === 116 ||
            event.which === 8 || event.which === 46 || event.which === 9 || 
-          (event.which >= 48 && event.which <= 57));
+          event.which === 17 || (event.which >= 48 && event.which <= 57)) ;
 }
 
 function populateReviewForm (payment, currentBalance, calculatedBalance) {
@@ -1296,7 +1297,7 @@ function setEditButtonFunctionality() {
 
 
 function setPaymentTypeDropDown() {
- $('#selectpaymenttype').on('change', function() {
+ $('#selectpaymenttype').on('blur change', function() {
          var selectedtype = $(this).val();
          var $messageContainer = $('#messagecompletesteponecontainer');
          var $companymenu = $('#companydropdown');
@@ -1345,7 +1346,7 @@ function validCardNumber(number) {
         valid = (number === 16);
         break;
    }
-   return return valid;
+   return valid;
 
    /*var filter;
    

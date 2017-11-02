@@ -322,6 +322,15 @@ table.thead, table.tbody {
   font-size: .6em;
 }
 
+.inputtext:focus  {
+  border: 1px solid black;
+}
+
+.dropdown:focus {
+  border: 1px solid black;
+}
+
+
 #paymenttypelabel {
   display: block;
   margin-bottom: 5.3%;
