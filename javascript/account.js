@@ -303,21 +303,36 @@ $(function() {
        var $messageContainer = $('#messagecompletesteponecontainer');
        var $creditContainer = $('#creditinputcontainer');
        var $onlineContainer = $('#onlineinputcontainer');
-       
-       $messageContainer.hide();
-       
-       switch(type) {
-         case "cc":
-              $onlineContainer.hide();
-              $creditContainer.show();
-              $('#creditcard').focus()
-           break;
-         case "op":
-              $creditContainer.hide();
-              $onlineContainer.show();
-              $('#username').focus();
-           break;
-       }
+
+       if ($(this).val() !== null) {
+         if ($(this).val().length === 0) {
+            switch(type) {
+              case "cc":
+                $creditContainer.hide();
+                $messageContainer.css('display', 'flex')
+              break;
+              case "op":
+                $onlineContainer.hide(); 
+                $messageContainer.css('display', 'flex') 
+              break;
+            }
+         } else {
+           $messageContainer.hide();
+           
+           switch(type) {
+             case "cc":
+                  $onlineContainer.hide();
+                  $creditContainer.show();
+                  $('#creditcard').focus()
+               break;
+             case "op":
+                  $creditContainer.hide();
+                  $onlineContainer.show();
+                  $('#username').focus();
+               break;
+           }
+        }
+    }
     });
     
     $('#creditcard').on('input', function() {
@@ -1297,33 +1312,43 @@ function setEditButtonFunctionality() {
 
 
 function setPaymentTypeDropDown() {
- $('#selectpaymenttype').on('blur change', function() {
+ $('#selectpaymenttype').on('change', function() {
          var selectedtype = $(this).val();
-         var $messageContainer = $('#messagecompletesteponecontainer');
          var $companymenu = $('#companydropdown');
          var $creditcontainer = $('#creditinputcontainer');
-         var $onlinecontainer = $('#onlineinputcontainer');
+         var $onlinecontainer = $('#onlineinputcontainer');  
+         var $messageContainer = $('#messagecompletesteponecontainer');
 
          if($companymenu.find('option').length >= 1) {
-             $companymenu.empty();
+               $companymenu.empty();
          }
-         
-         if(selectedtype === "cc") {
-                  $companymenu.append(" <option value=\"\" style=\"display:none;\"></option>\
-                                        <option value=\"visa\">Visa</option>\
-                                        <option value=\"mc\">MasterCard</option>\
-                                        <option value=\"ae\">America Express</option>\
-                                        <option value=\"disc\">Discover</option>");
-         } else if(selectedtype === "op") {
-                 $companymenu.append("  <option value=\"\" style=\"display:none;\"></option>\
-                                        <option value=\"ap\">Amazon Payments</option>\
-                                        <option value=\"gc\">Google Checkout</option>\
-                                        <option value=\"pp\">PayPal</option>");
-         }         
 
-         ($companymenu.val() !== "") ? $creditcontainer.show() : $creditcontainer.hide();         
-         ($companymenu.val() !== "") ? $onlinecontainer.show() : $onlinecontainer.hide();
-         ($companymenu.val() === "") ? $messageContainer.css('display', 'flex') : $messageContainer.hide();
+         if (selectedtype.length === 0) {
+             if ($creditcontainer.css('display') === 'block') {
+                 $creditcontainer.hide();
+                 $messageContainer.css('display', 'flex')
+             } else if ($onlinecontainer.css('display') === 'block') {
+                 $onlinecontainer.hide(); 
+                 $messageContainer.css('display', 'flex') 
+             }
+         } else { 
+             if(selectedtype === "cc") {
+                      $companymenu.append(" <option value=\"\" style=\"display:none;\"></option>\
+                                            <option value=\"visa\">Visa</option>\
+                                            <option value=\"mc\">MasterCard</option>\
+                                            <option value=\"ae\">America Express</option>\
+                                            <option value=\"disc\">Discover</option>");
+             } else if(selectedtype === "op") {
+                     $companymenu.append("  <option value=\"\" style=\"display:none;\"></option>\
+                                            <option value=\"ap\">Amazon Payments</option>\
+                                            <option value=\"gc\">Google Checkout</option>\
+                                            <option value=\"pp\">PayPal</option>");
+             }         
+
+             ($companymenu.val() !== "") ? $creditcontainer.show() : $creditcontainer.hide();         
+             ($companymenu.val() !== "") ? $onlinecontainer.show() : $onlinecontainer.hide();
+             ($companymenu.val() === "") ? $messageContainer.css('display', 'flex') : $messageContainer.hide();
+         }
    });       
 }
 
