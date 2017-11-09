@@ -60,26 +60,34 @@ body {
 }
 
 #tab-personal label {
-  float: left;
-  clear: both;
-  width: 110px;
+  display: inline-block;
+  width: 30%;
 }
 
-#tab-personal input {
-  float: left;
-  padding-top: 3px;
-  margin-top: 6px;
+#tab-personal input[type='text'] {
+  display: inline-block;
+  padding-top: 0.8%;
+  margin-top: 1%;
+  margin-left: 6%;
   width: 200px;
 }
 
+#tab-personal select {
+  margin-left: 5%;
+}
+
 .contactinput  {
-  padding:1px;
+  padding: 0.8%;
   margin-top: 2.2%;
-  margin-left: 6%;
   border: 1px solid black;
   width: 55%;
+  font-size: 0.9em;
   pointer-events: none;
 } 
+
+#tab-personal input[type='password'] {
+  width: 60%;
+}
 
 #editbutton {
    font-size: 0.9em;
@@ -468,7 +476,7 @@ table.thead, table.tbody {
 #changepasswordbutton {
    font-size: 0.9em;
    position: absolute;
-   top: 33%;
+   top: 30%;
    left: 35%;
 }
 
@@ -682,10 +690,6 @@ th.credits {
 /*#tab-payment {
   display: block;
 }*/
-
-.changepasswordinput {
-  left-margin
-}
 
 #tab-personal {
   position:relative;
