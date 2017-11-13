@@ -607,6 +607,13 @@
             </div>
            
       <div id="tab-payment" class="tabsjump">
+            <div id="currentstepcontainer">
+                  <label class="currentsteplabel">Payment</label>
+                  <hr/>
+                  <label class="currentsteplabel">Review</label>
+                  <hr/>
+                  <label class="currentsteplabel">Submit</label>
+            </div>
                  <div id="steponecontainer" class="paymentcontainer">
                           <label id="paymenttypelabel" class="input">Type:
                                <select id="selectpaymenttype" class="dropdown" tabindex="1">
