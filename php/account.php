@@ -614,86 +614,94 @@
                   <hr/>
                   <label class="currentsteplabel">Submit</label>
             </div>
-                 <div id="steponecontainer" class="paymentcontainer">
-                          <label id="paymenttypelabel" class="input">Type:
-                               <select id="selectpaymenttype" class="dropdown" tabindex="1">
-                                     <option value="" style="display:none;"></option>
-                                     <option value="cc">Credit Card</option>
-                                     <option value="op">Online Payment</option>
-                               </select>
-                          </label>
-                
-                       <label class="input">Company:        
-                           <select id="companydropdown" class="dropdown" tabindex="2"> </select>
-                       </label>
-              </div>  
-        
-           <div id="steptwocontainer" class="paymentcontainer">  
-                <div id="messagecompletesteponecontainer">
-                      <label id="completestephonelabel">Complete Type and Company in First Box to Activate</label>
-                </div>
+            <div id="paymentreviewsubmitcontainer">
+                <div id="paymentcontainer">  
+                     <div id="steponecontainer" class="paymentcontainer">
+                              <label id="paymenttypelabel" class="input">Type:
+                                   <select id="selectpaymenttype" class="dropdown" tabindex="1">
+                                         <option value="" style="display:none;"></option>
+                                         <option value="cc">Credit Card</option>
+                                         <option value="op">Online Payment</option>
+                                   </select>
+                              </label>
+                    
+                           <label class="input">Company:        
+                               <select id="companydropdown" class="dropdown" tabindex="2"> </select>
+                           </label>
+                      </div>  
+            
+                   <div id="steptwocontainer" class="paymentcontainer">  
+                        <div id="messagecompletesteponecontainer">
+                              <label id="completestephonelabel">Complete Type and Company in First Box to Activate</label>
+                        </div>
 
-                <div id="creditinputcontainer">
-                     <label id="creditcardlabel" class="input">Credit Card:
-                         <input type="text" id="creditcard" maxlength="19" tabindex="3" class="inputtext"/>
-                    </label>
+                        <div id="creditinputcontainer">
+                             <label id="creditcardlabel" class="input">Credit Card:
+                                 <input type="text" id="creditcard" maxlength="19" tabindex="3" class="inputtext"/>
+                            </label>
+                        
+                            <label id="vinlabel" class="input">VIN:
+                                 <input type="text" id="vin" maxlength="4" tabindex="4" class="inputtext"/>
+                            </label> 
+                        </div>
+                        
+                        <div id="onlineinputcontainer"> 
+                            <label class="input">Username:
+                                 <input type="text" id="username" class="inputtext" tabindex="3">
+                            </label>
+                        
+                            <label id="passwordlabel" class="input">Password:
+                                 <input type="password" id="password" class="inputtext" tabindex="4">
+                            </label>
+                        
+                            <input type="checkbox" id="showpasscb"/>
+                            <label for="showpasscb" id="showpasslabel" tabindex="5">Show Password</label>  
+                        </div>
+                    </div>            
                 
-                    <label id="vinlabel" class="input">VIN:
-                         <input type="text" id="vin" maxlength="4" tabindex="4" class="inputtext"/>
-                    </label> 
-                </div>
-                
-                <div id="onlineinputcontainer"> 
-                    <label class="input">Username:
-                         <input type="text" id="username" class="inputtext" tabindex="3">
-                    </label>
-                
-                    <label id="passwordlabel" class="input">Password:
-                         <input type="password" id="password" class="inputtext" tabindex="4">
-                    </label>
-                
-                    <input type="checkbox" id="showpasscb"/>
-                    <label for="showpasscb" id="showpasslabel" tabindex="5">Show Password</label>  
-                </div>
-            </div>            
-        
-             <div id="stepthreecontainer" class="paymentcontainer">
-                        <label class="input">Amount:
-                          <input type="text" id="amount" class="inputtext" tabindex="5" disabled>
-                        </label>
-             </div>
+                     <div id="stepthreecontainer" class="paymentcontainer">
+                                <label class="input">Amount:
+                                  <input type="text" id="amount" class="inputtext" tabindex="5" disabled>
+                                </label>
+                     </div>
 
-             <div id="finishbuttoncontainer">
-                  <input type="button" id="finishbutton" value="Submit Payment" disabled/> 
-             </div>
-        
-        <!-- <div id="reviewpaymentcontainer">
-             <div class="paymentcontainers">
-                <label id="datelabeltitle">Date:</label><label id="datelabel"></label>
-             </div>
-             
-             </div class="paymentcontainers">
-                 <label id="transactionidtitle">Transaction ID:</label><label id ="transactionidlabel"</label>
-             </div>
-             
-             <div class="paymentcontainers">
-                 <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel">
-             </div>
-             
-             <div class="paymentcontainers">
-                 <label id="currentbalancetitle">Current Balance:</label><label id="currentbalancelabel"></label>
-                 <label id="paymenttitle">Payment:</label><label id="paymentlabel"</label>
-                 <label>_________<label>
-                 <label id="balancetitle">Balance:</label><label id="balancelabel"</label>                 
-             </div>
-             
-             <div id="submitbuttoncontainer">
-                 <input type="button" id="submitbutton">
-             </div>
-         </div> -->
+                     <div id="nextbuttonpaymentcontainer">
+                         <input type="button" class="navbutton" id="nextbuttonpayment" value="Next" disabled/>
+                     </div>
+              </div>
+              <div id="reviewcontainer">
+                  <!-- <div id="reviewpaymentcontainer">
+                       <div class="paymentcontainers">
+                          <label id="datelabeltitle">Date:</label><label id="datelabel"></label>
+                       </div>
+                       
+                       </div class="paymentcontainers">
+                           <label id="transactionidtitle">Transaction ID:</label><label id ="transactionidlabel"</label>
+                       </div>
+                       
+                       <div class="paymentcontainers">
+                           <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel">
+                       </div>
+                       
+                       <div class="paymentcontainers">
+                           <label id="currentbalancetitle">Current Balance:</label><label id="currentbalancelabel"></label>
+                           <label id="paymenttitle">Payment:</label><label id="paymentlabel"</label>
+                           <label>_________<label>
+                           <label id="balancetitle">Balance:</label><label id="balancelabel"</label>                 
+                       </div>
+
+                       <div id="submitbuttoncontainer">
+                           <input type="button" class="navbutton" id="prevbuttonpayment" value="Previous"/>
+                           <input type="button" id="submitpaymentbutton" value="Submit Payment">
+                       </div>
+                    </div> -->
+              </div>
+              <div id="submitcontainer">
+              </div>
+        </div>
       </div>
      
-      <script src="../plugins/jquery-1.12.0.js"></script>
+      <script src="../plugins/jquery-1.12.4.js"></script>
       <script src="../plugins/tablesorter/jquery.tablesorter.js"></script>
       <script src="../plugins/autonumeric/autoNumeric.js"></script>
       <script src="../plugins/jquery.maskedinput.js"></script>

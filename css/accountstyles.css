@@ -413,7 +413,11 @@ table.thead, table.tbody {
   vertical-align: top;
 }
 
-#finishbutton {
+.navbutton {
+
+}
+
+#finishpaymentbutton {
    width: 10%;
    height: 80%;
    margin-bottom: 1%;
