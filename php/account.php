@@ -608,11 +608,11 @@
            
       <div id="tab-payment" class="tabsjump">
             <div id="currentstepcontainer">
-                  <label id="paymentsteplabel" class="currentsteplabelactive">Payment</label>
-                  <hr id="firststephorizontalline"/>
-                  <label id="reviewsteplabel" class="currentsteplabelnonactive">Review</label>
-                  <hr id="secondstephorizontalline"/>
-                  <label id="submitsteplabel" class="currentsteplabelnonactive">Submit</label>
+                  <label id="paymentsteplabel" class="currentsteplabel">Payment</label>
+                  <hr id="firststephorizontalline" class="currentstephorizontalline"/>
+                  <label id="reviewsteplabel" class="currentsteplabel">Review</label>
+                  <hr id="secondstephorizontalline" class="currentstephorizontalline"/>
+                  <label id="submitsteplabel" class="currentsteplabel">Submit</label>
             </div>
             <div id="paymentreviewsubmitcontainer">
                 <div id="paymentcontainer">  

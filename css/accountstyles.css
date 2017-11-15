@@ -89,33 +89,26 @@ body {
   width: 60%;
 }
 
-.currentsteplabelactive {
+.currentsteplabel {
   display: inline-block;
-  border: solid 2px black;
+  border: solid 2px white;
   font-size: 1.5em;
   padding-top: 0.2%;
   padding-left: 0.8%;
   padding-right: 0.8%;
 }
 
-.currentsteplabelnonactive {
-  display: inline-block;
-  border-style: solid;
-  border-width: 0.01em;
-  font-size: 1.5em;
-  padding-top: 0.2%;
-  padding-left: 0.8%;
-  padding-right: 0.8%;
+#paymentsteplabel {
+   border: solid 2px black;
+   background-color: white;
 }
 
-#currentstepcontainer hr {
+.currentstephorizontalline {
    display: inline-block;
-   /*border: solid 1px black;*/
-   border-width: thin;
-   margin-right: -0.25%;
-   margin-left: -0.25%;
+   border: solid 2px white;
+   margin-right: -0.26%;
+   margin-left: -0.26%;
    margin-bottom: 0.2%;
-   line-height: 20%;
    height: 0.4%;
    width: 10%;
 }
