@@ -1,0 +1,24 @@
+* {padding:0; margin:0}
+
+#paymentscontainer {
+  width: 100%;
+}
+
+#inputcontainer {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#selectpaymenttype {
+  width: 50%;
+}
+
+.makepaymentlabel {
+  width: 50%;
+  font-weight: bold;  
+}
+
+#nextbuttoncontainer {
+    margin-top: 4px;
+    text-align: center;
+}

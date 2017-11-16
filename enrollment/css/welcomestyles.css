@@ -1,0 +1,31 @@
+* {padding:0; margin:0}
+
+body {
+	background-color: #484848;
+}
+
+h1 {
+	text-align: center;
+    font-family: Tahoma;
+    text-shadow: 3px 3px 5px #333;
+    font-size: 8em;
+    font-weight: bold;
+    font-style: italic;	
+}
+
+p {
+  font-size: 2em;
+  line-height: 0.5em;
+  text-align: center;
+  font-family: SIMPSON;
+}
+
+button {
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  font-family: SIMPSON;
+}

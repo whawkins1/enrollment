@@ -1,0 +1,738 @@
+* {padding:0; margin:0}
+
+body {
+  background-color: #9933ff;
+}
+
+.tabs li {
+  list-style: none;
+  display: inline;
+}
+
+.tabs a {
+   padding: 5px 10px;
+   display: inline-block;
+   background: #666;
+   color: #fff;
+   text-decoration: none;
+   width: 130px;
+}
+
+.tabs a.active {
+   background: #000066;
+}
+
+.tabsjump {
+    width: 100%;
+    height: 100%;
+    padding-top: 6px;
+    background-color: red;  
+}
+
+#nav ul {
+  margin-bottom: 10px;
+  padding: 0;
+  text-align: center;
+  background-color: #000000;
+}
+
+#nav  ul li{
+  display: inline;
+  list-style: none;
+}
+
+
+#nav li a:link, #nav li a:visited {
+  width: 120px;
+  padding: 4px;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: inline-block;
+  background-color: #000000;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#nav li a:hover, #nav li a:active {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+#tab-personal label {
+  display: inline-block;
+  width: 30%;
+}
+
+#tab-personal input[type='text'] {
+  display: inline-block;
+  padding-top: 0.8%;
+  margin-top: 1%;
+  margin-left: 6%;
+  width: 200px;
+}
+
+#tab-personal select {
+  margin-left: 5%;
+}
+
+.contactinput  {
+  padding: 0.8%;
+  margin-top: 2.2%;
+  border: 1px solid black;
+  width: 55%;
+  font-size: 0.9em;
+  pointer-events: none;
+} 
+
+#tab-personal input[type='password'] {
+  width: 60%;
+}
+
+.currentsteplabel {
+  display: inline-block;
+  border: solid 2px white;
+  font-size: 1.5em;
+  padding-top: 0.2%;
+  padding-left: 0.8%;
+  padding-right: 0.8%;
+}
+
+#paymentsteplabel {
+   border: solid 2px black;
+   background-color: white;
+}
+
+.currentstephorizontalline {
+   display: inline-block;
+   border: solid 2px white;
+   margin-right: -0.26%;
+   margin-left: -0.26%;
+   margin-bottom: 0.2%;
+   height: 0.4%;
+   width: 10%;
+}
+
+#nextbuttonpaymentcontainer {
+  text-align: center;
+}
+
+#currentstepcontainer {
+  text-align: center;
+  margin-top: 1%;
+}
+
+#editbutton {
+   font-size: 0.9em;
+   width: 20%;
+}
+
+#editbuttoncontainer {
+  height: 6%;
+  width: 15%;
+  margin-left: 7%;
+  margin-top: 0.2%;
+  text-align: center;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 110%;
+}
+
+#financialfieldSet {
+  width: 100%;
+  height: 100%;
+}
+
+.tablesorter {
+   width: 100%;
+   border-collapse: collapse;
+   border: 1px solid black;
+}
+
+.tablesorter thead tr th {
+  text-align: left;
+  font-size: 12px;
+  background-color: limegreen;
+  padding: 4px 30px 4px 8px;
+  border: 1px solid green;
+} 
+
+.tablesorter th.header {
+    background-image: url("../plugins/tablesorter/themes/blue/bg.gif");
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.tablesorter th.headerSortUp {
+    background-image: url("../plugins/tablesorter/themes/blue/asc.gif");
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.tablesorter th.headerSortDown {
+    background-image: url("../plugins/tablesorter/themes/blue/desc.gif");
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+th.checkbox, th.credits {
+  width: 2%;
+}
+
+th.code {
+ width: 6%;
+}
+
+th.time {
+   width: 10%;
+}
+
+th.location {
+    width: 15%;
+}
+
+th.name {
+   width: 26%;
+}
+
+th.department {
+   width: 15%;
+}
+
+th.professor {
+   width: 24%;
+}
+
+.filters {
+  display: inline-block;
+  margin-bottom: 4px;
+  margin-right: 14px;
+}
+
+#filterlabel {
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.tablesorter td {
+   border: 1px solid black;
+}
+
+#tablesummary th {
+    font-style: italic;
+    text-decoration: underline;
+    text-align: center;
+}
+
+table {
+  border-collapse: separate;
+    border-spacing: 0;
+}
+
+#tablesummary {
+    font-size: 1.4em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+}
+
+#tablesummary th, td {
+   padding: 3px 10px;
+}
+
+#tablesummary td {
+  background-color: white;
+}
+
+.separatorlinetotal td {
+ border-top: 2px solid black;
+}
+
+#paymentslabel {
+    float: left;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+table.thead, table.tbody {
+  display: block;
+}
+
+#tablepayments th {
+  text-align: left;  
+  width: 24%;
+  height: 30%;   
+  font-weight: bold;
+  background-color: limegreen;
+  border: 1px solid green;
+}
+
+#tablepayments {
+  border-spacing: 0;
+   border: 2px solid black;
+}
+
+#tablepayments  tbody tr td:nth-child(1){
+   text-align: left;
+}
+
+#tablepayments  tbody tr td:nth-child(2){
+   text-align: right;
+}
+
+#tablepayments  tbody tr td:nth-child(3){
+   text-align: right;
+}
+
+#tablepayments  tbody tr td:nth-child(4){
+   text-align: right;
+}
+
+#selecttype {
+  margin-bottom: 4px;
+  margin-top: 2px;  
+}
+
+#containertablepayments {
+   width:400px;
+   height: 245px;
+   margin-bottom: 6px;
+   overflow: auto;
+}
+
+#containerfinancial {
+  text-align: center;
+  width: 100%;
+}
+
+#contactfieldset {
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+  height: 84%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 0.5%;
+}
+
+#makepaymentbuttoncontainer {
+   position: absolute;
+   text-align: center;
+   margin-top: 4px;
+}
+
+#tablepayments  td {
+   font-family: sans-serif;
+   font-size: 0.7em;
+}
+
+#creditinputcontainer {
+  display: none;
+}
+
+#onlineinputcontainer {
+  display: none;
+}
+
+/*#makepaymenttab {
+   visibility: hidden;
+}*/
+
+.paymentcontainer {
+  padding: 0.5%;  
+  border: 1px solid black;
+  display: inline-block;
+  position: relative;
+  height: 40%;
+  width: 26%;
+  vertical-align: bottom;
+  margin-left: 4.5%;
+  margin-top: 4%;
+  margin-bottom: 1%;
+}
+
+.dropdown {
+  font-size: .6em;
+}
+
+.inputtext:focus  {
+  border: 1px solid black;
+}
+
+.dropdown:focus {
+  border: 1px solid black;
+}
+
+
+#paymenttypelabel {
+  display: block;
+  margin-bottom: 5.3%;
+}
+
+#creditcardlabel {
+  display: block;
+  margin-bottom: 5.2%;
+}
+
+.input {
+ font-size: 2em;
+}
+
+/*.hidden {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  height: 15%;
+}*/
+
+#onlineinputcontainer {
+/* visibility: hidden;  
+*/}
+
+.inputtext {
+   font-size: 0.6em;
+}
+
+#showpasslabel {
+  font-size: 0.8em;
+}
+
+#vin {
+  width: 12%;
+}
+
+#creditcard {
+  width: 49%;
+}
+
+#showpasscb {
+  vertical-align: top;
+}
+
+.navbutton {
+
+}
+
+#finishpaymentbutton {
+   width: 10%;
+   height: 80%;
+   margin-bottom: 1%;
+   font-size: 1.2em;
+}
+
+#messagecompletesteponecontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8%;
+  margin-bottom: 8%;
+  z-index: 2;
+}
+
+#finishbuttoncontainer {
+  text-align: center;
+}
+
+#completestephonelabel {
+  margin-top: 20%;
+  margin-bottom: 20%;
+  font-weight: bold;
+}
+
+#stepthreecontainer {
+  text-align: center;
+}
+
+#loggedincontainer {
+  height: 20%;
+  text-align: right;
+}
+
+#loggedinlabel {
+  padding-right: 8px;
+}
+
+#fontusername {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.contactlabel {
+  width: 52%;
+  margin-top: 3.2%;
+  margin-left: 3%;
+}
+
+.error {
+  color: red;
+  font-size: 1.2em;
+}
+
+#errorcontainer {
+   width: 100%;
+   height: 5%;
+   text-align: center;
+   margin-bottom: 4px;
+}
+
+#passwordmessage {
+   width: 100%;
+   height: 14%;
+  text-align: center;
+  margin-top: 4px;
+}
+
+
+#allfieldsrequirednotation {
+  margin-left: 83%;
+  margin-top: 4%;
+  font-size: 0.9em;
+}
+
+#passwordfieldset {
+    display: inline-block;
+    height: 33%;
+    width: 18%;
+    margin-top: 0.5%;
+    padding-bottom: 0.5%;
+    vertical-align: top;
+}
+
+#changepasswordbutton {
+   font-size: 0.9em;
+   position: absolute;
+   top: 30%;
+   left: 35%;
+}
+
+.highlightred {
+    border: 1px solid red;
+    background: #FFCECE;
+}
+
+#resetdefaultbutton {
+  font-size: 0.9em;
+   width: 20%;  
+   display: none;
+}
+
+#labelyear {
+    margin-right: 10px;
+}
+
+#yeardropdown {
+    margin-right: 12px;
+}
+
+#semesterlabel {
+    margin-right: 8px;
+}
+
+
+#labelgpatitle {
+ font-weight: bold;
+ margin-right: 8px; 
+}
+
+#labelgpasemestertitle {
+    margin-right: 4px;   
+}
+
+#labelgpasemester {
+   margin-right: 12px;
+}
+
+#labelcumulativetitle {
+    margin-right: 4px;   
+}
+
+#labelcumulativegpa {
+   margin-right: 8px;
+}
+
+#gpacontainer {
+  float: right;
+}
+
+#selectiongpacontainer {
+  margin-left: 8px;
+}
+
+th.code {
+  width: 10%;
+}
+
+th.title {
+  width: 60%;
+}
+
+th.grade {
+  width: 20%;
+}
+
+th.credits {
+   width: 10%;
+}
+
+#totalcreditscontainer {
+  float: right;
+  margin-right: 30px;
+}
+
+#labeltotalcreditstitle {
+  font-weight: bold;
+}
+
+#labeltotalcredits {
+   font-weight: bold;
+}
+
+.buttonscontainer {
+   margin-top: 8px;
+   text-align: center;
+}
+
+.buttonscourses {
+  width: 9%;
+  margin: 10px;
+  font-size: 105%;
+}
+
+#labelfilterdepartmenttitle {
+  font-weight: bold;
+}
+
+.labelcreditstitle {
+  font-weight: bold;
+  font-size: 108%;
+  margin-right: 4px;
+}
+
+.creditscontainer {
+  float: right;
+  margin-top: 8px;
+  margin-right: 4px;
+}
+
+#filterdepartmentcontainer {
+  margin-bottom: 8px;
+  margin-left: 7px;
+}
+
+#labelfilterdepartmenttitle {
+   font-weight: bold;
+   padding-right: 14px;
+}
+
+.containercoursestitle {
+    margin-top: 20px;
+    margin-bottom: -5px;
+    text-align: center;
+    padding-right: 150px;
+}
+
+#containerfilterscurrentcourses {
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+#containerlabelcoursesdate {
+    text-align: center;
+}
+
+.labeltitletables {
+    font-size: 160%;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.tablesorter tbody tr:nth-child(odd) {
+  background-color: #D3D3D3;
+}
+
+.tablesorter tbody tr:nth-child(even) {
+    background-color: #FFFFFF;
+}
+
+#containerpaymentbutton {
+   text-align: right;
+   width: 100%;
+}
+
+#makepaymentbutton {
+   margin-right: 8px;
+   width: 10%;
+   height: 20%;
+   font-size: 100%;
+}
+
+#tablepayments td a{
+    width: 100%;
+    display: block;
+}
+
+#tablepayments {
+    width: 100%;
+    max-height: 30%;
+    overflow-y: scroll;
+    font-size: 1.1em;      
+}
+
+.labelfinancial {
+   font-weight: bold;
+   font-size: 2.4em;
+   text-decoration: underline;
+}
+
+#containerfilterby {
+   margin-left: 8px;
+   text-align: left;
+}
+
+#filterbylabel {
+    font-weight: bold;
+    padding-right: 8px;
+}
+
+.cellssummary {
+   text-align: right;
+}
+
+.cellsummarylabel {
+  text-align: left;
+}
+
+#closepaymenttabbutton {
+   position: absolute;
+   margin-left: -14px;
+   background-color: transparent;
+   color: #fff;
+   outline: none;
+   border: none;
+   display: none;
+}
+
+/*#tab-payment {
+  display: block;
+}*/
+
+#tab-personal {
+  position:relative;
+}
+
+#passwordlabel {
+  display: block;
+  margin-top: 2%;
+}

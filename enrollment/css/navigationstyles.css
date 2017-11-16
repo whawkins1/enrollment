@@ -1,0 +1,31 @@
+* {padding:0; margin:0}
+
+#nav ul {
+  margin-bottom: 10px;
+  padding: 0;
+  text-align: center;
+  background-color: #000000;
+}
+
+#nav  ul li{
+  display: inline;
+  list-style: none;
+}
+
+#nav li a:link, #nav li a:visited {
+  width: 120px;
+  padding: 4px;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: inline-block;
+  background-color: #000000;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#nav li a:hover, #nav li a:active {
+  background-color: #FFFFFF;
+  color: #000000;
+}

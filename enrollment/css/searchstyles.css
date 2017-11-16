@@ -1,0 +1,55 @@
+
+#searchtextcontainer {
+    width: 26%;
+    text-align: center;
+    margin: 0 auto;    
+    overflow: hidden;
+}
+
+
+#searchbuttoncontainer {
+    text-align: center;
+}
+
+#searchinput {
+    width: 65%;
+    font-size: 1.1em;
+}
+
+#indropdown {
+    width: 70%;
+    font-size: 1.1em;
+}
+
+#bydropdown {
+    width: 69%;
+    font-size: 1.1em;
+}
+
+.format_div {
+  width: 100%;
+  float: left;
+  margin: 8px;
+}
+
+.searchlabels {
+   margin-right: 4px;
+   height: 70%;
+   font-size: 1.3em;
+}
+
+#searchbutton {
+   width: 40%;
+   font-size: 1.1em;
+}
+
+.labelresultstitle {
+    font-size: 1.8em;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#containerresultstitle {
+    margin: 20px;
+    text-align: center;
+}

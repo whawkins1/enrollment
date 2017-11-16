@@ -1,0 +1,70 @@
+#containerinputcode {
+   text-align: center;
+   height: 50px;
+}
+
+#containerquickfind {
+  margin-top: 30px;
+   margin-bottom: 20px;
+}
+
+#containerresult {
+  margin: 1%;
+  text-align: center;
+  vertical-align: middle;
+  }
+
+#noresultlabel {
+  font-size: 1.6em;
+}
+
+#noresultcode {
+  font-style: italic;
+  font-size: 1.4em;
+  margin-left: 10px;
+}
+
+#labelinputcodetitle  {
+  font-size: 2.0em;
+  margin-right: 20px;
+}
+
+#inputcoursecode {
+  font-size: 1.6em;
+}
+
+#quickfindtable {
+   width: 100%;
+   border-collapse: collapse;
+   border-spacing: 0;
+   border: 1px solid black;   
+}
+
+#quickfindtable th {
+  text-align: left;
+  font-size: 18px;
+  background-color: limegreen;
+  border: 1px solid black;
+  padding: 2px 4px 2px 8px;
+}
+
+#quickfindtable td {
+  text-align: left;
+  font-size: 14px;
+  border: 1px solid black;
+  background: white;
+  padding: 4px 0px 4px 8px;
+}
+
+#quickfindbutton {
+  background:url(../images/search.png) no-repeat center;
+  width: 2.5%;
+  height: 68%;
+  vertical-align: 9px;
+}
+
+.toggleenroll {
+    font-size: 1.2em;
+	margin-top: 2%;
+	padding: 4px;
+}
