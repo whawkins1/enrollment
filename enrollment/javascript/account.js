@@ -855,6 +855,16 @@ $(function() {
     });
 });
 
+$('#nextbuttonpayment').on('click keypress', function() {
+    $('#paymentcontainer').css('display', 'none');
+    $('#reviewcontainer').css('display', 'block');
+    $('#firststephorizontalline').css('border', 'solid 2px black');
+    $('#paymentsteplabel').css('background-color', '');
+    $('#reviewsteplabel').css('background-color', 'white');
+    $('#reviewsteplabel').css('border', 'solid 2px black');
+    
+});
+
 function populateGradeTable() {
    $.ajax({
            type: 'GET',
