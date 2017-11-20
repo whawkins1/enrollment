@@ -861,8 +861,7 @@ $('#nextbuttonpayment').on('click keypress', function() {
     $('#firststephorizontalline').css('border', 'solid 2px black');
     $('#paymentsteplabel').css('background-color', '');
     $('#reviewsteplabel').css('background-color', 'white');
-    $('#reviewsteplabel').css('border', 'solid 2px black');
-    
+    $('#reviewsteplabel').css('border', 'solid 2px black');    
 });
 
 function populateGradeTable() {

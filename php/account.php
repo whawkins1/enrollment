@@ -664,18 +664,13 @@
                                   <input type="text" id="amount" class="inputtext" tabindex="5" disabled>
                                 </label>
                      </div>
-
-                     <div id="nextbuttonpaymentcontainer">
-                         <input type="button" class="navbutton" id="nextbuttonpayment" value="Next" disabled/>
-                     </div>
               </div>
-              <div id="reviewcontainer">
-                  <!-- <div id="reviewpaymentcontainer">
+                  <div id="reviewpaymentcontainer">
                        <div class="paymentcontainers">
                           <label id="datelabeltitle">Date:</label><label id="datelabel"></label>
                        </div>
                        
-                       </div class="paymentcontainers">
+                       <div class="paymentcontainers">
                            <label id="transactionidtitle">Transaction ID:</label><label id ="transactionidlabel"</label>
                        </div>
                        
@@ -694,11 +689,13 @@
                            <input type="button" class="navbutton" id="prevbuttonpayment" value="Previous"/>
                            <input type="button" id="submitpaymentbutton" value="Submit Payment">
                        </div>
-                    </div> -->
-              </div>
+                  </div>
               <div id="submitcontainer">
               </div>
-        </div>
+        </div>        
+        <div id="nextbuttonpaymentcontainer">
+                    <input type="button" class="navbutton" id="nextbuttonpaymentcontainernt" value="Next"/>
+            </div>
       </div>
      
       <script src="../plugins/jquery-1.12.4.js"></script>

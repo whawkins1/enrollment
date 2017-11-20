@@ -349,7 +349,7 @@ table.thead, table.tbody {
 .paymentcontainer {
   padding: 0.5%;  
   border: 1px solid black;
-  display: inline-block;
+  display: none;
   position: relative;
   height: 40%;
   width: 26%;
@@ -357,6 +357,10 @@ table.thead, table.tbody {
   margin-left: 4.5%;
   margin-top: 4%;
   margin-bottom: 1%;
+}
+
+#reviewpaymentcontainer {
+  display: inline-block;
 }
 
 .dropdown {
