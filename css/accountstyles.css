@@ -113,8 +113,19 @@ body {
    width: 10%;
 }
 
-#nextbuttonpaymentcontainer {
+#buttonpaymentcontainer {
   text-align: center;
+}
+
+#backbuttonpayment {
+  display: inline-block;
+}
+
+#submitpaymentbutton {
+  width: 8%;
+  height: 100%;
+  font-size: 1.0em;
+  margin-bottom: 1%;
 }
 
 #currentstepcontainer {
@@ -361,6 +372,19 @@ table.thead, table.tbody {
 
 #reviewpaymentcontainer {
   display: inline-block;
+  border: 1px solid black;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 1%;
+}
+
+.reviewcontainers {
+  text-align: left;
+  margin-bottom: 4%;
+}
+
+#paymentreviewsubmitcontainer {
+  text-align: center;
 }
 
 .dropdown {
@@ -375,10 +399,9 @@ table.thead, table.tbody {
   border: 1px solid black;
 }
 
-
-#paymenttypelabel {
-  display: block;
-  margin-bottom: 5.3%;
+.reviewbalancecontainers {
+  text-align: left;
+  margin-top: 4%;
 }
 
 #creditcardlabel {

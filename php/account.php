@@ -666,35 +666,39 @@
                      </div>
               </div>
                   <div id="reviewpaymentcontainer">
-                       <div class="paymentcontainers">
-                          <label id="datelabeltitle">Date:</label><label id="datelabel"></label>
+                       <div class="reviewcontainers">
+                          <label id="datelabeltitle">Date:</label><label id="datelabel">March 4, 2038</label>
                        </div>
                        
-                       <div class="paymentcontainers">
-                           <label id="transactionidtitle">Transaction ID:</label><label id ="transactionidlabel"</label>
+                       <div class="reviewcontainers">
+                           <label id="transactionidtitle">Transaction ID:</label><label id="transactionidlabel">kjk45jy54</label>
                        </div>
                        
-                       <div class="paymentcontainers">
-                           <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel">
+                       <div class="reviewcontainers">
+                           <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel">jfksdff</label>
                        </div>
                        
-                       <div class="paymentcontainers">
-                           <label id="currentbalancetitle">Current Balance:</label><label id="currentbalancelabel"></label>
-                           <label id="paymenttitle">Payment:</label><label id="paymentlabel"</label>
-                           <label>_________<label>
-                           <label id="balancetitle">Balance:</label><label id="balancelabel"</label>                 
-                       </div>
-
-                       <div id="submitbuttoncontainer">
-                           <input type="button" class="navbutton" id="prevbuttonpayment" value="Previous"/>
-                           <input type="button" id="submitpaymentbutton" value="Submit Payment">
+                       <div class="reviewcontainers">
+                           <div class="reviewbalancecontainers">
+                               <label id="currentbalancetitle" class="reviewlabelbalance">Current Balance:</label><label id="currentbalancelabel"></label>
+                           </div>
+                           <div class="reviewbalancecontainers">
+                               <label id="paymenttitle">Payment:</label><label id="paymentlabel"</label>
+                           <div class="reviewbalancecontainers">
+                               <hr>
+                           </div>
+                           <div class="reviewbalancecontainers"> 
+                               <label id="balancetitle">Balance:</label><label id="balancelabel"</label>                 
+                           </div>
                        </div>
                   </div>
               <div id="submitcontainer">
               </div>
         </div>        
-        <div id="nextbuttonpaymentcontainer">
-                    <input type="button" class="navbutton" id="nextbuttonpaymentcontainernt" value="Next"/>
+        <div id="buttonpaymentcontainer">
+                    <input type="button" class="navbutton" id="backbuttonpayment" value="Back"/> 
+                    <input type="button" class="navbutton" id="nextbuttonpayment" value="Next"/>
+                    <input type="button" id="submitpaymentbutton" value="Submit Payment">
             </div>
       </div>
      
