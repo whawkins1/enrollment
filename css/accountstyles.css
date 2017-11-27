@@ -373,14 +373,28 @@ table.thead, table.tbody {
 #reviewpaymentcontainer {
   display: inline-block;
   border: 1px solid black;
+  width: 30%;
+  height: 30%;
   margin-top: 1%;
   margin-bottom: 1%;
-  padding: 1%;
+  padding: 0.3%;
 }
 
 .reviewcontainers {
-  text-align: left;
+  width: 100%;
   margin-bottom: 4%;
+}
+
+#paymenttypelastfourdigits {
+  display: none;
+}
+
+#paymenttypeusername {
+  display: none;
+}
+
+#transactionidlabel {
+  margin-right: 38%;
 }
 
 #paymentreviewsubmitcontainer {

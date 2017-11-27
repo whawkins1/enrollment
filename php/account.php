@@ -667,28 +667,33 @@
               </div>
                   <div id="reviewpaymentcontainer">
                        <div class="reviewcontainers">
-                          <label id="datelabeltitle">Date:</label><label id="datelabel">March 4, 2038</label>
-                       </div>
-                       
-                       <div class="reviewcontainers">
                            <label id="transactionidtitle">Transaction ID:</label><label id="transactionidlabel">kjk45jy54</label>
+                           <label id="datelabeltitle">Date:</label><label id="datelabel">March 4, 2038</label>
                        </div>
                        
                        <div class="reviewcontainers">
-                           <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel">jfksdff</label>
+                           <label id="paymenttypetitle">Payment Type:</label><label id="paymenttypelabel">Credit Card</label>
+                       </div>
+
+                       <div class="reviewcontainers">
+                           <label id="paymenttypelastfourdigits">Last 4 Digits:</label><label id="paymenttypelabel">Credit Card</label>
+                       </div>
+
+                       <div class="reviewcontainers">
+                           <label id="paymenttypeusername">Payment Type:</label><label id="paymenttypelabel">bpomp</label>
                        </div>
                        
                        <div class="reviewcontainers">
                            <div class="reviewbalancecontainers">
-                               <label id="currentbalancetitle" class="reviewlabelbalance">Current Balance:</label><label id="currentbalancelabel"></label>
+                               <label id="currentbalancetitle" class="reviewlabelbalance">Current Balance:</label><label id="currentbalancelabel">$1530.56</label>
                            </div>
                            <div class="reviewbalancecontainers">
-                               <label id="paymenttitle">Payment:</label><label id="paymentlabel"</label>
+                               <label id="paymenttitle">Payment:</label>$356.92<label id="paymentlabel"</label>
                            <div class="reviewbalancecontainers">
                                <hr>
                            </div>
                            <div class="reviewbalancecontainers"> 
-                               <label id="balancetitle">Balance:</label><label id="balancelabel"</label>                 
+                               <label id="balancetitle">Balance:</label>$1184.12<label id="balancelabel"</label>                 
                            </div>
                        </div>
                   </div>
