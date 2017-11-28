@@ -382,19 +382,20 @@ table.thead, table.tbody {
 
 .reviewcontainers {
   width: 100%;
-  margin-bottom: 4%;
-}
+  text-align: left;
+/*  margin-bottom: 4%;
+*/}
 
-#paymenttypelastfourdigits {
-  display: none;
+#paymentlastfourdigitscontainer {
+  /*display: none;*/
 }
 
 #paymenttypeusername {
-  display: none;
-}
+/*  display: none;
+*/}
 
 #transactionidlabel {
-  margin-right: 38%;
+  margin-right: 30%;
 }
 
 #paymentreviewsubmitcontainer {
@@ -413,14 +414,35 @@ table.thead, table.tbody {
   border: 1px solid black;
 }
 
-.reviewbalancecontainers {
+#balancecontainer {
   text-align: left;
   margin-top: 4%;
+}
+
+.balancesummarycontainer {
+  margin-bottom: 1%;
+}
+
+#balancesummaryline {
+  margin-bottom: 1%;
+  border: 1px solid black;
 }
 
 #creditcardlabel {
   display: block;
   margin-bottom: 5.2%;
+}
+
+.reviewpaymentlabel {
+  margin-left: 8%;
+}
+
+#datelabel {
+  margin-left: 4%;
+}
+
+#transactionidlabel {
+  margin-left: 4%;
 }
 
 .input {
