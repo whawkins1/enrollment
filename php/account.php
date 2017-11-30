@@ -665,7 +665,67 @@
                                 </label>
                      </div>
               </div>
-                  <div id="reviewpaymentcontainer">
+                  <table id="reviewpaymenttable">
+                    <tr>
+                        <td>Transaction ID:</td>
+                        <td>kjk45jy54</td>
+                        <td></td>
+                        <td></td>
+                        <td>Date:</td>
+                        <td>March 4, 2038</td>
+                    <tr></tr>
+                    <tr>
+                        <td>Payment Type:</td>
+                        <td>Credit Card</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Last Four Digits</td>
+                        <td>5030</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td>bpomp@yahoo.com</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>Current Balance</td>
+                      <td>$1530.56</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>Payment</td>
+                      <td>$356.92</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr></tr>
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td>Balance</td>
+                      <td>$1184.12</td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+               </table>
+                  <!-- <div id="reviewpaymentcontainer">
                       <div id="infocontainer">
                          <div class="reviewcontainers">
                              <label id="transactionidtitle" class="reviewlabeltitle">Transaction ID:</label><label id="transactionidlabel">kjk45jy54</label>
@@ -698,7 +758,7 @@
                                  <label id="balancetitle" class="reviewlabeltitle">Balance:</label><label class="reviewpaymentlabel" id="balancelabel">$1184.12</label>                 
                              </div>
                       </div>
-                  </div>
+                  </div> -->
               <div id="submitcontainer">
               </div>
         </div>        
