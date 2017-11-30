@@ -386,6 +386,10 @@ table.thead, table.tbody {
 /*  margin-bottom: 4%;
 */}
 
+.reviewlabeltitle {
+    font-weight: bold;
+}
+
 #paymentlastfourdigitscontainer {
   /*display: none;*/
 }
