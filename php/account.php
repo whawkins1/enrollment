@@ -666,63 +666,54 @@
                      </div>
               </div>
                   <table id="reviewpaymenttable">
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                     <tr>
                         <td>Transaction ID:</td>
                         <td>kjk45jy54</td>
-                        <td></td>
-                        <td></td>
+                        <td colspan="2"></td>
                         <td>Date:</td>
                         <td>March 4, 2038</td>
                     <tr></tr>
                     <tr>
                         <td>Payment Type:</td>
                         <td>Credit Card</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td colspan="4"></td>                        
                     </tr>
                     <tr>
                         <td>Last Four Digits</td>
                         <td>5030</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td colspan="4"></td>                        
                     </tr>
                     <tr>
                         <td>Username:</td>
                         <td>bpomp@yahoo.com</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td cospan="4"></td>                        
                     </tr>
                     <tr></tr>
                     <tr>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>                      
                       <td>Current Balance</td>
                       <td>$1530.56</td>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>                      
                     </tr>
                     <tr>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>                      
                       <td>Payment</td>
                       <td>$356.92</td>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>
                     </tr>
                     <tr></tr>
                   <tr>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>                      
                       <td>Balance</td>
                       <td>$1184.12</td>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>                      
                   </tr>
                </table>
                   <!-- <div id="reviewpaymentcontainer">
