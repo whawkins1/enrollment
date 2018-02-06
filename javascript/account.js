@@ -1,4 +1,4 @@
-  var originalFirstName;
+var originalFirstName;
 var originalLastName;
 var originalStreetAddress;
 var originalCountry;
